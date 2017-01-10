@@ -1,0 +1,5 @@
+jshint:
+  config_file: .jshintrc
+
+jshint:
+  ignore_file: .javascript_ignore
