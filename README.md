@@ -53,5 +53,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-####Master branch build status: 
+####feature/create-travisCI-badge-137138309 branch build status: 
+
 ![](https://travis-ci.org/[andela-rbabalola]/MovingHelper.svg?branch=feature/create-travisCI-badge-137138309)
