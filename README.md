@@ -53,3 +53,4 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
+
