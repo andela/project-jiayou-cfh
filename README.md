@@ -2,7 +2,7 @@ Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
-Our Team
+Our Team - Yess Boss
 --------
 Cards for Humanity was created at [Hack Reactor](http://www.hackreactor.com) by:
 * [Matt Silverstein](http://www.mattsilverstein.com/)
