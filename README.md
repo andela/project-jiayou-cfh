@@ -1,5 +1,6 @@
-
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
+![](https://travis-ci.org/andela-rbabalola/project-jiayou-cfh.svg?branch=feature/create-travisCI-badge-137138309)
+
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 
@@ -56,6 +57,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-####feature/create-travisCI-badge-137138309 branch build status: 
 
+
+####feature/create-travisCI-badge-137138309 branch build status:
 ![](https://travis-ci.org/[andela-rbabalola]/project-jiayou-cfh.svg?branch=feature/create-travisCI-badge-137138309)
+
