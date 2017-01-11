@@ -1,7 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
 ![](https://travis-ci.org/andela-rbabalola/project-jiayou-cfh.svg?branch=feature/create-travisCI-badge-137138309)
 
-
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
