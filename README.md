@@ -1,5 +1,5 @@
 ####feature/create-travisCI-badge-137138309 branch build status: 
-![](https://travis-ci.org/andela-rbabalola/project-jiayou-cfh.svg?branch=feature/create-travisCI-badge-137138309)
+![](https://travis-ci.org/andela/project-jiayou-cfh.svg?branch=feature%2Fcreate-travisCI-badge-137138309)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
