@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "node node_modules/grunt-cli/bin/grunt test",
     "postinstall": "node node_modules/grunt-cli/bin/grunt install",
+     "test":"./node_modules/karma/bin/karma start karma.conf.js",
      },
   "dependencies": {
     "express": "~3.4.0",
