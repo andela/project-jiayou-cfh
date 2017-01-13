@@ -15,10 +15,10 @@ var sass = require('gulp-sass');
             
             gulp.watch(['public/css/common.scss', 
             'public/css/views/articles.scss'], ['sass']); 
-            gulp.watch("app/views/**").on('change', browserSync.reload);
+            gulp.watch('app/views/**').on('change', browserSync.reload);
             gulp.watch(['public/js/**', 'app/**/*.js'], ['jshint'])
             .on('change', browserSync.reload);
-            gulp.watch("public/views/**").on('change', browserSync.reload);
+            gulp.watch('public/views/**').on('change', browserSync.reload);
             gulp.watch('public/css/**', ['sass'])
             .on('change', browserSync.reload);
             gulp.watch('app/views/**', ['jade'])
