@@ -8,9 +8,6 @@ var sass = require('gulp-sass');
 
    //Configuration
 
-        var fs = require('fs');
-        var json = JSON.parse(fs.readFileSync('package.json'));
-
         gulp.task('watch', function(){
             
             gulp.watch(['public/css/common.scss', 
