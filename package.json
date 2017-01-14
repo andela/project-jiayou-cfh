@@ -18,7 +18,7 @@
     "postinstall": "node node_modules/grunt-cli/bin/grunt install",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "start": "node node_modules/gulp-cli/bin/gulp",
-    "test": "echo\"Error: no test specified\"",
+    "test": "node node_modules/gulp-cli/bin/gulp test",
     "postinstall": "node node_modules/gulp-cli/bin/gulp install"
   },
   "dependencies": {
