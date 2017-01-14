@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node node_modules/gulp-cli/bin/gulp",
-    "test": "node node_modules/gulp-cli/bin/gulp test",
+    "test": "echo\"Error: no test specified\"",
     "postinstall": "node node_modules/gulp-cli/bin/gulp install"
   },
   "dependencies": {
