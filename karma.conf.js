@@ -100,7 +100,20 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be
     // started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    //custom launcher for TravisCI
+    customLaunchers: {
+        chromeTravisCI:{
+            base: 'Chrome',
+            flags: ['--no-sandbox']
+        }
+    },
   });
+
+  //custom configuration for Travis-CI
+  if(process.env.TRAVIS){
+    config.browsers=['chromeTravisCI'];
+  }
 
 };
