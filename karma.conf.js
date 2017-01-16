@@ -102,3 +102,5 @@ module.exports = function(config) {
     // started simultaneous
     concurrency: Infinity
   });
+
+}
