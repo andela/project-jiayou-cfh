@@ -25,10 +25,7 @@ module.exports = function(config) {
     //  patterns to load
     //  in the browser
     files: [
-      '/test/unit_test',
-      '/test/unit_test/test.js',
-      '/test/unit_test',
-      'test/unit_test'
+      'test/unit_test/test.js',
     ],
 
 
@@ -98,11 +95,10 @@ module.exports = function(config) {
     // if true, Karma
     // captures browsers,
     // runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be
     // started simultaneous
     concurrency: Infinity
   });
-}
