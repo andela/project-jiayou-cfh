@@ -995,8 +995,8 @@
 
 /*Override Bootstrap Row Class*/
 .row {
-   margin-left: 0;
-   margin-right: 9px;
+   /*margin-left: 0;
+   margin-right: 9px; */
 }
 
 #donations {
