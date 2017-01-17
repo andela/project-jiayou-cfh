@@ -6,6 +6,7 @@ var nodemon = require('gulp-nodemon');
 var bower = require('gulp-bower');
 var sass = require('gulp-sass');
 
+require('dotenv').config();
    //Configuration
 
         gulp.task('watch', function(){
@@ -34,21 +35,31 @@ var sass = require('gulp-sass');
         });
         
         //setup nodemon
-       gulp.task('nodemon', function () {
-           nodemon({
+       gulp.task('nodemon', function (done) {
+           var started = false;
+           return nodemon({
                script: 'server.js',
                ext: 'js',
-               env: { NODE_ENV: 'development' }
-            });
+            //    env: { NODE_ENV: 'development' }
+            }).on('start', function(){
+                if(!started){
+                    done();
+                    started = true;
+                }
+            })
         });
         
         gulp.task('server', ['nodemon'], function () {
-            browserSync.create({
-                server: 'server.js',
-                port: 5000,
+            setTimeout(()=>{
+                browserSync.init({
+                proxy: 'http://localhost:'+process.env.PORT || 5000,
+                port: 3000,
+                ui:{
+                    port: 3001
+                },
                 reloadOnRestart: true
             });
-
+            },2000);
         });
 
         //setup mocha
