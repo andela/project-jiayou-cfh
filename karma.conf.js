@@ -119,7 +119,7 @@ module.exports = function(config) {
   //for Travis-CI
   //if(process.
   //env.TRAVIS){
-    //config.browsers=['chromeTravisCI'];
+    config.browsers=['chromeTravisCI'];
   //}
 
 };
