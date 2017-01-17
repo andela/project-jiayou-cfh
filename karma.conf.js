@@ -112,8 +112,8 @@ module.exports = function(config) {
   });
 
   //custom configuration for Travis-CI
-  if(process.env.TRAVIS){
+  //if(process.env.TRAVIS){
     config.browsers=['chromeTravisCI'];
-  }
+  //}
 
 };
