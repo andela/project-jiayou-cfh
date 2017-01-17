@@ -98,11 +98,14 @@ module.exports = function(config) {
     singleRun: false,
 
     // Concurrency level
-    // how many browser should be
-    // started simultaneous
+    // how many browser 
+    // should be
+    // started 
+    // simultaneous
     concurrency: Infinity,
 
-    //custom launcher for TravisCI
+    //custom launcher
+    // for TravisCI
     customLaunchers: {
         chromeTravisCI:{
             base: 'Chrome',
@@ -111,8 +114,11 @@ module.exports = function(config) {
     },
   });
 
-  //custom configuration for Travis-CI
-  //if(process.env.TRAVIS){
+  //custom 
+  //configuration 
+  //for Travis-CI
+  //if(process.
+  //env.TRAVIS){
     config.browsers=['chromeTravisCI'];
   //}
 
