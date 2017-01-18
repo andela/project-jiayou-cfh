@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "./node_modules/karma/.bin/karma start karma.conf.js",
+    "test": "karma start karma.conf.js",
     "postinstall": "node node_modules/grunt-cli/bin/grunt install"
   },
   "dependencies": {
