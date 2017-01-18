@@ -10,10 +10,11 @@ exports.userAuth = function(req, res){
 	User.findOne({
 		email: req.body.email
 	}, function(err, user){
-		if(err) throw err;
-
+		if(err){
+			throw err;
+		} 
 		if(!user){
-			res.send({success: false, msg: "Authentication failed user not found"});
+			res.send({success: false, msg: 'Authentication failed user not found'});
 		} else {
 			if(user.authenticate(req.body.password)){
 				var token = jwt.sign(user, secret);
