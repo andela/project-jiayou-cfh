@@ -18,7 +18,7 @@ exports.userAuth = function(req, res){
 			if(user.authenticate(req.body.password)){
 				var token = jwt.sign(user, secret);
 				//use moment to state that the token will last for 5 hours
-				res.json({success: true, token: 'JWT ' + token, expDate: moment().add(5, 'h')});
+				res.json({success: true, token: 'JWT ' + token, expDate: moment().add(5, 'hours').valueOf()});
 			} else {
 				res.send({success: false, message: 'Authentication failed wrong password'});
 			}
