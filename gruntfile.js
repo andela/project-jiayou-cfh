@@ -2,6 +2,11 @@ module.exports = function(grunt) {
     // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        },
         watch: {
             jade: {
                 files: ['app/views/**'],
@@ -97,6 +102,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-karma');
 
     //Making grunt default to force in order not to break the project.
     grunt.option('force', true);
@@ -109,4 +115,7 @@ module.exports = function(grunt) {
 
     //Bower task.
     grunt.registerTask('install', ['bower']);
+
+    //karma task.
+    grunt.registerTask('karma',['karma']);
 };
