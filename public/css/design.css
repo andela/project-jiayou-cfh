@@ -86,6 +86,8 @@
   float: right;
   margin: 0;
   margin-right: 80px;
+  position: absolute;
+  margin-left: 57px;
 }
 
 .play h3 {
@@ -233,4 +235,12 @@ padding:0 1.05em;
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+.blue-box{
+    width: 240px;
+    height: 220px;
+    background-color: #0768a0;
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 15px;
 }
