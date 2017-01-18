@@ -1,8 +1,4 @@
-.container {
-    width: 1280px;
-}
-
-.body {
+.bkg{
   background-image: linear-gradient(rgba(0,15,25,.8), rgba(0,15,25,.8)), url('../img/fun.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,6 +6,8 @@
   color: #fff;
   padding-top: 25px;
 }
+
+
 .body-content {
   margin-top: 60px;
   margin-left: 150px;
@@ -49,18 +47,16 @@
 .navbar-nav.navbar-right li a:focus {
   color: #fff;
 }
-
-
 .welcome {
   font-size: 73px;
 }
 
 .humanity{
   display: block;
-  padding-left: 32px;
+  /*padding-left: 32px; */
 }
 .welcome + p{
- font-size:1.3em;
+ font-size:1.0em;
  letter-spacing: 0.05em;
  font-weight: 300;
 }
@@ -87,6 +83,9 @@
   background-color: #fff;
   height: 450px;
   padding: 10px 30px;
+  float: right;
+  margin: 0;
+  margin-right: 80px;
 }
 
 .play h3 {
@@ -116,12 +115,16 @@
 }
 .watch-video {
   padding: 10px 15px;
-  border: 1px #808080 solid;
+
   font-size: 1.3em;
   text-decoration: none;
-  color: #808080;
-  opacity: .5;
+  /*color: #808080;
+   opacity: .5;
+   border: 1px #808080 solid;*/
+  color:black;
+
   margin: 0px 0 0 20%;
+
 }
 
 .footer-bottom{
@@ -183,3 +186,51 @@ padding:0 1.05em;
 .twitter {background: #00aced;}
 .google-plus {background: #c32f10;}
 
+.donate{
+   float: right;
+   margin: 0;
+   margin-right: 80px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color:black;
+    text-align: center;
+}
+.size{
+  width:50%;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

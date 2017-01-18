@@ -1,6 +1,6 @@
 <div class="bkg">
- <div class="container" ng-controller="IndexController">
-      <nav class="navbar navbar-default">
+<div class="container">
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -16,46 +16,51 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="/">HOME</a></li>
-             <li><a href="#!/charity">CHARITY</a></li>
-             <li><a href="#!/aboutus">ABOUT US</a></li>
-             <li><a href="#!/signin">SIGN IN</a></li>
-             <li><a href="#!/signup">SIGN UP</a></li>
+            <li ><a href="/">HOME</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
 <div class="row body-content">
-      <div class="col-lg-12">
-      <div class="col-lg-6 col-lg-offset-2">
-        <div class="sign-error" ng-show="showError() === 'invalid'">
-                Please check your username/password and try again.
+  <div class="col-lg-12">
+  <div class="col-lg-6 col-lg-offset-2">
+    <form action="/users" method="post">
+      <h4 class="login">SIGN UP</h4>
+        <div class="form-group">
+          <label for="">Username</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
         </div>
-        <form class="" action="/users/session" method="post">
-            <h2 class="login">SIGN IN</h2>
-            <hr>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
-          <input type="password"  id="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-default btn-primary">Submit</button>
-       </form>
+            <div id="contain-avatars">
+              <ul ng-controller="IndexController" class="avatar-list">
+                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
+                  <input name="avatar" type='radio' value="{{$index}}">
+                    <img ng-src="{{avatar}}"/>
+                </li>
+              </ul>
+            </div>
+        <button type="submit" class="btn play-button center">Sign up</button>
+   </form>
+   <br/>
+   <p class=""> Already have an account? <a href="#!/signin">Click here </a> &nbsp; to Sign in </p>
+<!--
   <div class="social-buttons">
       <button class="btn facebook">Facebook</button>
       <button class="btn twitter">Twitter</button>
       <button class="btn google-plus">Google Plus</button>
+  </div> -->
   </div>
-</div>
-<div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
-    <div class="container">
-      <p class="navbar-text pull-left">© 2017 - Team Jiayou.
-
-      </p>
+    <div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
+        <div class="container">
+          <p class="navbar-text pull-left">© 2017 - Team Jiayou.</p>
+        </div>
     </div>
 </div>
-  </div>
 </div>
