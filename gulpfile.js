@@ -77,6 +77,12 @@ gulp.task('sass', function () {
 });
 
 //setup bower
+gulp.task('bower', function () {
+    bower()
+    .pipe(gulp.dest('./public/lib/'));
+});
+
+//install bower
 gulp.task('install', function () {
     return bower('./bower_components')
     .pipe(gulp.dest('./public/lib'));
