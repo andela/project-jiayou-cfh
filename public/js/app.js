@@ -43,7 +43,7 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
   ]).run(['$rootScope', function($rootScope) {
   $rootScope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
-    if(phase == '$apply' || phase == '$digest') {
+    if(phase === '$apply' || phase === '$digest') {
         if(fn && (typeof(fn) === 'function')) {
             fn();
         }
