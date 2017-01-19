@@ -98,10 +98,14 @@ exports.create = function(req, res) {
             });
           }
           
+          //Creaate token here
+          
+
           req.logIn(user, function(err) {
             if (err) {
               return next(err);
             }
+
             return res.redirect('/#!/');
             //next();
        });
