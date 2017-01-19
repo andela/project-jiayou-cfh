@@ -33,7 +33,7 @@ block auth
 
   div.sign-body
     div.more-sign
-      form.signup.form-horizontal(action="/users", method="post")
+      form.signup.form-horizontal(action="/api/auth/signup", method="post")
         .control-group
           label.control-label(for='name') Full name
           .controls
@@ -45,7 +45,7 @@ block auth
             input#email(type='text', name="email", placeholder='Email', value=user.email)
 
         .control-group
-          label.control-label(for='username') Username
+          label.control-label(for='username') SSSS
           .controls
             input#username(type='text', name="username", placeholder='Username', value=user.username)
 

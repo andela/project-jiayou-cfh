@@ -7,9 +7,12 @@ module.exports = function(app, passport, auth) {
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
+    
 
     //Setting up the users api
     app.post('/users', users.create);
+
+
     app.post('/users/avatars', users.avatars);
 
     // Donation Routes
@@ -89,5 +92,8 @@ module.exports = function(app, passport, auth) {
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
     app.get('/', index.render);
+
+    var signup = require('../app/controllers/signup');
+    app.post('/api/auth/signup',signup.signup);
 
 };

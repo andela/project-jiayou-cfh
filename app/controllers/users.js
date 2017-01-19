@@ -4,6 +4,10 @@
 var mongoose = require('mongoose'),
   User = mongoose.model('User');
 var avatars = require('./avatars').all();
+var moment = require('moment');
+var jwt = require('jsonwebtoken');
+var secret = process.env.JWT_SECRET;
+
 
 /**
  * Auth callback
@@ -93,11 +97,16 @@ exports.create = function(req, res) {
               user: user
             });
           }
+          
           req.logIn(user, function(err) {
-            if (err) return next(err);
+            if (err) {
+              return next(err);
+            }
             return res.redirect('/#!/');
-          });
+            //next();
+       });
         });
+        
       } else {
         return res.redirect('/#!/signup?error=existinguser');
       }
