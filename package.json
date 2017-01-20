@@ -19,7 +19,9 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "start": "node node_modules/gulp-cli/bin/gulp",
     "test": "echo \"Error: no test specified\"",
-    "postinstall": "node node_modules/gulp-cli/bin/gulp install"
+    "postinstall": "node node_modules/gulp-cli/bin/gulp install",
+    "postinstall": "node node_modules/gulp-cli/bin/gulp install",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "dependencies": {
     "async": "~0.2.9",
@@ -60,10 +62,7 @@
     "view-helpers": "~0.1.3"
   },
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "body-parser": "^1.15.2",
->>>>>>> JWT created on signup
     "grunt": "~0.4.1",
     "grunt-concurrent": "~0.4.0",
     "grunt-contrib-jshint": "~0.6.4",
@@ -71,15 +70,12 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-mocha-test": "~0.7.0",
     "grunt-nodemon": "~0.1.1",
-<<<<<<< HEAD
     "gulp": "^3.9.1",
-=======
     "jsonwebtoken": "^7.2.1",
     "jwt-simple": "^0.5.1",
     "moment": "^2.17.1",
     "morgan": "^1.7.0",
     "passport-jwt": "^2.2.1",
->>>>>>> JWT created on signup
     "should": "~1.3.0",
     "supertest": "~0.8.0"
   }
