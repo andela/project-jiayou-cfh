@@ -38,7 +38,7 @@ $(document).ready(function() {
                   <li><a href="#!/signin">Sign In</a></li>
                 </span>
                 <span ng-hide="showOptions">
-                  <li><a href="/signout">Sign Out</a></li>
+                  <li><a href="/signout" ng-click="userLogout()">Sign Out</a></li>
                 </span>
               </ul>
             </div>
@@ -74,7 +74,7 @@ $(document).ready(function() {
         </p>
       </div>
       <!-- Teaser Text End -->
-      <span id='send-link' ng-show="showOptions"> *To send a private link to your friends, sign up! </span>
+      <span id='send-link' ng-controller="IndexController" ng-show="showOptions"> *To send a private link to your friends, sign up! </span>
       <div id="sign-up">
         <span ng-show="showOptions">
         <a href="#!/signup"><div id="sign-up-btn-landing">Sign Up</div></a>

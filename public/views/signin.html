@@ -44,21 +44,21 @@
           <div class="sign-error" ng-show="showError() === 'invalid'">
             Please check your username/password and try again.
           </div>
-          <form class="signup form-horizontal" action="/users/session" method="post">
+          <form ng-submit="userLogin()" class="signup form-horizontal">
             <div class="control-group">
               <label for="email" class="control-label"></label>
               <div class="controls">
-                <input class="input-info" id="email" type="text" name="email" placeholder="Email" required novalidate />
+                <input class="input-info" id="email" type="text" name="email" placeholder="Email" ng-model="credentials.userEmail" required novalidate />
               </div>
             </div>
             <div class="control-group">
               <label for="password" class="control-label"></label>
               <div class="controls">
-                <input class="input-info" id="password" type="password" name="password" placeholder="Password" required novalidate />
+                <input class="input-info" id="password" type="password" name="password" placeholder="Password" ng-model="credentials.userPassword" required novalidate/>
               </div>
             </div>
             <div class="form-actions top-margin">
-              <button id="sign-up-btn-other" type='submit'>Sign In</button>
+              <input name="" id="sign-up-btn-other" type='submit' value="Sign In"/>
             </div>
           </form>
         </div>
