@@ -3,7 +3,10 @@ var async = require('async');
 module.exports = function(app, passport, auth) {
     //User Routes
     var users = require('../app/controllers/users');
-    app.get('/signin', users.signin);
+    var signin = require('../app/controllers/signin');
+
+    app.post('/api/auth/login', signin.userAuth);
+ 
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
@@ -89,7 +92,4 @@ module.exports = function(app, passport, auth) {
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
     app.get('/', index.render);
-
-    var signin = require('../app/controllers/signin');
-    app.post('/api/auth/login', signin.userAuth);
 };
