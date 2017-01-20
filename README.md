@@ -1,3 +1,6 @@
+###setup/integrate-coveralls-code-coverage-service-137138317
+[![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
+
 ####feature/create-travisCI-badge-137138309 branch build status: 
 ![](https://travis-ci.org/andela/project-jiayou-cfh.svg?branch=feature%2Fcreate-travisCI-badge-137138309)
 

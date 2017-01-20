@@ -15,7 +15,8 @@
   "scripts": {
     "start": "node node_modules/gulp-cli/bin/gulp",
     "test": "echo \"Error: no test specified\"",
-    "postinstall": "node node_modules/gulp-cli/bin/gulp install"
+    "postinstall": "node node_modules/gulp-cli/bin/gulp install",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "dependencies": {
     "async": "~0.2.9",
