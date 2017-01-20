@@ -84,7 +84,7 @@ gulp.task('install', function () {
 });
 
 //Default task(s).
-gulp.task('default', ['jshint', 'server', 'watch', 'sass'], function (done) {
+gulp.task('default', ['install','jshint', 'server', 'watch', 'sass'], function (done) {
     done();
 });
 
