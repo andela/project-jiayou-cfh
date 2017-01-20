@@ -33,8 +33,10 @@ exports.signup = function(req, res) {
 				var token = jwt.sign({userId: user._id, exp:exp}, secret);
 				res.json({success: true, mss: 'New user created', 
 					token: token,
+					email:user.email,
+					username:user.name,
 					exp: exp});
-				console.log("HAAAAAA");
+				
 				//return res.redirect('/#!/');
 			}
 	    });
