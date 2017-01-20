@@ -23,6 +23,15 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
           when('/choose-avatar', {
             templateUrl: '/views/choose-avatar.html'
           }).
+          when('/charity', {
+            templateUrl: '/views/charity.html'
+          }).
+          when('/aboutus', {
+            templateUrl: '/views/aboutus.html'
+          }).
+          when('/signin-up', {
+            templateUrl: '/views/signin-up.html'
+          }).
           otherwise({
             redirectTo: '/'
           });
@@ -34,7 +43,7 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
   ]).run(['$rootScope', function($rootScope) {
   $rootScope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
-    if(phase == '$apply' || phase == '$digest') {
+    if(phase === '$apply' || phase === '$digest') {
         if(fn && (typeof(fn) === 'function')) {
             fn();
         }
