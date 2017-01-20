@@ -10,7 +10,7 @@ require('dotenv').config();
    // Configuration
 
 gulp.task('watch', function () {
-    gulp.watch(['public/css/common.scss', 
+    gulp.watch(['public/css/common.scss',
     'public/css/views/articles.scss'], ['sass']);
 
     gulp.watch(['public/js/**', 'app/**/*.js'], ['jshint'])
@@ -24,7 +24,7 @@ gulp.task('watch', function () {
     gulp.watch('app/views/**', ['jade'])
     .on('change', browserSync.reload);
 });
-        
+
  //setup jshint
 gulp.task('jshint', function () {
     return  gulp.src([
@@ -35,7 +35,7 @@ gulp.task('jshint', function () {
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
-        
+
 //setup nodemon
 gulp.task('nodemon', function (done) {
     var started = false;
@@ -65,7 +65,7 @@ gulp.task('server', ['nodemon'], function () {
 //setup mocha
 gulp.task('mochaTest', function () {
     gulp.src('test/**/*.js', {read: false})
-    // gulp-mocha needs filepaths so you can't have any plugins before it 
+    // gulp-mocha needs filepaths so you can't have any plugins before it
     .pipe(mocha({ reporter: 'spec' }));
 });
 
@@ -76,11 +76,6 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('public/css/'));
 });
 
-//setup bower
-gulp.task('bower', function () {
-    bower()
-    .pipe(gulp.dest('./public/lib/'));
-});
 
 //install bower
 gulp.task('install', function () {
@@ -92,13 +87,8 @@ gulp.task('install', function () {
 gulp.task('default', ['jshint', 'server', 'watch', 'sass'], function (done) {
     done();
 });
- 
+
 //Test task.
 gulp.task('test', ['mochaTest'], function (done) {
-    done();
-});
-    
-//Bower task.
-gulp.task('install', ['bower'], function(done) {
     done();
 });
