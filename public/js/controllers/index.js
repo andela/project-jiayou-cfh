@@ -24,15 +24,15 @@ angular.module('mean.system')
     $scope.userLogin = function(){
       $http.post('/api/auth/login', {email: $scope.credentials.userEmail, password: $scope.credentials.userPassword}).success(function(res){
         if(res.success){
-          $window.sessionStorage.setItem('task', res.token);
-
-          $location.path('/#!/app');
+          $window.sessionStorage.setItem('JWT', res.token);
+          $location.path('/app');
         } else {
           $location.path('/#!/signin');
         }
       }).error(function(err){
         $scope.userActive = false;
+        console.log('err:', err);
       });
-    }; 
+    };
 
 }]);

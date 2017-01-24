@@ -7,7 +7,6 @@ var dotEnv = require('dotenv');
 dotEnv.config();
 
 exports.userAuth = function(req, res){
-	console.log('here we are', req.body);
 	User.findOne({
 		email: req.body.email
 	}, function(err, user){

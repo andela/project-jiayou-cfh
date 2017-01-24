@@ -53,7 +53,7 @@ angular.module('mean.directives', [])
       }
     };
   }).directive('question', function() {
-    return {
+    return { 
       restrict: 'EA',
       templateUrl: '/views/question.html',
       link: function(scope, elem, attr) {}
@@ -70,14 +70,15 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       link: function(scope, elem, attr) {
         scope.showOptions = true;
+        scope.showNavBar = true;
 
-        if (window.sessionStorage.task) {
+        if(window.sessionStorage.JWT) {
           scope.showOptions = false;
+          scope.showNavBar = false;
         }
         scope.userLogout = function () {
-          window.sessionStorage.task = '';
+          window.sessionStorage.JWT = '';
         };
-
       }
     };
   });

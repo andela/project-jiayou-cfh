@@ -22,13 +22,14 @@
                             <ul ng-controller="IndexController" class="avatar-list">
                                 <li ng-repeat="avatar in avatars" class="avatars ng-scope">
                                     <input name="avatar" type='radio' value="{{$index}}">
-                                    <img ng-src="{{avatar}}">
-                                    </input>
+                                    <img ng-src="{{avatar}}" />
                                 </li>
                             </ul>
                         </div>
                         <button type="submit" class="btn play-button center">Sign up</button>
                     </form>
+                    <br/>
+                    <p class=""> Already have an account? <a href="#!/signin">Click here </a> &nbsp; to Sign in </p>
 
                 </div>
                 <div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
