@@ -24,7 +24,6 @@ angular.module('mean.system')
 
 
     $scope.userSignUp = function(){
-      alert("Success");
       $http.post('/api/auth/signup', {email:$scope.credentials.email, password: $scope.credentials.password, username:$scope.credentials.username}).success(function(res){
         if (res.success) {
           $window.localStorage.setItem('jwtToken', res.token);
