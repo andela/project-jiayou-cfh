@@ -26,6 +26,7 @@ angular.module('mean.system')
           // Write token to local storage
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);
+          localStorage.setItem('expDate', res.expDate);
           $location.path('/app');
         } else if (res.message === 'An unexpected error occurred') {
           // Display a modal if an error occured
