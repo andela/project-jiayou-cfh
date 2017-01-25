@@ -1,7 +1,7 @@
 
 ###setup/integrate-coveralls-code-coverage-service-137138317
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
->>>>>>> fixed conflict on README.md and added the coveralls script to package.json fixes #137138317
+fixed conflict on README.md and added the coveralls script to package.json fixes #137138317
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
