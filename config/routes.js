@@ -94,6 +94,6 @@ module.exports = function(app, passport, auth) {
     app.get('/', index.render);
 
     var signup = require('../app/controllers/signup');
-    app.post('/api/auth/signup',signup.signup);
+    app.post('/api/auth/signup', signup.signup);
 
 };
