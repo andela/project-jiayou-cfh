@@ -1,4 +1,4 @@
-jshint:
-  config_file: .jshintrc
-jshint:
-  ignore_file: .javascript_ignore
+eslint:
+  enabled: true
+  config_file: .eslintrc
+  ignore_file: .eslintignore
