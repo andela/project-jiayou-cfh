@@ -6,5 +6,4 @@ module.exports = {
 	root: rootPath,
 	port: process.env.PORT,
     db: process.env.DB_URL,
-	port: process.env.PORT  
 };
