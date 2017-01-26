@@ -94,10 +94,5 @@ module.exports = function(app, passport, auth) {
     app.get('/', index.render);
 
     var signup = require('../app/controllers/signup');
-<<<<<<< HEAD
     app.post('/api/auth/signup', signup.signup);
-=======
-    app.post('/api/auth/signup',signup.signup);
->>>>>>> c8f3b6561eb76f9080c8104f6bc1d85fa94d8f18
-
 };
