@@ -1,7 +1,6 @@
 ###setup/integrate-coveralls-code-coverage-service-137138317
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
 
-####feature/create-travisCI-badge-137138309 branch build status: 
 ![](https://travis-ci.org/andela/project-jiayou-cfh.svg?branch=feature%2Fcreate-travisCI-badge-137138309)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
@@ -22,7 +21,7 @@ The game is simple - each player is given 10 answer cards which are used to fill
 
 Cards Against Humanity is open-source and licensed under Creative Commons. The idea for Cards for Humanity was to create a web version of the game we love so much, while still doing something good for humanity. To achieve this we integrated the option to donate to the Make a Wish Foundation.
 
-The app is completely functional across all devices - from iPhone to full-sized desktop. We used Socket.io to create rooms which hold up 6 players at a time, and also included the functionality to create private rooms once logged in. Passport handles authentication with Local, Twitter, Facebook, Google and Github strategies implemented. 
+The app is completely functional across all devices - from iPhone to full-sized desktop. We used Socket.io to create rooms which hold up 6 players at a time, and also included the functionality to create private rooms once logged in. Passport handles authentication with Local, Twitter, Facebook, Google and Github strategies implemented.
 
 ![alt-text](https://dl.dropboxusercontent.com/u/7390609/CFHforGit.png "Cards for Humanity views")
 
@@ -30,7 +29,7 @@ The app is completely functional across all devices - from iPhone to full-sized 
 
 Our Tech Stack
 --------------
-Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2. 
+Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2.
 
 ![alt-text](https://dl.dropboxusercontent.com/u/7390609/tech.png "Tech Stack Overview")
 
