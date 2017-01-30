@@ -1,7 +1,8 @@
-var moment = require('moment');
+//var moment = require('moment');
 var nameSpace = angular.module('mean.system');
+//, ['angularModalService']
 nameSpace
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window' function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -91,7 +92,7 @@ nameSpace
     };
   }]);
 
-nameSpace
+/*nameSpace
   .controller('ModalController', ['$scope', '$element', 'close', ($scope, $element, close) => {
     $scope.dismissModal = function (result) {
       close(result, 200); // close, but give 200ms for bootstrap to animate
@@ -118,4 +119,4 @@ nameSpace
         });
       }
     };
-  }]);
+  }]);*/
