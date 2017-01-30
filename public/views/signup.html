@@ -1,22 +1,22 @@
-<div class="bkg">
+<div class="bkg" ng-controller="IndexController">
     <div class="container">
         <div ng-include="'/views/navbar.html'"> </div>
         <div class="row body-content">
             <div class="col-lg-12">
                 <div class="col-lg-6 col-lg-offset-2">
-                    <form action="/users" method="post">
+                    <form class="" ng-submit="userSignUp()">
                         <h4 class="login">SIGN UP</h4>
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username" ng-model="credentials.username">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" ng-model="credentials.email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="credentials.password">
                         </div>
                         <div id="contain-avatars">
                             <ul ng-controller="IndexController" class="avatar-list">

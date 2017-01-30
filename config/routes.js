@@ -8,8 +8,10 @@ module.exports = function (app, passport, auth) {
   var questions = require('../app/controllers/questions');
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
+  var signup = require('../app/controllers/signup');
 
   app.post('/api/auth/login', signin.userAuth);
+  app.post('/api/auth/signup', signup.signupAuth);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
