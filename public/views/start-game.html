@@ -1,13 +1,12 @@
-<div id = "startGame" ng-click="startGame()"> 
-      <div id="player-count">{{game.players.length}} / 6 </div>
-      <div id="the-word-players"> Players </div> 
+<div modal="showModal" close="startDonation()">
+    <div class="modal-header">
+        <h4>{{title}}</h4>
     </div>
-    <div id="loading-container">
-      <div id="loading-gif"></div>
+    <div class="modal-body">
+        <p>{{message}}</p>
     </div>
-    <div id="start-game-container">
-      <div id = 'start-game-button'> 
-        Start Game with {{game.players.length}} players
-      </div>
-    </div>   
-</div>
+    <div class="modal-footer">
+      <button class="btn btn-success" ng-click="startGame()">Yes</button>
+      <button class="btn" ng-click="startDonation()">No</button>
+    </div>
+  </div>
