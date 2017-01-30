@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  <div class="section"></div>
+  <div ng-include="'/views/navbar.html'"> </div>
   <main ng-controller="IndexController">
     <center>
       <div class="section"></div>
@@ -34,7 +34,8 @@
   <div class='row margin'>
     <div class='input-field col s12'>
       <i class="mdi-action-lock-outline prefix"></i>
-      <input class='validate' type='password' name='password' id='password' ng-model="credentials.userPassword"/>
+      <input class='validate' type='password' name='password' id='password' ng-model="credentials.userPassword"
+      />
       <label for='password'>Enter your password</label>
     </div>
   </div>
@@ -42,7 +43,7 @@
   <br/>
   <center>
     <div class='row'>
-      <md-button name='btn_login' class='col s12 btn waves-effect tw-button' type="submit"
+      <md-button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
         ng-click="userLogin()">SIGN IN</md-button>
     </div>
   </center>

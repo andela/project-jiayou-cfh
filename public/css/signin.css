@@ -38,15 +38,39 @@ body {
       background: #4862a3;
     }
 
+    .row :hover .fb-button{
+      background: #4862a3;
+    }
+
     .tw-button {
       background:#55acee;
+    }
+
+    .sb-button {
+      background:#0768a0;
+    }
+
+    .row :hover .sb-button{
+      background: #0768a0;
+    }
+
+    .row :hover .tw-button{
+      background: #55acee;
     }
 
     .g-button {
       background: #dd4b39;
     }
 
+    .row :hover .g-button{
+      background: #dd4b39;
+    }
+
     .gt-button {
+      background: grey;
+    }
+
+    .row :hover .gt-button{
       background: grey;
     }
 
