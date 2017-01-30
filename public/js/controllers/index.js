@@ -19,11 +19,9 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
-
     $scope.userLogin = function () {
       $http.post('/api/auth/login', { email: $scope.credentials.userEmail, password: $scope.credentials.userPassword }).success(function (res) {
         if (res.success) {
-          // Write token to local storage
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);
           localStorage.setItem('expDate', res.expDate);
