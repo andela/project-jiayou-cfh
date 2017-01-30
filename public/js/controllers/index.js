@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window, toaster) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -21,8 +21,12 @@ angular.module('mean.system')
       });
 
     $scope.userLogin = function () {
+      $scope.pop = function () {
+        toaster.pop('success', 'title', 'text');
+      };
       $http.post('/api/auth/login', { email: $scope.credentials.userEmail, password: $scope.credentials.userPassword }).success(function (res) {
         if (res.success) {
+          // toaster.pop('success', 'title', 'Successful');
           // Write token to local storage
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);

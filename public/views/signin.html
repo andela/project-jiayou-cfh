@@ -1,4 +1,7 @@
-ƒuse
+<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>-->
+<!--<script src="/bower_components/angular-animate/angular-animate.js"></script>-->
+<link href="../css/toaster.css" rel="stylesheet" />
 <div class="bkg" ng-controller="IndexController">
   <div class="container">
     <div ng-include="'/views/navbar.html'"> </div>
@@ -23,14 +26,6 @@
             </div>
             <input name="" id="sign-up-btn-other" class="btn btn-default btn-primary" type='submit'
               value="Sign In" />
-            <!--Div for modal-->
-            <div ng-controller="AppCtrl" class="md-padding" id="popupContainer" ng-cloak>
-              <div class="dialog-demo-content" layout="row" layout-wrap layout-margin layout-align="center">
-                <md-button class="md-primary md-raised" ng-click="showAlert($event)">
-                  Alert Dialog
-                </md-button>
-              </div>
-            </div>
           </form>
           <div class="social-buttons">
             <button class="btn facebook">Facebook</button>
