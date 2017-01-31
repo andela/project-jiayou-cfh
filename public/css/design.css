@@ -204,7 +204,7 @@
 
 /* The Modal (background) */
 
-.modal {
+.modals {
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -230,7 +230,7 @@
 
 /* Modal Content */
 
-.modal-content {
+.modal-contents {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;

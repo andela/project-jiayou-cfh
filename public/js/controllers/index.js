@@ -1,6 +1,5 @@
-//var moment = require('moment');
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', 'ModalService', function ($scope, Global, $location, socket, game, AvatarService, $http, $window, ModalService) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -48,20 +47,74 @@ angular.module('mean.system')
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);
           localStorage.setItem('expDate', res.expDate);
-          $location.path('/app');
+          //$location.path('/app');
           $scope.signinSuccess = true;
           $scope.showDialog(res);
         } else if (res.message === 'An unexpected error occurred') {
           // Display a modal if an error occured
           $scope.signinSuccess = false;
           $scope.showDialog(res);
-          console.log('An unexpected error occurred');
         } else {
-          $location.path('/#!/signin');
-          //console.log('An unexpected error occurred');
+          $scope.signinSuccess = false;
+          $scope.showDialog(res);
         }
       }).error(function (err) {
         $scope.userActive = false;
       });
+    };
+
+    $scope.showDialog = function (res) {
+      if ($scope.signinSuccess) {
+        $scope.message = 'Would you like to Start a new game?';
+        $scope.title = 'Sign in was Successful!';
+        $scope.templateUrl = 'views/start-game.html';
+      } else if ($scope.jwtExpired) {
+        $scope.message = 'Your sign in session has expired, please re-login!';
+        $scope.title = 'Session Token Expired!';
+        $scope.templateUrl = 'views/error_message.html';
+      } else {
+        $scope.message = 'An unexpected Error occurred, please sign in again!';
+        $scope.title = 'Sign in Failed!';
+        $scope.templateUrl = 'views/error_message.html';
+      }
+
+      ModalService.showModal({
+        templateUrl: $scope.templateUrl,
+        controller: 'ModalController',
+        scope: $scope
+      }).then(function (modal) {
+        modal.element.modal();
+        modal.close.then(function (result) {
+          //do something on successful page routing
+        });
+      });
+    };
+  }]);
+
+angular.module('mean.system')
+  .controller('ModalController', ['$scope', '$element', '$location', 'close', 'moment', function ($scope, $element, $location, close, moment) {
+    $scope.dismissModal = function (result) {
+      close(result, 200); // close, but give 200ms for bootstrap to animate
+    };
+    $scope.startGame = function () {
+      if (moment().isBefore(localStorage.getItem('expDate'))) {
+        $location.path('/app');
+      } else {
+        $location.path('/charity');
+      }
+    };
+    $scope.startDonation = function () {
+      $location.path('/charity');
+    };
+  }]).directive('removeModal', ['$document', function ($document) {
+    return {
+      restrict: 'A',
+      link: (scope, element) => {
+        element.bind('click', () => {
+          $document[0].body.classList.remove('modal-open');
+          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
+          angular.element($document[0].getElementsByClassName('modal')).remove();
+        });
+      }
     };
   }]);

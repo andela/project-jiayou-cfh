@@ -1,4 +1,4 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
   .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
@@ -56,6 +56,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
       DonationService.userDonated(donationObject);
     };
   }]);
-
-angular.module('mean.system', ['angularModalService']);
+angular.module('mean.system', ['angularModalService', 'angularMoment']);
 angular.module('mean.directives', []);
