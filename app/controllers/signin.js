@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
   User = mongoose.model('User');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
-var secret = process.env.SECRET;
+var secret = process.env.JWT_SECRET;
 var dotEnv = require('dotenv');
 dotEnv.config();
 
