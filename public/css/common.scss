@@ -386,7 +386,7 @@ html, body, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
 }
 
-html{
+/*html{
     // margin: 20px;
     // margin-top: 5px;
     // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
@@ -416,7 +416,7 @@ body{
     @include mobile-only{
         margin: 1px;
     }
-}
+} */
 
 .navbar .nav>li>a.brand {
     padding-left:20px;
@@ -1325,5 +1325,3 @@ body{
         border-top: 0px solid black !important;
     }
 }
-
-
