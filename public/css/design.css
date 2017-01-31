@@ -202,34 +202,20 @@
     margin-right: 80px;
 }
 
-
-/* The Modal (background) */
-
 .modal {
     display: none;
     /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     padding-top: 100px;
-    /* Location of the box */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
 }
-
-
-/* Modal Content */
 
 .modal-content {
     background-color: #fefefe;
@@ -244,9 +230,6 @@
 .size {
     width: 50%;
 }
-
-
-/* The Close Button */
 
 .close {
     color: #aaaaaa;
@@ -270,3 +253,161 @@
     margin-top: -30px;
     margin-left: 15px;
 }
+
+@media (max-width: 420px) {
+  .bkg {
+    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    padding-top: 25px;
+    width: 100%;
+    height: auto;
+  }
+
+  html,
+  .bkg {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+
+  .bkg {
+    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    padding-top: 25px;
+    width: 100%;
+    height: auto;
+  }
+
+  html,
+  .bkg {
+    font-size: 12px;
+  }
+  .col-xs-1,
+  .col-sm-1,
+  .col-md-1,
+  .col-lg-1,
+  .col-xs-2,
+  .col-sm-2,
+  .col-md-2,
+  .col-lg-2,
+  .col-xs-3,
+  .col-sm-3,
+  .col-md-3,
+  .col-lg-3,
+  .col-xs-4,
+  .col-sm-4,
+  .col-md-4,
+  .col-lg-4,
+  .col-xs-5,
+  .col-sm-5,
+  .col-md-5,
+  .col-lg-5,
+  .col-xs-6,
+  .col-sm-6,
+  .col-md-6,
+  .col-lg-6,
+  .col-xs-7,
+  .col-sm-7,
+  .col-md-7,
+  .col-lg-7,
+  .col-xs-8,
+  .col-sm-8,
+  .col-md-8,
+  .col-lg-8,
+  .col-xs-9,
+  .col-sm-9,
+  .col-md-9,
+  .col-lg-9,
+  .col-xs-10,
+  .col-sm-10,
+  .col-md-10,
+  .col-lg-10,
+  .col-xs-11,
+  .col-sm-11,
+  .col-md-11,
+  .col-lg-11,
+  .col-xs-12,
+  .col-sm-12,
+  .col-md-12,
+  .col-lg-12 {
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .title {
+    margin-top: 20px;
+  }
+
+  .play {
+    position: relative;
+    margin-left: 0px;
+    margin-right: 375px;
+    height: 375px;
+    margin-top: 25px;
+  }
+
+  .blue-box {
+    background: none;
+  }
+
+  .play-button {
+    width: 150px;
+    height: 40px;
+  }
+
+  .bottom-container {
+    height: 500px;
+  }
+
+  .welcome+p {
+    font-size: 1.0em;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+    width: 480px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 479px) {
+  .bottom-container {
+    height: 500px;
+  }
+
+  .play {
+    position: relative;
+    margin-left: 0px;
+    margin-right: 20px;
+    margin-top: 25px;
+    height: 420px;
+  }
+
+  body {
+    height: 100%;
+    background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+  }
+
+  .bkg {
+    background-image: none;
+  }
+
+  .blue-box {
+    display: none;
+  }
+
+}
+
+
+
