@@ -14,9 +14,11 @@
     <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } } (document, 'script', 'twitter-wjs');</script>
 </span>
 </div>
-<div class="alert alert-success" role="alert">
+
+<div alert-message class="alert alert-success" role="alert" ng-show="showAlert">
   <span><strong>Welcome!</strong></span>
 </div>
+
 <div id="gameplay-container">
   <div id="upper-gameplay-container">
     <div id="menu-timeremaining-container">
@@ -34,11 +36,3 @@
   <answers></answers>
 </div>
 </div>
-<script>
-  // remove the alert after 4000 milliseconds
-  window.setTimeout(function () {
-    $(".alert").fadeTo(500, 0).slideUp(500, function () {
-      $(this).remove();
-    });
-  }, 4000);
-</script>

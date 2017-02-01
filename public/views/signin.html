@@ -7,18 +7,21 @@
           <div class="sign-error" ng-show="showError() === 'invalid'">
             Please check your username/password and try again.
           </div>
+          <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+            <strong><span ng-bind="message"></span></strong>
+          </div>
           <form class="" ng-submit="userLogin()">
             <h2 class="login">SIGN IN</h2>
             <hr>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"
-                ng-model="credentials.userEmail">
+                ng-model="credentials.userEmail" required>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Password" ng-model="credentials.userPassword">
+                placeholder="Password" ng-model="credentials.userPassword" required>
             </div>
             <input name="" id="sign-up-btn-other" class="btn btn-default btn-primary" type='submit'
               value="Sign In" />
