@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, $http, $window, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -27,15 +27,38 @@ angular.module('mean.system')
           localStorage.setItem('Email', res.userEmail);
           localStorage.setItem('expDate', res.expDate);
           $location.path('/app');
-        } else if (res.message === 'An unexpected error occurred') {
-          // Display a modal if an error occured
-
+        } else if (res.msg === 'An unexpected error occurred') {
+          $scope.message = 'An unexpected error occured';
+          $scope.errorMessage = true;
+          // display error message for 4000ms
+          $scope.timer(4000);
+        } else if (res.message === 'Authentication failed wrong password') {
+          $scope.message = 'Wrong password';
+          $scope.errorMessage = true;
+          // display error message for 4000ms
+          $scope.timer(4000);
+        } else if (res.msg === 'Authentication failed user not found') {
+          $scope.message = 'Invalid user';
+          $scope.errorMessage = true;
+          // display error message for 4000ms
+          $scope.timer(4000);
         } else {
           $location.path('/#!/signin');
         }
       }).error(function (err) {
         $scope.userActive = false;
       });
+    };
+
+    /**
+     * Function to display message a for a time
+     * @param{Integer} howLong - How long in milliseconds message should show
+     * @returns{undefined}
+     */
+    $scope.timer = function (howLong) {
+      $timeout(function () {
+        $scope.errorMessage = false;
+      }, howLong);
     };
 
     $scope.userSignUp = function () {
