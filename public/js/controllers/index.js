@@ -29,6 +29,7 @@ angular.module('mean.system')
           $location.path('/app');
         } else if (res.message === 'An unexpected error occurred') {
           // Display a modal if an error occured
+
         } else {
           $location.path('/#!/signin');
         }
@@ -50,4 +51,3 @@ angular.module('mean.system')
       });
     };
   }]);
-

@@ -51,7 +51,7 @@ angular.module('mean.directives', [])
         });
       }
     };
-  }).directive('question', function() {
+  }).directive('question', function () {
     return {
       restrict: 'EA',
       templateUrl: '/views/question.html',
@@ -69,20 +69,18 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       link: function (scope, elem, attr) {
         scope.showOptions = true;
-        if (window.sessionStorage.task) {
-          scope.showOptions = false;
-        }
-        scope.userLogout = function () {
-          window.sessionStorage.task = '';
-        if (localStorage.getItem('JWT') && localStorage.getItem('Email')) {
+        scope.showNavBar = true;
+
+        if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken')) {
           scope.showNavBar = false;
         }
         scope.userLogout = function () {
           // remove the password and email on logout
           localStorage.removeItem('JWT');
           localStorage.removeItem('Email');
+          localStorage.removeItem('expDate');
+          localStorage.removeItem('jwtToken');
         };
-
       }
     };
   });
