@@ -12,7 +12,7 @@ body {
     body {
       /* For browsers that don't support gradients*/
       background: #0768a0;
-      font-family: Ubuntu;
+      font-family: Helvetica, Arial, sans-serif;
       /*background: -webkit-linear-gradient(left top, #2196f3 , #bbdefb);
       background: -o-linear-gradient(bottom right, #2196f3 , #bbdefb);
       background: -moz-linear-gradient(bottom right, #2196f3 , #bbdefb);
@@ -75,19 +75,20 @@ body {
     }
 
     html {
-      font-family: Ubuntu;
+      font-family: Helvetica, Arial, sans-serif;
     }
 
     h3 {
       font-size: 1.8em;
-      font-family: Ubuntu !important;
+      font-family: Helvetica, Arial, sans-serif !important;
     }
 
     h5 {
-      font-size: 1.3em;
-      font-family: Ubuntu !important;
+      font-size: 1em;
+      font-family: Helvetica, Arial, sans-serif !important;
+      color: #757575;
     }
 
     .btn {
-      font-family: Ubuntu !important;
+      font-family: Helvetica, Arial, sans-serif !important;
     }

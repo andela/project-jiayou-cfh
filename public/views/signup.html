@@ -47,19 +47,21 @@
   </div>
   <br/>
   <h5>Choose an Avatar</h5>
+
   <div id="contain-avatars">
     <ul ng-controller="IndexController" class="avatar-list">
       <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-        <input name="avatar" type='radio' value="{{$index}}">
-        <label></label>
+        <input name="avatar" type="radio" id="{{$index}}">
+        <label for="{{$index}}"></label>
         <img ng-src="{{avatar}}">
         </input>
       </li>
     </ul>
   </div>
+
   <center>
     <div class='row'>
-      <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect tw-button'>SIGN UP</button>
+      <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect sb-button'>SIGN UP</button>
     </div>
     <div class="input-field col s12">
       <h5 class="left medium-small">Already have an account? <a href="/#!/signin">Login</a></h5>
