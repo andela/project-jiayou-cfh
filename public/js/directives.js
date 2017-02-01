@@ -71,13 +71,15 @@ angular.module('mean.directives', [])
         scope.showOptions = true;
         scope.showNavBar = true;
 
-        if (localStorage.getItem('JWT') && localStorage.getItem('Email')) {
+        if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken')) {
           scope.showNavBar = false;
         }
         scope.userLogout = function () {
           // remove the password and email on logout
           localStorage.removeItem('JWT');
           localStorage.removeItem('Email');
+          localStorage.removeItem('expDate');
+          localStorage.removeItem('jwtToken');
         };
       }
     };
