@@ -86,7 +86,7 @@ angular.module('mean.directives', [])
           }, 4000);
         }
         scope.userLogout = function () {
-          // remove the password and email on logout
+          // remove the JWT, email and expDate on logout
           localStorage.removeItem('JWT');
           localStorage.removeItem('Email');
           localStorage.removeItem('expDate');
