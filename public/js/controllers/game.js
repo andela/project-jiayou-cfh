@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -30,7 +30,7 @@ angular.module('mean.system')
 
     $scope.pointerCursorStyle = function() {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return {'cursor': 'pointer'};
+        return { 'cursor': 'pointer' };
       } else {
         return {};
       }
@@ -57,18 +57,18 @@ angular.module('mean.system')
       }
     };
 
-    $scope.firstAnswer = function($index){
-      if($index % 2 === 0 && game.curQuestion.numAnswers > 1){
+    $scope.firstAnswer = function($index) {
+      if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
         return true;
-      } else{
+      } else {
         return false;
       }
     };
 
-    $scope.secondAnswer = function($index){
-      if($index % 2 === 1 && game.curQuestion.numAnswers > 1){
+    $scope.secondAnswer = function($index) {
+      if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
         return true;
-      } else{
+      } else {
         return false;
       }
     };
@@ -158,13 +158,13 @@ angular.module('mean.system')
         } else if ($scope.isCustomGame() && !$location.search().game) {
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
-          $location.search({game: game.gameID});
-          if(!$scope.modalShown){
-            setTimeout(function(){
+          $location.search({ game: game.gameID });
+          if (!$scope.modalShown) {
+            setTimeout(function() {
               var link = document.URL;
               var txt = 'Give the following link to your friends so they can join your game: ';
               $('#lobby-how-to-play').text(txt);
-              $('#oh-el').css({'text-align': 'center', 'font-size':'22px', 'background': 'white', 'color': 'black'}).text(link);
+              $('#oh-el').css({ 'text-align': 'center', 'font-size': '22px', 'background': 'white', 'color': 'black' }).text(link);
             }, 200);
             $scope.modalShown = true;
           }
@@ -172,13 +172,14 @@ angular.module('mean.system')
       }
     });
 
+
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       console.log('joining custom game');
-      game.joinGame('joinGame',$location.search().game);
+      game.joinGame('joinGame', $location.search().game);
     } else if ($location.search().custom) {
-      game.joinGame('joinGame',null,true);
+      game.joinGame('joinGame', null, true);
     } else {
       game.joinGame();
     }
 
-}]);
+  }]);
