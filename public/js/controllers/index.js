@@ -1,13 +1,13 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function ($scope, Global, $location, socket, game, AvatarService, $http, $window) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', function($scope, Global, $location, socket, game, AvatarService, $http, $window) {
     $scope.global = Global;
     $scope.credentials = {};
-    $scope.playAsGuest = function () {
+    $scope.playAsGuest = function() {
       game.joinGame();
       $location.path('/app');
     };
 
-    $scope.showError = function () {
+    $scope.showError = function() {
       if ($location.search().error) {
         return $location.search().error;
       }
@@ -16,11 +16,11 @@ angular.module('mean.system')
 
     $scope.avatars = [];
     AvatarService.getAvatars()
-      .then(function (data) {
+      .then(function(data) {
         $scope.avatars = data;
       });
-    $scope.userLogin = function () {
-      $http.post('/api/auth/login', { email: $scope.credentials.userEmail, password: $scope.credentials.userPassword }).success(function (res) {
+    $scope.userLogin = function() {
+      $http.post('/api/auth/login', { email: $scope.credentials.userEmail, password: $scope.credentials.userPassword }).success(function(res) {
         if (res.success) {
           // Write token to local storage
           localStorage.setItem('JWT', res.token);
@@ -33,20 +33,20 @@ angular.module('mean.system')
         } else {
           $location.path('/#!/signin');
         }
-      }).error(function (err) {
+      }).error(function(err) {
         $scope.userActive = false;
       });
     };
 
-    $scope.userSignUp = function () {
-      $http.post('/api/auth/signup', { email: $scope.credentials.email, password: $scope.credentials.password, username: $scope.credentials.username }).success(function (res) {
+    $scope.userSignUp = function() {
+      $http.post('/api/auth/signup', { email: $scope.credentials.email, password: $scope.credentials.password, username: $scope.credentials.username }).success(function(res) {
         if (res.success) {
           $window.localStorage.setItem('jwtToken', res.token);
-          $location.path('/app');
+          $location.path('/gametour');
         } else {
           $location.path('/#!/signup');
         }
-      }).error(function (err) {
+      }).error(function(err) {
         $scope.userActive = false;
       });
     };

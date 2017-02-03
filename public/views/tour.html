@@ -40,11 +40,11 @@
             <div id="startGame" ng-show="'awaiting players'">
               <div id="finding-players">Finding Players</div>
               <div id="player-count-container">
-                <div id="player-count">4/ 6 </div>
+                <div id="player-count">3/ 6 </div>
                 <div id="the-word-players"> Players </div>
               </div>
               <div id="loading-container">
-                <div id="loading-gif"><img ng-src="../img/loader.gif" /></div>
+                <div id="loading-gif"><img src="../img/loader.gif" /></div>
               </div>
               <div id="start-game-container">
                 <button id='start-game-button'>
@@ -66,9 +66,9 @@
           <div id="above-czar-container">
             <div id="avatar_">
               <span>
-        <img ng-src="img/king.png" id="king">
+        <img src="img/king.png" id="king">
       </span>
-              <img src="../img/chosen/FC01.png" />
+              <img id="player-avatar" src="../img/chosen/FC01.png" />
             </div>
             <div id="player-container-inner">
               <div id="player-name">
@@ -77,7 +77,7 @@
               <div id="player-score">
                 <h2>0/6</h2>
               </div>
-              <div ng-show="isPlayer($index)" id="player-star">
+              <div id="player-star">
                 <img src="../img/11.png" />
               </div>
             </div>
@@ -231,10 +231,6 @@
       <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
         <h2>What would you like to do now?</h2>
         You might consider donating to charity to atone for the horrifying answers you've submitted. Donating will also place a lovely crown on your avatar's head.
-      </div>
-      <div class="game-end-answer-text" ng-show="game.state === 'game ended' || game.gameWinner !== -1">
-        <h2>What would you like to do now?</h2>
-        Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
       </div>
       <div id='inner-text-container'>
         <a href='/#!/app'>
