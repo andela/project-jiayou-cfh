@@ -1,6 +1,5 @@
 <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="social-bar-container">
-        <player></player>
     </div>
     <div id="cards" class='hand'>
 
@@ -24,16 +23,32 @@
 </div>
 </div>
 
-<div id="info-container" ng-show="game.state === 'awaiting players'">
-    <div id="inner-info">
-        <div id="lobby-how-to-play">How To Play</div>
-        <ol id="oh-el">
-            <li>Each player begins with, and will always have, 10 white answer cards.</li>
-            <li>For each round, one player is randomly chosen as the Card Czar.</li>
-            <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
-            <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
-            <li>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+<div ng-show="game.state === 'awaiting players'">
+    <!--<div id="inner-info">-->
+        <ul class="Collection with-header">
+        <li class="collection-header text-bold"><h3>How To Play</h3></li>
+        <!--<ol id="oh-el">-->
+            
+            <li class="card small hoverable">Each player begins with, and will always have, 10 white answer cards.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
+            <li class="card small hoverable">For each round, one player is randomly chosen as the Card Czar.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
+            <li class="card small hoverable">Everyone else answers the black question card by clicking on the answer card they want to use.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
+            <li class="card small hoverable">The Card Czar then picks a favorite answer, and whoever played that answer wins the round.<hr></li>
+
+            <div class="card small hoverable smaller-text">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="/img/clickme.gif">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator red-text text-darken-4">Click Me!<i class="material-icons right"></i></span>
+      
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">CFH!<i class="material-icons right"></i></span>
+      <h4>*Want to adorn your avatar with a glorious crown? <hr> Donate to charity after the game!</h4>
+    </div>
+  </div>
         </ol>
+        <ul>
     </div>
 </div>
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">

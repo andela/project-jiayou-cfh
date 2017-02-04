@@ -394,7 +394,8 @@ html{
     // -moz-background-size: cover;
     // -o-background-size: cover;
     // background-size: cover;
-    @include gradient-bg;
+    // @include gradient-bg;
+    
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: relative;

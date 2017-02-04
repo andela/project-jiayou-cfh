@@ -1,4 +1,4 @@
-<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
+<!--<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
   <div id ="above-czar-container">
     <div id="avatar_">
       <span ng-show="isPremium($index)">
@@ -14,6 +14,32 @@
       </div>
     </div>
   </div>
+  <div id="czar-container" ng-show="currentCzar($index)">
+    <span id='the-czar'>CZAR</span>
+  </div>
+</div>
+-->
+<!--<div ng-repeat="player in game.players" style="width: 50px; height: 50px; display: inline-block; padding: 5px">-->
+<div ng-repeat="player in game.players" style="display: inline-block; position: relative">
+  <div ng-show="isPlayer($index)" style="background-image: url(../img/11.png); background-size: 15px; width: 15px; height: 15px; position: absolute; z-index: 100; top: -2px; right: 50px"></div>
+  <div class="chip">
+    <img ng-src="{{player.avatar}}" alt="{{player.username | upperFirstLetter}}"/>
+    <span style="display: inline-block;">{{player.username | upperFirstLetter}}</span>
+    <span class="badge light-blue darken-3 white-text">{{player.points}}/{{game.pointLimit}}</span>
+  </div>
+  <!--<div class="player-container" style="position: relative">
+    <div>
+      <span ng-show="isPremium($index)">
+        <img ng-src="img/king.png" id="king">
+      </span>
+      <img ng-src="{{player.avatar}}" style="height: 40px"/>
+    </div>
+    <span class="badge red white-text">{{player.username | upperFirstLetter}}</span>
+      <div><h2>{{player.points}}/{{game.pointLimit}}</h2></div>
+    <div ng-show="isPlayer($index)" id="player-star"
+      style="background-image: url(../img/11.png); background-size: 20px; width: 20px; height: 20px; position: absolute; z-index: 100; top: -15px; right: -2px">
+    </div>
+  </div>-->
   <div id="czar-container" ng-show="currentCzar($index)">
     <span id='the-czar'>CZAR</span>
   </div>
