@@ -1,16 +1,15 @@
 <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="social-bar-container">
     </div>
-    <div id="cards" class='hand'>
-
-        <span ng-show="winnerPicked()"></span>
-
-        <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()" ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-            <span ng-bind-html-unsafe="card.text"></span>
-            <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-            <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+    <div>
+        <div id="cards" class='hand' style="background: url(img/bluewood.jpg)">
+            <span ng-show="winnerPicked()"></span>
+            <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+                ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+                <span ng-bind-html-unsafe="card.text"></span>
+                <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
+                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
         </div>
-
         <span ng-repeat="answer in game.table">
         <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
@@ -19,26 +18,38 @@
         <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
     </div>
     </span>
-
 </div>
 </div>
-
+</div>
 <div ng-show="game.state === 'awaiting players'">
-     <ul class="collection with-header">
-        <li class="card-panel z-depth-2 hoverable collection-header"><h4>How To Play</h4></li>
-        <li class="card-panel z-depth-2 collection-item"><div>Each player begins with, and will always have, 10 white answer cards.</div></li>
-        <li class="card-panel z-depth-2 collection-item"><div>For each round, one player is randomly chosen as the Card Czar.</div></li>
-        <li class="card-panel z-depth-2 collection-item"><div>Everyone else answers the black question card by clicking on the answer card they want to use.</div></li>
-        <li class="card-panel z-depth-2 collection-item"><div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div></li>
-        <li class="card-panel z-depth-2 blue darken-2 white-text collection-item"><div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div></li>
-      </ul>
-    </div>
+    <ul class="collection with-header">
+        <li class="card-panel z-depth-2 hoverable collection-header">
+            <h4>How To Play</h4>
+        </li>
+        <li class="card-panel z-depth-2 collection-item">
+            <div>Each player begins with, and will always have, 10 white answer cards.</div>
+        </li>
+        <li class="card-panel z-depth-2 collection-item">
+            <div>For each round, one player is randomly chosen as the Card Czar.</div>
+        </li>
+        <li class="card-panel z-depth-2 collection-item">
+            <div>Everyone else answers the black question card by clicking on the answer card they want to use.</div>
+        </li>
+        <li class="card-panel z-depth-2 collection-item">
+            <div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div>
+        </li>
+        <li class="card-panel z-depth-2 blue darken-2 white-text collection-item">
+            <div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
+        </li>
+    </ul>
+</div>
 </div>
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="inner-info-exit">
         <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
             <h2>What would you like to do now?</h2>
-            You might consider donating to charity to atone for the horrifying answers you've submitted. Donating will also place a lovely crown on your avatar's head.
+            You might consider donating to charity to atone for the horrifying answers you've submitted. Donating will also place a lovely
+            crown on your avatar's head.
         </div>
         <div class="game-end-answer-text" ng-show="game.state === 'game ended' || game.gameWinner !== -1">
             <h2>What would you like to do now?</h2>
@@ -57,7 +68,6 @@
             </a>
         </div>
     </div>
-
     <div id="charity-widget-container">
         <!-- This is real -->
         <a href="http://www.crowdrise.com" id="crowdriseStaticLink-fundraiser-121142" title="Fundraising Websites on Crowdrise">Fundraising Websites - Crowdrise</a>
@@ -74,14 +84,11 @@
     </div>
     <div id='charity-fact-container'>
         <div id='charity-fact-tagline'>Did you know?</div>
-
         <div id='charity-fact'>
             {{ makeAWishFact }}
         </div>
-
         <div id='charity-logo-container'>
             <img src='/img/make-a-wish-logo.png' />
         </div>
-
     </div>
 </div>
