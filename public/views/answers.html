@@ -24,31 +24,14 @@
 </div>
 
 <div ng-show="game.state === 'awaiting players'">
-    <!--<div id="inner-info">-->
-        <ul class="Collection with-header">
-        <li class="collection-header text-bold"><h3>How To Play</h3></li>
-        <!--<ol id="oh-el">-->
-            
-            <li class="card small hoverable">Each player begins with, and will always have, 10 white answer cards.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
-            <li class="card small hoverable">For each round, one player is randomly chosen as the Card Czar.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
-            <li class="card small hoverable">Everyone else answers the black question card by clicking on the answer card they want to use.<hr><p class="grey-text text-lighten-3">CFH!</p></li>
-            <li class="card small hoverable">The Card Czar then picks a favorite answer, and whoever played that answer wins the round.<hr></li>
-
-            <div class="card small hoverable smaller-text">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="/img/clickme.gif">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator red-text text-darken-4">Click Me!<i class="material-icons right"></i></span>
-      
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">CFH!<i class="material-icons right"></i></span>
-      <h4>*Want to adorn your avatar with a glorious crown? <hr> Donate to charity after the game!</h4>
-    </div>
-  </div>
-        </ol>
-        <ul>
+     <ul class="collection with-header">
+        <li class="card-panel z-depth-2 hoverable collection-header"><h4>How To Play</h4></li>
+        <li class="card-panel z-depth-2 collection-item"><div>Each player begins with, and will always have, 10 white answer cards.</div></li>
+        <li class="card-panel z-depth-2 collection-item"><div>For each round, one player is randomly chosen as the Card Czar.</div></li>
+        <li class="card-panel z-depth-2 collection-item"><div>Everyone else answers the black question card by clicking on the answer card they want to use.</div></li>
+        <li class="card-panel z-depth-2 collection-item"><div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div></li>
+        <li class="card-panel z-depth-2 blue darken-2 white-text collection-item"><div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div></li>
+      </ul>
     </div>
 </div>
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
