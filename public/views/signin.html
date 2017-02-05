@@ -9,62 +9,67 @@
   <main ng-controller="IndexController">
     <center>
       <div class="section"></div>
-
+      <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+        <strong><span ng-bind="message"></span></strong>
+      </div>
       <h3 class="white-text text-lighten-2">SIGN IN</h3>
       <div class="section"></div>
 
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-<form class="col s12">
-  <div class='row'>
-    <div class='col s12'>
-    </div>
-  </div>
+          <form class="col s12">
+            <div class='row'>
+              <div class='col s12'>
+              </div>
+            </div>
 
-  <div class='row margin'>
-    <div class='input-field col s12'>
-      <i class="mdi-communication-email prefix"></i>
-      <input class='validate' type='email' name='email' id='email' ng-model="credentials.userEmail"
-      />
-      <label for='email'>Enter your email</label>
-    </div>
-  </div>
+            <div class='row margin'>
+              <div class='input-field col s12'>
+                <i class="mdi-communication-email prefix"></i>
+                <input id='email' type='email' class='validate' ng-model='credentials.userEmail'
+                  required='' aria-required='true'>
+                  <label for='email' data-error='wrong' data-success="right">Enter your email</label>
+              </div>
+            </div>
 
-  <div class='row margin'>
-    <div class='input-field col s12'>
-      <i class="mdi-action-lock-outline prefix"></i>
-      <input class='validate' type='password' name='password' id='password' ng-model="credentials.userPassword"
-      />
-      <label for='password'>Enter your password</label>
-    </div>
-  </div>
+            <div class='row margin'>
+              <div class='input-field col s12'>
+                <i class="mdi-action-lock-outline prefix"></i>
+                <input class='validate' type='password' name='password' id='password' ng-model="credentials.userPassword"
+                  required="" aria-required="true">
+                  <label for='password' data-error="wrong" data-success="right">Enter your password</label>
+              </div>
+            </div>
 
-  <br/>
-  <center>
-    <div class='row'>
-      <md-button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
-        ng-click="userLogin()">SIGN IN</md-button>
-    </div>
-  </center>
-  <h5 class="grey-text text-darken-1">...or sign in with:</h5>
-  <div class="row">
-    <div class="social-buttons">
-      <a class="waves-effect waves-light btn fb-button"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-      <a class="waves-effect waves-light btn tw-button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-      <a class="waves-effect waves-light btn g-button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-      <a class="waves-effect waves-light btn gt-button"><i class="fa fa-github" aria-hidden="true"></i></a>
-    </div>
-  </div>
-</form>
-</div>
-</div>
-</center>
-<div class="section"></div>
-</main>
+            <br/>
+            <center>
+              <div class='row'>
+                <md-button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
+                  ng-click="userLogin()">SIGN IN</md-button>
+              </div>
+            </center>
+            <h5 class="grey-text text-darken-1">...or sign in with:</h5>
+            <div class="row">
+              <div class="social-buttons">
+                <a href="/auth/facebook" class="waves-effect waves-light btn fb-button"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="/auth/twitter" class="waves-effect waves-light btn tw-button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="/auth/google" class="waves-effect waves-light btn g-button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+              </div>
 
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+              <div class="input-field col s12">
+                <h5 class="left medium-small">Don't have an account yet? <a href="/#!/signup">Sign up</a></h5>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </center>
+    <div class="section"></div>
+  </main>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>

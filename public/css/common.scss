@@ -386,37 +386,37 @@ html, body, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
 }
 
-html{
-    // margin: 20px;
-    // margin-top: 5px;
-    // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
-    // -webkit-background-size: cover;
-    // -moz-background-size: cover;
-    // -o-background-size: cover;
-    // background-size: cover;
-    @include gradient-bg;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    position: relative;
+// html{
+//     // margin: 20px;
+//     // margin-top: 5px;
+//     // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
+//     // -webkit-background-size: cover;
+//     // -moz-background-size: cover;
+//     // -o-background-size: cover;
+//     // background-size: cover;
+//     @include gradient-bg;
+//     background-attachment: fixed;
+//     background-repeat: no-repeat;
+//     position: relative;
 
-    @include mobile-only{
-        //margin: 3px;
-        margin-top: 0px;
-    }
-}
-body{
-    font-family: $main-font;
-    background: transparent;
-    margin: 10px;
+//     @include mobile-only{
+//         //margin: 3px;
+//         margin-top: 0px;
+//     }
+// }
+// body{
+//     font-family: $main-font;
+//     background: transparent;
+//     margin: 10px;
 
-    @include tablet-portrait-only{
-        margin: 5px;
-    }
+//     @include tablet-portrait-only{
+//         margin: 5px;
+//     }
 
-    @include mobile-only{
-        margin: 1px;
-    }
-}
+//     @include mobile-only{
+//         margin: 1px;
+//     }
+// }
 
 .navbar .nav>li>a.brand {
     padding-left:20px;
