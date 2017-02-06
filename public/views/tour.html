@@ -19,7 +19,7 @@
         <div id="menu-container">
           <span id="menu-button">Menu</span>
         </div>
-        <div id="timer-container">
+        <div id="timer-container" ng-show="showTime">
           <!--<timer></timer>-->
           <div id="inner-timer-container">
             <span id="timer-status-round"> Time Remaining</span>
@@ -34,11 +34,11 @@
             <!--<span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
 
             <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>-->
-            <span id="question" style="color:seashell">Can you guess who amongst this men is not the president of the world ?
+            <span id="question" ng-show="showQuestion" style="color:seashell">Can you guess who amongst this men is not the president of the world ?
                   </span>
 
             <div id="startGame" ng-show="'awaiting players'">
-              <div id="finding-players">Finding Players</div>
+              <div id="finding-players" ng-show="awaitingPlayers">Finding Players</div>
               <div id="player-count-container">
                 <div id="player-count">3/ 6 </div>
                 <div id="the-word-players"> Players </div>
@@ -46,7 +46,7 @@
               <div id="loading-container">
                 <div id="loading-gif"><img src="../img/loader.gif" /></div>
               </div>
-              <div id="start-game-container">
+              <div id="start-game-container" ng-show="showStartButton">
                 <button id='start-game-button'>
                   Start Game</br>with 4 players
                 </button>
@@ -60,7 +60,7 @@
     </div>
     <!--<answers></answers>-->
     <div id="cards-container">
-      <div id="social-bar-container">
+      <div id="social-bar-container" ng-show="showOtherPlayers">
         <!--<player></player>-->
         <div id="player-container" style="background-color:antiquewhite">
           <div id="above-czar-container">
@@ -165,7 +165,7 @@
         <!-- end of players -->
 
       </div>
-      <div id="cards" class='hand'>
+      <div id="cards" class='hand' ng-show="showQuestion">
 
         <!--<span ng-show="winnerPicked()"></span>-->
 
@@ -226,7 +226,7 @@
     </div>
   </div>
 
-  <div id="game-end-container">
+  <div id="game-end-container" ng-show="gameEnd">
     <div id="inner-info-exit">
       <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
         <h2>What would you like to do now?</h2>

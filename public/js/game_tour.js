@@ -129,10 +129,19 @@ angular.module('mean.system')
 
     const beforeTourChange = (targetElement) => {
       switch (targetElement.id) {
-        case 'find-players':
+        case 'finding-players':
           {
             $scope.$apply(() => {
               $scope.awaitingPlayers = true;
+            });
+            break;
+          }
+        case 'player-container':
+          {
+            $scope.$apply(() => {
+              $scope.awaitingPlayers = true;
+              $scope.showOtherPlayers = true;
+              $scope.showStartButton = false;
             });
             break;
           }
@@ -140,7 +149,7 @@ angular.module('mean.system')
           {
             $scope.$apply(() => {
               $scope.awaitingPlayers = true;
-              $scope.showOtherPlayers = false;
+              $scope.showOtherPlayers = true;
               $scope.showStartButton = false;
             });
             break;
@@ -181,7 +190,7 @@ angular.module('mean.system')
             });
             break;
           }
-        case 'is-czar':
+        case 'the-czar':
           {
             $scope.$apply(() => {
               $scope.showCzar = true;
@@ -195,7 +204,7 @@ angular.module('mean.system')
               $scope.showQuestion = false;
               $scope.gameEnd = true;
               $scope.showChatBody = false;
-              //$scope.expandChat = 'expand_less';
+              // $scope.expandChat = 'expand_less';
             });
             break;
           }
@@ -203,7 +212,7 @@ angular.module('mean.system')
           {
             $scope.$apply(() => {
               $scope.showChatBody = true;
-              //$scope.expandChat = 'expand_more';
+              // $scope.expandChat = 'expand_more';
             });
             break;
           }
