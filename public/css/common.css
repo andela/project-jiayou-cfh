@@ -869,6 +869,8 @@ body {
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
   background: #eceff1;
   border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   display: flex;
   justify-content: space-between;
   flex-direction: column; }
@@ -1091,3 +1093,13 @@ Message Box
 .activeChat {
   transition: all .5s;
   transform: translateY(0%); }
+
+.player-chip {
+  background-image: url(../img/11.png);
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  z-index: 100;
+  top: -2px;
+  right: 50px; }
