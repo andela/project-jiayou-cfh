@@ -1,13 +1,15 @@
 <div ng-controller="GameController">
-  <div class="container">
-    <div ng-include="'/views/navbar.html'"></div>
+  <div class="light-blue darken-3">
+    <div class="container" ng-include="'/views/navbar.html'"></div>
   </div>
+  <hr>
+  <hr>
   <div class="container" style="border: 1px solid #ececec">
     <div class="row valign-wrapper" style="min-height: 50px">
       <div class="col m8 valign">
       </div>
       <div class="col m4 valign">
-        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame()"> Abandon Game
+        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame()"> <i class="material-icons">cancel</i>
         </div>
         <div id="tweet-container" class="col m4 right-align">
           <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
@@ -22,36 +24,72 @@
                   js.src = p + '://platform.twitter.com/widgets.js';
                   fjs.parentNode.insertBefore(js, fjs);
                 }
-              }(document, 'script', 'twitter-wjs');
+              } (document, 'script', 'twitter-wjs');
             </script>
         </div>
       </div>
+      <div>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col m9">
-        <div id="gameplay-container">
-         <!-- <div id="menu-container">
+
+    <div class="gameplay-container">
+      <div class="row">
+        <div class="col m9">
+          <div id="">
+            <!-- <div id="menu-container">
             <span id="menu-button">Menu</span>
           </div>-->
-          <div class="row">
-            <div class="col m3">
-              <timer></timer>
+            <div class="row">
+              <div class="col m3">
+                <timer></timer>
+              </div>
+              <div class="col m9 blue z-depth-5" style="background: url(img/bluewood.jpg)">
+                <question></question>
+              </div>
             </div>
-            <div class="col m9 blue z-depth-5" style="background: url(img/bluewood.jpg)">
-              <question></question>
+            <div class="row">
+              <answers></answers>
             </div>
-          </div>
-          <hr>
-          <div class="row">
-            <answers></answers>
           </div>
         </div>
-      </div>
-      <div class="col m3">
-        <player></player>
+        <div class="col m3" style="padding-left: 40px">
+          <player></player>
+        </div>
       </div>
     </div>
   </div>
+  <div class="chat-container" id="chatContainer">
+    <button class="btn light-blue darken-3" id="openChatButton">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button>
+    <div class="chat">
+      <div class="chat-title">
+        <figure class="avatar" ng-repeat="player in game.players">
+          <img ng-show="isPlayer($index)" ng-src="{{player.avatar}}" alt="{{player.username | upperFirstLetter}}" />
+        </figure>
+      </div>
+      <div class="messages">
+        <div class="messages-content"></div>
+      </div>
+      <div class="message-box">
+        <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+        <button type="submit" class="message-submit">Send</button>
+      </div>
+    </div>
+    <!--<div class="bg"></div>-->
+  </div>
 </div>
+
+<div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
+            <div class="container">
+                <p class="navbar-text pull-left">© 2017 - Team Jiayou.
+                </p>
+            </div>
+        </div>
+
+<script>
+  $("#openChatButton").click(function() {
+    console.log("this is the thing");
+    $("#chatContainer").toggleClass("activeChat");
+  });
+</script>
