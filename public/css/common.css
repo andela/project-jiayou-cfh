@@ -74,8 +74,7 @@ html {
 
 body {
   font-family: "helvetica neue", helvetica, sans-serif;
-  background: transparent;
-  margin: 10px; }
+  background: transparent; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
       margin: 5px; } }
@@ -860,3 +859,235 @@ body {
   text-transform: none !important; }
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
+
+.chat {
+  width: 300px;
+  height: 80vh;
+  max-height: 500px;
+  z-index: 2;
+  overflow: hidden;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  background: #eceff1;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+/*--------------------
+Chat Title
+--------------------*/
+.chat-title {
+  flex: 0 1 45px;
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
+  color: #0277bd;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 10px 10px 10px 50px; }
+  .chat-title h1, .chat-title h2 {
+    font-weight: normal;
+    font-size: 10px;
+    margin: 0;
+    padding: 0; }
+  .chat-title h2 {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 8px;
+    letter-spacing: 1px; }
+  .chat-title .avatar {
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: 9px;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.24); }
+    .chat-title .avatar img {
+      width: 100%;
+      height: auto; }
+
+/*--------------------
+Messages
+--------------------*/
+.messages {
+  flex: 1 1 auto;
+  color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  position: relative;
+  width: 100%; }
+  .messages .messages-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 101%;
+    width: 100%; }
+  .messages .message {
+    clear: both;
+    float: left;
+    padding: 6px 10px 7px;
+    border-radius: 10px 10px 10px 0;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 8px 0;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-left: 35px;
+    position: relative;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
+    .messages .message .timestamp {
+      position: absolute;
+      bottom: -15px;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.3); }
+    .messages .message::before {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      border-top: 6px solid rgba(0, 0, 0, 0.3);
+      left: 0;
+      border-right: 7px solid transparent; }
+    .messages .message .avatar {
+      position: absolute;
+      z-index: 1;
+      bottom: -15px;
+      left: -35px;
+      border-radius: 30px;
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      border: 2px solid rgba(255, 255, 255, 0.24); }
+      .messages .message .avatar img {
+        width: 100%;
+        height: auto; }
+    .messages .message.message-personal {
+      float: right;
+      color: #fff;
+      text-align: right;
+      background: linear-gradient(120deg, #248A52, #257287);
+      border-radius: 10px 10px 0 10px; }
+      .messages .message.message-personal::before {
+        left: auto;
+        right: 0;
+        border-right: none;
+        border-left: 5px solid transparent;
+        border-top: 4px solid #257287;
+        bottom: -4px; }
+    .messages .message:last-child {
+      margin-bottom: 30px; }
+    .messages .message.new {
+      transform: scale(0);
+      transform-origin: 0 0;
+      animation: bounce 500ms linear both; }
+    .messages .message.loading::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: 2;
+      margin-top: 4px;
+      animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+      border: none;
+      animation-delay: .15s; }
+    .messages .message.loading span {
+      display: block;
+      font-size: 0;
+      width: 20px;
+      height: 10px;
+      position: relative; }
+      .messages .message.loading span::before {
+        content: '';
+        display: block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 2;
+        margin-top: 4px;
+        animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        margin-left: -7px; }
+      .messages .message.loading span::after {
+        content: '';
+        display: block;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 2;
+        margin-top: 4px;
+        animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+        margin-left: 7px;
+        animation-delay: .3s; }
+
+/*--------------------
+Message Box
+--------------------*/
+.message-box {
+  flex: 0 1 40px;
+  width: 100%;
+  background: #0277bd;
+  padding: 10px;
+  position: relative;
+  opacity: 2; }
+  .message-box .message-input {
+    background: none;
+    border: none;
+    outline: none !important;
+    resize: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    height: 17px;
+    margin: 0;
+    padding-right: 20px;
+    width: 265px; }
+  .message-box textarea:focus:-webkit-placeholder {
+    color: transparent; }
+  .message-box .message-submit {
+    position: absolute;
+    z-index: 1;
+    top: 9px;
+    right: 10px;
+    color: #0277bd;
+    border: none;
+    background: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: 10px;
+    outline: none !important;
+    transition: background .2s ease; }
+    .message-box .message-submit:hover {
+      background: #0277bd; }
+
+#notifications {
+  position: absolute;
+  background-color: rgba(245, 245, 245, 0.9);
+  padding: 10px;
+  top: -40px;
+  left: 0; }
+
+#main-container {
+  background-color: whitesmoke; }
+
+.chat-container {
+  position: fixed;
+  right: 15px;
+  bottom: 48px;
+  transition: all .5s;
+  transform: translateY(90%); }
+  .chat-container button {
+    position: absolute;
+    top: 4px;
+    right: 14px;
+    z-index: 100; }
+
+.activeChat {
+  transition: all .5s;
+  transform: translateY(0%); }
