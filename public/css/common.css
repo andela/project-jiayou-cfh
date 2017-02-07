@@ -1091,3 +1091,6 @@ Message Box
 .activeChat {
   transition: all .5s;
   transform: translateY(0%); }
+
+.isCzar {
+  background-color: #424242 !important; }
