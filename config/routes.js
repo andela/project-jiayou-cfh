@@ -9,9 +9,13 @@ module.exports = function (app, passport, auth) {
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
   var signup = require('../app/controllers/signup');
+  var invite = require('../app/controllers/invite');
 
   app.post('/api/auth/login', signin.userAuth);
   app.post('/api/auth/signup', signup.signupAuth);
+
+  app.post('/api/search/users', invite.invite);
+  app.get('/api/userEmail', invite.getEmail);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
