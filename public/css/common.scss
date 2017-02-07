@@ -306,7 +306,7 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
     border-radius: 8px;
 
     color: #252525;
-    font-family: Arial;
+    font-family: 'Caveat Brush', cursive;
     font-size: 20px;
     font-weight: bold;
 
@@ -346,7 +346,9 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
     }
 
     &.smallest {
-        font-size: 0.750em;
+        font-size: 1.5em;
+        font-family: 'Indie Flower', cursive;
+        
 
         @include mobile-only{
             font-size: 10px; //play with later
@@ -1577,7 +1579,7 @@ Message Box
     transition: background .2s ease;
     
     &:hover {
-      background: #0277bd;
+      background: #fff;
     }
   }
 }
@@ -1586,9 +1588,9 @@ Message Box
 
 #notifications {
     position: absolute;
-    background-color: rgba(whitesmoke,0.9);
+    // background-color: rgba(whitesmoke,0.9);
     padding: 10px;
-    top: -40px;
+    bottom: -8px;
     left: 0;
 }
 
@@ -1626,5 +1628,13 @@ Message Box
     right: 50px
 }
 
-
-
+.the-card{
+    background-image: url(../img/ribbon5.png);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right bottom;
+    max-height: 217px;
+    height: 200px;
+    opacity: 50;
+}

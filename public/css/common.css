@@ -9,7 +9,7 @@
   background-color: #fff;
   border-radius: 8px;
   color: #252525;
-  font-family: Arial;
+  font-family: 'Caveat Brush', cursive;
   font-size: 20px;
   font-weight: bold;
   vertical-align: top; }
@@ -38,7 +38,8 @@
     padding-left: 2%;
     padding-right: 2%; }
   .card.smallest {
-    font-size: 0.750em; }
+    font-size: 1.5em;
+    font-family: 'Indie Flower', cursive; }
     @media (max-width: 520px) {
       .card.smallest {
         font-size: 10px; } }
@@ -1066,13 +1067,12 @@ Message Box
     outline: none !important;
     transition: background .2s ease; }
     .message-box .message-submit:hover {
-      background: #0277bd; }
+      background: #fff; }
 
 #notifications {
   position: absolute;
-  background-color: rgba(245, 245, 245, 0.9);
   padding: 10px;
-  top: -40px;
+  bottom: -8px;
   left: 0; }
 
 #main-container {
@@ -1103,3 +1103,13 @@ Message Box
   z-index: 100;
   top: -2px;
   right: 50px; }
+
+.the-card {
+  background-image: url(../img/ribbon5.png);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right bottom;
+  max-height: 217px;
+  height: 200px;
+  opacity: 50; }
