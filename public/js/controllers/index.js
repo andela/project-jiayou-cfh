@@ -48,6 +48,7 @@ angular.module('mean.system')
           localStorage.setItem('Email', res.userEmail);
           localStorage.setItem('expDate', res.expDate);
           //$location.path('/app');
+          console.log("success");
           $scope.signinSuccess = true;
           $scope.showDialog(res);
         } else if (res.message === 'An unexpected error occurred') {
@@ -64,6 +65,7 @@ angular.module('mean.system')
     };
 
     $scope.showDialog = function (res) {
+
       if ($scope.signinSuccess) {
         $scope.message = 'Would you like to Start a new game?';
         $scope.title = 'Sign in was Successful!';
@@ -71,6 +73,10 @@ angular.module('mean.system')
       } else if ($scope.jwtExpired) {
         $scope.message = 'Your sign in session has expired, please re-login!';
         $scope.title = 'Session Token Expired!';
+        $scope.templateUrl = 'views/error_message.html';
+      } else if ($scope.startGameStatus) {
+        $scope.message = 'Game creation failed! Contact Admin.';
+        $scope.title = 'Game Creation Failed';
         $scope.templateUrl = 'views/error_message.html';
       } else {
         $scope.message = 'An unexpected Error occurred, please sign in again!';
@@ -89,6 +95,19 @@ angular.module('mean.system')
         });
       });
     };
+
+    $scope.generateGameId = function (jwt) {
+      $http.post('/api/games/0/start', {
+        JWT: jwt,
+        email: $scope.credentials.userEmail
+      }).success(function (res) {
+        const generatedGameId = res.gameId;
+        $location.path('/app/').search({gameDbId: generatedGameId,custom: 1});
+      }).error(function (err) {
+        $scope.startGameStatus = false;
+        $scope.showDialog();
+      });
+    };
   }]);
 
 angular.module('mean.system')
@@ -98,7 +117,7 @@ angular.module('mean.system')
     };
     $scope.startGame = function () {
       if (moment().isBefore(localStorage.getItem('expDate'))) {
-        $location.path('/app');
+        $scope.generateGameId(localStorage.getItem('JWT'));
       } else {
         $location.path('/charity');
       }

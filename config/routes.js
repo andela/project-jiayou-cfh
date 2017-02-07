@@ -9,9 +9,14 @@ module.exports = function (app, passport, auth) {
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
   var signup = require('../app/controllers/signup');
+  var games = require('../app/controllers/games');
 
   app.post('/api/auth/login', signin.userAuth);
   app.post('/api/auth/signup', signup.signupAuth);
+
+  // game playing routes
+  app.post('/api/games/:id/start', users.authenticate, games.startGame);
+  app.put('/api/games/:id/start', users.authenticate, games.updateGame);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
