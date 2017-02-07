@@ -35,6 +35,7 @@ exports.signupAuth = function (req, res) {
           mss: 'New user created',
           token,
           email: req.body.email,
+          user: user,
           username: req.body.username,
           exp
         });

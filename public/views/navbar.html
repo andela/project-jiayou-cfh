@@ -15,7 +15,7 @@
             <ul class="nav navbar-nav navbar-right" landing>
                 <li ng-class="{ active: link.isActive }" ng-repeat="link in links"><a href="{{link.url}}">{{link.name}}</a></li>
                 <li><a href="#!/signin" ng-show="showNavBar">SIGN IN</a></li>
-                <li><a href="#!/index" ng-click="userLogout()" ng-hide="showNavBar">SIGN OUT</a></li>
+                <li><a href="/signout" ng-click="userLogout()" ng-hide="showNavBar">SIGN OUT</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

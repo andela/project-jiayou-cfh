@@ -26,6 +26,7 @@ angular.module('mean.system')
           // Write token to local storage
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);
+          window.user = res.user;
           localStorage.setItem('expDate', res.expDate);
           $location.path('/app');
         } else if (res.msg === 'An unexpected error occurred') {
@@ -66,6 +67,7 @@ angular.module('mean.system')
       $http.post('/api/auth/signup', { email: $scope.credentials.email, password: $scope.credentials.password, username: $scope.credentials.username }).success(function (res) {
         if (res.success) {
           $window.localStorage.setItem('jwtToken', res.token);
+          window.user = res.user;
           $location.path('/app');
         } else if (res.message === 'Unknown Error') {
           $scope.message = 'An unexpected error occured';

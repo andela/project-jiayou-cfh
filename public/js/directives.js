@@ -65,7 +65,7 @@ angular.module('mean.directives', [])
       link: function (scope, elem, attr) { }
     };
   })
-  .directive('landing', function ($timeout) {
+  .directive('landing', function ($timeout, $http) {
     return {
       restrict: 'EA',
       link: function (scope, elem, attr) {
