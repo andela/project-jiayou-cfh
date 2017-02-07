@@ -8,6 +8,7 @@
 5 info lifecycle cardsforhumanity@1.0.0~prestart: cardsforhumanity@1.0.0
 6 silly lifecycle cardsforhumanity@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle cardsforhumanity@1.0.0~start: cardsforhumanity@1.0.0
+8 verbose lifecycle cardsforhumanity@1.0.0~start: unsafe-perm in lifecycle true
 9 verbose lifecycle cardsforhumanity@1.0.0~start: PATH: /Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/lib/node_modules/npm/bin/node-gyp-bin:/Users/oluwasinmisolaakinrele/Documents/www/Simulation-V/project-jiayou-cfh/node_modules/.bin:/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle cardsforhumanity@1.0.0~start: CWD: /Users/oluwasinmisolaakinrele/Documents/www/Simulation-V/project-jiayou-cfh
 11 silly lifecycle cardsforhumanity@1.0.0~start: Args: [ '-c', 'node node_modules/gulp-cli/bin/gulp' ]

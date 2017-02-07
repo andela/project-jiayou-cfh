@@ -1157,7 +1157,6 @@ body,
     font-size: 15px;
   }
 }
-
 .crDonateWidget {
   -webkit-box-shadow: 0px 0px 0px 0px transparent !important;
   -moz-box-shadow: 0px 0px 0px 0px transparent !important;
@@ -1205,6 +1204,7 @@ body,
   margin-bottom: 8px !important;
 }
 
+
 .gradientButton {
   width: 80% !important;
   margin-top: 8px !important;
@@ -1212,9 +1212,10 @@ body,
   -webkit-border-radius: 8px !important;
   -moz-border-radius: 8px !important;
   border-radius: 8px !important;
+
   text-transform: none !important;
 }
 
-.gradientButton .donateNow {
-  border-top: 0px solid black !important;
-}
+ .gradientButton .donateNow {
+    border-top: 0px solid black !important; }
+
