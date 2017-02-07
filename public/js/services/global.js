@@ -8,6 +8,27 @@ angular.module('mean.system')
 
     return _this._data;
   }])
+  .factory('authService', ['$http', '$q', function ($http, $q) {
+    return {
+      signIn: function (email, password) {
+        return $q.all([
+          $http.post('/api/auth/login', { email, password })
+        ])
+          .then(function (response) {
+            return response[0].data;
+          });
+      },
+
+      signUp: function (email, password, username) {
+        return $q.all([
+          $http.post('/api/auth/signup', { email, password, username })
+        ])
+          .then(function (response) {
+            return response[0].data;
+          });
+      }
+    };
+  }])
   .factory('AvatarService', ['$http', '$q', function ($http, $q) {
     return {
       getAvatars: function () {

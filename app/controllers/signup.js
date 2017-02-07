@@ -32,7 +32,7 @@ exports.signupAuth = function (req, res) {
         var token = jwt.sign({ userId: user._id, exp }, secret);
         res.json({
           success: true,
-          mss: 'New user created',
+          message: 'New user created',
           token,
           email: req.body.email,
           user: user,
