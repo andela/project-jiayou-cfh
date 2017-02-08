@@ -47,10 +47,11 @@ exports.signout = function (req, res) {
  * Session
  */
 exports.session = function (req, res) {
-  res.redirect('/');
+  res.redirect('/#!/app');
+
 };
 
-/** 
+/**
  * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -58,8 +59,8 @@ exports.session = function (req, res) {
 exports.checkAvatar = function (req, res) {
   if (req.user && req.user._id) {
     User.findOne({
-        _id: req.user._id
-      })
+      _id: req.user._id
+    })
       .exec(function (err, user) {
         if (user.avatar !== undefined) {
           res.redirect('/#!/');
@@ -71,7 +72,6 @@ exports.checkAvatar = function (req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
@@ -116,8 +116,8 @@ exports.avatars = function (req, res) {
   if (req.user && req.user._id && req.body.avatar !== undefined &&
     /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
-        _id: req.user._id
-      })
+      _id: req.user._id
+    })
       .exec(function (err, user) {
         user.avatar = avatars[req.body.avatar];
         user.save();
@@ -131,8 +131,8 @@ exports.addDonation = function (req, res) {
     // Verify that the object contains crowdrise data
     if (req.body.amount && req.body.crowdrise_donation_id && req.body.donor_name) {
       User.findOne({
-          _id: req.user._id
-        })
+        _id: req.user._id
+      })
         .exec(function (err, user) {
           // Confirm that this object hasn't already been entered
           var duplicate = false;

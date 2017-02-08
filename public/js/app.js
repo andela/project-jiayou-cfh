@@ -2,39 +2,46 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
   .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
-      when('/', {
-        templateUrl: 'views/index.html'
-      }).
-      when('/app', {
-        templateUrl: '/views/app.html',
-      }).
-      when('/privacy', {
-        templateUrl: '/views/privacy.html',
-      }).
-      when('/bottom', {
-        templateUrl: '/views/bottom.html'
-      }).
-      when('/signin', {
-        templateUrl: '/views/signin.html'
-      }).
-      when('/signup', {
-        templateUrl: '/views/signup.html'
-      }).
-      when('/choose-avatar', {
-        templateUrl: '/views/choose-avatar.html'
-      }).
-      when('/charity', {
-        templateUrl: '/views/charity.html'
-      }).
-      when('/aboutus', {
-        templateUrl: '/views/aboutus.html'
-      }).
-      when('/signin-up', {
-        templateUrl: '/views/signin-up.html'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
+        when('/', {
+          templateUrl: 'views/index.html'
+        }).
+        when('/app', {
+          templateUrl: '/views/app.html',
+        }).
+        when('/privacy', {
+          templateUrl: '/views/privacy.html',
+        }).
+        when('/bottom', {
+          templateUrl: '/views/bottom.html'
+        }).
+        when('/signin', {
+          templateUrl: '/views/signin.html'
+        }).
+        when('/signup', {
+          templateUrl: '/views/signup.html'
+        }).
+        when('/choose-avatar', {
+          templateUrl: '/views/choose-avatar.html'
+        }).
+        when('/charity', {
+          templateUrl: '/views/charity.html'
+        }).
+        when('/aboutus', {
+          templateUrl: '/views/aboutus.html'
+        }).
+        when('/signin-up', {
+          templateUrl: '/views/signin-up.html'
+        }).
+        when('/gametour', {
+          templateUrl: '/views/tour.html'
+        }).
+        otherwise({
+          redirectTo: '/'
+        });
+    }
+  ]).config(['$locationProvider',
+    function ($locationProvider) {
+      $locationProvider.hashPrefix("!");
     }
   ]).config(['$locationProvider',
     function ($locationProvider) {
@@ -56,5 +63,6 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
       DonationService.userDonated(donationObject);
     };
   }]);
+
 angular.module('mean.system', ['angularModalService', 'angularMoment']);
 angular.module('mean.directives', []);
