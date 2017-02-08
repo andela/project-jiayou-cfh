@@ -9,14 +9,17 @@ body {
       flex: 1 0 auto;
     }
 
+    .btn-large {
+      width: 60% !important;
+    }
+
+    .my-container {
+      width: 60% !important;
+    }
+
     body {
-      /* For browsers that don't support gradients*/
       background: #0768a0;
       font-family: Helvetica, Arial, sans-serif;
-      /*background: -webkit-linear-gradient(left top, #2196f3 , #bbdefb);
-      background: -o-linear-gradient(bottom right, #2196f3 , #bbdefb);
-      background: -moz-linear-gradient(bottom right, #2196f3 , #bbdefb);
-      background: linear-gradient(to bottom right, #bbdefb, #2196f3 , #bbdefb);*/
     }
 
     .input-field input[type=date]:focus + label,
@@ -71,12 +74,12 @@ body {
     }
 
     h3 {
-      font-size: 1.8em;
+      font-size: 1.5em;
       font-family: Helvetica, Arial, sans-serif !important;
     }
 
     h5 {
-      font-size: 1em;
+      font-size: 1.1em;
       font-family: Helvetica, Arial, sans-serif !important;
       color: #757575;
     }
