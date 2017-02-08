@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http, gameModals) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -30,7 +30,9 @@ angular.module('mean.system')
 
     $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
+        return {
+          'cursor': 'pointer'
+        };
       } else {
         return {};
       }
@@ -56,6 +58,7 @@ angular.module('mean.system')
         return false;
       }
     };
+
     $scope.firstAnswer = function ($index) {
       if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
         return true;
@@ -124,8 +127,31 @@ angular.module('mean.system')
     };
 
     $scope.abandonGame = function () {
-      game.leaveGame();
+      $scope.title = 'Exit Game';
+      $scope.message = 'Do you really want to abandon the game?';
+      $scope.templateUrl = 'views/modal_with_yes_button_only.html';
+      gameModals.showDialog('GameModalController', $scope);
+      /* call function to update the
+      database record with new gameId if
+      remaining players are just two
+      and then route user to
       $location.path('/');
+      */
+      // $scope.updateGameId(gameDetails);
+    };
+
+    $scope.updateGameId = function (gameDetails) {
+      if (gameDetails.playerLeft === 2) {
+        $http.put('/api/games/${gameDetails.gameId}/start', {
+          gameDetails: gameDetails
+        }).success(function (res) {
+          $location.path('/');
+        }).error(function (err) {
+          // $scope.startGameStatus = false;
+          // $scope.showDialog();
+        });
+        $location.path('/');
+      }
     };
 
     // Catches changes to round to update when no players pick card
@@ -157,6 +183,7 @@ angular.module('mean.system')
         } else if ($scope.isCustomGame() && !$location.search().game) {
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
+
           $location.search({ game: game.gameID });
           if (!$scope.modalShown) {
             setTimeout(function () {
@@ -176,8 +203,31 @@ angular.module('mean.system')
       console.log('joining custom game');
       game.joinGame('joinGame', $location.search().game);
     } else if ($location.search().custom) {
-      game.joinGame('joinGame', null, true);
+      var gameDBId = $location.search().gameDBId;
+      game.joinGame('joinGame', null, true, gameDBId);
     } else {
       game.joinGame();
     }
+  }]);
+
+angular.module('mean.system')
+  .controller('GameModalController', ['$scope', '$element', '$location', 'close', 'moment', 'game', function ($scope, $element, $location, close, moment, game) {
+    $scope.dismissModal = function (result) {
+      close(result, 200); // close, but give 200ms for bootstrap to animate
+    };
+    $scope.abandonGameYes = function () {
+      game.leaveGame();
+      $location.path('/').search({});
+    };
+  }]).directive('removeModal', ['$document', function ($document) {
+    return {
+      restrict: 'A',
+      link: (scope, element) => {
+        element.bind('click', () => {
+          $document[0].body.classList.remove('modal-open');
+          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
+          angular.element($document[0].getElementsByClassName('modal')).remove();
+        });
+      }
+    };
   }]);

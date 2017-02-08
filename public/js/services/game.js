@@ -44,21 +44,67 @@ angular.module('mean.system')
       }
     };
 
-    var timeSetViaUpdate = false;
-    var decrementTime = function () {
-      if (game.time > 0 && !timeSetViaUpdate) {
-        game.time--;
-      } else {
-        timeSetViaUpdate = false;
-      }
-      $timeout(decrementTime, 950);
-    };
 
-    socket.on('id', function (data) {
-      game.id = data.id;
-    });
+  var game = {
+    id: null, // This player's socket ID, so we know who this player is
+    gameID: null,
+    players: [],
+    playerIndex: 0,
+    winningCard: -1,
+    winningCardPlayer: -1,
+    gameWinner: -1,
+    table: [],
+    czar: null,
+    playerMinLimit: 3,
+    playerMaxLimit: 6,
+    pointLimit: null,
+    state: null,
+    round: 0,
+    time: 0,
+    curQuestion: null,
+    notification: null,
+    timeLimits: {},
+    joinOverride: false
+  };
 
-    socket.on('prepareGame', function (data) {
+  var notificationQueue = [];
+  var timeout = false;
+  var self = this;
+  var joinOverrideTimeout = 0;
+
+  var addToNotificationQueue = function(msg) {
+    notificationQueue.push(msg);
+    if (!timeout) { // Start a cycle if there isn't one
+      setNotification();
+    }
+  };
+  var setNotification = function() {
+    if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
+      clearInterval(timeout);
+      timeout = false;
+      game.notification = '';
+    } else {
+      game.notification = notificationQueue.shift(); // Show a notification and check again in a bit
+      timeout = $timeout(setNotification, 1300);
+    }
+  };
+
+  var timeSetViaUpdate = false;
+  var decrementTime = function() {
+    if (game.time > 0 && !timeSetViaUpdate) {
+      game.time--;
+    } else {
+      timeSetViaUpdate = false;
+    }
+    $timeout(decrementTime, 950);
+  };
+
+  socket.on('id', function(data) {
+    game.id = data.id;
+    console.log(game.id);
+  });
+
+      socket.on('prepareGame', function (data) {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;
       game.pointLimit = data.pointLimit;
@@ -171,37 +217,37 @@ angular.module('mean.system')
       }
     });
 
-    socket.on('notification', function (data) {
-      addToNotificationQueue(data.notification);
-    });
+  socket.on('notification', function(data) {
+    addToNotificationQueue(data.notification);
+  });
 
-    game.joinGame = function (mode, room, createPrivate) {
-      mode = mode || 'joinGame';
-      room = room || '';
-      createPrivate = createPrivate || false;
-      var userID = window.user ? user._id : 'unauthenticated';
-      socket.emit(mode, { userID, room, createPrivate });
-    };
+  game.joinGame = function(mode, room, gameDBId, createPrivate) {
+    mode = mode || 'joinGame';
+    room = room || '';
+    createPrivate = createPrivate || false;
+    var userID = !!window.user ? user._id : 'unauthenticated';
+    socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate, gameDBId: gameDBId});
+  };
 
-    game.startGame = function () {
-      socket.emit('startGame');
-    };
+  game.startGame = function() {
+    socket.emit('startGame');
+  };
 
-    game.leaveGame = function () {
-      game.players = [];
-      game.time = 0;
-      socket.emit('leaveGame');
-    };
+  game.leaveGame = function() {
+    game.players = [];
+    game.time = 0;
+    socket.emit('leaveGame');
+  };
 
-    game.pickCards = function (cards) {
-      socket.emit('pickCards', { cards });
-    };
+  game.pickCards = function(cards) {
+    socket.emit('pickCards',{cards: cards});
+  };
 
-    game.pickWinning = function (card) {
-      socket.emit('pickWinning', { card: card.id });
-    };
+  game.pickWinning = function(card) {
+    socket.emit('pickWinning',{card: card.id});
+  };
 
-    decrementTime();
+  decrementTime();
 
-    return game;
-  }]);
+  return game;
+}]);

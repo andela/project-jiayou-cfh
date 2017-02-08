@@ -3,7 +3,7 @@ script.
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src='//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
-script(type='text/javascript', src='/lib/jquery/jquery.js')
+script(type='text/javascript', src='/lib/jquery/dist/jquery.js')
 script(type='text/javascript', src='/lib/underscore/underscore-min.js')
 
 //Bootstrap
@@ -13,13 +13,18 @@ script(type='text/javascript', src='/lib/bootstrap/js/bootstrap.js')
 script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
 
 //AngularJS
-script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular.js')
-script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular-resource.js')
-script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular-cookies.js')
+
+script(type='text/javascript', src='https://code.angularjs.org/1.5.6/angular.js')
+script(type='text/javascript', src='https://code.angularjs.org/1.5.6/angular-route.js')
+script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-resource.js')
+script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-cookies.js')
 
 //Angular UI
 script(type='text/javascript', src='/lib/angular-bootstrap/ui-bootstrap-tpls.js')
 script(type='text/javascript', src='/lib/angular-ui-utils/modules/route.js')
+script(type='text/javascript', src='/lib/moment/moment.js')
+script(type='text/javascript', src='/lib/angular-moment/angular-moment.js')
+script(type='text/javascript', src='/lib/angular-modal-service/dst/angular-modal-service.js')
 
 //Application Init
 script(type='text/javascript', src='/js/init.js')
@@ -31,6 +36,7 @@ script(type='text/javascript', src='/js/filters.js')
 script(type='text/javascript', src='/js/services/global.js')
 script(type='text/javascript', src='/js/services/socket.js')
 script(type='text/javascript', src='/js/services/game.js')
+script(type='text/javascript', src='/js/services/modal.js')
 
 //Application Controllers
 script(type='text/javascript', src='/js/controllers/index.js')

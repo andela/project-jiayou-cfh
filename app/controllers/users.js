@@ -4,6 +4,7 @@
 var mongoose = require('mongoose'),
   User = mongoose.model('User');
 var avatars = require('./avatars').all();
+var jwt = require('jsonwebtoken');
 
 /**
  * Auth callback
@@ -47,6 +48,7 @@ exports.signout = function (req, res) {
  */
 exports.session = function (req, res) {
   res.redirect('/#!/app');
+
 };
 
 /**
@@ -70,7 +72,6 @@ exports.checkAvatar = function (req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
@@ -185,4 +186,22 @@ exports.user = function (req, res, next, id) {
       req.profile = user;
       next();
     });
+};
+
+/**
+ * Authenticate the user
+ */
+exports.authenticate = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.redirect('/#!/signin?error=invalid');
+    return;
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/#!/signin?error=invalid');
+      return;
+    }
+  }
 };

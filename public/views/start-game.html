@@ -1,13 +1,19 @@
-<div id = "startGame" ng-click="startGame()"> 
-      <div id="player-count">{{game.players.length}} / 6 </div>
-      <div id="the-word-players"> Players </div> 
+<!-- error modals -->
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="startDonation()" data-dismiss="modal" aria-hidden="true" remove-modal>&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{message}}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="startGame()" remove-modal>Yes</button>
+                <button class="btn btn-success" ng-click="startDonation()" remove-modal>No</button>
+            </div>
+        </div>
     </div>
-    <div id="loading-container">
-      <div id="loading-gif"></div>
-    </div>
-    <div id="start-game-container">
-      <div id = 'start-game-button'> 
-        Start Game with {{game.players.length}} players
-      </div>
-    </div>   
 </div>
+<!-- error modals ends -->
