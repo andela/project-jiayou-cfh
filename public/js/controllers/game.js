@@ -87,6 +87,7 @@ angular.module('mean.system')
         }
       });
     } else {
+      $scope.showAlert2 = true;
       $scope.timer2(4000);
     }
   };
