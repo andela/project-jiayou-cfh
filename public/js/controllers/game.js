@@ -56,7 +56,6 @@ angular.module('mean.system')
         return false;
       }
     };
-
     $scope.firstAnswer = function ($index) {
       if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
         return true;
@@ -171,6 +170,7 @@ angular.module('mean.system')
         }
       }
     });
+
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       console.log('joining custom game');

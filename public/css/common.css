@@ -65,24 +65,37 @@
 html, body, .main-container, .cont, #first-section, #inner-container {
   height: 100%; }
 
-html {
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  position: relative; }
-  @media (max-width: 520px) {
-    html {
-      margin-top: 0px; } }
+/*html{
+    // margin: 20px;
+    // margin-top: 5px;
+    // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
+    // -webkit-background-size: cover;
+    // -moz-background-size: cover;
+    // -o-background-size: cover;
+    // background-size: cover;
+    // @include gradient-bg;
+    
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
 
-body {
-  font-family: "helvetica neue", helvetica, sans-serif;
-  background: transparent; }
-  @media only screen and (min-width: 521px) and (max-width: 768px) {
-    body {
-      margin: 5px; } }
-  @media (max-width: 520px) {
-    body {
-      margin: 1px; } }
+    @include mobile-only{
+        //margin: 3px;
+        margin-top: 0px;
+    }
+}
+body{
+    font-family: $main-font;
+    background: transparent;
 
+    @include tablet-portrait-only{
+        margin: 5px;
+    }
+
+    @include mobile-only{
+        margin: 1px;
+    }
+} */
 .navbar .nav > li > a.brand {
   padding-left: 20px;
   margin-left: 0; }

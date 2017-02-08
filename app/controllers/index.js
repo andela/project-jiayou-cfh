@@ -16,8 +16,20 @@ exports.play = function (req, res) {
   }
 };
 
-exports.render = function (req, res) {
+
+/**
+ * Redirect users to the tour of the app
+ */
+exports.gameTour = function(req, res) {
+  if (Object.keys(req.query)[0] === 'custom') {
+    res.redirect('/#!/gametour?custom');
+  } else {
+    res.redirect('/#!/gametour');
+  }
+};
+
+exports.render = function(req, res) {
   res.render('index', {
-    user: req.user ? JSON.stringify(req.user) : "null"
+    user: req.user ? JSON.stringify(req.user) : 'null'
   });
 };

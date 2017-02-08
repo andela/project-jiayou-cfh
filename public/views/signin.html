@@ -22,21 +22,24 @@
             <div class="row margin">
               <div class="input-field col s12">
                 <i class="mdi-communication-email prefix"></i>
-                <input id="email" type="email" name="email" class="validate" required="required" ng-model='credentials.userEmail'>
-                <label for="email" data-error="wrong" data-success="right">Enter your email</label>
+                <input id="email" type="email" name="email" class="validate" required="required"
+                  ng-model='credentials.userEmail'>
+                  <label for="email" data-error="wrong" data-success="right">Enter your email</label>
               </div>
             </div>
             <div class="row margin">
               <div class="input-field col s12">
                 <i class="mdi-action-lock-outline prefix"></i>
-                <input class="validate" type="password" name="password" id="password" required="required" ng-model="credentials.userPassword">
-                <label for="password" data-error="wrong" data-success="right">Enter your password</label>
+                <input class="validate" type="password" name="password" id="password" required="required"
+                  ng-model="credentials.userPassword">
+                  <label for="password" data-error="wrong" data-success="right">Enter your password</label>
               </div>
             </div>
             <br/>
             <center>
               <div class="row">
-                <button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit" ng-click="userLogin()">SIGN IN</button>
+                <button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
+                  ng-click="userLogin()">SIGN IN</button>
               </div>
             </center>
             <h5 class="grey-text text-darken-1">...or sign in with:</h5>
@@ -50,9 +53,6 @@
                 <h5 class="left medium-small">Don't have an account yet? <a href="/#!/signup">Sign up</a></h5>
               </div>
             </div>
-          </form>
-        </div>
-      </div>
     </center>
     <div class="section"></div>
   </main>
