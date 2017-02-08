@@ -19,13 +19,13 @@
                 <span id='selection-number' ng-show="showSecond(card)"> 2 </span>-->
         </div>
         <span ng-repeat="answer in game.table">
-        <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+        <div class="card smallest " ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
-        <div class ="the-card">
-            <span ng-bind-html-unsafe="card.text"></span>
-        <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
-        <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
-        </div>
+            <div class ="the-card">
+                <span ng-bind-html-unsafe="card.text"></span>
+                <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+                <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+            </div>
     </div>
     </span>
 </div>
