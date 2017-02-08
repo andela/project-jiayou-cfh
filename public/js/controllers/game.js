@@ -53,19 +53,48 @@ angular.module('mean.system')
   $scope.uncheckAll = function () {
     $scope.selected = angular.copy([]);
   };
-
+  $scope.sentEmails = [];
   $scope.sendInvite = function () {
+    $scope.canSend = false;
+    $scope.cantSend = [];
+    $scope.selected = $scope.selected.filter(function (email, index) {
+      return $scope.sentEmails.indexOf(email) === -1;
+    });
+
     array = [];
     $scope.selected.forEach(function (userEmail) {
       array.push({ email: userEmail });
-    });
-    $http.post('/api/search/users', { emailArray: array }).success(function (res) {
-      if (res.statusCode === 202) {
-        $scope.showAlert = true;
+      if ($scope.sentEmails.indexOf(userEmail) === -1) {
+        $scope.sentEmails.push(userEmail);
       } else {
-        $location.path('/#!/signup');
+        $scope.cantSend.push(userEmail);
       }
     });
+
+    if ($scope.sentEmails.length > 11) {
+      $scope.canSend = false;
+    } else {
+      $scope.canSend = true;
+    }
+
+    if ($scope.canSend) {
+      $http.post('/api/search/users', { emailArray: array }).success(function (res) {
+        if (res.statusCode === 202) {
+          $scope.showAlert = true;
+          $scope.timer(4000);
+        } else {
+          $location.path('/#!/signup');
+        }
+      });
+    } else {
+      $scope.showAlert2 = true;
+    }
+  };
+
+  $scope.timer = function (howLong) {
+    $timeout(function () {
+      $scope.showAlert = false;
+    }, howLong);
   };
 
   $scope.checkFirst = function () {
