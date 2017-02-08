@@ -1,4 +1,4 @@
-<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
+<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'" style="background: url(img/bluewood.jpg)">
     <div id="social-bar-container">
     </div>
     <div>
@@ -32,24 +32,30 @@
 </div>
 </div>
 <div ng-show="game.state === 'awaiting players'">
-    <ul class="collection with-header">
-        <li class="card-panel z-depth-2 hoverable collection-header">
-            <h4 style="text-align: center">How To Play</h4>
+    <ul class="collection white-text green darken-1" style="padding-left: 7px;">
+        <li >
+            <h4 style="text-align: center;">How To Play</h4>
         </li>
-        <li class="card-panel z-depth-2 collection-item">
-            <div>Each player begins with, and will always have, 10 white answer cards.</div>
+        <hr>
+     
+        <li>
+            Each player begins with, and will always have, 10 white answer cards.
         </li>
-        <li class="card-panel z-depth-2 collection-item">
+        <br>
+        <li>
             <div>For each round, one player is randomly chosen as the Card Czar.</div>
         </li>
-        <li class="card-panel z-depth-2 collection-item">
+        <br>
+        <li>
             <div>Everyone else answers the black question card by clicking on the answer card they want to use.</div>
         </li>
-        <li class="card-panel z-depth-2 collection-item">
+        <br>
+        <li >
             <div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div>
         </li>
-        <li class="card-panel z-depth-2 blue darken-2 white-text collection-item">
-            <div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
+        <br>
+        <li class="">
+            <div class="card-panel hoverable blue darken-2 white-text collection-item">*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
         </li>
     </ul>
 </div>
