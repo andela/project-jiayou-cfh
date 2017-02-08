@@ -7,7 +7,9 @@ angular.module('mean.system')
           controller: paramController,
           scope: paramScope
         }).then(function (modal) {
+          console.log(paramScope.templateUrl);
           modal.element.modal();
+          console.log(paramScope.templateUrl);
           modal.close.then(function (result) {
           // do something on successful page routing
           });

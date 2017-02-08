@@ -113,9 +113,6 @@ angular.module('mean.system')
     };
 
     $scope.userLogin = function () {
-      let paramTitle = '';
-      let paramMessage = '';
-      let paramTemplateUrl = '';
       $http.post('/api/auth/login', {
         email: $scope.credentials.userEmail,
         password: $scope.credentials.userPassword
