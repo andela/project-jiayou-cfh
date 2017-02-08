@@ -15,6 +15,7 @@
 .navbar-default {
     background: transparent;
     border: none;
+    box-shadow: unset;
     /*margin-bottom: 85px;*/
 }
 
@@ -131,7 +132,6 @@
 
 .footer-bottom {
     background-color: #0477b7;
-    opacity: 0.85;
 }
 
 .navbar-default .navbar-text {

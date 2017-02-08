@@ -12,6 +12,7 @@ module.exports = function (app, passport, auth) {
 
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);
+
   // Route for sign-up
   app.post('/api/auth/signup', signup.signupAuth);
 
