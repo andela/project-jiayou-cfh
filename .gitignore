@@ -6,3 +6,4 @@ c4h_keys.txt
 .env
 .idea/
 public/lib
+.vscode
