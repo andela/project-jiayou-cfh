@@ -87,13 +87,19 @@ angular.module('mean.system')
         }
       });
     } else {
-      $scope.showAlert2 = true;
+      $scope.timer2(4000);
     }
   };
 
   $scope.timer = function (howLong) {
     $timeout(function () {
       $scope.showAlert = false;
+    }, howLong);
+  };
+
+  $scope.timer2 = function (howLong) {
+    $timeout(function () {
+      $scope.showAlert2 = false;
     }, howLong);
   };
 
