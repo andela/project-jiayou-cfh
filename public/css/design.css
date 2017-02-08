@@ -19,7 +19,7 @@ h2 {
 .navbar-default {
   background: transparent;
   border: none;
-  /*margin-bottom: 85px;*/
+  box-shadow: unset;
 }
 
 .navbar-default .navbar-brand {
@@ -264,4 +264,8 @@ h2 {
   position: absolute;
   margin-top: -30px;
   margin-left: 15px;
+}
+
+#player-count-container {
+  margin-top: 50px;
 }

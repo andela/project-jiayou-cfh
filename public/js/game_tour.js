@@ -21,7 +21,7 @@ angular.module('mean.system')
          tour and proceed to playing the game.`
         },
         {
-          element: '#finding-players',
+          element: '#loading-container',
           intro: `Game needs a minimum of 3 players to start.
           You have to wait for minimum number of players to join the game.`
         },
@@ -67,24 +67,25 @@ angular.module('mean.system')
           another round and the next CZAR is chosen`
         },
         {
+          element: '#answer',
+          intro: 'This is the answer to the question',
+          position: 'top'
+        },
+        {
           element: '#the-czar',
-          intro: `You might be the next CZAR, check the CZAR icon to 
-          know the next CZAR. As a Czar, you wait for all players to
+          intro: `The background turns grey so that 
+          you can easily identify that you are the Czar.
+          As a Czar, you wait for all players to
           submit their answers after which you pick what you feel is the most
           appropriate answer to the question. The Player who submitted that
-          answer wins the round. The game proceeds to another round`
+          answer wins the round. The game proceeds to another round and the Czar 
+          changes at every round`
         },
-        // {
-        //   element: '#notifications',
-        //   intro: `Your in-app notifications are shown here. Click to view
-        //  a dialog listing all your current game invites from your friends`,
-        //   position: 'bottom'
-        // },
-        // {
-        //   element: '#chat',
-        //   intro: 'While in a game, you can chat with other players.',
-        //   position: 'top'
-        // },
+        {
+          element: '#openChatButton',
+          intro: 'While in a game, you can chat with other players.',
+          position: 'top'
+        },
         {
           element: '#join-new-game',
           intro: `After a game ends (because too many players left the game 
@@ -99,16 +100,16 @@ angular.module('mean.system')
         {
           element: '#charity-widget-container',
           intro: `Click here to donate to charity at the end of the game.`,
-          position: 'bottom'
+          position: 'top'
         },
         {
-          element: '#abandon-game-button',
+          element: '#abandon-game',
           intro: 'You can click this icon to abandon a game at any time.'
         },
         {
           element: '#home',
           intro: 'You can click done to return to go to the game page',
-          position: 'bottom'
+          position: 'top'
         }
 
       ]
@@ -129,7 +130,7 @@ angular.module('mean.system')
 
     const beforeTourChange = (targetElement) => {
       switch (targetElement.id) {
-        case 'finding-players':
+        case 'loading-container':
           {
             $scope.$apply(() => {
               $scope.awaitingPlayers = true;
@@ -171,6 +172,8 @@ angular.module('mean.system')
               $scope.showStartButton = false;
               $scope.showTime = true;
               $scope.showQuestion = true;
+              $scope.cards = true;
+              $scope.answer = false;
             });
             break;
           }
@@ -178,15 +181,18 @@ angular.module('mean.system')
           {
             $scope.$apply(() => {
               $scope.showCzar = false;
+              $scope.answer = false;
             });
             break;
           }
-        case 'time-card':
+        case 'inner-timer-container':
           {
             $scope.$apply(() => {
               $scope.showQuestion = true;
               $scope.gameEnd = false;
               $scope.playerScore = 0;
+              $scope.cards = false;
+              $scope.answer = true;
             });
             break;
           }
@@ -195,6 +201,7 @@ angular.module('mean.system')
             $scope.$apply(() => {
               $scope.showCzar = true;
               $scope.playerScore = 1;
+              $scope.answer = false;
             });
             break;
           }
@@ -204,29 +211,21 @@ angular.module('mean.system')
               $scope.showQuestion = false;
               $scope.gameEnd = true;
               $scope.showChatBody = false;
-              // $scope.expandChat = 'expand_less';
+              $scope.expandChat = 'expand_less';
             });
             break;
           }
-        case 'chat':
+        case 'openChatButton':
           {
             $scope.$apply(() => {
               $scope.showChatBody = true;
-              // $scope.expandChat = 'expand_more';
-            });
-            break;
-          }
-        case 'requests':
-          {
-            $scope.$apply(() => {
-              $scope.showChatBody = false;
-              // $scope.expandChat = 'expand_less';
+              $scope.expandChat = 'expand_more';
             });
             break;
           }
         default:
           {
-            // we don't want to do anything on the default cases
+            // nothing here
           }
       }
     };
