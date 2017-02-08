@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http, gameModals) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -127,7 +127,10 @@ angular.module('mean.system')
     };
 
     $scope.abandonGame = function () {
-      game.leaveGame();
+      $scope.title = 'Exit Game';
+      $scope.message = 'Do you really want to abandon the game?';
+      $scope.templateUrl = 'views/modal_with_yes_button_only.html';
+      gameModals.showDialog('GameModalController', $scope);
       /* call function to update the
       database record with new gameId if 
       remaining players are just two
@@ -135,7 +138,6 @@ angular.module('mean.system')
       $location.path('/');
       */
       // $scope.updateGameId(gameDetails);
-      $location.path('/').search({});
     };
 
     $scope.updateGameId = function (gameDetails) {
@@ -211,4 +213,25 @@ angular.module('mean.system')
     } else {
       game.joinGame();
     }
+  }]);
+angular.module('mean.system')
+  .controller('GameModalController', ['$scope', '$element', '$location', 'close', 'moment', 'game', function ($scope, $element, $location, close, moment, game) {
+    $scope.dismissModal = function (result) {
+      close(result, 200); // close, but give 200ms for bootstrap to animate
+    };
+    $scope.abandonGameYes = function () {
+      game.leaveGame();
+      $location.path('/').search({});
+    };
+  }]).directive('removeModal', ['$document', function ($document) {
+    return {
+      restrict: 'A',
+      link: (scope, element) => {
+        element.bind('click', () => {
+          $document[0].body.classList.remove('modal-open');
+          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
+          angular.element($document[0].getElementsByClassName('modal')).remove();
+        });
+      }
+    };
   }]);
