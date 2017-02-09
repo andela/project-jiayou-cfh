@@ -87,3 +87,12 @@ body {
     .btn {
       font-family: Helvetica, Arial, sans-serif !important;
     }
+
+    .bdy {
+     display: inline-block;
+      border: 1px solid #EEE;
+    }
+
+    .section {
+      padding-top: 0rem;
+    }
