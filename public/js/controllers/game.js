@@ -9,7 +9,6 @@ angular.module('mean.system')
   var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
   $scope.selected = [];
-
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -42,6 +41,7 @@ angular.module('mean.system')
     return {};
   };
   $scope.getEmail = function () {
+    $scope.canSend = false;
     $http({
       method: 'GET',
       url: '/api/userEmail'
@@ -59,6 +59,7 @@ angular.module('mean.system')
   $scope.uncheckAll = function () {
     $scope.selected = angular.copy([]);
   };
+
   $scope.sentEmails = [];
   $scope.sendInvite = function () {
     $scope.canSend = false;
@@ -85,8 +86,8 @@ angular.module('mean.system')
     if ($scope.canSend) {
       $http.post('/api/search/users', { emailArray: array }).success(function (res) {
         if (res.statusCode === 202) {
-          $scope.showAlert = true;
-          $scope.timer(4000);
+          $scope.showSuccessAlert = true;
+          $scope.timer(5000);
         } else {
           $location.path('/#!/signup');
         }
@@ -99,7 +100,7 @@ angular.module('mean.system')
 
   $scope.timer = function (howLong) {
     $timeout(function () {
-      $scope.showAlert = false;
+      $scope.showSuccessAlert = false;
     }, howLong);
   };
 
