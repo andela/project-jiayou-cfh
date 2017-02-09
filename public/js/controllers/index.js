@@ -27,7 +27,7 @@ angular.module('mean.system')
         localStorage.setItem('Email', res.userEmail);
         window.user = res.user;
         localStorage.setItem('expDate', res.expDate);
-        $location.path('/app');
+        $scope.showDialog();
       } else if (res.message === 'Authentication failed wrong password') {
         $scope.message = 'Wrong password';
         $scope.errorMessage = true;
@@ -48,12 +48,15 @@ angular.module('mean.system')
       }
     };
 
-    var signInFailure = function (err) {
-      $scope.userActive = false;
+    $scope.showDialog = function () {
+      $scope.title = 'Sign in was Successful!';
+      $scope.message = 'Would you like to Start a new game?';
+      $scope.templateUrl = 'views/start-game.html';
+      gameModals.showDialog('IndexModalController', $scope);
     };
 
-    $scope.userLogin = function () {
-      authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
+    var signInFailure = function (err) {
+      $scope.userActive = false;
     };
 
     var signUpSuccess = function (res) {
@@ -95,52 +98,8 @@ angular.module('mean.system')
       }, howLong);
     };
 
-    $scope.userSignUp = function () {
-      $http.post('/api/auth/signup', {
-        email: $scope.credentials.email,
-        password: $scope.credentials.password,
-        username: $scope.credentials.username
-      }).success(function (res) {
-        if (res.success) {
-          $window.localStorage.setItem('jwtToken', res.token);
-          $location.path('/app');
-        } else {
-          $location.path('/#!/signup');
-        }
-      }).error(function (err) {
-        $scope.userActive = false;
-      });
-    };
-
     $scope.userLogin = function () {
-      $http.post('/api/auth/login', {
-        email: $scope.credentials.userEmail,
-        password: $scope.credentials.userPassword
-      }).success(function (res) {
-        if (res.success) {
-          // Write token to local storage
-          localStorage.setItem('JWT', res.token);
-          localStorage.setItem('Email', res.userEmail);
-          localStorage.setItem('expDate', res.expDate);
-          $scope.title = 'Sign in was Successful!';
-          $scope.message = 'Would you like to Start a new game?';
-          $scope.templateUrl = 'views/start-game.html';
-          gameModals.showDialog('IndexModalController', $scope);
-        } else if (res.message === 'An unexpected error occurred') {
-          // Display a modal if an error occured
-          $scope.title = 'Sign in Failed';
-          $scope.message = 'Sign in Failed because incorrect Login Details';
-          $scope.templateUrl = 'views/error_message.html';
-          gameModals.showDialog('IndexModalController', $scope);
-        } else {
-          $scope.title = 'Sign in Failed';
-          $scope.message = 'Sign in Failed beacuse of incorrect Login Details';
-          $scope.templateUrl = 'views/error_message.html';
-          gameModals.showDialog('IndexModalController', $scope);
-        }
-      }).error(function (err) {
-        $scope.userActive = false;
-      });
+      authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
 
     $scope.generateGameId = function (jwt) {
