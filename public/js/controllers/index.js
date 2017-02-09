@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', 'ModalService', function ($scope, Global, $location, socket, game, AvatarService, $http, $window, ModalService) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window', 'gameModals', function ($scope, Global, $location, socket, game, AvatarService, $http, $window, gameModals) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -38,6 +38,9 @@ angular.module('mean.system')
     };
 
     $scope.userLogin = function () {
+      let paramTitle = '';
+      let paramMessage = '';
+      let paramTemplateUrl = '';
       $http.post('/api/auth/login', {
         email: $scope.credentials.userEmail,
         password: $scope.credentials.userPassword
@@ -47,73 +50,66 @@ angular.module('mean.system')
           localStorage.setItem('JWT', res.token);
           localStorage.setItem('Email', res.userEmail);
           localStorage.setItem('expDate', res.expDate);
-          //$location.path('/app');
-          $scope.signinSuccess = true;
-          $scope.showDialog(res);
+          $scope.title = 'Sign in was Successful!';
+          $scope.message = 'Would you like to Start a new game?';
+          $scope.templateUrl = 'views/start-game.html';
+          gameModals.showDialog('IndexModalController', $scope);
         } else if (res.message === 'An unexpected error occurred') {
           // Display a modal if an error occured
-          $scope.signinSuccess = false;
-          $scope.showDialog(res);
+          $scope.title = 'Sign in Failed';
+          $scope.message = 'Sign in Failed because incorrect Login Details';
+          $scope.templateUrl = 'views/error_message.html';
+          gameModals.showDialog('IndexModalController', $scope);
         } else {
-          $scope.signinSuccess = false;
-          $scope.showDialog(res);
+          $scope.title = 'Sign in Failed';
+          $scope.message = 'Sign in Failed beacuse of incorrect Login Details';
+          $scope.templateUrl = 'views/error_message.html';
+          gameModals.showDialog('IndexModalController', $scope);
         }
       }).error(function (err) {
         $scope.userActive = false;
       });
     };
 
-    $scope.showDialog = function (res) {
-      if ($scope.signinSuccess) {
-        $scope.message = 'Would you like to Start a new game?';
-        $scope.title = 'Sign in was Successful!';
-        $scope.templateUrl = 'views/start-game.html';
-      } else if ($scope.jwtExpired) {
-        $scope.message = 'Your sign in session has expired, please re-login!';
-        $scope.title = 'Session Token Expired!';
-        $scope.templateUrl = 'views/error_message.html';
-      } else {
-        $scope.message = 'An unexpected Error occurred, please sign in again!';
-        $scope.title = 'Sign in Failed!';
-        $scope.templateUrl = 'views/error_message.html';
-      }
-
-      ModalService.showModal({
-        templateUrl: $scope.templateUrl,
-        controller: 'ModalController',
-        scope: $scope
-      }).then(function (modal) {
-        modal.element.modal();
-        modal.close.then(function (result) {
-          //do something on successful page routing
-        });
+    $scope.generateGameId = function (jwt) {
+      $http.post("/api/games/0/start", {
+        JWT: jwt,
+        email: $scope.credentials.userEmail
+      }).success(function (res) {
+        const generatedGameId = res.gameId;
+        $location.path("/app/").search({gameDbId: generatedGameId, custom: 1});
+      }).error(function (err) {
+        $scope.title = "Game Creation Failed!";
+        $scope.message = "The game could not be created!";
+        $scope.templateUrl = "views/error_message.html";
+        gameModals.showDialog("IndexModalController", $scope);
       });
     };
   }]);
-
-angular.module('mean.system')
-  .controller('ModalController', ['$scope', '$element', '$location', 'close', 'moment', function ($scope, $element, $location, close, moment) {
+angular.module("mean.system")
+  .controller("IndexModalController", ["$scope", "$element", "$location", "close", "moment", function ($scope, $element, $location, close, moment) {
     $scope.dismissModal = function (result) {
       close(result, 200); // close, but give 200ms for bootstrap to animate
     };
     $scope.startGame = function () {
-      if (moment().isBefore(localStorage.getItem('expDate'))) {
-        $location.path('/app');
+      if (moment().isBefore(localStorage.getItem("expDate"))) {
+        $scope.generateGameId(localStorage.getItem("JWT"));
       } else {
-        $location.path('/charity');
+        gameModals.showDialog("IndexModalController");
+        $location.path("/charity");
       }
     };
     $scope.startDonation = function () {
-      $location.path('/charity');
+      $location.path("/charity");
     };
-  }]).directive('removeModal', ['$document', function ($document) {
+  }]).directive("removeModal", ["$document", function ($document) {
     return {
-      restrict: 'A',
+      restrict: "A",
       link: (scope, element) => {
-        element.bind('click', () => {
-          $document[0].body.classList.remove('modal-open');
-          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
-          angular.element($document[0].getElementsByClassName('modal')).remove();
+        element.bind("click", () => {
+          $document[0].body.classList.remove("modal-open");
+          angular.element($document[0].getElementsByClassName("modal-backdrop")).remove();
+          angular.element($document[0].getElementsByClassName("modal")).remove();
         });
       }
     };
