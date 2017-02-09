@@ -865,7 +865,7 @@ body {
 .chat {
   width: 300px;
   height: 80vh;
-  max-height: 500px;
+  max-height: 350px;
   z-index: 2;
   overflow: hidden;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
@@ -1082,7 +1082,7 @@ Message Box
 .chat-container {
   position: fixed;
   right: 15px;
-  bottom: 48px;
+  bottom: 57px;
   transition: all .5s;
   transform: translateY(90%); }
   .chat-container button {
