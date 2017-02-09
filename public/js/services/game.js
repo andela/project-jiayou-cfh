@@ -57,7 +57,7 @@ angular.module('mean.system')
 
   socket.on('id', function(data) {
     game.id = data.id;
-    console.log(game.id);
+    // console.log(game.id);
   });
 
   socket.on('prepareGame', function(data) {
@@ -178,12 +178,12 @@ angular.module('mean.system')
     addToNotificationQueue(data.notification);
   });
 
-  game.joinGame = function(mode, room, gameDBId, createPrivate) {
+  game.joinGame = function (mode, room, gameDBId, createPrivate) {
     mode = mode || 'joinGame';
     room = room || '';
     createPrivate = createPrivate || false;
     var userID = !!window.user ? user._id : 'unauthenticated';
-    socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate, gameDBId: gameDBId});
+    socket.emit(mode, {userID: userID, room: room, createPrivate: createPrivate, gameDBId: gameDBId });
   };
 
   game.startGame = function() {

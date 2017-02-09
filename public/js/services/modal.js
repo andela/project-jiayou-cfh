@@ -1,5 +1,5 @@
-angular.module('mean.system')
-  .factory('gameModals', ['ModalService', function (ModalService) {
+angular.module("mean.system")
+  .factory("gameModals", ["ModalService", function (ModalService) {
     return {
       showDialog: (paramController, paramScope) => {
         ModalService.showModal({

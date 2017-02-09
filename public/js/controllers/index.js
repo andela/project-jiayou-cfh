@@ -72,44 +72,44 @@ angular.module('mean.system')
     };
 
     $scope.generateGameId = function (jwt) {
-      $http.post('/api/games/0/start', {
+      $http.post("/api/games/0/start", {
         JWT: jwt,
         email: $scope.credentials.userEmail
       }).success(function (res) {
         const generatedGameId = res.gameId;
-        $location.path('/app/').search({gameDbId: generatedGameId, custom: 1});
+        $location.path("/app/").search({gameDbId: generatedGameId, custom: 1});
       }).error(function (err) {
-        $scope.title = 'Game Creation Failed!';
-        $scope.message = 'The game could not be created!';
-        $scope.templateUrl = 'views/error_message.html';
-        gameModals.showDialog('IndexModalController', $scope);
+        $scope.title = "Game Creation Failed!";
+        $scope.message = "The game could not be created!";
+        $scope.templateUrl = "views/error_message.html";
+        gameModals.showDialog("IndexModalController", $scope);
       });
     };
   }]);
-angular.module('mean.system')
-  .controller('IndexModalController', ['$scope', '$element', '$location', 'close', 'moment', function ($scope, $element, $location, close, moment) {
+angular.module("mean.system")
+  .controller("IndexModalController", ["$scope", "$element", "$location", "close", "moment", function ($scope, $element, $location, close, moment) {
     $scope.dismissModal = function (result) {
       close(result, 200); // close, but give 200ms for bootstrap to animate
     };
     $scope.startGame = function () {
-      if (moment().isBefore(localStorage.getItem('expDate'))) {
-        $scope.generateGameId(localStorage.getItem('JWT'));
+      if (moment().isBefore(localStorage.getItem("expDate"))) {
+        $scope.generateGameId(localStorage.getItem("JWT"));
       } else {
-        gameModals.showDialog('IndexModalController');
-        $location.path('/charity');
+        gameModals.showDialog("IndexModalController");
+        $location.path("/charity");
       }
     };
     $scope.startDonation = function () {
-      $location.path('/charity');
+      $location.path("/charity");
     };
-  }]).directive('removeModal', ['$document', function ($document) {
+  }]).directive("removeModal", ["$document", function ($document) {
     return {
-      restrict: 'A',
+      restrict: "A",
       link: (scope, element) => {
-        element.bind('click', () => {
-          $document[0].body.classList.remove('modal-open');
-          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
-          angular.element($document[0].getElementsByClassName('modal')).remove();
+        element.bind("click", () => {
+          $document[0].body.classList.remove("modal-open");
+          angular.element($document[0].getElementsByClassName("modal-backdrop")).remove();
+          angular.element($document[0].getElementsByClassName("modal")).remove();
         });
       }
     };
