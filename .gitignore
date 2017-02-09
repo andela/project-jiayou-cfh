@@ -8,3 +8,4 @@ c4h_keys.txt
 public/lib
 .vscode
 npm-debug.log
+.vscode/formatter.json
