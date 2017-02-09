@@ -82,17 +82,8 @@ angular.module('mean.system')
     };
 
     $scope.userSignUp = function () {
-      $http.post('/api/auth/signup', { email: $scope.credentials.email, password: $scope.credentials.password, username: $scope.credentials.username }).success(function (res) {
-        if (res.success) {
-          localStorage.setItem('jwtToken', res.token);
-          $location.path('/app');
-        } else {
-          $location.path('/#!/signup');
-        }
-      }).error(function (err) {
-        $scope.userActive = false;
-      });
-      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
+      authService.signUp($scope.credentials.email, $scope.credentials.password,
+      $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time
