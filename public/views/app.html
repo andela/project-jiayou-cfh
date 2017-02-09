@@ -1,11 +1,11 @@
 <div ng-controller="GameController">
-  <div class=" navbar light-blue darken-3">
+  <div class="navbar light-blue darken-3 top-navbar">
     <div class="row valign-wrapper" style="min-height: 50px">
       <div class="col m8 valign">
       </div>
       <div class="col m4 valign">
-        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame()" style="color: light-blue darken-3"> 
-          <a class="chip black"; style=" border-radius: 10px; color: white">Abandon Game</a>
+        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame()"> 
+          <a class="chip red darken-3"; style=" border-radius: 10px; color: white">Abandon Game</a>
         </div>
         <div id="tweet-container" class="col m4"; style="padding-top: 1% ">
           <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
@@ -33,27 +33,26 @@
   <div class="container" style="padding-top: 30px;">
     
 
-    <div class="gameplay-container">
+    <div class="gameplay-container ">
       <div class="row">
-        <div class="col m9">
-          <div id="">
-            <!-- <div id="menu-container">
-            <span id="menu-button">Menu</span>
-          </div>-->
-            <div class="row white-text" style="margin-bottom: 20px; background-color:#0277bd">
-              <div class="col m3">
-                <timer></timer>
-              </div>
-              <div class="col m9 blue z-depth-5" style="background: url(img/bluewood.jpg); min-width: 415px">
+        <div class="col m9 s12">
+
+            <!--<div class="white-text" style="margin-bottom: 20px; justify-content: center">-->
+            <div class="valign-wrapper" style="justify-content: center; margin-bottom: 20px;">
+              <!--<div class="" style="background: url(img/bluewood.jpg);">-->
+              <div class="valign col m8 s12" style="background: url(img/bluewood.jpg); margin-left: unset">
                 <question></question>
               </div>
             </div>
             <div class="row">
               <answers></answers>
             </div>
-          </div>
+
         </div>
-        <div class="col m3" style="padding-left: 40px">
+        <div class="col m3" style="padding-left: 40px;">
+          
+                <timer></timer>
+            
           <player></player>
         </div>
       </div>
@@ -65,9 +64,7 @@
     </button>
     <div class="chat">
       <div class="chat-title">
-        <figure class="avatar" ng-repeat="player in game.players">
-          <img ng-show="isPlayer($index)" ng-src="{{player.avatar}}" alt="{{player.username | upperFirstLetter}}" />
-        </figure>
+        
       </div>
       <div class="messages">
         <div class="messages-content"></div>
@@ -82,12 +79,6 @@
 </div>
 </div>
 
-<div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
-            <div class="container">
-                <p class="navbar-text pull-left">© 2017 - Team Jiayou.
-                </p>
-            </div>
-        </div>
 
 <script>
   $("#openChatButton").click(function() {

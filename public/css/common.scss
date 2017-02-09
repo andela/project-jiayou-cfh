@@ -1602,7 +1602,7 @@ Message Box
 .chat-container {
     position: fixed;
     right: 15px;
-    bottom: 57px;
+    bottom: 2px;
     transition: all .5s;
     transform: translateY(90%);
     button {
@@ -1649,3 +1649,9 @@ Message Box
     color: white;
 }
 
+.top-navbar {
+    @media screen and (max-width: 768px) {
+        height: 40px;
+        transition: all 1.5s;
+    }
+}

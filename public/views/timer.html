@@ -1,6 +1,6 @@
-<div id = "inner-timer-container" style="text-align: center; font-size: 24px; ">
-  <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'" style="color:white; font-family: ubuntu" > Time Remaining</span>
+<div id = "inner-timer-container" style="text-align: center; font-size: 20px; ">
+  <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'" style="font-family: ubuntu" > Time Remaining</span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>
-  <div style="font-size: 125px; text-align: center; font-family: cookie Intellecta Design;" ng-bind="game.time"></div>
+  <div style="font-size: 35px; text-align: center; font-family: cookie Intellecta Design;" ng-bind="game.time"></div>
 </div>

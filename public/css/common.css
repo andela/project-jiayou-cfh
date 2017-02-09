@@ -1082,7 +1082,7 @@ Message Box
 .chat-container {
   position: fixed;
   right: 15px;
-  bottom: 57px;
+  bottom: 2px;
   transition: all .5s;
   transform: translateY(90%); }
   .chat-container button {
@@ -1121,3 +1121,8 @@ Message Box
 .isCzar {
   background-color: #424242 !important;
   color: white; }
+
+@media screen and (max-width: 768px) {
+  .top-navbar {
+    height: 40px;
+    transition: all 1.5s; } }
