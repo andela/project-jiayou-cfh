@@ -21,52 +21,6 @@ angular.module('mean.system')
       timeLimits: {},
       joinOverride: false
     };
-
-    var notificationQueue = [];
-    var timeout = false;
-    var self = this;
-    var joinOverrideTimeout = 0;
-
-    var addToNotificationQueue = function (msg) {
-      notificationQueue.push(msg);
-      if (!timeout) { // Start a cycle if there isn't one
-        setNotification();
-      }
-    };
-    var setNotification = function () {
-      if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
-        clearInterval(timeout);
-        timeout = false;
-        game.notification = '';
-      } else {
-        game.notification = notificationQueue.shift(); // Show a notification and check again in a bit
-        timeout = $timeout(setNotification, 1300);
-      }
-    };
-
-
-  var game = {
-    id: null, // This player's socket ID, so we know who this player is
-    gameID: null,
-    players: [],
-    playerIndex: 0,
-    winningCard: -1,
-    winningCardPlayer: -1,
-    gameWinner: -1,
-    table: [],
-    czar: null,
-    playerMinLimit: 3,
-    playerMaxLimit: 6,
-    pointLimit: null,
-    state: null,
-    round: 0,
-    time: 0,
-    curQuestion: null,
-    notification: null,
-    timeLimits: {},
-    joinOverride: false
-  };
-
   var notificationQueue = [];
   var timeout = false;
   var self = this;

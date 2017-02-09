@@ -77,11 +77,11 @@ module.exports = function (io) {
      });
 
     socket.on('disconnect', function () {
-      console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
+        // console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       const gameDBId = socket.gameDBId;
       const newGameId = socket.gameID;
-      var numberOfPlayersLeft = exitGame(socket);
-      return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
+      exitGame(socket);
+      // return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
     });
   });
 
