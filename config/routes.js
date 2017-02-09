@@ -9,6 +9,7 @@ module.exports = function (app, passport, auth) {
   var questions = require('../app/controllers/questions');
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
+  var signup = require('../app/controllers/signup');
 
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);

@@ -52,13 +52,38 @@
             </div>
           </form>
         </div>
+        <div class="sign-body">
+          <div class="more-sign">
+            <div class="sign-error" ng-show="showError() === 'invalid'">
+              Please check your username/password and try again.
+            </div>
+            <form ng-submit="userLogin()" class="signup form-horizontal">
+              <div class="control-group">
+                <label for="email" class="control-label"></label>
+                <div class="controls">
+                  <input class="input-info" id="email" type="text" name="email" placeholder="Email"
+                    ng-model="credentials.userEmail" required novalidate />
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="password" class="control-label"></label>
+                <div class="controls">
+                  <input class="input-info" id="password" type="password" name="password" placeholder="Password"
+                    ng-model="credentials.userPassword" required novalidate/>
+                </div>
+              </div>
+              <div class="form-actions top-margin">
+                <input name="" id="sign-up-btn-other" type='submit' value="Sign In" />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </center>
     <div class="section"></div>
   </main>
 
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
