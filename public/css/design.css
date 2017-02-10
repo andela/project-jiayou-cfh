@@ -278,3 +278,19 @@ h2 {
 #player-count-container {
   margin-top: 50px;
 }
+
+/* css rule for angular material modal */
+.md-title, .md-dialog-content-body {
+  color: #ffffff;
+}
+.md-button {
+  background: #ffffff !important;
+  border-radius: 2px !important;
+  text-align: center !important;
+}
+.md-button :hover {
+  color: #4CAF50 !important;
+}
+md-dialog {
+  background: #0477b7 !important;
+}

@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -48,11 +48,50 @@ angular.module('mean.system')
       }
     };
 
+    var startDonation = function () {
+      $location.path('/charity');
+    };
+    var signout = function () {
+      $http.get("/signout")
+     .success(function (res) {
+       $location.path('/signin');
+     }).error(function (err) {
+        var dialogDetails = { title: "Signout Failed",
+          content: "Signout failed!",
+          label: "Signout",
+          okTitle: "Ok"
+        };
+       gameModals.showAlert($scope.event, dialogDetails);
+     });
+    };
+
+    var startGame = function () {
+      if (moment().isBefore(localStorage.getItem('expDate'))) {
+        $scope.generateGameId(localStorage.getItem('JWT'));
+      } else {
+        var dialogDetails = { title: "Session Expired",
+          content: "Please resign in, your session has expired!",
+          label: "Session Expired",
+          okTitle: "Ok"
+        };
+        gameModals.showAlert($scope.event, dialogDetails).then(function () {
+          signout();
+        });
+      }
+    };
+
     $scope.showDialog = function () {
-      $scope.title = 'Sign in was Successful!';
-      $scope.message = 'Would you like to Start a new game?';
-      $scope.templateUrl = 'views/start-game.html';
-      gameModals.showDialog('IndexModalController', $scope);
+      var dialogDetails = { title: "Sign in was Successful!",
+        content: "Would you like to Start a new game?",
+        label: "Start Game After Signin",
+        okTitle: "Yes",
+        cancelTitle: "No"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        startGame();
+      }, function () {
+        startDonation();
+      });
     };
 
     var signInFailure = function (err) {
@@ -98,7 +137,8 @@ angular.module('mean.system')
       }, howLong);
     };
 
-    $scope.userLogin = function () {
+    $scope.userLogin = function ($event) {
+      $scope.event = $event;
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
 
@@ -110,38 +150,13 @@ angular.module('mean.system')
         const generatedGameId = res.gameId;
         $location.path('/app/').search({ gameDbId: generatedGameId, custom: 1 });
       }).error(function (err) {
-        $scope.title = 'Game Creation Failed!';
-        $scope.message = 'The game could not be created!';
-        $scope.templateUrl = 'views/error_message.html';
-        gameModals.showDialog('IndexModalController', $scope);
+        var dialogDetails = { title: "Game Creation Failed!",
+          content: "The game could not be created!",
+          label: "Game Creation Error",
+          okTitle: "Ok"
+        };
+        gameModals.showAlert($scope.event, dialogDetails);
       });
     };
   }]);
-angular.module('mean.system')
-  .controller('IndexModalController', ['$scope', '$element', '$location', 'close', 'moment', function ($scope, $element, $location, close, moment) {
-    $scope.dismissModal = function (result) {
-      close(result, 200); // close, but give 200ms for bootstrap to animate
-    };
-    $scope.startGame = function () {
-      if (moment().isBefore(localStorage.getItem('expDate'))) {
-        $scope.generateGameId(localStorage.getItem('JWT'));
-      } else {
-        gameModals.showDialog('IndexModalController');
-        $location.path('/charity');
-      }
-    };
-    $scope.startDonation = function () {
-      $location.path('/charity');
-    };
-  }]).directive('removeModal', ['$document', function ($document) {
-    return {
-      restrict: 'A',
-      link: (scope, element) => {
-        element.bind('click', () => {
-          $document[0].body.classList.remove('modal-open');
-          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
-          angular.element($document[0].getElementsByClassName('modal')).remove();
-        });
-      }
-    };
-  }]);
+

@@ -126,11 +126,17 @@ angular.module('mean.system')
       game.startGame();
     };
 
-    $scope.abandonGame = function () {
-      $scope.title = 'Exit Game';
-      $scope.message = 'Do you really want to abandon the game?';
-      $scope.templateUrl = 'views/modal_with_yes_button_only.html';
-      gameModals.showDialog('GameModalController', $scope);
+    $scope.abandonGame = function (event) {
+      var dialogDetails = { title: "Exit Game",
+        content: "Do you really want to abandon the game?",
+        label: "Abandon Game",
+        okTitle: "Yes",
+        cancelTitle: "No"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        game.leaveGame();
+        $location.path('/').search({});
+      });
       /* call function to update the
       database record with new gameId if
       remaining players are just two
@@ -210,24 +216,4 @@ angular.module('mean.system')
     }
   }]);
 
-angular.module('mean.system')
-  .controller('GameModalController', ['$scope', '$element', '$location', 'close', 'moment', 'game', function ($scope, $element, $location, close, moment, game) {
-    $scope.dismissModal = function (result) {
-      close(result, 200); // close, but give 200ms for bootstrap to animate
-    };
-    $scope.abandonGameYes = function () {
-      game.leaveGame();
-      $location.path('/').search({});
-    };
-  }]).directive('removeModal', ['$document', function ($document) {
-    return {
-      restrict: 'A',
-      link: (scope, element) => {
-        element.bind('click', () => {
-          $document[0].body.classList.remove('modal-open');
-          angular.element($document[0].getElementsByClassName('modal-backdrop')).remove();
-          angular.element($document[0].getElementsByClassName('modal')).remove();
-        });
-      }
-    };
-  }]);
+

@@ -7,3 +7,5 @@ c4h_keys.txt
 .idea/
 public/lib
 .vscode
+npm-debug.log
+Procfile

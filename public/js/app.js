@@ -64,5 +64,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
     };
   }]);
 
-angular.module('mean.system', ['angularModalService', 'angularMoment']);
+angular.module('mean.system', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'angularMoment']);
 angular.module('mean.directives', []);

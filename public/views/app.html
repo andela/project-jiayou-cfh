@@ -1,4 +1,4 @@
-<div ng-controller="GameController">
+<div ng-controller="GameController" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="">
 
   <div class=" navbar light-blue darken-3">
     <div class="row valign-wrapper" style="min-height: 50px">
@@ -6,7 +6,7 @@
         <h1 style="margin-left:20px; color:white;">cfh</h1>
       </div>
       <div class="col m4 valign">
-        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame()" style="color: light-blue darken-3">
+        <div class="col m8 right-align" id='abandon-game-button' ng-click="abandonGame($event)" style="color: light-blue darken-3">
           <a class="btn green"; style=" border-radius: 10px; color: white">Abandon Game</a>
         </div>
         <div id="tweet-container" class="col m4" ; style="padding-top: 1% ">
