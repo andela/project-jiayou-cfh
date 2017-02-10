@@ -209,7 +209,7 @@ h2 {
 /* The Modal (background) */
 
 
-.modals {
+.modal {
     display: none;
     /* Hidden by default */
     position: fixed;
@@ -235,7 +235,7 @@ h2 {
 
 /* Modal Content */
 
-.modal-contents {
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
