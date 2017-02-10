@@ -8,7 +8,6 @@ angular.module('mean.system')
   $scope.pickedCards = [];
   var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
-  $scope.selected = [];
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -23,17 +22,16 @@ angular.module('mean.system')
           $timeout($scope.sendPickedCards, 300);
         }
       }
-    };
+    }
 
     $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
-      } else {
-        $scope.pickedCards.pop();
+        return { cursor: 'pointer' };
       }
-    }
+      $scope.pickedCards.pop();
+    };
   };
-  
+
   $scope.pointerCursorStyle = function () {
     if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
       return { cursor: 'pointer' };
@@ -52,37 +50,23 @@ angular.module('mean.system')
     });
   };
 
-  $scope.checkAll = function () {
-    $scope.selected = angular.copy($scope.emails);
-  };
-
-  $scope.uncheckAll = function () {
-    $scope.selected = angular.copy([]);
-  };
-
   $scope.sentEmails = [];
+  $scope.canSend = false;
+  $scope.cantSend = [];
   $scope.sendInvite = function () {
-    $scope.canSend = false;
-    $scope.cantSend = [];
-    $scope.selected = $scope.selected.filter(function (email, index) {
-      return $scope.sentEmails.indexOf(email) === -1;
-    });
-
     array = [];
-    $scope.selected.forEach(function (userEmail) {
-      array.push({ email: userEmail });
-      if ($scope.sentEmails.indexOf(userEmail) === -1) {
-        $scope.sentEmails.push(userEmail);
-      } else {
-        $scope.cantSend.push(userEmail);
-      }
-    });
+    var selectedEmail = document.getElementById('select').value;
+    array.push({ email: selectedEmail });
+    if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
+      $scope.sentEmails.push(selectedEmail);
+    } else {
+      $scope.cantSend.push(selectedEmail);
+    }
     if ($scope.sentEmails.length > 11) {
       $scope.canSend = false;
     } else {
       $scope.canSend = true;
     }
-
     if ($scope.canSend) {
       $http.post('/api/search/users', { emailArray: array }).success(function (res) {
         if (res.statusCode === 202) {
@@ -96,6 +80,7 @@ angular.module('mean.system')
       $scope.showAlert2 = true;
       $scope.timer2(4000);
     }
+    document.getElementById('select').value = '';
   };
 
   $scope.timer = function (howLong) {
