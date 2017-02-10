@@ -6,7 +6,9 @@
     "angular-bootstrap": "~0.4.0",
     "angular-ui-utils": "0.0.4",
     "jquery": "~1.9.1",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "angular-modal-service": "^0.10.1",
+    "angular-moment-service": "angular-momentjs-service#^0.1.0"
   },
   "exportsOverride": {
     "bootstrap": {

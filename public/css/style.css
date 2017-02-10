@@ -1,3 +1,5 @@
+ 
+
  .clear {
    clear:both;
  }
@@ -396,6 +398,12 @@
    margin-right: 10px;
    padding: 0.65em 35px;
    cursor: pointer;
+ }
+
+ .alert {
+   width: 300px;
+   height: 60px;
+   margin: 0 0 20px;
  }
 
   #sign-up-btn-other {

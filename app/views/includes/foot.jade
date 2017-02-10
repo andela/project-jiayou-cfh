@@ -3,20 +3,32 @@ script.
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src='//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
-script(type='text/javascript', src='/lib/jquery/jquery.js')
+script(type='text/javascript', src='/lib/jquery/dist/jquery.js')
+//- script(type='text/javascript', src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 script(type='text/javascript', src='/lib/underscore/underscore-min.js')
 
 //Bootstrap
 script(type='text/javascript', src='/lib/bootstrap/js/bootstrap.js')
 
 //AngularJS
-script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular.js')
+script(type='text/javascript', src='https://code.angularjs.org/1.5.6/angular.js')
+script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js')
+script(type='text/javascript', src='https://code.angularjs.org/1.5.6/angular-route.js')
+script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js')
+script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js')
+script(type='text/javascript', src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js')
 script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-resource.js')
 script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-cookies.js')
+
+//MAterialize
+script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js')
+script(type='text/javascript', src='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.3/angular-material.js')
 
 //Angular UI
 script(type='text/javascript', src='/lib/angular-bootstrap/ui-bootstrap-tpls.js')
 script(type='text/javascript', src='/lib/angular-ui-utils/modules/route.js')
+script(type='text/javascript', src='/lib/moment/moment.js')
+script(type='text/javascript', src='/lib/angular-moment/angular-moment.js')
 
 //Application Init
 script(type='text/javascript', src='/js/init.js')
@@ -28,6 +40,7 @@ script(type='text/javascript', src='/js/filters.js')
 script(type='text/javascript', src='/js/services/global.js')
 script(type='text/javascript', src='/js/services/socket.js')
 script(type='text/javascript', src='/js/services/game.js')
+script(type='text/javascript', src='/js/services/modal.js')
 
 //Application Controllers
 script(type='text/javascript', src='/js/controllers/index.js')
@@ -35,6 +48,10 @@ script(type='text/javascript', src='/js/controllers/header.js')
 script(type='text/javascript', src='/js/controllers/game.js')
 script(type='text/javascript', src='/js/controllers/navbar.js')
 script(type='text/javascript', src='/js/init.js')
+
+//IntroJS
+script(type='text/javascript', src='/js/intro.js')
+script(type='text/javascript', src='/js/game_tour.js')
 
 //Socket.io Client Library
 script(type='text/javascript', src='/socket.io/socket.io.js')
