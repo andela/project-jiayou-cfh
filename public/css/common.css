@@ -1080,6 +1080,7 @@ Message Box
   background-color: whitesmoke; }
 
 .chat-container {
+  background-size: contain;
   position: fixed;
   right: 15px;
   bottom: 2px;

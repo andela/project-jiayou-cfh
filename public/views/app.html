@@ -58,8 +58,8 @@
       </div>
     </div>
   </div>
-  <div class="chat-container" id="chatContainer">
-    <button class="btn light-blue darken-3" id="openChatButton">
+  <div class="col m12 chat-container " id="chatContainer">
+    <button class="btn waves-light light-blue darken-3" style = "outline: none" id="openChatButton">
       <i class="material-icons">keyboard_arrow_up</i>
     </button>
     <div class="chat">
@@ -82,7 +82,6 @@
 
 <script>
   $("#openChatButton").click(function() {
-    console.log("this is the thing");
     $("#chatContainer").toggleClass("activeChat");
   });
 </script>
