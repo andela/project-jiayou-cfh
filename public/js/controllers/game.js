@@ -56,29 +56,35 @@ angular.module('mean.system')
   $scope.sendInvite = function () {
     array = [];
     var selectedEmail = document.getElementById('select').value;
-    array.push({ email: selectedEmail });
-    if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
-      $scope.sentEmails.push(selectedEmail);
+    var currentUser = localStorage.getItem('Email');
+    if (currentUser !== selectedEmail) {
+      array.push({ email: selectedEmail });
+      if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
+        $scope.sentEmails.push(selectedEmail);
+      } else {
+        $scope.cantSend.push(selectedEmail);
+      }
+      if ($scope.sentEmails.length > 11) {
+        $scope.canSend = false;
+      } else {
+        $scope.canSend = true;
+      }
+      if ($scope.canSend) {
+        $http.post('/api/search/users', { emailArray: array }).success(function (res) {
+          if (res.statusCode === 202) {
+            $scope.showSuccessAlert = true;
+            $scope.timer(5000);
+          } else {
+            $location.path('/#!/signup');
+          }
+        });
+      } else {
+        $scope.showAlert2 = true;
+        $scope.timer(4000);
+      }
     } else {
-      $scope.cantSend.push(selectedEmail);
-    }
-    if ($scope.sentEmails.length > 11) {
-      $scope.canSend = false;
-    } else {
-      $scope.canSend = true;
-    }
-    if ($scope.canSend) {
-      $http.post('/api/search/users', { emailArray: array }).success(function (res) {
-        if (res.statusCode === 202) {
-          $scope.showSuccessAlert = true;
-          $scope.timer(5000);
-        } else {
-          $location.path('/#!/signup');
-        }
-      });
-    } else {
-      $scope.showAlert2 = true;
-      $scope.timer2(4000);
+      $scope.showWarningAlert = true;
+      $scope.timer(5000);
     }
     document.getElementById('select').value = '';
   };
@@ -86,11 +92,7 @@ angular.module('mean.system')
   $scope.timer = function (howLong) {
     $timeout(function () {
       $scope.showSuccessAlert = false;
-    }, howLong);
-  };
-
-  $scope.timer2 = function (howLong) {
-    $timeout(function () {
+      $scope.showWarningAlert = false;
       $scope.showAlert2 = false;
     }, howLong);
   };

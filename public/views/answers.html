@@ -75,6 +75,9 @@
         <div class="alert alert-warning" ng-if="showAlert2">
             <strong>Only a maximum of 12 players are allowed per game!</strong>
         </div>
+        <div class="alert alert-warning" ng-if="showWarningAlert">
+            <strong>Oops! You cannot invite yourself!</strong>
+        </div>
         <form class="" ng-submit="sendInvite()">
             <div id='email' style="text-align: left">
 
