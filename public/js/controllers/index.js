@@ -74,9 +74,8 @@ angular.module('mean.system')
           label: "Session Expired",
           okTitle: "Ok"
         };
-        gameModals.showAlert($scope.event, dialogDetails).then(function () {
-          signout();
-        });
+        gameModals.showAlert($scope.event, dialogDetails);
+        signout();
       }
     };
 
