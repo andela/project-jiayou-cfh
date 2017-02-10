@@ -20,7 +20,7 @@ exports.startGame = function (req, res) {
         id: gameId,
         czar: req.body.email,
         winner: '',
-        players: [req.email],
+        players: [req.body.email],
         numberOfRounds: 0,
         state: 'start',
       });

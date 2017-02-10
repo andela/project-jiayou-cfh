@@ -1,6 +1,6 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/febechukwuopara/.nvm/versions/node/v6.9.4/bin/node',
-1 verbose cli   '/Users/febechukwuopara/.nvm/versions/node/v6.9.4/bin/npm',
+1 verbose cli [ '/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin/node',
+1 verbose cli   '/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin/npm',
 1 verbose cli   'start' ]
 2 info using npm@3.10.10
 3 info using node@v6.9.4
@@ -9,25 +9,25 @@
 6 silly lifecycle cardsforhumanity@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle cardsforhumanity@1.0.0~start: cardsforhumanity@1.0.0
 8 verbose lifecycle cardsforhumanity@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle cardsforhumanity@1.0.0~start: PATH: /Users/febechukwuopara/.nvm/versions/node/v6.9.4/lib/node_modules/npm/bin/node-gyp-bin:/Users/febechukwuopara/Documents/Workspace/project-jiayou-cfh/node_modules/.bin:/Users/febechukwuopara/.nvm/versions/node/v6.9.4/bin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar/mongodb/3.4.1/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar/nvm/0.33.0/etc/bash_completion.d:/usr/sbin:/bin:/sbin:/Users/febechukwuopara/Documents/js_projects/check_point_1/inverted-index/node_modules/jshint/bin:/usr/sbin:/bin:/sbin:/Users/febechukwuopara/Documents/js_projects/check_point_1/inverted-index/node_modules/gulp/bin:/usr/sbin:/bin:/sbin:/Users/febechukwuopara/node_modules/karma/bin:/usr/sbin:/bin:/sbin
-10 verbose lifecycle cardsforhumanity@1.0.0~start: CWD: /Users/febechukwuopara/Documents/Workspace/project-jiayou-cfh
+9 verbose lifecycle cardsforhumanity@1.0.0~start: PATH: /Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/lib/node_modules/npm/bin/node-gyp-bin:/Users/oluwasinmisolaakinrele/Documents/www/Simulation-V/project-jiayou-cfh/node_modules/.bin:/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle cardsforhumanity@1.0.0~start: CWD: /Users/oluwasinmisolaakinrele/Documents/www/Simulation-V/project-jiayou-cfh
 11 silly lifecycle cardsforhumanity@1.0.0~start: Args: [ '-c', 'node node_modules/gulp-cli/bin/gulp' ]
 12 silly lifecycle cardsforhumanity@1.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle cardsforhumanity@1.0.0~start: Failed to exec start script
 14 verbose stack Error: cardsforhumanity@1.0.0 start: `node node_modules/gulp-cli/bin/gulp`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/Users/febechukwuopara/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
+14 verbose stack     at EventEmitter.<anonymous> (/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at EventEmitter.emit (events.js:191:7)
-14 verbose stack     at ChildProcess.<anonymous> (/Users/febechukwuopara/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/spawn.js:40:14)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at ChildProcess.emit (events.js:191:7)
 14 verbose stack     at maybeClose (internal/child_process.js:877:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid cardsforhumanity@1.0.0
-16 verbose cwd /Users/febechukwuopara/Documents/Workspace/project-jiayou-cfh
-17 error Darwin 15.6.0
-18 error argv "/Users/febechukwuopara/.nvm/versions/node/v6.9.4/bin/node" "/Users/febechukwuopara/.nvm/versions/node/v6.9.4/bin/npm" "start"
+16 verbose cwd /Users/oluwasinmisolaakinrele/Documents/www/Simulation-V/project-jiayou-cfh
+17 error Darwin 15.5.0
+18 error argv "/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin/node" "/Users/oluwasinmisolaakinrele/.nvm/versions/node/v6.9.4/bin/npm" "start"
 19 error node v6.9.4
 20 error npm  v3.10.10
 21 error code ELIFECYCLE
