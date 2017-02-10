@@ -147,7 +147,8 @@ angular.module('mean.system')
         email: $scope.credentials.userEmail
       }).success(function (res) {
         const generatedGameId = res.gameId;
-        $location.path('/app/').search({ gameDbId: generatedGameId, custom: 1 });
+        localStorage.setItem("gameDBId", generatedGameId);
+        $location.path('/app/').search({ custom: 1 });
       }).error(function (err) {
         var dialogDetails = { title: "Game Creation Failed!",
           content: "The game could not be created!",
