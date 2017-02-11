@@ -8,14 +8,22 @@ var sender = require('sendgrid').mail;
 exports.invite = function (req, res) {
   fromEmail = 'fisayomi.ojuri@andela.com';
   subject = 'Invite to join Cards for Humanity game';
-  content = 'Hello,\n I would like to invite you to join cards for humanity game. Kindly click this link http://localhost:5000/#!/app to join \n\n Regards,';
+  content =
+  '<html>\
+  <body>\
+    <label>Hello, <\label><br>\
+    <p> I would like to invite you to join cards for humanity game. </p>\
+    <p>Kindly click this  <a href = "http://localhost:5000/#!/app"> link </a> to join</p>\
+    <br><p>Regards,<p>jiayou team.</p></p>\
+  </body>\
+  </html>';
   mailer = {
     personalizations: [{
       to: req.body.emailArray,
       subject: `${subject}`
     }],
     content: [{
-      type: 'text/plain',
+      type: 'text/html',
       value: `${content}`
     }],
     from: { email: fromEmail }
