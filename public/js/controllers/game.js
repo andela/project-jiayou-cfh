@@ -32,7 +32,7 @@ angular.module('mean.system')
       }
     }
   };
-  
+
   $scope.pointerCursorStyle = function () {
     if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
       return { cursor: 'pointer' };
@@ -198,6 +198,20 @@ angular.module('mean.system')
     $location.path('/');
   };
 
+    $scope.gameState = {
+      awaitingDrawCard: function () {
+        return $scope.game.state === 'waiting for czar to draw cards';
+      },
+
+      winnerChosen: function () {
+        return $scope.game.state === 'winner has been chosen';
+      },
+
+      awaitingCzar: function () {
+        return $scope.game.state === 'waiting for czar to decide';
+      }
+    };
+
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
   $scope.$watch('game.round', function () {
@@ -250,4 +264,9 @@ angular.module('mean.system')
   } else {
     game.joinGame();
   }
+  $scope.drawCard = () => {
+      console.log('clicked');
+      game.drawCard();
+    };
 }]);
+

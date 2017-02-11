@@ -19,6 +19,7 @@ exports.signin = function (req, res) {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
+    console.log(req);
     res.redirect('/#!/app');
   }
 };

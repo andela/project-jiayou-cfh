@@ -444,6 +444,19 @@
    padding-right: 10px;
  }
 
+ .draw-card-icon{
+  background-image:url('../img/deck-card.png');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  height: 200px;
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
  #login-buttons {
    text-align: center;
  }
