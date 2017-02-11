@@ -19,7 +19,6 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
-
     $scope.userLogin = function () {
       $http.post('/api/auth/login', { email: $scope.credentials.userEmail, password: $scope.credentials.userPassword }).success(function (res) {
         if (res.success) {
@@ -38,5 +37,17 @@ angular.module('mean.system')
         $scope.userActive = false;
       });
     };
-  }]);
 
+    $scope.userSignUp = function () {
+      $http.post('/api/auth/signup', { email: $scope.credentials.email, password: $scope.credentials.password, username: $scope.credentials.username }).success(function (res) {
+        if (res.success) {
+          $window.localStorage.setItem('jwtToken', res.token);
+          $location.path('/app');
+        } else {
+          $location.path('/#!/signup');
+        }
+      }).error(function (err) {
+        $scope.userActive = false;
+      });
+    };
+  }]);
