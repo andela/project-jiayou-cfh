@@ -389,15 +389,7 @@ html, body, .main-container, .cont, #first-section, #inner-container{
 }
 
 html{
-    // margin: 20px;
-    // margin-top: 5px;
-    // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
-    // -webkit-background-size: cover;
-    // -moz-background-size: cover;
-    // -o-background-size: cover;
-    // background-size: cover;
-    // @include gradient-bg;
-    
+   
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: relative;
@@ -1659,3 +1651,4 @@ Message Box
         transition: all 1.5s;
     }
 }
+
