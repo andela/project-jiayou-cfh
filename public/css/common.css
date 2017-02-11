@@ -150,6 +150,9 @@ body {
             margin-right: 1px;
             padding: 5px;
             width: 60px; } }
+        @media only screen and (min-width: 1025) {
+          #main-container #app-container #menu-container #abandon-game-button {
+            position: relative; } }
       #main-container #app-container #menu-container #abandon-game-button:hover {
         background: #F34444; }
       #main-container #app-container #menu-container #tweet-container {

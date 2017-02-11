@@ -13,10 +13,6 @@
 
                 </div>
                 </div>
-                
-                <!--<span ng-bind-html-unsafe="card.text"></span>
-                <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>-->
         </div>
         <span ng-repeat="answer in game.table">
         <div class="card smallest hoverable z-depth-3" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
@@ -55,11 +51,16 @@
         </li>
         <hr>
         <li class="">
-            <div class="card-panel hoverable blue darken-2 white-text collection-item">*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
+            <div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
         </li>
     </ul>
+    <div>
+        <a href="https://www.crowdrise.com/fundraise-and-volunteer/donate-mobile/project/cfhio/cards4humanity?widget=true&amp;redirect_to=http%3A%2F%2Flocalhost%3A5000%2F%23!%2Fcharity&amp;stylesheet=&amp;amounts=">
+        <span class="chip blue darken-3 white-text">Donate Now</span>
+        </a></div>
 </div>
 </div>
+
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="inner-info-exit">
         <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

@@ -503,6 +503,9 @@ body{
                     padding: 5px;
                     width: 60px;
                 }
+                @media only screen and (min-width : 1025) {
+                    position: relative;
+            }
             }
 
             #abandon-game-button:hover{
