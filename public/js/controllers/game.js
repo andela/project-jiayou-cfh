@@ -8,7 +8,6 @@ angular.module('mean.system')
   $scope.pickedCards = [];
   var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
-  $scope.selected = [];
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -61,55 +60,51 @@ angular.module('mean.system')
   };
 
   $scope.sentEmails = [];
+  $scope.canSend = false;
+  $scope.cantSend = [];
   $scope.sendInvite = function () {
-    $scope.canSend = false;
-    $scope.cantSend = [];
-    $scope.selected = $scope.selected.filter(function (email, index) {
-      return $scope.sentEmails.indexOf(email) === -1;
-    });
-
     array = [];
-    $scope.selected.forEach(function (userEmail) {
-      array.push({ email: userEmail });
-      if ($scope.sentEmails.indexOf(userEmail) === -1) {
-        $scope.sentEmails.push(userEmail);
+    var selectedEmail = document.getElementById('select').value;
+    var currentUser = localStorage.getItem('Email');
+    if (currentUser !== selectedEmail) {
+      array.push({ email: selectedEmail });
+      if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
+        $scope.sentEmails.push(selectedEmail);
       } else {
-        $scope.cantSend.push(userEmail);
+        $scope.cantSend.push(selectedEmail);
       }
-    });
-    if ($scope.sentEmails.length > 11) {
-      $scope.canSend = false;
+      if ($scope.sentEmails.length > 11) {
+        $scope.canSend = false;
+      } else {
+        $scope.canSend = true;
+      }
+      if ($scope.canSend) {
+        $http.post('/api/search/users', { emailArray: array }).success(function (res) {
+          if (res.statusCode === 202) {
+            $scope.showSuccessAlert = true;
+            $scope.timer(5000);
+          } else {
+            $location.path('/#!/signup');
+          }
+        });
+      } else {
+        $scope.showAlert2 = true;
+        $scope.timer(4000);
+      }
     } else {
-      $scope.canSend = true;
+      $scope.showWarningAlert = true;
+      $scope.timer(5000);
     }
-
-    if ($scope.canSend) {
-      $http.post('/api/search/users', { emailArray: array }).success(function (res) {
-        if (res.statusCode === 202) {
-          $scope.showSuccessAlert = true;
-          $scope.timer(5000);
-        } else {
-          $location.path('/#!/signup');
-        }
-      });
-    } else {
-      $scope.showAlert2 = true;
-      $scope.timer2(4000);
-    }
+    document.getElementById('select').value = '';
   };
 
   $scope.timer = function (howLong) {
     $timeout(function () {
       $scope.showSuccessAlert = false;
-    }, howLong);
-  };
-
-  $scope.timer2 = function (howLong) {
-    $timeout(function () {
+      $scope.showWarningAlert = false;
       $scope.showAlert2 = false;
     }, howLong);
   };
-
   $scope.checkFirst = function () {
     $scope.user.emails.splice(0, $scope.user.roles.length);
     $scope.user.emails.push('guest');
