@@ -13,8 +13,11 @@
 }
 
 .navbar-default {
-  background: transparent;
-  border: none;
+    background: transparent;
+    border: none;
+    box-shadow: unset;
+    /*margin-bottom: 85px;*/
+
 }
 
 .navbar-default .navbar-brand {
@@ -129,6 +132,7 @@
 }
 
 .footer-bottom {
+
   background-color: #0477b7;
   opacity: 0.85;
 }
