@@ -1,7 +1,7 @@
 var should = require('should');
 var io = require('socket.io-client');
 
-var socketURL = 'http://localhost:3000';
+var socketURL = 'http://localhost:5000';
 
 var options ={
   transports: ['websocket'],
@@ -15,13 +15,14 @@ var cfhPlayer3 = {'name':'Dana'};
 describe("Game Server",function(){
 
   it('Should accept requests to joinGame', function(done) {
-    var client1 = io.connect(socketURL, options);
+    var client1= io.connect(socketURL, options);
+
     var disconnect = function() {
       client1.disconnect();
       done();
     };
     client1.on('connect', function(data){
-      client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
+      client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: true});
       setTimeout(disconnect,200);
     });
   });
