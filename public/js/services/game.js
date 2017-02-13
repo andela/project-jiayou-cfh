@@ -165,7 +165,7 @@ angular.module('mean.system')
         if (game.czar === game.playerIndex) {
           addToNotificationQueue('Click to Draw the Cards!');
         } else {
-          addToNotificationQueue('The czar is drawing the cards...');
+          // addToNotificationQueue('The czar is drawing the cards...');
         }
       } else if (data.state === 'winner has been chosen' &&
         game.curQuestion.text.indexOf('<u></u>') > -1) {
@@ -210,7 +210,7 @@ angular.module('mean.system')
       socket.emit('pickWinning', { card: card.id });
     };
 
-    game.drawCard = function () {
+game.drawCard = function() {
       socket.emit('drawCard');
     };
 

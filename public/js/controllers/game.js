@@ -199,16 +199,37 @@ angular.module('mean.system')
   };
 
     $scope.gameState = {
-      awaitingDrawCard: function () {
-        return $scope.game.state === 'waiting for czar to draw cards';
+      awaitingPlayers: function () {
+        return $scope.game.state === 'awaiting players';
+      },
+
+      ended: function () {
+        return $scope.game.state === 'game ended';
+      },
+
+      dissolved: function () {
+        return $scope.game.state === 'game dissolved';
+      },
+
+      awaitingCzar: function () {
+        return $scope.game.state === 'waiting for czar to decide';
       },
 
       winnerChosen: function () {
         return $scope.game.state === 'winner has been chosen';
       },
 
-      awaitingCzar: function () {
-        return $scope.game.state === 'waiting for czar to decide';
+      noWinner: function () {
+        return game.gameWinner === -1;
+      },
+      userWon: function () {
+        return game.gameWinner === game.playerIndex;
+      },
+      userLost: function () {
+        return game.gameWinner !== game.playerIndex;
+      },
+      awaitingDrawCard: function () {
+        return $scope.game.state === 'waiting for czar to draw cards';
       }
     };
 
@@ -269,4 +290,3 @@ angular.module('mean.system')
       game.drawCard();
     };
 }]);
-

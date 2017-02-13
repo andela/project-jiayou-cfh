@@ -865,6 +865,7 @@ body {
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
 
+
 .chat {
   width: 300px;
   height: 80vh;
@@ -1157,3 +1158,22 @@ Message Box
   font-size: 30px;
   font-family: ubuntu;
   padding-left: 70px; }
+
+.flip-3D > .front {
+  position: absolute;
+  transform: perspective(800px) rotateY(0deg);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s; }
+
+.flip-3D > .back {
+  position: absolute;
+  transform: perspective(800px) rotateY(180deg);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s; }
+
+.flip-3D:hover > .front {
+  transform: perspective(600px) rotateY(-180deg); }
+
+.flip-3D:hover > .back {
+  transform: perspective(600px) rotateY(0deg); }
+

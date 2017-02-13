@@ -139,10 +139,12 @@ Game.prototype.startGame = function() {
   console.log(this.gameID,this.state);
   this.shuffleCards(this.questions);
   this.shuffleCards(this.answers);
+  // my code
+  // this.stateDrawCards(this);
   this.stateChoosing(this);
 };
 
-Game.prototype.sendUpdate = function() {
+Game.prototype.sendUpdate = function () {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
 };
 
@@ -152,9 +154,9 @@ Game.prototype.stateDrawCards = function (self) {
   self.drawCardsTimeout = setTimeout(function () {
     self.stateChoosing(self);
   }, self.timeLimits.stateDrawCards * 1000);
-}
+};
 
-Game.prototype.stateChoosing = function(self) {
+Game.prototype.stateChoosing = function (self) {
   self.state = "waiting for players to pick";
   // console.log(self.gameID,self.state);
   self.table = [];
