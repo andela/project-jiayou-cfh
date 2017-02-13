@@ -1425,6 +1425,7 @@ Messages
     left: 0;
     height: 101%;
     width: 100%;
+    overflow-y: scroll;
   }
 
   
@@ -1656,3 +1657,4 @@ Message Box
         transition: all 1.5s;
     }
 }
+

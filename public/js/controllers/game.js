@@ -1,15 +1,19 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $window) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
+    $timeout(function(){
+      $window.sessionStorage.setItem('gameID', game.gameID);
+    }, 500);
+
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
-    $scope.pickCard = function(card) {
+    $scope.pickCard = function (card) {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
           $scope.pickedCards.push(card.id);
@@ -86,6 +90,7 @@ angular.module('mean.system')
     };
 
     $scope.isPlayer = function($index) {
+      $window.sessionStorage.setItem('Username', game.players[game.playerIndex].username);
       return $index === game.playerIndex;
     };
 

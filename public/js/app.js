@@ -36,7 +36,16 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             redirectTo: '/'
           });
       }
-  ]).config(['$locationProvider',
+  ]).config([function () {
+    var config = {
+      apiKey: 'AIzaSyAAU_0vcioI8gYtO4XD3z3eSDz3wVYOmYs',
+      authDomain: 'cards-for-humanity-e3686.firebaseapp.com',
+      databaseURL: 'https://cards-for-humanity-e3686.firebaseio.com',
+      storageBucket: 'cards-for-humanity-e3686.appspot.com',
+      messagingSenderId: '324856728467'
+    };
+    firebase.initializeApp(config);
+  }]).config(['$locationProvider',
     function($locationProvider) {
         $locationProvider.hashPrefix("!");
     }
