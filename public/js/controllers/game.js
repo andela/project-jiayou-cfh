@@ -278,7 +278,4 @@ angular.module('mean.system')
     } else {
       game.joinGame();
     }
-  }]);
-
-
 }]);
