@@ -1,5 +1,5 @@
 <!--<div id="question-container-inner">-->
-  <div class="card smallest col s12 black z-depth-5" style="font-family: ubuntu; text-align: center; padding-top: 15px" >
+  <div class="card smallest col s12 black z-depth-5" id="question-conatiner" >
     
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
     <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>

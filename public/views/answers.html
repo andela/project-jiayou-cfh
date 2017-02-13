@@ -2,7 +2,7 @@
     <div id="social-bar-container">
     </div>
     <div>
-        <div id="cards" class='hand' style="padding-left: 20px">
+        <div id="cards" class='hand'>
             <span ng-show="winnerPicked()"></span>
             <div ng-style="{'cursor':'pointer'}" class="card smallest hoverable z-depth-5" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
                 ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
@@ -28,9 +28,9 @@
 </div>
 </div>
 <div ng-show="game.state === 'awaiting players'">
-    <ul class="collection" style="padding-left: 17px; font-size: 15px; font-family: ubuntu;">
+    <ul class="collection" id="waiting-for-players">
         <li >
-            <h4 style="text-align: center; font-size: 24px">How To Play</h4>
+            <h3 class="center-align">How To Play</h3>
         </li>
         <hr>
      

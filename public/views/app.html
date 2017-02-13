@@ -2,25 +2,25 @@
   <div class=" light-blue darken-3 top-navbar">
     <div class="row valign-wrapper" style="min-height: 50px">
       <div class="col m8 valign"> 
-        <div class="white-text" style="font-size: 30px; font-family: ubuntu; padding-left: 70px">CFH</div>
+        <div class="white-text" id="cfh-icon">CFH</div>
       </div>
       <div class="col m4 right-align" style="padding-right: 70px" id='abandon-game-button' ng-click="abandonGame()"> 
-          <a class="chip red darken-3"; style="color: white">Abandon Game</a>
+          <a class="chip red darken-3 white-text">Abandon Game</a>
       </div>
       <div>
       </div>
     </div>
   </div>
 
-  <div class="container" style="padding-top: 10px;">
+  <div class="question-top container">
     
 
-    <div class="gameplay-container ">
+    <div class="gameplay-container">
       <div class="row">
         <div class="col m9 s12">
 
-            <div class="valign-wrapper" style="justify-content: center; margin-bottom: 20px; margin-top:10px">
-              <div class="valign col m8 s12" style="margin-left: unset; margin-right: auto">
+            <div class="valign-wrapper question-top">
+              <div class="questions valign col m8 s12">
                 <question></question>
               </div>
               <div class="card col m4"> CARD DECK</div>
@@ -30,7 +30,7 @@
             </div>
 
         </div>
-        <div class="col m3" style="padding-left: 40px;">
+        <div class="col m3" id = "player-timer">
           
                 <timer></timer>
             
