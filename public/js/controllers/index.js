@@ -48,12 +48,13 @@ angular.module('mean.system')
       }
     };
 
-    var startDonation = function () {
-      $location.path('/charity');
+    var showGameLog = function () {
+      $location.path('/leader-board');
     };
     var signout = function () {
       $http.get("/signout")
      .success(function (res) {
+       localStorage.clear();
        $location.path('/signin');
      }).error(function (err) {
         var dialogDetails = { title: "Signout Failed",
@@ -89,7 +90,7 @@ angular.module('mean.system')
       gameModals.showConfirm($scope.event, dialogDetails).then(function () {
         startGame();
       }, function () {
-        startDonation();
+        showGameLog();
       });
     };
 

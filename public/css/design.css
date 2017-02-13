@@ -294,3 +294,43 @@ h2 {
 md-dialog {
   background: #0477b7 !important;
 }
+
+/* css for dashboard */
+.dashboard-menu {
+  background:#0477b7;
+  height: 80px !important;
+  }
+
+.gamelog-header {
+  color:#0477b7;
+}
+
+.active {
+  background: #0477b7;
+  opacity: 0.8;
+  color: #fff !important;
+  padding: 10px;
+}
+.inactive {
+  color: #0477b7 !important;
+}
+.dashboard-menu-items {
+  color: #fff !important;
+}
+.dashboard-menu-items:hover {
+  background: #607d8b;
+  border: solid 2px #607d8b;
+  color: #fff !important;
+}
+
+.menu-item-container {
+  padding-left: 65%;
+  padding-top: 5px;
+}
+.iconize {
+  width: 40px;
+  height: 30px;
+}
+.content {
+  margin-top: 20px;
+}
