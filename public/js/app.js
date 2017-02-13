@@ -35,6 +35,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
         when('/gametour', {
           templateUrl: '/views/tour.html'
         }).
+         when('/history', {
+          templateUrl: '/views/history.html'
+        }).
         otherwise({
           redirectTo: '/'
         });

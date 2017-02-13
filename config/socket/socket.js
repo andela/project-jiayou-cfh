@@ -1,15 +1,14 @@
 var Game = require('./game');
 var Player = require('./player');
-require("console-stamp")(console, "m/dd HH:MM:ss");
+require('console-stamp')(console, 'm/dd HH:MM:ss');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+var avatars = require(`${__dirname }/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
-var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = function(io) {
-
     var game;
     var allGames = {};
     var allPlayers = {};
@@ -17,13 +16,13 @@ module.exports = function(io) {
     var gameID = 0;
 
     io.sockets.on('connection', function(socket) {
-        console.log(socket.id + ' Connected');
+        console.log(`${socket.id} Connected`);
         socket.emit('id', {
             id: socket.id
         });
 
         socket.on('pickCards', function(data) {
-            console.log(socket.id, "picked", data);
+            console.log(socket.id, 'picked', data);
             if (allGames[socket.gameID]) {
                 allGames[socket.gameID].pickCards(data.cards, socket.id);
             } else {
@@ -110,6 +109,26 @@ module.exports = function(io) {
             });
         } else {
             // If the user isn't authenticated (guest)
+            // var gameInstance = new Game();
+            // var guest = gameInstance.guestNames;
+            // console.log(guest);
+            // var guestName = guest[Math.floor(Math.random() * 4) + 12];
+            // console.log(guestName);
+            // var guestNames = [
+            //     "Disco Potato",
+            //     "Silver Blister",
+            //     "Insulated Mustard",
+            //     "Funeral Flapjack",
+            //     "Toenail",
+            //     "Urgent Drip",
+            //     "Raging Bagel",
+            //     "Aggressive Pie",
+            //     "Loving Spoon",
+            //     "Swollen Node",
+            //     "The Spleen",
+            //     "Dingle Dangle"
+            // ];
+            // var randIndex = Math.floor(Math.random() * guestNames.length);
             player.username = 'Guest';
             player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
             getGame(player, socket, data.room, data.gameDBId, data.createPrivate);
@@ -139,7 +158,7 @@ module.exports = function(io) {
                 game.assignPlayerColors();
                 game.assignGuestNames();
                 game.sendUpdate();
-                game.sendNotification(player.username + ' has joined the game!');
+                game.sendNotification(`${player.username} has joined the game!`);
                 if (game.players.length >= game.playerMaxLimit) {
                     gamesNeedingPlayers.shift();
                     game.prepareGame();
@@ -156,7 +175,6 @@ module.exports = function(io) {
                 fireGame(player, socket);
             }
         }
-
     };
 
     var fireGame = function(player, socket) {
@@ -185,7 +203,7 @@ module.exports = function(io) {
             game.assignPlayerColors();
             game.assignGuestNames();
             game.sendUpdate();
-            game.sendNotification(player.username + ' has joined the game!');
+            game.sendNotification(`${player.username } has joined the game!`);
             if (game.players.length >= game.playerMaxLimit) {
                 gamesNeedingPlayers.shift();
                 game.prepareGame();
@@ -202,7 +220,7 @@ module.exports = function(io) {
             for (var i = 0; i < 6; i++) {
                 uniqueRoom += chars[Math.floor(Math.random() * chars.length)];
             }
-            /* append the Db record id created 
+            /* append the Db record id created
             for game to the generated 6-xter game id
             */
             uniqueRoom += gameDBId;
@@ -220,7 +238,7 @@ module.exports = function(io) {
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
-        console.log("List of players", game.players);
+        console.log('List of players', game.players);
     };
 
     var exitGame = function(socket) {

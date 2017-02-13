@@ -126,6 +126,10 @@ angular.module('mean.system')
             game.startGame();
         };
 
+        $scope.saveGame = () => {
+            game.saveGame();
+        };
+
         $scope.abandonGame = function(event) {
             var dialogDetails = {
                 title: "Exit Game",
@@ -147,19 +151,19 @@ angular.module('mean.system')
             // $scope.updateGameId(gameDetails);
         };
 
-        $scope.updateGameId = function(gameDetails) {
-            if (gameDetails.playerLeft === 2) {
-                $http.put('/api/games/${gameDetails.gameId}/start', {
-                    gameDetails: gameDetails
-                }).success(function(res) {
-                    $location.path('/');
-                }).error(function(err) {
-                    // $scope.startGameStatus = false;
-                    // $scope.showDialog();
-                });
-                $location.path('/');
-            }
-        };
+        // $scope.updateGameId = function(gameDetails) {
+        //     if (gameDetails.playerLeft === 2) {
+        //         $http.put('/api/games/${gameDetails.gameId}/start', {
+        //             gameDetails: gameDetails
+        //         }).success(function(res) {
+        //             $location.path('/');
+        //         }).error(function(err) {
+        //             // $scope.startGameStatus = false;
+        //             // $scope.showDialog();
+        //         });
+        //         $location.path('/');
+        //     }
+        // };
 
         // Catches changes to round to update when no players pick card
         // (because game.state remains the same)
@@ -210,9 +214,12 @@ angular.module('mean.system')
             console.log('joining custom game');
             game.joinGame('joinGame', $location.search().game);
         } else if ($location.search().custom) {
-            var gameDBId = $location.search().gameDBId;
-            game.joinGame('joinGame', null, true, gameDBId);
+            var gameDBId = localStorage.getItem("gameDBId");
+            game.joinGame('joinGame', null, gameDBId, true);
         } else {
             game.joinGame();
         }
+
+        //console.log(game.players, ' service players list');
+
     }]);
