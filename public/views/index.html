@@ -4,11 +4,14 @@
     <div class="row body-content">
       <div class="col-lg-12">
         <div class="col-lg-6 title">
+          <div class="alert alert-success" role="alert" ng-show="signOut" landing>
+            <span><strong>Goodbye! Click Sign out to quit the game</strong></span>
+          </div>
+
           <h2 class="welcome">Cards for <span class="humanity">Humanity</span></h2>
           <p> Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.</p>
 
           <button id="myBtn" class="btn btn-default btn-primary play-button">PLAY</button>
-
           <div id="myModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content size">
@@ -33,19 +36,22 @@
             </ul>
             <div class="how-to-play-buttons">
               <a href="https://www.youtube.com/watch?v=_U8lUp7zc8k" target="_blank" class="watch-video">WATCH VIDEO</a>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
-      <div class="container">
-        <p class="navbar-text pull-left">© 2017 - Team Jiayou.
-        </p>
-      </div>
-    </div>
+    <!-- End -->
   </div>
+</div>
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
+  <div class="container">
+    <p class="navbar-text pull-left">© 2017 - Team Jiayou.
+    </p>
+  </div>
+</div>
+</div>
 </div>
 <script>
   // Get the modal
@@ -68,4 +74,6 @@
       modal.style.display = "none";
     }
   };
+
+
 </script>
