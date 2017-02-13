@@ -19,7 +19,6 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
-
     var signInSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
@@ -96,7 +95,7 @@ angular.module('mean.system')
     var signInFailure = function (err) {
       $scope.userActive = false;
     };
-
+    
     var signUpSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
@@ -123,7 +122,8 @@ angular.module('mean.system')
     };
 
     $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
+      authService.signUp($scope.credentials.email, $scope.credentials.password,
+      $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time

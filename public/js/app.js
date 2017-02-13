@@ -1,5 +1,5 @@
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
-  .config(['$routeProvider',
+ .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
         when('/', {
