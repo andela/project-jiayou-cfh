@@ -60,7 +60,7 @@ angular.module('mean.system')
         // Write token to local storage
         localStorage.setItem('jwtToken', res.token);
         window.user = res.user;
-        $location.path('/app');
+        $location.path('/gametour');
       } else if (res.message === 'Unknown Error') {
         $scope.message = 'An unexpected error occured';
         $scope.errorMessage = true;
@@ -81,7 +81,8 @@ angular.module('mean.system')
     };
 
     $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
+      authService.signUp($scope.credentials.email, $scope.credentials.password,
+      $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time

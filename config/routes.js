@@ -1,6 +1,6 @@
 var async = require('async');
 
-module.exports = function (app, passport, auth) {
+module.exports = function(app, passport, auth) {
   // User Routes
   var users = require('../app/controllers/users');
   var signin = require('../app/controllers/signin');
@@ -9,12 +9,17 @@ module.exports = function (app, passport, auth) {
   var questions = require('../app/controllers/questions');
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
-  var signup = require('../app/controllers/signup');
 
+  var signup = require('../app/controllers/signup');
+  var invite = require('../app/controllers/invite');
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);
+
   // Route for sign-up
   app.post('/api/auth/signup', signup.signupAuth);
+
+  app.post('/api/search/users', invite.invite);
+  app.get('/api/userEmail', invite.getEmail);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
@@ -101,4 +106,5 @@ module.exports = function (app, passport, auth) {
   // Home route
   app.get('/play', index.play);
   app.get('/', index.render);
+  app.get('/gametour', index.gameTour);
 };
