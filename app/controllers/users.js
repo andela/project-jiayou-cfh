@@ -205,3 +205,21 @@ exports.authenticate = function (req, res, next) {
     }
   }
 };
+
+/**
+ * check if user is authenticated
+ * before showing dashboard menu
+ * on navbar
+ */
+exports.isAuthenticated = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.send(false);
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  }
+}
