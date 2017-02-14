@@ -56,7 +56,7 @@ angular.module('mean.system')
     $scope.selected = angular.copy([]);
   };
 
-    $scope.sentEmails = [];
+  $scope.sentEmails = [];
   $scope.canSend = false;
   $scope.cantSend = [];
   $scope.sendInvite = function () {

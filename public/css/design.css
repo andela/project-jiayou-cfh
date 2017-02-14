@@ -258,9 +258,9 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.size {
+/*.size {
   width: 50%;
-}
+}*/
 
 .close {
   color: #aaaaaa;
@@ -287,6 +287,11 @@
 
 #player-count-container {
   margin-top: 50px;
+}
+
+/*for invite to display well */
+#invModal {
+  max-height: 33%;
 }
 
 /* css rule for angular material modal */
