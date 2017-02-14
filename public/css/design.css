@@ -7,19 +7,17 @@
   padding-top: 25px;
 }
 
-h2 {
-  font-family: Ubuntu !important;
-}
-
 .body-content {
   margin-top: 60px;
   margin-left: 150px;
 }
 
 .navbar-default {
-  background: transparent;
-  border: none;
-  box-shadow: unset;
+    background: transparent;
+    border: none;
+    box-shadow: unset;
+    /*margin-bottom: 85px;*/
+
 }
 
 .navbar-default .navbar-brand {
@@ -134,6 +132,7 @@ h2 {
 }
 
 .footer-bottom {
+
   background-color: #0477b7;
   opacity: 0.85;
 }
@@ -206,11 +205,9 @@ h2 {
   margin-right: 80px;
 }
 
-
-/* The Modal (background) */
-
 .modal {
   display: none;
+  /* Hidden by default */
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -222,9 +219,6 @@ h2 {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
-
-/* Modal Content */
 
 .modal-content {
   background-color: #fefefe;
@@ -239,9 +233,6 @@ h2 {
 .size {
   width: 50%;
 }
-
-
-/* The Close Button */
 
 .close {
   color: #aaaaaa;
@@ -266,6 +257,149 @@ h2 {
   margin-left: 15px;
 }
 
-#player-count-container {
-  margin-top: 50px;
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (min-device-height: 800px) and (max-device-height: 1400px) and (-webkit-min-device-pixel-ratio: 1) {
+  .body-content {
+    margin-left: 100px;
+  }
+  .blue-box {
+    display: none;
+  }
+  .play {
+    margin-left: 0px;
+    height: 420px;
+  }
+  .welcome+p {
+    width: 600px;
+  }
+  .bottom-container {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (orientation: portrait) {
+  body {
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+  }
+  .welcome {
+    font-size: 50px;
+  }
+  .bottom-container {
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+  .blue-box {
+    display: none;
+  }
+  .play {
+    margin-left: 0px;
+    width: 280px;
+    height: 440px;
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 479px) {
+  .bottom-container {
+    height: 500px;
+  }
+  .play {
+    position: relative;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 25px;
+    height: 420px;
+  }
+  body {
+    height: 100%;
+    background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+  }
+  .bkg {
+    background-image: none;
+  }
+  .blue-box {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+  .bkg {
+    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    padding-top: 25px;
+    width: 100%;
+    height: auto;
+  }
+  html,
+  .bkg {
+    font-size: 12px;
+  }
+  .title {
+    margin-top: 20px;
+  }
+  .play {
+    position: relative;
+    margin-left: 0px;
+    margin-right: 375px;
+    height: 375px;
+    margin-top: 25px;
+  }
+  .blue-box {
+    background: none;
+  }
+  .play-button {
+    width: 150px;
+    height: 40px;
+  }
+  .bottom-container {
+    height: 500px;
+  }
+  .welcome+p {
+    font-size: 1.0em;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+    width: 480px;
+  }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1199px) {
+  body {
+    height: 100%;
+    background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+  }
+  .bkg {
+    background-image: none;
+  }
+  .body-content {
+    margin-top: 0px;
+  }
+  .welcome+p {
+    width: 550px;
+  }
+  .bottom-container {
+    margin-top: 30px;
+  }
+  .blue-box {
+    background: none;
+  }
+  .play {
+    height: 400px;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-device-width: 1024px) and (max-device-height: 1366px) {
+  .bottom-container {
+    margin-top: 50px;
+  }
 }

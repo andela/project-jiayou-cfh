@@ -72,6 +72,7 @@ angular.module('mean.directives', [])
         scope.showOptions = true;
         scope.showNavBar = true;
         scope.signOut = false;
+        
         if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken') || localStorage.getItem('sign_in')) {
           scope.showNavBar = false;
           scope.signOut = true;

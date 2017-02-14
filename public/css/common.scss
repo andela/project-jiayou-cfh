@@ -348,7 +348,7 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
     &.smallest {
         font-size: .98em;
         font-family: 'ubuntu', cursive;
-
+        
 
         @include mobile-only{
             font-size: 10px; //play with later
@@ -386,6 +386,30 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
 
 html, body, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
+}
+
+html{
+   
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+
+    @include mobile-only{
+        //margin: 3px;
+        margin-top: 0px;
+    }
+}
+body{
+    font-family: $main-font;
+    background: transparent;
+
+    @include tablet-portrait-only{
+        margin: 5px;
+    }
+
+    @include mobile-only{
+        margin: 1px;
+    }
 }
 
 .navbar .nav>li>a.brand {
@@ -463,6 +487,7 @@ html, body, .main-container, .cont, #first-section, #inner-container{
                 padding: 0.65em 20px;
                 width: 140px;
                 cursor: pointer;
+                
 
                 @include mobile-only{
                     font-size: 0.7rem;
@@ -471,6 +496,10 @@ html, body, .main-container, .cont, #first-section, #inner-container{
                     padding: 5px;
                     width: 60px;
                 }
+                @media only screen and (min-width : 1025) {
+                    position: relative;
+                    
+            }
             }
 
             #abandon-game-button:hover{
@@ -1207,8 +1236,8 @@ html, body, .main-container, .cont, #first-section, #inner-container{
                     width: 100%;
                     height: 100%;
                     font-size: 18px;
-                    padding-left: 5px;
                     max-height: 250px;
+                    padding-left: 20px;
 
                     @include mobile-only{
                         background: #252525;
@@ -1316,7 +1345,7 @@ html, body, .main-container, .cont, #first-section, #inner-container{
  // @include right;
   width: 300px;
   height: 80vh;
-  max-height: 500px;
+  max-height: 350px;
   z-index: 2;
   overflow: hidden;
   box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
@@ -1342,20 +1371,20 @@ Chat Title
   text-transform: uppercase;
   text-align: left;
   padding: 10px 10px 10px 50px;
-
+  
   h1, h2 {
     font-weight: normal;
     font-size: 10px;
     margin: 0;
     padding: 0;
   }
-
+  
   h2 {
     color: rgba(255, 255, 255, .5);
     font-size: 8px;
     letter-spacing: 1px;
   }
-
+  
   .avatar {
     position: absolute;
     z-index: 1;
@@ -1368,7 +1397,7 @@ Chat Title
     margin: 0;
     padding: 0;
     border: 2px solid rgba(255, 255, 255, 0.24);
-
+    
     img {
       width: 100%;
       height: auto;
@@ -1386,7 +1415,7 @@ Messages
   overflow: hidden;
   position: relative;
   width: 100%;
-
+  
   & .messages-content {
     position: absolute;
     top: 0;
@@ -1395,7 +1424,7 @@ Messages
     width: 100%;
   }
 
-
+  
   .message {
     clear: both;
     float: left;
@@ -1408,14 +1437,14 @@ Messages
     margin-left: 35px;
     position: relative;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-
+    
     .timestamp {
       position: absolute;
       bottom: -15px;
       font-size: 9px;
       color: rgba(255, 255, 255, .3);
     }
-
+    
     &::before {
       content: '';
       position: absolute;
@@ -1424,7 +1453,7 @@ Messages
       left: 0;
       border-right: 7px solid transparent;
     }
-
+    
     .avatar {
       position: absolute;
       z-index: 1;
@@ -1443,14 +1472,14 @@ Messages
         height: auto;
       }
     }
-
+    
     &.message-personal {
       float: right;
       color: #fff;
       text-align: right;
       background: linear-gradient(120deg, #248A52, #257287);
       border-radius: 10px 10px 0 10px;
-
+      
       &::before {
         left: auto;
         right: 0;
@@ -1460,17 +1489,17 @@ Messages
         bottom: -4px;
       }
     }
-
+    
     &:last-child {
       margin-bottom: 30px;
     }
-
+    
     &.new {
       transform: scale(0);
       transform-origin: 0 0;
       animation: bounce 500ms linear both;
     }
-
+    
     &.loading {
 
       &::before {
@@ -1498,7 +1527,7 @@ Messages
         }
       }
     }
-
+    
   }
 }
 
@@ -1513,7 +1542,7 @@ Message Box
   padding: 10px;
   position: relative;
   opacity: 2;
-
+  
   & .message-input {
     background: none;
     border: none;
@@ -1526,11 +1555,11 @@ Message Box
     padding-right: 20px;
     width: 265px;
   }
-
+  
   textarea:focus:-webkit-placeholder{
       color: transparent;
   }
-
+  
   & .message-submit {
     position: absolute;
     z-index: 1;
@@ -1542,11 +1571,11 @@ Message Box
     font-size: 10px;
     text-transform: uppercase;
     line-height: 1;
-    padding: 6px 10px;
+    padding: 6px 10px; 
     border-radius: 10px;
     outline: none!important;
     transition: background .2s ease;
-
+    
     &:hover {
       background: #fff;
     }
@@ -1563,14 +1592,15 @@ Message Box
     left: 0;
 }
 
-// #main-container {
-//     background-color: whitesmoke;
-// }
+#main-container {
+    background-color: whitesmoke;
+}
 
 .chat-container {
+    background-size: contain;
     position: fixed;
     right: 15px;
-    bottom: 48px;
+    bottom: 2px;
     transition: all .5s;
     transform: translateY(90%);
     button {
@@ -1587,13 +1617,13 @@ Message Box
 }
 
 .player-chip{
-    background-image: url(../img/11.png);
-    background-size: 15px;
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    z-index: 100;
-    top: -2px;
+    background-image: url(../img/11.png); 
+    background-size: 15px; 
+    width: 15px; 
+    height: 15px; 
+    position: absolute; 
+    z-index: 100; 
+    top: -2px; 
     right: 50px
 }
 
@@ -1609,9 +1639,50 @@ Message Box
 }
 .player-card{
     background-color: whitesmoke;
-
+    
 }
 
-.isCzar {
+.is-czar {
     background-color: #424242 !important;
+    color: white;
+}
+
+.top-navbar {
+    @media screen and (max-width: 768px) {
+        height: 40px;
+        transition: all 1.5s;
+    }
+}
+
+.question-top {
+    justify-content: center;
+    margin-bottom: 20px; 
+    margin-top:10px;
+}
+
+#question-container {
+     font-family: ubuntu; 
+     text-align: center; 
+     padding-top: 15px;
+}
+
+.questions {
+     margin-left: unset; 
+     margin-right: auto;
+}
+
+#player-timer {
+    padding-left: 40px;
+}
+
+#waiting-for-players {
+     padding-left: 17px; 
+     font-size: 15px;
+     font-family: ubuntu;
+}
+
+#cfh-icon {
+    font-size: 30px; 
+    font-family: ubuntu; 
+    padding-left: 70px;
 }
