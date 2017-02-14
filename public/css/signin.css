@@ -1,18 +1,25 @@
-body {
+/*body {
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-      background: #3399FF;
-    }
+      background: #3399FF !important;
+    }*/
 
     main {
       flex: 1 0 auto;
     }
 
+    .btn-large {
+      width: 100% !important;
+    }
+
+    .my-container {
+      width: 60% !important;
+    }
+
     body {
-      /* For browsers that don't support gradients*/
       background: #0768a0 !important;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif;
     }
 
     .input-field input[type=date]:focus + label,
@@ -67,16 +74,31 @@ body {
     }
 
     h3 {
-      font-size: 1.8em;
-      font-family: Helvetica, Arial, sans-serif !important;
+      font-size: 1.5em;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
     }
 
     h5 {
-      font-size: 1em;
-      font-family: Helvetica, Arial, sans-serif !important;
+      font-size: 1.1em;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
       color: #757575;
     }
 
     .btn {
-      font-family: Helvetica, Arial, sans-serif !important;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
+    }
+
+    .bdy {
+     display: inline-block;
+      border: 1px solid #EEE;
+    }
+
+    .section {
+      padding-top: 0rem;
+    }
+
+    .center-div {
+      padding-left: 40px;
+      padding-top: 20px;
+      padding-right: 120px;
     }

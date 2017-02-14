@@ -1,5 +1,5 @@
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
-  .config(['$routeProvider',
+ .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
         when('/', {
@@ -67,5 +67,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
     };
   }]);
 
-angular.module('mean.system', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'angularMoment']);
+angular.module('mean.system', ['ngMaterial', 'ngMessages', 'ngSanitize', 'material.svgAssetsCache', 'angularMoment']);
 angular.module('mean.directives', []);

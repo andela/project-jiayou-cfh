@@ -1,65 +1,102 @@
-<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'" style="background: url(img/bluewood.jpg)">
+<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'" >
     <div id="social-bar-container">
     </div>
     <div>
-        <div id="cards" class='hand' style="background: url(img/bluewood.jpg)">
+        <div id="cards" class='hand'>
             <span ng-show="winnerPicked()"></span>
-            <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+            <div ng-style="{'cursor':'pointer'}" class="card smallest hoverable z-depth-5" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
                 ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
                 <div class = "the-card">
-                    <span ng-bind-html-unsafe="card.text"></p>
+                    <span ng-bind-html="card.text"></p>
                     <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+        <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
 
                 </div>
                 </div>
-                
-                <!--<span ng-bind-html-unsafe="card.text"></span>
-                <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>-->
         </div>
         <span ng-repeat="answer in game.table">
-        <div class="card smallest " ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+        <div class="card smallest hoverable z-depth-3" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
-            <div class ="the-card">
-                <span ng-bind-html-unsafe="card.text"></span>
-                <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
-                <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
-            </div>
-    </div>
-    </span>
+<div class="the-card">
+    <span ng-bind-html="card.text"></span>
+    <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+    <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
 </div>
 </div>
+</span>
+</div>
+
+</div>
+
 </div>
 <div ng-show="game.state === 'awaiting players'">
-    <ul class="collection white-text green darken-1" style="padding-left: 7px;">
+    <ul class="collection" id="waiting-for-players">
         <li >
-            <h4 style="text-align: center;">How To Play</h4>
+            <h3 class="center-align">How To Play</h3>
         </li>
         <hr>
      
         <li>
             Each player begins with, and will always have, 10 white answer cards.
         </li>
-        <br>
+        <hr>
         <li>
             <div>For each round, one player is randomly chosen as the Card Czar.</div>
         </li>
-        <br>
+        <hr>
         <li>
             <div>Everyone else answers the black question card by clicking on the answer card they want to use.</div>
         </li>
-        <br>
+       <hr>
         <li >
             <div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div>
         </li>
-        <br>
+        <hr>
         <li class="">
-            <div class="card-panel hoverable blue darken-2 white-text collection-item">*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
+            <div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
+        </li>
+        <li>
+        <div><a id="invBtn" ng-click="getEmail()">Click to Invite Users</a></div>
         </li>
     </ul>
+    <div>
+        <a href="https://www.crowdrise.com/fundraise-and-volunteer/donate-mobile/project/cfhio/cards4humanity?widget=true&amp;redirect_to=http%3A%2F%2Flocalhost%3A5000%2F%23!%2Fcharity&amp;stylesheet=&amp;amounts=">
+        <span class="chip blue darken-3 white-text">Donate Now</span>
+        </a></div>
+
+        <div id="invModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content size">
+        <span class="close">&times;</span>
+        <div class="alert alert-success" ng-if="showSuccessAlert">
+            <strong>Invite sent successfully!!</strong>
+        </div>
+        <div class="alert alert-warning" ng-if="showAlert2">
+            <strong>Only a maximum of 12 players are allowed per game!</strong>
+        </div>
+        <div class="alert alert-warning" ng-if="showWarningAlert">
+            <strong>Oops! You cannot invite yourself!</strong>
+        </div>
+        <form class="" ng-submit="sendInvite()">
+            <div id='email' style="text-align: left">
+
+<label style="font-size:15px">Enter email to send invites</label>
+<input type="text" list="emails" id = "select" placeholder="Enter Email">
+<datalist id="emails" >
+    <option ng-repeat="email in emails"  value = "{{email}}" >
+    </option>
+</datalist>
+</div>
+<div>
+    <button id="myBtn" class="btn btn-default btn-primary">Send Invite</button>
+</div>
+</form>
 </div>
 </div>
+<!-- End -->
+</div>
+</div>
+
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="inner-info-exit">
         <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
@@ -108,3 +145,30 @@
         </div>
     </div>
 </div>
+<script>
+    // Get the modal
+    var modal = document.getElementById('invModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("invBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
