@@ -69,34 +69,31 @@
     <!-- Modal content -->
     <div class="modal-content size">
         <span class="close">&times;</span>
-        <div class="alert alert-success" ng-if="showSuccessAlert">
-            <strong>Invite sent successfully!!</strong>
-        </div>
-        <div class="alert alert-warning" ng-if="showAlert2">
-            <strong>Only a maximum of 12 players are allowed per game!</strong>
-        </div>
-        <div class="alert alert-warning" ng-if="showWarningAlert">
-            <strong>Oops! You cannot invite yourself!</strong>
-        </div>
-        <form class="" ng-submit="sendInvite()">
-            <div id='email' style="text-align: left">
-
-<label style="font-size:15px">Enter email to send invites</label>
-<input type="text" list="emails" id = "select" placeholder="Enter Email">
-<datalist id="emails" >
-    <option ng-repeat="email in emails"  value = "{{email}}" >
-    </option>
-</datalist>
-</div>
-<div>
-    <button id="myBtn" class="btn btn-default btn-primary">Send Invite</button>
-</div>
-</form>
-</div>
+            <div class="alert alert-success" ng-if="showSuccessAlert">
+                <strong>Invite sent successfully!!</strong>
+            </div>
+            <div class="alert alert-warning" ng-if="showAlert2">
+                <strong>Only a maximum of 12 players are allowed per game!</strong>
+            </div>
+            <div class="alert alert-warning" ng-if="showWarningAlert">
+                <strong>Oops! You cannot invite yourself!</strong>
+            </div>
+            <form class="" ng-submit="sendInvite()">
+                <div id='email' style="text-align: left">
+                    <label style="font-size:15px">Enter email to send invites</label>
+                    <input type="text" list="emails" id = "select" placeholder="Enter Email">
+                    <datalist id="emails" >
+                        <option ng-repeat="email in emails"  value = "{{email}}" ></option>
+                    </datalist>
+                </div>
+                <div>
+                    <button id="myBtn" class="btn btn-default btn-primary">Send Invite</button>
+                </div>
+            </form>
+    </div>
 </div>
 <!-- End -->
-</div>
-</div>
+
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="inner-info-exit">
         <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

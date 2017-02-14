@@ -18,13 +18,13 @@ angular.module('mean.system')
         } else if (game.curQuestion.numAnswers === 2 &&
             $scope.pickedCards.length === 2) {
             // delay and send
-          $scope.hasPickedCards = true;
-          $timeout($scope.sendPickedCards, 300);
-        }
+        $scope.hasPickedCards = true;
+        $timeout($scope.sendPickedCards, 300);
       }
-    };
+    }
+  };
 
-    $scope.pointerCursorStyle = function () {
+  $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
         return { 'cursor': 'pointer' };
       } else {
@@ -32,7 +32,7 @@ angular.module('mean.system')
       }
     }
   };
-  
+
   $scope.pointerCursorStyle = function () {
     if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
       return { cursor: 'pointer' };
@@ -53,6 +53,16 @@ angular.module('mean.system')
 
   $scope.checkAll = function () {
     $scope.selected = angular.copy($scope.emails);
+  };
+
+  $scope.display = function () {
+    document.getElementById('friend').style.display = 'block';
+  };
+
+  $scope.friendList = [];
+  $scope.addFriend = function () {
+    var friend = document.getElementById('newFriend').value;
+    $scope.friendList.push(friend);
   };
 
   $scope.uncheckAll = function () {
