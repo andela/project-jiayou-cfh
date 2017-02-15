@@ -1,13 +1,14 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
-  $scope.hasPickedCards = false;
-  $scope.winningCardPicked = false;
-  $scope.showTable = false;
-  $scope.modalShown = false;
-  $scope.game = game;
-  $scope.pickedCards = [];
-  var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-  $scope.makeAWishFact = makeAWishFacts.pop();
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
+   $scope.hasPickedCards = false;
+    $scope.winningCardPicked = false;
+    $scope.showTable = false;
+    $scope.modalShown = false;
+    $scope.game = game;
+    $scope.pickedCards = [];
+    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    $scope.makeAWishFact = makeAWishFacts.pop();
+
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -22,23 +23,19 @@ angular.module('mean.system')
           $timeout($scope.sendPickedCards, 300);
         }
       }
-    };
+    }
+  };
 
     $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
+        return {
+          'cursor': 'pointer'
+        };
       } else {
         $scope.pickedCards.pop();
       }
-    }
-  };
+    };
   
-  $scope.pointerCursorStyle = function () {
-    if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-      return { cursor: 'pointer' };
-    }
-    return {};
-  };
   $scope.getEmail = function () {
     $scope.canSend = false;
     $http({
@@ -185,17 +182,46 @@ angular.module('mean.system')
     }
   };
 
+    $scope.abandonGame = function (event) {
+      var dialogDetails = { title: "Exit Game",
+        content: "Do you really want to abandon the game?",
+        label: "Abandon Game",
+        okTitle: "Yes",
+        cancelTitle: "No"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        game.leaveGame();
+        $location.path('/').search({});
+      });
+      /* call function to update the
+      database record with new gameId if
+      remaining players are just two
+      and then route user to
+      $location.path('/');
+      */
+      // $scope.updateGameId(gameDetails);
+    };
+
+    $scope.updateGameId = function (gameDetails) {
+      if (gameDetails.playerLeft === 2) {
+        $http.put('/api/games/${gameDetails.gameId}/start', {
+          gameDetails: gameDetails
+        }).success(function (res) {
+          $location.path('/');
+        }).error(function (err) {
+          // $scope.startGameStatus = false;
+          // $scope.showDialog();
+        });
+        $location.path('/');
+      }
+    };
+
   $scope.winnerPicked = function () {
     return game.winningCard !== -1;
   };
 
   $scope.startGame = function () {
     game.startGame();
-  };
-
-  $scope.abandonGame = function () {
-    game.leaveGame();
-    $location.path('/');
   };
 
     // Catches changes to round to update when no players pick card
@@ -228,26 +254,28 @@ angular.module('mean.system')
       } else if ($scope.isCustomGame() && !$location.search().game) {
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
-        $location.search({ game: game.gameID });
-        if (!$scope.modalShown) {
-          setTimeout(function () {
-            var link = document.URL;
-            var txt = 'Give the following link to your friends so they can join your game: ';
-            $('#lobby-how-to-play').text(txt);
-            $('#oh-el').css({ 'text-align': 'center', 'font-size': '22px', background: 'white', color: 'black' }).text(link);
-          }, 200);
-          $scope.modalShown = true;
+
+          $location.search({ game: game.gameID });
+          if (!$scope.modalShown) {
+            setTimeout(function () {
+              var link = document.URL;
+              var txt = 'Give the following link to your friends so they can join your game: ';
+              $('#lobby-how-to-play').text(txt);
+              $('#oh-el').css({ 'text-align': 'center', 'font-size': '22px', 'background': 'white', 'color': 'black' }).text(link);
+            }, 200);
+            $scope.modalShown = true;
+          }
         }
       }
-    }
-  });
+    });
 
-  if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-    console.log('joining custom game');
-    game.joinGame('joinGame', $location.search().game);
-  } else if ($location.search().custom) {
-    game.joinGame('joinGame', null, true);
-  } else {
-    game.joinGame();
-  }
+
+    if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
+      game.joinGame('joinGame', $location.search().game);
+    } else if ($location.search().custom) {
+      var gameDBId = localStorage.getItem("gameDBId");
+      game.joinGame('joinGame', null, gameDBId, true);
+    } else {
+      game.joinGame();
+    }
 }]);
