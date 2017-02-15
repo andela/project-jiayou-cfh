@@ -10,7 +10,6 @@ module.exports = function(app, passport, auth) {
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
 
-  var signup = require('../app/controllers/signup');
   var invite = require('../app/controllers/invite');
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);

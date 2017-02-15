@@ -865,7 +865,96 @@ body {
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
 
+/*----------------------------
+Card flipping animation start
+----------------------------*/
+#question-flip {
+  transform: perspective(800px) rotateY(0deg);
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s; }
 
+#question-flip.flipped {
+  -webkit-transform: perspective(600px) rotateY(-180deg);
+  transform: perspective(600px) rotateY(-180deg); }
+
+.back {
+  font-size: 36px;
+  position: absolute;
+  padding: 90px 150px;
+  border-radius: 10px;
+  background-color: #cccccc;
+  height: 215px;
+  width: 36.3%;
+  margin-top: 6.5px;
+  border: 6px solid #fff; }
+
+#outer {
+  border: 6px solid #fff;
+  position: relative;
+  margin-left: 40px;
+  background-color: #cccccc;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transform: rotate(-2deg);
+  -moz-transform: rotate(-2deg);
+  -ms-transform: rotate(-2deg);
+  transform: rotate(-2deg);
+  cursor: pointer; }
+
+#outer:before {
+  content: "";
+  height: 215px;
+  width: 245px;
+  border-radius: 10px;
+  background: #cccccc;
+  border: 6px solid white;
+  margin-left: 35px;
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: -10px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  transform: rotate(5deg); }
+
+#outer:after {
+  content: "";
+  height: 215px;
+  width: 245px;
+  padding-right: 40px;
+  border-radius: 10px;
+  background: #cccccc;
+  border: 6px solid white;
+  margin-left: 35px;
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: -10px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transform: rotate(-5deg);
+  -moz-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg); }
+
+.inner {
+  -ms-transform: rotate(-5deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-5deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-5deg);
+  padding-left: 20px;
+  padding-top: 20px; }
+
+/*--------------------------
+Card flipping animation end
+---------------------------*/
 .chat {
   width: 300px;
   height: 80vh;
@@ -1080,9 +1169,6 @@ Message Box
   bottom: -8px;
   left: 0; }
 
-#main-container {
-  background-color: whitesmoke; }
-
 .chat-container {
   background-size: contain;
   position: fixed;
@@ -1158,22 +1244,3 @@ Message Box
   font-size: 30px;
   font-family: ubuntu;
   padding-left: 70px; }
-
-.flip-3D > .front {
-  position: absolute;
-  transform: perspective(800px) rotateY(0deg);
-  backface-visibility: hidden;
-  transition: transform .5s linear 0s; }
-
-.flip-3D > .back {
-  position: absolute;
-  transform: perspective(800px) rotateY(180deg);
-  backface-visibility: hidden;
-  transition: transform .5s linear 0s; }
-
-.flip-3D:hover > .front {
-  transform: perspective(600px) rotateY(-180deg); }
-
-.flip-3D:hover > .back {
-  transform: perspective(600px) rotateY(0deg); }
-

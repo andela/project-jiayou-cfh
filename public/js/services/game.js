@@ -163,7 +163,7 @@ angular.module('mean.system')
         }
       } else if (data.state === 'waiting for czar to draw cards') {
         if (game.czar === game.playerIndex) {
-          addToNotificationQueue('Click to Draw the Cards!');
+          // addToNotificationQueue('Click to Draw the Cards!');
         } else {
           // addToNotificationQueue('The czar is drawing the cards...');
         }
