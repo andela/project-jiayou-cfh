@@ -1,42 +1,63 @@
-<div class="bkg">
-  <div class="container">
-    <div ng-include="'/views/navbar.html'"> </div>
-    <div ng-include="'/views/start_new_game_popup.html'"> </div>
-    <div class="row body-content">
-      <div class="col-lg-12">
-        <div class="col-lg-6 col-lg-offset-2">
-          <div class="sign-error" ng-show="showError() === 'invalid'">
-            Please check your username/password and try again.
-          </div>
-          <!-- For expired session after 5 hours -->
-          <div class="sign-error" ng-show="showTokenExpired() === 'invalid'">
-            Please sign in again, your session has expired!
-          </div>
-          <!-- For expired session after 5 hours -->
-          <form class="" action="/users/session" method="post" name="sign-in">
-            <h2 class="login">SIGN IN</h2>
-            <hr>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-default btn-primary">Submit</button>
-          </form>
-          <div class="social-buttons">
-            <button class="btn facebook">Facebook</button>
-            <button class="btn twitter">Twitter</button>
-            <button class="btn google-plus">Google Plus</button>
-          </div>
-        </div>
-        <div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
-          <div class="container">
-            <p class="navbar-text pull-left">© 2017 - Team Jiayou.
-            </p>
-          </div>
-        </div>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/signin.css">
+</head>
+
+<body>
+  <div ng-include="'/views/navbar.html'"> </div>
+  <main ng-controller="IndexController">
+    <center>
+      <div class="section"></div>
+      <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+        <strong><span ng-bind="message"></span></strong>
       </div>
-    </div>
+      <h3 class="white-text text-lighten-2">SIGN IN</h3>
+      <div class="section"></div>
+
+      <div class="container">
+        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+          <form class="col s12">
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="mdi-communication-email prefix"></i>
+                <input id="email" type="email" name="email" class="validate" required="required"
+                  ng-model='credentials.userEmail'>
+                  <label for="email" data-error="wrong" data-success="right">Enter your email</label>
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="mdi-action-lock-outline prefix"></i>
+                <input class="validate" type="password" name="password" id="password" required="required"
+                  ng-model="credentials.userPassword">
+                  <label for="password" data-error="wrong" data-success="right">Enter your password</label>
+              </div>
+            </div>
+            <br/>
+            <center>
+              <div class="row">
+                <button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
+                  ng-click="userLogin()">SIGN IN</button>
+              </div>
+            </center>
+            <h5 class="grey-text text-darken-1">...or sign in with:</h5>
+            <div class="row">
+              <div class="social-buttons">
+                <a href="/auth/facebook" class="waves-effect waves-light btn fb-button"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="/auth/twitter" class="waves-effect waves-light btn tw-button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="/auth/google" class="waves-effect waves-light btn g-button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+              </div>
+              <div class="input-field col s12">
+                <h5 class="left medium-small">Don't have an account yet? <a href="/#!/signup">Sign up</a></h5>
+              </div>
+            </div>
+    </center>
+    <div class="section"></div>
+  </main>
+
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+</body>

@@ -1,0 +1,104 @@
+body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      background: #3399FF;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    .btn-large {
+      width: 100% !important;
+    }
+
+    .my-container {
+      width: 60% !important;
+    }
+
+    body {
+      background: #0768a0;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif;
+    }
+
+    .input-field input[type=date]:focus + label,
+    .input-field input[type=text]:focus + label,
+    .input-field input[type=email]:focus + label,
+    .input-field input[type=password]:focus + label {
+      color: #e91e63;
+    }
+
+    .input-field input[type=date]:focus,
+    .input-field input[type=text]:focus,
+    .input-field input[type=email]:focus,
+    .input-field input[type=password]:focus {
+      border-bottom: 2px solid #e91e63;
+      box-shadow: none;
+    }
+
+    .fb-button {
+      background: #4862a3;
+    }
+
+    .row :hover .fb-button{
+      background: #4862a3;
+    }
+
+    .tw-button {
+      background:#55acee;
+    }
+
+    .sb-button {
+      background:#0768a0;
+    }
+
+    .row :hover .sb-button{
+      background: #0768a0;
+    }
+
+    .row :hover .tw-button{
+      background: #55acee;
+    }
+
+    .g-button {
+      background: #dd4b39;
+    }
+
+    .row :hover .g-button{
+      background: #dd4b39;
+    }
+
+    html {
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
+    }
+
+    h5 {
+      font-size: 1.1em;
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
+      color: #757575;
+    }
+
+    .btn {
+      font-family: Ubuntu, Helvetica, Arial, sans-serif !important;
+    }
+
+    .bdy {
+     display: inline-block;
+      border: 1px solid #EEE;
+    }
+
+    .section {
+      padding-top: 0rem;
+    }
+
+    .center-div {
+      padding-left: 40px;
+      padding-top: 20px;
+      padding-right: 120px;
+    }

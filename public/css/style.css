@@ -400,6 +400,12 @@
    cursor: pointer;
  }
 
+ .alert {
+   width: 300px;
+   height: 60px;
+   margin: 0 0 20px;
+ }
+
   #sign-up-btn-other {
    display: inline-block;
    border-radius: 8px;
