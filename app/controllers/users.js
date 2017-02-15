@@ -192,6 +192,7 @@ exports.user = function (req, res, next, id) {
  * Authenticate the user
  */
 exports.authenticate = function (req, res, next) {
+   console.log(req.body.JWT);
   if (!req.body.JWT) {
     res.redirect('/#!/signin?error=invalid');
     return;

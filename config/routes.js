@@ -21,6 +21,7 @@ module.exports = function(app, passport, auth) {
   app.post("/api/games/:id/start", users.authenticate, games.startGame);
   app.put("/api/games/:id/start", users.authenticate, games.updateGame);
   app.post("/api/users/jwt/authenticated", users.isAuthenticated);
+  app.post("/api/games", users.authenticate, games.findAllRecord);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
