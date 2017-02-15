@@ -1079,9 +1079,6 @@ Message Box
   bottom: -8px;
   left: 0; }
 
-#main-container {
-  background-color: whitesmoke; }
-
 .chat-container {
   background-size: contain;
   position: fixed;

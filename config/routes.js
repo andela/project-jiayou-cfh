@@ -21,7 +21,6 @@ module.exports = function(app, passport, auth) {
 
   // game playing routes
   app.post('/api/games/:id/start', users.authenticate, games.startGame);
-  app.put('/api/games/:id/start', users.authenticate, games.updateGame);
 
   app.post('/api/search/users', invite.invite);
   app.get('/api/userEmail', invite.getEmail);
