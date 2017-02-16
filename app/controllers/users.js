@@ -195,14 +195,12 @@ exports.authenticate = function (req, res, next) {
    console.log(req.body.JWT);
   if (!req.body.JWT) {
     res.redirect('/#!/signin?error=invalid');
-    return;
   } else {
     req.user = jwt.verify(req.body.JWT, process.env.SECRET);
     if (req.user) {
       next();
     } else {
       res.redirect('/#!/signin?error=invalid');
-      return;
     }
   }
 };
@@ -223,4 +221,18 @@ exports.isAuthenticated = function (req, res, next) {
       res.send(false);
     }
   }
-}
+};
+
+exports.findAllRecord = function (req, res) {
+  User.find()
+    .exec((err, userDetails) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ users: userDetails });
+      }
+    });
+};
