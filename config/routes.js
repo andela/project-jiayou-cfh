@@ -14,12 +14,21 @@ module.exports = function(app, passport, auth) {
   var invite = require('../app/controllers/invite');
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);
+  // Endpoint to post all friends email in the database
+  app.post('/api/friends', invite.addFriend);
 
   // Route for sign-up
   app.post('/api/auth/signup', signup.signupAuth);
 
+  // Endpoint to invite users
   app.post('/api/search/users', invite.invite);
+  // Endpoint to get all users email
   app.get('/api/userEmail', invite.getEmail);
+  // Endpoint to get all friends email
+  app.get('/api/get/friendsEmail', invite.getFriendsEmail);
+
+  // Endpoint to get a friend email
+  app.get('/api/get/friend/email', invite.getAFriend);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
