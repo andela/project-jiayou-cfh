@@ -1,62 +1,87 @@
 var Game = require('./game');
 var Player = require('./player');
-require("console-stamp")(console, "m/dd HH:MM:ss");
+require('console-stamp')(console, 'm/dd HH:MM:ss');
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 var User = mongoose.model('User');
 
-var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+var avatars = require(`${__dirname }/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
-var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
-module.exports = function(io) {
-
+module.exports = function (io) {
   var game;
   var allGames = {};
   var allPlayers = {};
   var gamesNeedingPlayers = [];
   var gameID = 0;
 
+
+
   io.sockets.on('connection', function (socket) {
-    console.log(socket.id +  ' Connected');
-    socket.emit('id', {id: socket.id});
+    console.log(`${socket.id} Connected`);
+    socket.emit('id', { id: socket.id });
 
-    socket.on('pickCards', function(data) {
-      console.log(socket.id,"picked",data);
+    socket.on('user', function(id) {
+      var playerPrivateChannel = io.of('/'+ id);
+
+      var callYou = function () {
+        playerPrivateChannel.emit('notify', 'You just received a notification');
+      };
+
+      playerPrivateChannel.on('connection', function(private_socket) {
+        private_socket.on('message', function(data) {
+          console.log('wantt to send a message');
+          callYou();
+        });
+      });
+    });
+
+    socket.on('pickCards', function (data) {
+      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
-        allGames[socket.gameID].pickCards(data.cards,socket.id);
+        allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
-        console.log('Received pickCard from',socket.id, 'but game does not appear to exist!');
+        console.log('Received pickCard from', socket.id, 'but game does not appear to exist!');
       }
     });
 
-    socket.on('pickWinning', function(data) {
+    socket.on('pickWinning', function (data) {
       if (allGames[socket.gameID]) {
-        allGames[socket.gameID].pickWinning(data.card,socket.id);
+        allGames[socket.gameID].pickWinning(data.card, socket.id);
       } else {
-        console.log('Received pickWinning from',socket.id, 'but game does not appear to exist!');
+        console.log('Received pickWinning from', socket.id, 'but game does not appear to exist!');
       }
     });
 
-    socket.on('joinGame', function(data) {
+    socket.on('joinGame', function (data) {
       if (!allPlayers[socket.id]) {
-        joinGame(socket,data);
+        joinGame(socket, data, io);
       }
+      // socket.on('friendId', function (idDetails) {
+      // if ( idDetails.friendId === ) {
+
+      // }
+      // console.log('my id is'+id);
+      // console.log('friend id is'+ data.userID);
+   // });
+     
     });
 
-    socket.on('joinNewGame', function(data) {
+    socket.on('joinNewGame', function (data) {
       exitGame(socket);
-      joinGame(socket,data);
+      joinGame(socket, data, io);
     });
 
-    socket.on('startGame', function() {
+    socket.on('startGame', function () {
       if (allGames[socket.gameID]) {
         var thisGame = allGames[socket.gameID];
-        console.log('comparing',thisGame.players[0].socket.id,'with',socket.id);
+        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
-          gamesNeedingPlayers.forEach(function(game,index) {
+          gamesNeedingPlayers.forEach(function (game, index) {
             if (game.gameID === socket.gameID) {
-              return gamesNeedingPlayers.splice(index,1);
+              return gamesNeedingPlayers.splice(index, 1);
             }
           });
           thisGame.prepareGame();
@@ -65,53 +90,62 @@ module.exports = function(io) {
       }
     });
 
-    socket.on('leaveGame', function() {
+    socket.on('leaveGame', function () {
       exitGame(socket);
     });
 
-    socket.on('disconnect', function(){
+    socket.on('disconnect', function () {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
     });
+
+    // socket.on('invite', function (mss) {
+    //   socket.emit('invite2', mss);
+    //   console.log(mss);
+    // });
   });
 
-  var joinGame = function(socket,data) {
+  var joinGame = function (socket, data, io) {
+    var playerPrivateChannel = io.of('/'+data.userID);
     var player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
     if (data.userID !== 'unauthenticated') {
       User.findOne({
         _id: data.userID
-      }).exec(function(err, user) {
+      }).exec(function (err, user) {
         if (err) {
-          console.log('err',err);
+          console.log('err', err);
           return err; // Hopefully this never happens.
         }
         if (!user) {
           // If the user's ID isn't found (rare)
           player.username = 'Guest';
-          player.avatar = avatars[Math.floor(Math.random()*4)+12];
+          player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
         } else {
           player.username = user.name;
           player.premium = user.premium || 0;
-          player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];
+          player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
+          
+          // notify user of a message
+          
         }
-        getGame(player,socket,data.room,data.createPrivate);
+        getGame(player, socket, data.room, data.createPrivate);
       });
     } else {
       // If the user isn't authenticated (guest)
       player.username = 'Guest';
-      player.avatar = avatars[Math.floor(Math.random()*4)+12];
-      getGame(player,socket,data.room,data.createPrivate);
+      player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
+      getGame(player, socket, data.room, data.createPrivate);
     }
   };
 
-  var getGame = function(player,socket,requestedGameId,createPrivate) {
+  var getGame = function (player, socket, requestedGameId, createPrivate) {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
-    console.log(socket.id,'is requesting room',requestedGameId);
+    console.log(socket.id, 'is requesting room', requestedGameId);
     if (requestedGameId.length && allGames[requestedGameId]) {
-      console.log('Room',requestedGameId,'is valid');
+      console.log('Room', requestedGameId, 'is valid');
       var game = allGames[requestedGameId];
       // Ensure that the same socket doesn't try to join the same game
       // This can happen because we rewrite the browser's URL to reflect
@@ -121,7 +155,7 @@ module.exports = function(io) {
       if (game.state === 'awaiting players' && (!game.players.length ||
         game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
-        console.log('Allowing player to join',requestedGameId);
+        console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
         game.players.push(player);
         socket.join(game.gameID);
@@ -129,7 +163,7 @@ module.exports = function(io) {
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
-        game.sendNotification(player.username+' has joined the game!');
+        game.sendNotification(`${player.username} has joined the game!`);
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
           game.prepareGame();
@@ -139,17 +173,16 @@ module.exports = function(io) {
       }
     } else {
       // Put players into the general queue
-      console.log('Redirecting player',socket.id,'to general queue');
+      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
-        createGameWithFriends(player,socket);
+        createGameWithFriends(player, socket);
       } else {
-        fireGame(player,socket);
+        fireGame(player, socket);
       }
     }
-
   };
 
-  var fireGame = function(player,socket) {
+  var fireGame = function (player, socket) {
     var game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
@@ -161,7 +194,8 @@ module.exports = function(io) {
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
-      console.log(socket.id,'has joined newly created game',game.gameID);
+      console.log(socket.id, 'has joined newly created game', game.gameID);
+
       game.assignPlayerColors();
       game.assignGuestNames();
       game.sendUpdate();
@@ -169,13 +203,14 @@ module.exports = function(io) {
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
       game.players.push(player);
-      console.log(socket.id,'has joined game',game.gameID);
+      console.log(socket.id, 'has joined game', game.gameID);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
       game.assignPlayerColors();
       game.assignGuestNames();
       game.sendUpdate();
-      game.sendNotification(player.username+' has joined the game!');
+      game.sendNotification(`${player.username} has joined the game!`);
+      console.log(`id is${player.userID}`);
       if (game.players.length >= game.playerMaxLimit) {
         gamesNeedingPlayers.shift();
         game.prepareGame();
@@ -183,21 +218,21 @@ module.exports = function(io) {
     }
   };
 
-  var createGameWithFriends = function(player,socket) {
+  var createGameWithFriends = function (player, socket) {
     var isUniqueRoom = false;
     var uniqueRoom = '';
     // Generate a random 6-character game ID
     while (!isUniqueRoom) {
       uniqueRoom = '';
-      for (var i = 0; i < 6; i++) {
-        uniqueRoom += chars[Math.floor(Math.random()*chars.length)];
+      for (var i = 0; i < 12; i++) {
+        uniqueRoom += chars[Math.floor(Math.random() * chars.length)];
       }
       if (!allGames[uniqueRoom] && !(/^\d+$/).test(uniqueRoom)) {
         isUniqueRoom = true;
       }
     }
-    console.log(socket.id,'has created unique game',uniqueRoom);
-    var game = new Game(uniqueRoom,io);
+    console.log(socket.id, 'has created unique game', uniqueRoom);
+    var game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
     allGames[uniqueRoom] = game;
@@ -208,14 +243,14 @@ module.exports = function(io) {
     game.sendUpdate();
   };
 
-  var exitGame = function(socket) {
-    console.log(socket.id,'has disconnected');
+  var exitGame = function (socket) {
+    console.log(socket.id, 'has disconnected');
     if (allGames[socket.gameID]) { // Make sure game exists
       var game = allGames[socket.gameID];
-      console.log(socket.id,'has left game',game.gameID);
+      console.log(socket.id, 'has left game', game.gameID);
       delete allPlayers[socket.id];
       if (game.state === 'awaiting players' ||
-        game.players.length-1 >= game.playerMinLimit) {
+        game.players.length - 1 >= game.playerMinLimit) {
         game.removePlayer(socket.id);
       } else {
         game.stateDissolveGame();
@@ -228,5 +263,4 @@ module.exports = function(io) {
     }
     socket.leave(socket.gameID);
   };
-
 };
