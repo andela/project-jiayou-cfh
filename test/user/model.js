@@ -12,7 +12,7 @@ var user;
 //The tests
 describe('<Unit Test>', function() {
     describe('Model User:', function() {
-        before(function(done) {
+        beforeEach(function(done) {
             user = new User({
                 name: 'Full name',
                 email: 'test@test.com',
@@ -40,7 +40,7 @@ describe('<Unit Test>', function() {
             });
         });
 
-        after(function(done) {
+        afterAll(function(done) {
             done();
         });
     });
