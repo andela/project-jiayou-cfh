@@ -9,5 +9,7 @@ node_js:
   - "4.4"
 before_script:
   - npm install
+  - sleep 15
+  - mongo mydb_test --eval 'db.addUser("travis", "test");'
 
 after_script: cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls

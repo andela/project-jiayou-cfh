@@ -13,3 +13,4 @@ Procfile
 gruntfile.js
 debug
 public/lib
+npm-debug.log
