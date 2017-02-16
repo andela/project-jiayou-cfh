@@ -85,7 +85,7 @@ exports.updateGame = function(req, res) {
 };
 
 exports.getGame = function(req, res) {
-  Game.find({ creator: req.body.email }, function(err, result) {
+  Game.find({ creator: req.params.email }, function(err, result) {
     if (err) {
       res.status(500).json({
         message: 'An error occured while updating this data',
