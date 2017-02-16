@@ -1,4 +1,4 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'checklist-model'])
   .config(['$routeProvider',
       function($routeProvider) {
           $routeProvider.
@@ -45,18 +45,19 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
       messagingSenderId: '324856728467'
     };
     firebase.initializeApp(config);
+
   }]).config(['$locationProvider',
     function($locationProvider) {
         $locationProvider.hashPrefix("!");
     }
-  ]).run(['$rootScope', function($rootScope) {
-  $rootScope.safeApply = function(fn) {
-    var phase = this.$root.$$phase;
-    if(phase === '$apply' || phase === '$digest') {
-        if(fn && (typeof(fn) === 'function')) {
-            fn();
+  ]).run(['$rootScope', function ($rootScope) {
+    $rootScope.safeApply = function (fn) {
+      var phase = this.$root.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+        if (fn && (typeof (fn) === 'function')) {
+          fn();
         }
-    } else {
+      } else {
         this.$apply(fn);
       }
     };

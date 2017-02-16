@@ -5,3 +5,4 @@ c4h_keys.txt
 .env
 bower_components
 .idea/
+public/lib

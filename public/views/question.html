@@ -1,5 +1,5 @@
 <!--<div id="question-container-inner">-->
-  <div class="card card-panel col s12 blue lighten-5 z-depth-5" style="font-family: ubuntu">
+  <div class="card smallest col s12 black z-depth-5" id="question-conatiner" >
     
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
     <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
@@ -7,7 +7,7 @@
       <div id="finding-players"><h2 class="center-align">Finding Players</h2></div>
       <div class="row">
         <div class="col s4" id="player-count-container">
-          <div class="col s12 center-align" id="player-count">{{game.players.length}} / 6 </div>
+          <div class="col s12 center-align" id="player-count">{{game.players.length}} / 12 </div>
           <div class="col s12 center-align" id="the-word-players"> Players </div>
         </div>
         <div class="col s4 center-align" id="loading-container">
@@ -84,4 +84,3 @@
       </div>
     </div>
   </div>
-<!--</div>-->

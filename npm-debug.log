@@ -1,35 +1,33 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/AK/.nvm/versions/node/v6.9.4/bin/node',
-1 verbose cli   '/Users/AK/.nvm/versions/node/v6.9.4/bin/npm',
-1 verbose cli   'start' ]
-2 info using npm@3.10.10
-3 info using node@v6.9.4
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@3.10.9
+3 info using node@v4.5.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle cardsforhumanity@1.0.0~prestart: cardsforhumanity@1.0.0
 6 silly lifecycle cardsforhumanity@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle cardsforhumanity@1.0.0~start: cardsforhumanity@1.0.0
 8 verbose lifecycle cardsforhumanity@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle cardsforhumanity@1.0.0~start: PATH: /Users/AK/.nvm/versions/node/v6.9.4/lib/node_modules/npm/bin/node-gyp-bin:/Users/AK/Desktop/simulations/project-jiayou-cfh/node_modules/.bin:/Users/AK/.nvm/versions/node/v6.9.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-10 verbose lifecycle cardsforhumanity@1.0.0~start: CWD: /Users/AK/Desktop/simulations/project-jiayou-cfh
+9 verbose lifecycle cardsforhumanity@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/andela/Documents/project-jiayou-cfh/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle cardsforhumanity@1.0.0~start: CWD: /Users/andela/Documents/project-jiayou-cfh
 11 silly lifecycle cardsforhumanity@1.0.0~start: Args: [ '-c', 'node node_modules/gulp-cli/bin/gulp' ]
 12 silly lifecycle cardsforhumanity@1.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle cardsforhumanity@1.0.0~start: Failed to exec start script
 14 verbose stack Error: cardsforhumanity@1.0.0 start: `node node_modules/gulp-cli/bin/gulp`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/Users/AK/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
-14 verbose stack     at emitTwo (events.js:106:13)
-14 verbose stack     at EventEmitter.emit (events.js:191:7)
-14 verbose stack     at ChildProcess.<anonymous> (/Users/AK/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/spawn.js:40:14)
-14 verbose stack     at emitTwo (events.js:106:13)
-14 verbose stack     at ChildProcess.emit (events.js:191:7)
-14 verbose stack     at maybeClose (internal/child_process.js:877:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:829:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 15 verbose pkgid cardsforhumanity@1.0.0
-16 verbose cwd /Users/AK/Desktop/simulations/project-jiayou-cfh
+16 verbose cwd /Users/andela/Documents/project-jiayou-cfh
 17 error Darwin 16.4.0
-18 error argv "/Users/AK/.nvm/versions/node/v6.9.4/bin/node" "/Users/AK/.nvm/versions/node/v6.9.4/bin/npm" "start"
-19 error node v6.9.4
-20 error npm  v3.10.10
+18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+19 error node v4.5.0
+20 error npm  v3.10.9
 21 error code ELIFECYCLE
 22 error cardsforhumanity@1.0.0 start: `node node_modules/gulp-cli/bin/gulp`
 22 error Exit status 1

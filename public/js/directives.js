@@ -74,11 +74,13 @@ angular.module('mean.directives', [])
           const database = firebase.database();
           const gameID = sessionStorage.getItem('gameID');
           const usernameInput = sessionStorage.getItem('Username');
+          const avatarInput = sessionStorage.getItem('Avatar');
           const textInput = document.querySelector('#text');
           var msgUser = usernameInput;
+          var msgAvatar = avatarInput;
           var msgText = textInput.value;
             // replace myFirebase.set(...); with the next line
-          database.ref('msg').push({ username: msgUser, text: msgText });
+          database.ref('msg').push({ avatar: msgAvatar, username: msgUser, text: msgText });
           textInput.value = '';
         });
 
@@ -86,16 +88,18 @@ angular.module('mean.directives', [])
         var startListening = function () {
           firebase.database().ref('msg').on('child_added', function (snapshot) {
             var msg = snapshot.val();
+            var msgAvatarElement = $("<img />");
+            msgAvatarElement.attr('src', msg.avatar);
             var msgUsernameElement = $('<b />');
             msgUsernameElement.html(msg.username);
             var msgTextElement = $('<p />');
-            msgTextElement.append(`${msgUsernameElement.text()}: `);
+            // msgTextElement.append(`${msgUsernameElement.text()}: `);
             msgTextElement.append(msg.text);
 
             var msgElement = document.createElement('div');
 
             msgElement.className = 'msg';
-            $('#results').append(msgTextElement);
+            $('#results').append(msgAvatarElement).append(msgUsernameElement).append(msgTextElement);
           });
         };
 
@@ -104,21 +108,47 @@ angular.module('mean.directives', [])
       }
     };
   })
-  .directive('landing', function () {
+  .directive('landing', function ($timeout, $http) {
     return {
       restrict: 'EA',
       link(scope, elem, attr) {
         scope.showOptions = true;
         scope.showNavBar = true;
-
-        if (localStorage.getItem('JWT') && localStorage.getItem('Email')) {
+        scope.signOut = false;
+        
+        if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken') || localStorage.getItem('sign_in')) {
           scope.showNavBar = false;
+          scope.signOut = true;
+        }
+
+        if (localStorage.getItem('JWT')) {
+          // Fix ??
+          // set alert message to true for 4000ms
+          $timeout(function () {
+            scope.signOut = false;
+          }, 4000);
         }
         scope.userLogout = function () {
-          // remove the password and email on logout
+          // remove the JWT, email and expDate on logout
           localStorage.removeItem('JWT');
           localStorage.removeItem('Email');
+          localStorage.removeItem('expDate');
+          localStorage.removeItem('jwtToken');
+          localStorage.removeItem('sign_in');
         };
       }
+    };
+  })
+  .directive('alertMessage', function ($timeout) {
+    // this direction display an alert for a particular time
+    var linkFunction = function (scope) {
+      scope.showAlert = true;
+      $timeout(function () {
+        scope.showAlert = false;
+      }, 4000);
+    };
+    return {
+      restrict: 'A',
+      link: linkFunction
     };
   });

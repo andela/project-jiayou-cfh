@@ -1,38 +1,24 @@
-
-<div class="chat-container " id="chatContainer">
-  <button class="btn waves-light light-blue darken-3" style = "outline: none" id="openChatButton">
-    <i class="material-icons">keyboard_arrow_up</i>
-  </button>
-  <div class="chat">
-    <div class="chat-title">
-      
-    </div>
-    <div class="messages">
-      <div id = "results" style="padding-left: 10px; color: black" class="messages-content">
+<div class="col m12 chat-container " id="chatContainer">
+    <button class="btn-flat" style = "outline: none" id="openChatButton">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button>
+    <div class="chat">
+      <div class="chat-title">
         
       </div>
-    </div>
-    <div class="message-box">
+      <div class="messages">
+        <div id ="results"  style="padding-left: 10px; color: black" class="messages-content"></div>
+      </div>
+      <div class="message-box">
       <textarea id="text" class="message-input" placeholder="Type message..."></textarea>
       <button id="post" class="message-submit">Send</button>
+      </div>
     </div>
-  </div>
 </div>
 <script>
 $("#openChatButton").click(function() {
   $("#chatContainer").toggleClass("activeChat");
 });
 </script>
-<!--<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAAU_0vcioI8gYtO4XD3z3eSDz3wVYOmYs",
-    authDomain: "cards-for-humanity-e3686.firebaseapp.com",
-    databaseURL: "https://cards-for-humanity-e3686.firebaseio.com",
-    storageBucket: "cards-for-humanity-e3686.appspot.com",
-    messagingSenderId: "324856728467"
-  };
-  firebase.initializeApp(config);
-</script>-->
 
   
