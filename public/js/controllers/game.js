@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
+.controller('GameController', ['$scope', 'game', 'jwtHelper', '$timeout', 'socket', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, jwtHelper, $timeout, socket, $location, MakeAWishFactsService, $http, $dialog) {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
@@ -8,6 +8,62 @@ angular.module('mean.system')
   $scope.pickedCards = [];
   var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
+  $scope.friendList = [];
+
+  var sendNotification = function (id) {
+    var privateSocket = io.connect(`/${id}`);
+    privateSocket.emit('message', id);
+  };
+
+  $scope.sendInvite2 = (friend) => {
+    array = [];
+    var currentUser = localStorage.getItem('Email');
+    if (currentUser !== friend) {
+      array.push({ email: friend });
+      if ($scope.sentEmails.indexOf(friend) === -1) {
+        $scope.sentEmails.push(friend);
+      } else {
+        $scope.cantSend.push(friend);
+      }
+      if ($scope.sentEmails.length > 11) {
+        $scope.canSend = false;
+      } else {
+        $scope.canSend = true;
+      }
+      if ($scope.canSend) {
+        $http.post('/api/search/users', { emailArray: array, link: document.URL }).success(function (res) {
+          if (res.statusCode === 202) {
+            Materialize.toast('Invite Sent', 4000);
+          } else {
+            $location.path('/#!/signup');
+          }
+        });
+        $http({
+          method: 'GET',
+          url: `/api/get/friend/email?friend_email=${friend}`
+        }).then(function successCallback(response) {
+          $scope.friendId = response.data;
+          var user = localStorage.getItem('JWT');
+          var tokenDec = jwtHelper.decodeToken(user);
+          sendNotification($scope.friendId);
+        }, function errorCallback(response) {
+        });
+      } else {
+        Materialize.toast('You cannot invite more than 11', 4000);
+      }
+    } else {
+      Materialize.toast('You cannot invite yourself', 4000);
+    }
+  };
+
+  var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
+
+  var myPrivateSocket = io.connect(`/${id}`);
+  myPrivateSocket.on('notify', function (mess) {
+    document.getElementById('notification').innerHTML = mess;
+  });
+
+
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -18,19 +74,18 @@ angular.module('mean.system')
         } else if (game.curQuestion.numAnswers === 2 &&
             $scope.pickedCards.length === 2) {
             // delay and send
-        $scope.hasPickedCards = true;
-        $timeout($scope.sendPickedCards, 300);
+          $scope.hasPickedCards = true;
+          $timeout($scope.sendPickedCards, 300);
+        }
       }
     }
-  };
 
-  $scope.pointerCursorStyle = function () {
+    $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
-      } else {
-        $scope.pickedCards.pop();
+        return { cursor: 'pointer' };
       }
-    }
+      $scope.pickedCards.pop();
+    };
   };
 
   $scope.pointerCursorStyle = function () {
@@ -51,6 +106,19 @@ angular.module('mean.system')
     });
   };
 
+  $scope.getFriendsEmail = function () {
+    var user = localStorage.getItem('JWT');
+    var tokenDec = jwtHelper.decodeToken(user);
+    $http({
+      method: 'GET',
+      url: `/api/get/friendsEmail?user_id=${tokenDec._doc._id}`
+    }).then(function successCallback(response) {
+      var data = response.data;
+      $scope.friendList = data;
+    }, function errorCallback(response) {
+    });
+  };
+
   $scope.checkAll = function () {
     $scope.selected = angular.copy($scope.emails);
   };
@@ -59,10 +127,20 @@ angular.module('mean.system')
     document.getElementById('friend').style.display = 'block';
   };
 
-  $scope.friendList = [];
   $scope.addFriend = function () {
+    var user = localStorage.getItem('JWT');
+    var tokenDec = jwtHelper.decodeToken(user);
     var friend = document.getElementById('newFriend').value;
-    $scope.friendList.push(friend);
+
+    $http.post('/api/friends', { email: friend, user_id: tokenDec._doc._id }).success(function (res) {
+      if (res.succ) {
+        setTimeout(() => {
+          $scope.$apply(() => {
+            $scope.friendList.push(res.email);
+          });
+        }, 1000);
+      }
+    });
   };
 
   $scope.uncheckAll = function () {
