@@ -1,33 +1,47 @@
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+      <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.purple-red.min.css">
 <div ng-controller="GameController">
-  <div class=" light-blue darken-3 top-navbar">
-    <div class="row valign-wrapper" style="min-height: 50px">
-      <div class="col m8 valign"> 
+  <div class=" light-blue darken-3 top-navbar" >
+    <div class="row valign-wrapper" style="min-height: 50px;position: relative; ">
+      <div class="col m9"> 
         <div class="white-text" id="cfh-icon">CFH</div>
       </div>
-      <div class="col m4 right-align" style="padding-right: 70px" id='abandon-game-button' ng-click="abandonGame()"> 
-        <button class="dropdown-button btn green" ng-click="getEmail()" data-activates='dropdown1' style=" border-radius: 10px; color: white"> View Friends</button>
+      <div class="col m3">
+          <!--<div class="col m6">
+            <ul style="top:1.5px;position: absolute; z-index: 2; min-width: 100px; background-color: white" class="collapsible" data-collapsible="accordion">
+            
+              <li>
+                <div class=" collapsible-header white-text z-depth-2 light-blue darken-4" ng-click="getEmail()">Friends</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+              </li>
+            </ul>
+          </div>-->
           <!-- Dropdown Structure -->
-          <form id='dropdown1' class='dropdown-content'>
+          <!--<form id='dropdown1' class='dropdown-content'>
             <ul>
             <li ng-repeat= "friend in friendList" style="color: grey"> {{friend}} </li>
             </ul>
-          </form>
-          <a class="chip red darken-3 white-text">Abandon Game</a>
-      </div>
-      <div>
-      </div>
+          </form>-->
+          <div class="col m4">
+            <i  data-activates='dropdown1' class=" dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+              <li><a id = 'notification' href="#!"></a></li>
+            </ul>
+        
+          </div>
+          <div class="col m8">
+            <a class="chip red darken-3 white-text" ng-click="abandonGame()">Abandon Game</a>
+          </div>
+      </div>     
+      
     </div>
   </div>
 
- <div alert-message class="alert alert-success" role="alert" ng-show="showAlert">
-  <span><strong>Welcome!</strong></span> </div>
-  <div class="container" style="padding-top: 6%">
-  <div class="question-top container">
- 
-    <div class="gameplay-container">
-      <div class="row">
-        <div class="col m9 s12">
-
+    <div class="question-top container">
+      <div class="gameplay-container">
+        <div class="row">
+          <div class="col m9 s12">
             <div class="valign-wrapper question-top">
               <div class="questions valign col m8 s12">
                 <question></question>
@@ -37,17 +51,12 @@
             <div class="row">
               <answers></answers>
             </div>
-
         </div>
         <div class="col m3" id = "player-timer">
-          
-                <timer></timer>
-            
-          <player></player>
-          <div class="row">
-              <div class="col m10">
+              <!--<div class="col m10">
+                
                 <label style="font-size: 18px" for="gg">Add a friend</label>
-              <a id = "gg" class=" btn-floating waves-effect green" ng-click="display();getEmail(); "><i class="material-icons">add</i></a>
+              <a id = "gg" class="btn-floating waves-effect blue" ng-click="display();getEmail(); "><i class="material-icons">add</i></a>
               <div id = "friend" style="display: none">
                 <input id="newFriend" type="text" list="emails" placeholder="Enter email"  />
                 <datalist id="emails" >
@@ -55,9 +64,28 @@
                 </datalist>
                 <button class="btn" ng-click="addFriend()">add</button>
               </div>
-
-              </div>
+            </div>-->
+          <!--</div>-->
+          <timer></timer>   
+          <player></player>
+          <div class="col m10">
+              <ul style="position: absolute; z-index: 2; width: 250px; background-color: white" class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class=" collapsible-header white-text z-depth-2 light-blue darken-3" ng-click="getEmail();getFriendsEmail()">Friends</div>
+                  <div class="collapsible-body">
+                  <input style="width: 150px" id="newFriend" type="text" list="emails" placeholder="Enter email to add friend"  />
+                      <datalist id="emails" >
+                                <option ng-repeat="email in emails"  value = "{{email}}" ></option>
+                      </datalist>
+                    <a id = "gg" class="btn-floating waves-effect light-blue darken-3" ng-click="addFriend();"><i class="material-icons">add</i></a>
+                    <ul>
+                      <li ng-repeat= "friend in friendList"> <a>{{friend}}</a> <button ng-click="sendInvite2(friend)" class="btn light-blue darken-3"> invite</button> <hr></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
             </div>
+            
         </div>
       </div>
     </div>
@@ -92,10 +120,13 @@
   if (!(localStorage.getItem('JWT') && localStorage.getItem('Email')) || !localStorage.getItem('jwtToken')) {
     localStorage.setItem('sign_in', true);
   }
+  
+      $(document).ready(function(){
+        // getFriendsEmail();
+        $('.collapsible').collapsible({accordion: true, hover:true});
+      });
 
-</script>
-<script>
-  $(document).ready(function() {
+  // $(document).ready(function() {
             console.log("intiate dropdown");
             $('.dropdown-button').dropdown({
               inDuration: 300,
@@ -107,9 +138,7 @@
               belowOrigin: true,
               alignment: 'left'
             });
-          });
+          // });
           $('.dropdown-button').dropdown('open');
           $('.dropdown-button').dropdown('close');
-   
-</script>
 </script>
