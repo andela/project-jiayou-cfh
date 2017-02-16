@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Friend = mongoose.model('Friend');
 var MongoClient = require('mongodb').MongoClient;
 var sendMail = require('sendgrid').mail;
 var dburl = process.env.DB_URL;
@@ -13,7 +14,7 @@ exports.invite = function (req, res) {
   <body>\
     <label>Hello, <\label><br>\
     <p> I would like to invite you to join cards for humanity game. </p>\
-    <p>Kindly click this  <a href = "http://localhost:5000/#!/app"> link </a> to join</p>\
+    <p>Kindly click this  <a href = req.body.link> link </a> to join</p>\
     <br><p>Regards,<p>jiayou team.</p></p>\
   </body>\
   </html>';
@@ -53,3 +54,48 @@ exports.getEmail = function (req, res) {
     res.send(arr);
   });
 };
+
+exports.addFriend = function (req, res) {
+  var newFriend = new Friend();
+  Friend.findOne({ friend_email: req.body.email, user_id: req.body.user_id }, function (err, friends) {
+    if (friends) {
+      res.send({ success: false, message: 'Already a friend' });
+    } else {
+      User.findOne({ email: req.body.email }, function (err, friend) {
+        newFriend.friend_id = friend._id;
+        newFriend.friend_email = req.body.email;
+        newFriend.user_id = req.body.user_id;
+        newFriend.save(function (err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user
+            });
+          }
+        });
+      });
+      res.json({ succ: 'Successful', email: req.body.email });
+    }
+  });
+};
+
+exports.getFriendsEmail = function (req, res) {
+  var arr = [];
+  Friend.find({ user_id: req.query.user_id }, function (err, friend) {
+    friend.forEach((value, index) => {
+      arr.push(value.friend_email);
+    });
+    res.send(arr);
+  });
+};
+
+exports.getAFriend = function (req, res) {
+  var id = '';
+  Friend.find({ friend_email: req.query.friend_email }, function (err, friend) {
+    friend.forEach((value, index) => {
+      id = value.friend_id;
+    });
+    res.send(id);
+  });
+};
+
