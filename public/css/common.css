@@ -139,7 +139,7 @@ body {
         background: #C54141;
         margin-top: 3px;
         margin-bottom: 3px;
-        margin-right: 10px;
+        margin-right: 4px;
         padding: 0.65em 20px;
         width: 140px;
         cursor: pointer; }
@@ -1078,9 +1078,6 @@ Message Box
   padding: 10px;
   bottom: -8px;
   left: 0; }
-
-#main-container {
-  background-color: whitesmoke; }
 
 .chat-container {
   background-size: contain;
