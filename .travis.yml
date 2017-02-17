@@ -16,5 +16,5 @@ services:
 before_script:
   - npm install
   - sleep 15
-  - mongo mydb_test --eval 'db.addUser("travis", "test");'
+  - mongo mydb_test --eval 'db.createUser("travis", "test");'
 after_script: cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls
