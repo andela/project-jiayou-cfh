@@ -2,8 +2,9 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+User = mongoose.model('User');
 var avatars = require('./avatars').all();
+var jwt = require('jsonwebtoken');
 
 /**
  * Auth callback
