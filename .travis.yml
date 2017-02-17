@@ -9,12 +9,8 @@ node_js:
   - "4.4"
 env:
   - DB_URL=mongodb://localhost:27017 /cfh
-  - PORT=5000
-  - TRAVIS=true
 services:
   - mongodb
 before_script:
   - npm install
-  # - sleep 15
-  # - mongo mydb_test --eval 'db.createUser({"travis", "test"});'
 after_script: cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls
