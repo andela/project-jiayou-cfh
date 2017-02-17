@@ -9,14 +9,14 @@ exports.invite = function (req, res) {
   fromEmail = 'fisayomi.ojuri@andela.com';
   subject = 'Invite to join Cards for Humanity game';
   content =
-  '<html>\
+  `<html>\
   <body>\
     <label>Hello, <\label><br>\
     <p> I would like to invite you to join cards for humanity game. </p>\
-    <p>Kindly click this  <a href = "http://localhost:5000/#!/app"> link </a> to join</p>\
+    <p>Kindly click this  <a href = ='${req.body.link}'> link </a> to join</p>\
     <br><p>Regards,<p>jiayou team.</p></p>\
   </body>\
-  </html>';
+  </html>`;
   mailer = {
     personalizations: [{
       to: req.body.emailArray,
