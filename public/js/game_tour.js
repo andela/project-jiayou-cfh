@@ -1,7 +1,6 @@
 angular.module('mean.system')
   .controller('GameTourController', ['$scope', '$window', function($scope, $window) {
     // exit game tour when we navigate pages
-    // console.log(' tour file loaded');
     $scope.$on('$locationChangeSuccess', () => {
       if ($scope.gameTour) {
         $scope.gameTour.exit();
@@ -9,7 +8,6 @@ angular.module('mean.system')
     });
 
     $scope.gameTour = introJs();
-    //  $scope.expandChat = 'expand_more';
     $scope.playerCount = 1;
     $scope.playerScore = 0;
     $scope.awaitingPlayers = true;
@@ -61,10 +59,7 @@ angular.module('mean.system')
         {
           element: '#inner-timer-container',
           intro: `Timer counts down. You have a limited time to choose an answer
-          to the current question. After time out, the CZAR is also given a
-          limited time to select a favorite answer. Player who submitted
-          the CZARs favorite answer wins the round. The game proceeds to
-          another round and the next CZAR is chosen`
+          to the current question.`
         },
         {
           element: '#answer',
@@ -74,12 +69,7 @@ angular.module('mean.system')
         {
           element: '#the-czar',
           intro: `The background turns grey so that 
-          you can easily identify that you are the Czar.
-          As a Czar, you wait for all players to
-          submit their answers after which you pick what you feel is the most
-          appropriate answer to the question. The Player who submitted that
-          answer wins the round. The game proceeds to another round and the Czar 
-          changes at every round`
+          you can easily identify that you are the Czar.`
         },
         {
           element: '#openChatButton',
@@ -181,6 +171,7 @@ angular.module('mean.system')
           {
             $scope.$apply(() => {
               $scope.showCzar = false;
+              $scope.cards = true;
               $scope.answer = false;
             });
             break;
@@ -192,6 +183,13 @@ angular.module('mean.system')
               $scope.gameEnd = false;
               $scope.playerScore = 0;
               $scope.cards = false;
+              $scope.answer = true;
+            });
+            break;
+          }
+        case 'answer':
+          {
+            $scope.$apply(() => {
               $scope.answer = true;
             });
             break;
@@ -210,17 +208,12 @@ angular.module('mean.system')
             $scope.$apply(() => {
               $scope.showQuestion = false;
               $scope.gameEnd = true;
-              $scope.showChatBody = false;
-              $scope.expandChat = 'expand_less';
             });
             break;
           }
         case 'openChatButton':
           {
-            $scope.$apply(() => {
-              $scope.showChatBody = true;
-              $scope.expandChat = 'expand_more';
-            });
+            $scope.$apply(() => {});
             break;
           }
         default:

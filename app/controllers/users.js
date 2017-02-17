@@ -186,3 +186,21 @@ exports.user = function (req, res, next, id) {
       next();
     });
 };
+
+/**
+ * Authenticate the user
+ */
+exports.authenticate = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.redirect('/#!/signin?error=invalid');
+    return;
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/#!/signin?error=invalid');
+      return;
+    }
+  }
+};

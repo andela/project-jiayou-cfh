@@ -9,6 +9,7 @@ module.exports = function(app, passport, auth) {
   var questions = require('../app/controllers/questions');
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
+  var games = require('../app/controllers/games');
 
   var signup = require('../app/controllers/signup');
   var invite = require('../app/controllers/invite');
@@ -17,6 +18,9 @@ module.exports = function(app, passport, auth) {
 
   // Route for sign-up
   app.post('/api/auth/signup', signup.signupAuth);
+
+  // game playing routes
+  app.post('/api/games/:id/start', users.authenticate, games.startGame);
 
   app.post('/api/search/users', invite.invite);
   app.get('/api/userEmail', invite.getEmail);
