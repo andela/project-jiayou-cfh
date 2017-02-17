@@ -1,21 +1,26 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
-  $scope.hasPickedCards = false;
-  $scope.winningCardPicked = false;
-  $scope.showTable = false;
-  $scope.modalShown = false;
-  $scope.game = game;
-  $scope.pickedCards = [];
-  var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-  $scope.makeAWishFact = makeAWishFacts.pop();
-  $scope.pickCard = function (card) {
-    if (!$scope.hasPickedCards) {
-      if ($scope.pickedCards.indexOf(card.id) < 0) {
-        $scope.pickedCards.push(card.id);
-        if (game.curQuestion.numAnswers === 1) {
-          $scope.sendPickedCards();
-          $scope.hasPickedCards = true;
-        } else if (game.curQuestion.numAnswers === 2 &&
+.controller('GameController', ['$scope', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
+    $scope.hasPickedCards = false;
+    $scope.winningCardPicked = false;
+    $scope.showTable = false;
+    $scope.modalShown = false;
+    $scope.game = game;
+    $timeout(function(){
+      $window.sessionStorage.setItem('gameID', game.gameID);
+    }, 500);
+
+    $scope.pickedCards = [];
+    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    $scope.makeAWishFact = makeAWishFacts.pop();
+
+    $scope.pickCard = function (card) {
+      if (!$scope.hasPickedCards) {
+        if ($scope.pickedCards.indexOf(card.id) < 0) {
+          $scope.pickedCards.push(card.id);
+          if (game.curQuestion.numAnswers === 1) {
+            $scope.sendPickedCards();
+            $scope.hasPickedCards = true;
+          } else if (game.curQuestion.numAnswers === 2 &&
             $scope.pickedCards.length === 2) {
             // delay and send
           $scope.hasPickedCards = true;
@@ -142,16 +147,18 @@ angular.module('mean.system')
     return game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
   };
 
+  $scope.isPlayer = function($index) {
+    $window.sessionStorage.setItem('Username', game.players[game.playerIndex].username);
+    $window.sessionStorage.setItem('Avatar', game.players[game.playerIndex].avatar);
+    return $index === game.playerIndex;
+  };
+
   $scope.showSecond = function (card) {
     return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
   };
 
   $scope.isCzar = function () {
     return game.czar === game.playerIndex;
-  };
-
-  $scope.isPlayer = function ($index) {
-    return $index === game.playerIndex;
   };
 
   $scope.isCustomGame = function () {

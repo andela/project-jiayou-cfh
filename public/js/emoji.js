@@ -1,6 +1,3 @@
-$('#openChatButton').click(function () {
-  $('#chatContainer').toggleClass('activeChat');
-});
 
 $(function () {
     // Initializes and creates emoji set from sprite sheet
