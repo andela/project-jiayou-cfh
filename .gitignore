@@ -9,3 +9,5 @@ public/lib
 .vscode
 npm-debug.log
 Procfile
+coverage
+debug
