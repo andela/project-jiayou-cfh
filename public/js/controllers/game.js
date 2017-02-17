@@ -21,23 +21,18 @@ angular.module('mean.system')
           $scope.hasPickedCards = true;
           $timeout($scope.sendPickedCards, 300);
         }
+        } else {
+          $scope.pickedCards.pop();
+        }
       }
     };
 
-    $scope.pointerCursorStyle = function () {
-      if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
-      } else {
-        $scope.pickedCards.pop();
-      }
-    }
-  };
-  
   $scope.pointerCursorStyle = function () {
     if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
       return { cursor: 'pointer' };
+    } else {
+      return {};
     }
-    return {};
   };
   $scope.getEmail = function () {
     $scope.canSend = false;

@@ -1,4 +1,4 @@
-<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'" >
+<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="social-bar-container">
     </div>
     <div>
@@ -6,36 +6,32 @@
             <span ng-show="winnerPicked()"></span>
             <div ng-style="{'cursor':'pointer'}" class="card smallest hoverable z-depth-5" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
                 ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-                <div class = "the-card">
+                <div class="the-card">
                     <span ng-bind-html-unsafe="card.text"></p>
                     <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-        <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
-
-                </div>
+                    <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
                 </div>
         </div>
-        <span ng-repeat="answer in game.table">
+    </div>
+    <span ng-repeat="answer in game.table">
         <div class="card smallest hoverable z-depth-3" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
-<div class="the-card">
-    <span ng-bind-html-unsafe="card.text"></span>
+            <div class ="the-card">
+                <span ng-bind-html-unsafe="card.text"></span>
     <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
     <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
 </div>
 </div>
 </span>
 </div>
-
 </div>
-
 </div>
 <div ng-show="game.state === 'awaiting players'">
     <ul class="collection" id="waiting-for-players">
-        <li >
+        <li>
             <h3 class="center-align">How To Play</h3>
         </li>
         <hr>
-     
         <li>
             Each player begins with, and will always have, 10 white answer cards.
         </li>
@@ -47,8 +43,8 @@
         <li>
             <div>Everyone else answers the black question card by clicking on the answer card they want to use.</div>
         </li>
-       <hr>
-        <li >
+        <hr>
+        <li>
             <div>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</div>
         </li>
         <hr>
@@ -56,47 +52,45 @@
             <div>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</div>
         </li>
         <li>
-        <div><a id="invBtn" ng-click="getEmail()">Click to Invite Users</a></div>
+            <div><a id="invBtn" ng-click="getEmail()">Click to Invite Users</a></div>
         </li>
     </ul>
     <div>
         <a href="https://www.crowdrise.com/fundraise-and-volunteer/donate-mobile/project/cfhio/cards4humanity?widget=true&amp;redirect_to=http%3A%2F%2Flocalhost%3A5000%2F%23!%2Fcharity&amp;stylesheet=&amp;amounts=">
-        <span class="chip blue darken-3 white-text">Donate Now</span>
-        </a></div>
-
-        <div id="invModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content size">
-        <span class="close">&times;</span>
-        <div class="alert alert-success" ng-if="showSuccessAlert">
-            <strong>Invite sent successfully!!</strong>
+            <span class="chip blue darken-3 white-text">Donate Now</span>
+        </a>
+    </div>
+    <div id="invModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content size">
+            <span class="close">&times;</span>
+            <div class="alert alert-success" ng-if="showSuccessAlert">
+                <strong>Invite sent successfully!!</strong>
+            </div>
+            <div class="alert alert-warning" ng-if="showAlert2">
+                <strong>Only a maximum of 12 players are allowed per game!</strong>
+            </div>
+            <div class="alert alert-warning" ng-if="showWarningAlert">
+                <strong>Oops! You cannot invite yourself!</strong>
+            </div>
+            <form class="" ng-submit="sendInvite()">
+                <div id='email' style="text-align: left">
+                    <label style="font-size:15px">Enter email to send invites</label>
+                    <input type="text" list="emails" id="select" placeholder="Enter Email">
+                    <datalist id="emails">
+                        <option ng-repeat="email in emails" value="{{email}}">
+                        </option>
+                    </datalist>
+                </div>
+                <div>
+                    <button id="myBtn" class="btn btn-default btn-primary">Send Invite</button>
+                </div>
+            </form>
         </div>
-        <div class="alert alert-warning" ng-if="showAlert2">
-            <strong>Only a maximum of 12 players are allowed per game!</strong>
-        </div>
-        <div class="alert alert-warning" ng-if="showWarningAlert">
-            <strong>Oops! You cannot invite yourself!</strong>
-        </div>
-        <form class="" ng-submit="sendInvite()">
-            <div id='email' style="text-align: left">
-
-<label style="font-size:15px">Enter email to send invites</label>
-<input type="text" list="emails" id = "select" placeholder="Enter Email">
-<datalist id="emails" >
-    <option ng-repeat="email in emails"  value = "{{email}}" >
-    </option>
-</datalist>
-</div>
-<div>
-    <button id="myBtn" class="btn btn-default btn-primary">Send Invite</button>
-</div>
-</form>
+    </div>
+    <!-- End -->
 </div>
 </div>
-<!-- End -->
-</div>
-</div>
-
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
     <div id="inner-info-exit">
         <div class="game-end-answer-text" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

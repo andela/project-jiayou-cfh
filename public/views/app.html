@@ -50,8 +50,8 @@
       <div class="messages">
         <div class="messages-content"></div>
       </div>
-      <div class="message-box">
-        <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+      <div class="message-box lead emoji-picker-container">
+        <textarea  class="message-input" data-emojiable="true" data-emoji-input="unicode" type="text"  placeholder="Type message..."></textarea>
         <button type="submit" class="message-submit">Send</button>
       </div>
     </div>
@@ -60,8 +60,5 @@
 </div>
 
 
-<script>
-  $("#openChatButton").click(function() {
-    $("#chatContainer").toggleClass("activeChat");
-  });
-</script>
+
+<script type='text/javascript', src='/js/emoji.js'></script>
