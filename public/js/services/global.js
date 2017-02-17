@@ -29,7 +29,7 @@ angular.module('mean.system')
       },
       isAuthenticated: function () {
         var jwt = localStorage.getItem("JWT");
-        return $http.post("/api/users/jwt/authenticated", { JWT:  jwt})
+        return $http.post("/api/users/jwt/authenticated", { JWT:  jwt});
         
       }
     };

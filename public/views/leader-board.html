@@ -1,5 +1,5 @@
 <div ng-include="'/views/navbar.html'" class="dashboard-menu"> </div>
-<div class="container content">
+<div class="container content" ng-controller="DashboardController">
   <div class="col s12">
     <ul class="tabs">
       <li class="tab col s3"><a class="inactive" href="#!/game-log">Game Log</a></li>
@@ -9,13 +9,14 @@
   </div>
   <div class="row">
     <h1 class="gamelog-header">Leader Board</h1>
-    <div class="col m12">
+    <div class="col s12 m12 l12">
     </div>
     <div class="card-panel">
       <table class="striped">
         <col width="70">
         <col width="70">
-        <col width="10">
+        <col width="90">
+        <col width="150">
         <col width="90">
         <thead>
           <tr>
@@ -23,103 +24,30 @@
             <th data-field="avatar">Avatar</th>
             <th data-field="user-details">User Details</th>
             <th data-field="games-won">Games Won</th>
+            <th data-field="games-won">Points</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr ng-repeat="view in views">
             <td>
               <div class="col s12 m12 l12">
-                1st</div>
+                {{view[0]}}<span ng-if="view[0] === 1">st</span>
+                <span ng-if="view[0] === 2">nd</span>
+                <span ng-if="view[0] === 3">rd</span>
+                <span ng-if="view[0] > 3">th</span></div>
             </td>
             <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
+              <img ng-src="..{{view[1]}}" alt="User Avatar">
             </td>
             <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
+              <div class="chip">{{view[2]}} </div>
+              <div class="chip">{{view[3]}} </div>
             </td>
             <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="col s12 m12 l12">
-                2nd</div>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">{{view[4]}} Win(s)</div>
             </td>
             <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
-            </td>
-            <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
-            </td>
-            <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="col s12 m12 l12">
-                3rd</div>
-            </td>
-            <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
-            </td>
-            <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
-            </td>
-            <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="col s12 m12 l12">
-                4th</div>
-            </td>
-            <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
-            </td>
-            <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
-            </td>
-            <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="col s12 m12 l12">
-                5th</div>
-            </td>
-            <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
-            </td>
-            <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
-            </td>
-            <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="col s12 m12 l12">
-                6th</div>
-            </td>
-            <td>
-              <img src="img/chosen/E01.png" alt="User Avatar">
-            </td>
-            <td>
-              <div class="chip">elahsoft</div>
-              <div class="chip">febechukwu.opara@andela.com </div>
-            </td>
-            <td>
-              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">5 Games Won</div>
+              <div class="chip">{{view[5]}} Point(s)</div>
             </td>
           </tr>
         </tbody>

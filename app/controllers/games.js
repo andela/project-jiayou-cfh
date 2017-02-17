@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
   Game = mongoose.model('Game');
 
-exports.startGame = function(req, res) {
+exports.startGame = function (req, res) {
   var gameId = 0;
   Game.find()
     .exec((err, games) => {
@@ -24,7 +24,7 @@ exports.startGame = function(req, res) {
         numberOfRounds: 0,
         state: 'start',
       });
-      game.save(function(err) {
+      game.save(function (err) {
         if (err) {
           res.json({
             success: false,
@@ -42,7 +42,7 @@ exports.startGame = function(req, res) {
     });
 };
 
-exports.updateGame = function(req, res) {
+exports.updateGame = function (req, res) {
   Game.findOne({
     id: req.params.id
   }).exec((err, games) => {
@@ -68,7 +68,7 @@ exports.updateGame = function(req, res) {
         creator: game.creator
       }]
     };
-    Game.update({ id: req.params.id }, game, function(err, result) {
+    Game.update({ id: req.params.id }, game, function (err, result) {
       if (err) {
         res.status(500).json({
           message: 'An error occured while updating this data',
@@ -84,8 +84,8 @@ exports.updateGame = function(req, res) {
   });
 };
 
-exports.getGame = function(req, res) {
-  Game.find({ creator: req.params.email }, function(err, result) {
+exports.getGame = function (req, res) {
+  Game.find({ creator: req.params.email }, function (err, result) {
     if (err) {
       res.status(500).json({
         message: 'An error occured while updating this data',
@@ -95,4 +95,18 @@ exports.getGame = function(req, res) {
       res.status(200).json(result);
     }
   });
+};
+
+exports.findAllRecord = function (req, res) {
+  Game.find()
+    .exec((err, games) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ gameCollection: games });
+      }
+    });
 };
