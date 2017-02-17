@@ -7,6 +7,18 @@ node_js:
   - "5.11"
 env:
   - DB_URL=mongodb://localhost:27017 /cfh
+  - JWT_SECRET=This is the secret
+  - SECRET=This is the secret
+  - TWITTER_CONSUMER_KEY=w5R7mTeNa1CiZPoZW2t45IwcO
+  - TWITTER_CONSUMER_SECRET=XPNF7gYoI9a6mzOLPXwUf14XUVRyoHJJ9mpIbscRXIpVC5r14r
+  - TWITTER_CALLBACK_URL=http://localhost:5000/auth/twitter/callback
+  - FB_CLIENT_ID=824445121030011
+  - FB_CLIENT_SECRET=4080cc3528e934914b53bc082de42c3a
+  - FB_CALLBACK_URL=http://localhost:5000/auth/facebook/callback
+  - GOOGLE_CLIENT_ID=599168045651-82mrg9pq22idid7j9tbfapl5jcaethnd.apps.googleusercontent.com
+  - GOOGLE_CLIENT_SECRET=wuJoXFrfI-yNPDdX5M3yaxak
+  - GOOGLE_CALLBACK_URL=http://localhost:5000/auth/google/callback
+  - SENDGRID_API_KEY=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
 services:
   - mongodb
 before_script:
