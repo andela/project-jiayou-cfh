@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node node_modules/gulp-cli/bin/gulp",
-    "test": "gulp coveralls",
+    "test": "npm run coverage",
     "coverage": "node_modules/.bin/istanbul cover jasmine test/**/*.js spec/ && cat ./coverage/lcov.info | node_modules/.bin/coveralls",
     "postinstall": "node node_modules/gulp-cli/bin/gulp install",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
