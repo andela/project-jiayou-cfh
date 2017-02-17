@@ -19,11 +19,18 @@ module.exports = function(app, passport, auth) {
   // Route for sign-up
   app.post('/api/auth/signup', signup.signupAuth);
 
-  // game playing routes
+  // game history
   app.post('/api/games/:id/start', users.authenticate, games.startGame);
+  app.post("/api/users/jwt/authenticated", users.isAuthenticated);
+  app.post("/api/games", users.authenticate, games.findAllRecord);
+  app.post("/api/users/getAllUserDetails", users.authenticate, users.findAllRecord);
+  app.post('/api/users/jwt/authenticated', users.isAuthenticated);
+  app.put('/api/games/:id/end', games.updateGame);
+  app.get('/api/games/history/:email', games.getGame);
 
   app.post('/api/search/users', invite.invite);
   app.get('/api/userEmail', invite.getEmail);
+
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);

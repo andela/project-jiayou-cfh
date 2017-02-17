@@ -13,11 +13,10 @@
 }
 
 .navbar-default {
-    background: transparent;
-    border: none;
-    box-shadow: unset;
-    /*margin-bottom: 85px;*/
-
+  background: transparent;
+  border: none;
+  box-shadow: unset;
+  /*margin-bottom: 85px;*/
 }
 
 .navbar-default .navbar-brand {
@@ -132,7 +131,6 @@
 }
 
 .footer-bottom {
-
   background-color: #0477b7;
   opacity: 0.85;
 }
@@ -204,32 +202,6 @@
   margin-right: 80px;
 }
 
-/* The Modal (background) */
-
-
-.modals {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
 
 /* Modal Content */
 
@@ -242,6 +214,7 @@
     color: black;
     text-align: center;
 }
+
 
 .modals {
   display: none;
@@ -258,9 +231,6 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/*.size {
-  width: 50%;
-}*/
 
 .close {
   color: #aaaaaa;
@@ -298,14 +268,17 @@
 .md-title, .md-dialog-content-body {
   color: #ffffff;
 }
+
 .md-button {
   background: #ffffff !important;
   border-radius: 2px !important;
   text-align: center !important;
 }
+
 .md-button :hover {
   color: #4CAF50 !important;
 }
+
 md-dialog {
   background: #0477b7 !important;
 }
@@ -455,4 +428,51 @@ md-dialog {
   .bottom-container {
     margin-top: 50px;
   }
+}
+
+
+/* css for dashboard */
+
+.dashboard-menu {
+  background: #0477b7;
+  height: 80px !important;
+}
+
+.gamelog-header {
+  color: #0477b7;
+}
+
+.active {
+  background: #0477b7;
+  opacity: 0.8;
+  color: #fff !important;
+  padding: 10px;
+}
+
+.inactive {
+  color: #0477b7 !important;
+}
+
+.dashboard-menu-items {
+  color: #fff !important;
+}
+
+.dashboard-menu-items:hover {
+  background: #607d8b;
+  border: solid 2px #607d8b;
+  color: #fff !important;
+}
+
+.menu-item-container {
+  padding-left: 65%;
+  padding-top: 5px;
+}
+
+.iconize {
+  width: 40px;
+  height: 30px;
+}
+
+.content {
+  margin-top: 20px;
 }

@@ -1,9 +1,9 @@
-body {
+/*body {
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-      background: #3399FF;
-    }
+      background: #3399FF !important;
+    }*/
 
     main {
       flex: 1 0 auto;
@@ -18,7 +18,7 @@ body {
     }
 
     body {
-      background: #0768a0;
+      background: #0768a0 !important;
       font-family: Ubuntu, Helvetica, Arial, sans-serif;
     }
 

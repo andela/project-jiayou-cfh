@@ -1,13 +1,13 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
-    $scope.playAsGuest = function () {
+    $scope.playAsGuest = function() {
       game.joinGame();
       $location.path('/app');
     };
 
-    $scope.showError = function () {
+    $scope.showError = function() {
       if ($location.search().error) {
         return $location.search().error;
       }
@@ -16,10 +16,11 @@ angular.module('mean.system')
 
     $scope.avatars = [];
     AvatarService.getAvatars()
-      .then(function (data) {
+      .then(function(data) {
         $scope.avatars = data;
       });
-    var signInSuccess = function (res) {
+
+    var signInSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
         localStorage.setItem('JWT', res.token);
@@ -46,57 +47,68 @@ angular.module('mean.system')
         $location.path('/#!/signin');
       }
     };
-
-    var startDonation = function () {
+    
+    var startDonation = function() {
       $location.path('/charity');
-    };
-    var signout = function () {
-      $http.get("/signout")
-     .success(function (res) {
-       $location.path('/signin');
-     }).error(function (err) {
-        var dialogDetails = { title: "Signout Failed",
-          content: "Signout failed!",
-          label: "Signout",
-          okTitle: "Ok"
-        };
-       gameModals.showAlert($scope.event, dialogDetails);
-     });
+      var showGameLog = function() {
+        $location.path('/leader-board');
+      };
+      var signout = function() {
+        $http.get("/signout")
+          .success(function(res) {
+            $location.path('/signin');
+          }).error(function(err) {
+            var dialogDetails = {
+              title: "Signout Failed",
+              content: "Signout failed!",
+              label: "Signout",
+              okTitle: "Ok"
+            };
+            gameModals.showAlert($scope.event, dialogDetails);
+          });
+      };
     };
 
-    var startGame = function () {
+    var startGame = function() {
       if (moment().isBefore(localStorage.getItem('expDate'))) {
         $scope.generateGameId(localStorage.getItem('JWT'));
       } else {
-        var dialogDetails = { title: "Session Expired",
+        var dialogDetails = {
+          title: "Session Expired",
           content: "Please resign in, your session has expired!",
           label: "Session Expired",
           okTitle: "Ok"
         };
-        gameModals.showAlert($scope.event, dialogDetails);
-        signout();
+        gameModals.showAlert($scope.event, dialogDetails).then(function() {
+          signout();
+        });
       }
     };
 
-    $scope.showDialog = function () {
-      var dialogDetails = { title: "Sign in was Successful!",
+    $scope.showDialog = function() {
+      var dialogDetails = {
+        title: "Sign in was Successful!",
         content: "Would you like to Start a new game?",
         label: "Start Game After Signin",
         okTitle: "Yes",
         cancelTitle: "No"
       };
-      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+      gameModals.showConfirm($scope.event, dialogDetails).then(function() {
         startGame();
-      }, function () {
+        // $location.path('/app/').search({ custom: 1 });
+      }, function() {
         startDonation();
+
+      }, function() {
+        showGameLog();
       });
     };
 
-    var signInFailure = function (err) {
+    var signInFailure = function(err) {
       $scope.userActive = false;
     };
-    
-    var signUpSuccess = function (res) {
+
+    var signUpSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
         localStorage.setItem('jwtToken', res.token);
@@ -117,21 +129,20 @@ angular.module('mean.system')
       }
     };
 
-    var signUpFailure = function (err) {
+    var signUpFailure = function(err) {
       $scope.userActive = false;
     };
 
-    $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password,
-      $scope.credentials.username).then(signUpSuccess, signUpFailure);
+    $scope.userSignUp = function() {
+      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time
      * @param{Integer} howLong - How long in milliseconds message should show
      * @returns{undefined}
      */
-    $scope.timer = function (howLong) {
-      $timeout(function () {
+    $scope.timer = function(howLong) {
+      $timeout(function() {
         $scope.errorMessage = false;
       }, howLong);
     };
@@ -157,5 +168,17 @@ angular.module('mean.system')
         };
         gameModals.showAlert($scope.event, dialogDetails);
       });
+    };
+
+    $scope.gameLog = () => {
+      var userEmail = localStorage.getItem('Email');
+      $http.get(`/api/games/history/${userEmail}`)
+        .success((res) => {
+          console.log(res);
+          $scope.history = res;
+        })
+        .error((err) => {
+          console.log(err);
+        });
     };
   }]);

@@ -15,7 +15,7 @@ var GameSchema = new Schema({
   id: {
     type: Number
   },
-  czar: {
+  creator: {
     type: String
   },
   winner: {
@@ -49,3 +49,4 @@ GameSchema.pre('save', function (next) {
 });
 
 mongoose.model('Game', GameSchema);
+

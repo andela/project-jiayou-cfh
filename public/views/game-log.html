@@ -1,0 +1,121 @@
+<div ng-include="'/views/navbar.html'" class="dashboard-menu"> </div>
+<div class="container content" ng-controller="DashboardController">
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s3 active"><a class="active" href="#!/game-log">Game Log</a></li>
+      <li class="tab col s3"><a class="inactive" href="#!/leader-board">Leader Board</a></li>
+      <li class="tab col s3"><a class="inactive" href="#!/donation-log">Donation Log</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <h1 class="gamelog-header">Game Log</h1>
+    <div class="col m12">
+    </div>
+    <div class="card-panel">
+      <table class="striped">
+        <col width="70">
+        <col width="60">
+        <col width="10">
+        <col width="120">
+        <thead>
+          <tr>
+            <th data-field="id">Date <i class="material-icons">perm_contact_calendar</i></th>
+            <th data-field="name">Winner <i class="material-icons">star</i></th>
+            <th data-field="name">Rounds</th>
+            <th data-field="price">Players</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-if="history.winner" ng-repeat="history in histories">
+            <td>
+              <div class="col s12 m12 l12">
+                {{ history.date_created | date : format : timezone}}</div>
+            </td>
+            <td>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">{{history.winner}}</div>
+            </td>
+            <td> {{history.numberOfRounds}} </td>
+            <td>
+              <div class="chip " ng-repeat="friend in history.players"><img ng-src="{{friend.avatar}}" alt="Contact Person">{{ friend.username}}</div>
+              <!--<div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>-->
+            </td>
+          </tr>
+          <!--<tr>
+            <td>
+              <div class="col s12 m12 l12">
+                13-02-2017</div>
+            </td>
+            <td>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">Dummy User</div>
+            </td>
+            <td> 0 </td>
+            <td>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col s12 m12 l12">
+                13-02-2017</div>
+            </td>
+            <td>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">Dummy User</div>
+            </td>
+            <td> 0 </td>
+            <td>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col s12 m12 l12">
+                13-02-2017</div>
+            </td>
+            <td>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">Dummy User</div>
+            </td>
+            <td> 0 </td>
+            <td>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col s12 m12 l12">
+                13-02-2017</div>
+            </td>
+            <td>
+              <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">Dummy User</div>
+            </td>
+            <td> 0 </td>
+            <td>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+            </td>
+          </tr>-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<footer class="footer-bottom dashboard-footer">
+  <div class="footer-copyright">
+    <div class="container">
+      <p class="navbar-text pull-left"> © 2017 - Team Jiayou. </p>
+    </div>
+  </div>
+</footer>
+</div>

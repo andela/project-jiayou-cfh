@@ -1,50 +1,55 @@
+<div ng-include="'/views/navbar.html'" style="background:#0477b7"> </div>
 <div class="container">
   <div class="row">
+    <h1 style="color:#0477b7">Game Log</h1>
+    <div class="col m12">
+    </div>
+    <div class="card-panel">
+      <table class="striped">
+        <col width="70">
+        <col width="70">
+        <col width="10">
+        <col width="90">
+        <thead>
+          <tr>
+            <th data-field="id">Date </th>
+            <th data-field="name">Winner <i class="material-icons">star</i></th>
+            <th data-field="name">Rounds</th>
+            <th data-field="price">Friends</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              2/2/2017
+            </td>
+            <td>
+              <div class="chip blue-grey white-text">Dummy User</div>
+            </td>
+            <td> 0 </td>
+            <td>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+              <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+
+    </div>
     <div class="col m12">
 
-      <h1 class="blue-text text-darken-2">Game Log</h1>
-      <hr/>
-      <div class="col m12 right-align" id='abandon-game-button' style="color: light-blue darken-3">
-        <div class="chip green" ; style=" border-radius: 10px; color: white">
-          <a href="#"></a>Home</div>
-      </div>
-      <div class="card-panel">
-        <table class="striped">
-          <col width="70">
-          <col width="70">
-          <col width="10">
-          <col width="250">
-          <thead>
-            <tr>
-              <th data-field="id">Date</th>
-              <th data-field="name">Winner</th>
-              <th data-field="name">Rounds</th>
-              <th data-field="price">Friends</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>2/3/2017</td>
-              <td>
-                <div class="chip blue-grey white-text"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-              </td>
-              <td> 0 </td>
-              <td>
-                <div class="chip "><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-                <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-                <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-                <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-                <div class="chip"><img src="img/chosen/N04.png" alt="Contact Person">Dummy User</div>
-
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-      <div class="col m12">
-
-      </div>
     </div>
   </div>
+</div>
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom footer-bottom">
+  <div class="container">
+    <p class="navbar-text pull-left">© 2017 - Team Jiayou.
+    </p>
+  </div>
+</div>
