@@ -8,7 +8,7 @@ node_js:
   - "4.5"
   - "4.4"
 env:
-  - DB_URL=mongodb://localhost:process.env.PORT /cfh
+  - DB_URL=mongodb://localhost:27017 /cfh
   - PORT=5000
   - TRAVIS=true
 services:
