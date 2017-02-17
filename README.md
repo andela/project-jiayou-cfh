@@ -1,9 +1,9 @@
-###setup/integrate-coveralls-code-coverage-service-137138317
 [![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=setup%2Fintegrate-coveralls-code-coverage-service-137138317)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=setup%2Fintegrate-coveralls-code-coverage-service-137138317)
 ![](https://travis-ci.org/andela/project-jiayou-cfh.svg?branch=feature%2Fcreate-travisCI-badge-137138309)
 
+
 Cards for Humanity - [http://cfh.io](http://cfh.io)
-===========
+
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
 Our Team
@@ -55,4 +55,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

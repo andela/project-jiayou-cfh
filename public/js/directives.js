@@ -64,21 +64,48 @@ angular.module('mean.directives', [])
       templateUrl: '/views/timer.html',
       link: function (scope, elem, attr) { }
     };
-  }).directive('landing', function () {
+  })
+  .directive('landing', function ($timeout, $http) {
     return {
       restrict: 'EA',
       link: function (scope, elem, attr) {
         scope.showOptions = true;
         scope.showNavBar = true;
-
-        if (localStorage.getItem('JWT') && localStorage.getItem('Email')) {
+        scope.signOut = false;
+        
+        if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken') || localStorage.getItem('sign_in')) {
           scope.showNavBar = false;
+          scope.signOut = true;
+        }
+
+        if (localStorage.getItem('JWT')) {
+          // Fix ??
+          // set alert message to true for 4000ms
+          $timeout(function () {
+            scope.signOut = false;
+          }, 4000);
         }
         scope.userLogout = function () {
-          // remove the password and email on logout
+          // remove the JWT, email and expDate on logout
           localStorage.removeItem('JWT');
           localStorage.removeItem('Email');
+          localStorage.removeItem('expDate');
+          localStorage.removeItem('jwtToken');
+          localStorage.removeItem('sign_in');
         };
       }
+    };
+  })
+  .directive('alertMessage', function ($timeout) {
+    // this direction display an alert for a particular time
+    var linkFunction = function (scope) {
+      scope.showAlert = true;
+      $timeout(function () {
+        scope.showAlert = false;
+      }, 4000);
+    };
+    return {
+      restrict: 'A',
+      link: linkFunction
     };
   });

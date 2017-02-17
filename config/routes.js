@@ -1,15 +1,29 @@
 var async = require('async');
 
-module.exports = function (app, passport, auth) {
+module.exports = function(app, passport, auth) {
   // User Routes
   var users = require('../app/controllers/users');
   var signin = require('../app/controllers/signin');
+  var signup = require('../app/controllers/signup');
   var answers = require('../app/controllers/answers');
   var questions = require('../app/controllers/questions');
   var avatars = require('../app/controllers/avatars');
   var index = require('../app/controllers/index');
+  var games = require('../app/controllers/games');
 
+  var signup = require('../app/controllers/signup');
+  var invite = require('../app/controllers/invite');
+  // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);
+
+  // Route for sign-up
+  app.post('/api/auth/signup', signup.signupAuth);
+
+  // game playing routes
+  app.post('/api/games/:id/start', users.authenticate, games.startGame);
+
+  app.post('/api/search/users', invite.invite);
+  app.get('/api/userEmail', invite.getEmail);
 
   app.get('/signup', users.signup);
   app.get('/chooseavatars', users.checkAvatar);
@@ -37,6 +51,7 @@ module.exports = function (app, passport, auth) {
   }), users.signin);
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/#!/app',
     failureRedirect: '/signin'
   }), users.authCallback);
 
@@ -54,7 +69,9 @@ module.exports = function (app, passport, auth) {
     failureRedirect: '/signin'
   }), users.signin);
 
+  // This for new users redirects them to choose an avatar
   app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    successRedirect: '/#!/app',
     failureRedirect: '/signin'
   }), users.authCallback);
 
@@ -68,6 +85,7 @@ module.exports = function (app, passport, auth) {
   }), users.signin);
 
   app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/#!/app',
     failureRedirect: '/signin'
   }), users.authCallback);
 
@@ -92,4 +110,5 @@ module.exports = function (app, passport, auth) {
   // Home route
   app.get('/play', index.play);
   app.get('/', index.render);
+  app.get('/gametour', index.gameTour);
 };
