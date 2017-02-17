@@ -16,11 +16,11 @@ exports.startGame = function (req, res) {
       } else {
         gameId = Object.keys(games).length + 1;
       }
-      var game = new Game({
+      var game = new Games({
         id: gameId,
-        creator: req.body.email,
+        czar: req.body.email,
         winner: '',
-        players: [],
+        players: [req.body.email],
         numberOfRounds: 0,
         state: 'start',
       });
@@ -41,6 +41,7 @@ exports.startGame = function (req, res) {
       });
     });
 };
+
 
 exports.updateGame = function (req, res) {
   Game.findOne({

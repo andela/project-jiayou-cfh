@@ -47,8 +47,7 @@ angular.module('mean.system')
         $location.path('/#!/signin');
       }
     };
-
-
+    
     var startDonation = function() {
       $location.path('/charity');
       var showGameLog = function() {
@@ -148,22 +147,21 @@ angular.module('mean.system')
       }, howLong);
     };
 
-    $scope.userLogin = function($event) {
+    $scope.userLogin = function ($event) {
       $scope.event = $event;
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
 
-    $scope.generateGameId = function(jwt) {
+    $scope.generateGameId = function (jwt) {
       $http.post('/api/games/0/start', {
         JWT: jwt,
         email: $scope.credentials.userEmail
-      }).success(function(res) {
+      }).success(function (res) {
         const generatedGameId = res.gameId;
         localStorage.setItem("gameDBId", generatedGameId);
         $location.path('/app/').search({ custom: 1 });
-      }).error(function(err) {
-        var dialogDetails = {
-          title: "Game Creation Failed!",
+      }).error(function (err) {
+        var dialogDetails = { title: "Game Creation Failed!",
           content: "The game could not be created!",
           label: "Game Creation Error",
           okTitle: "Ok"
@@ -171,11 +169,6 @@ angular.module('mean.system')
         gameModals.showAlert($scope.event, dialogDetails);
       });
     };
-
-
-
-    // var userEmail = localStorage.getItem('Email');
-    // $http.get(`/api/games/history/${userEmail}`, {};
 
     $scope.gameLog = () => {
       var userEmail = localStorage.getItem('Email');
@@ -188,5 +181,4 @@ angular.module('mean.system')
           console.log(err);
         });
     };
-
   }]);
