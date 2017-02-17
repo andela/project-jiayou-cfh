@@ -103,3 +103,7 @@ gulp.task('install', function () {
 gulp.task('default', ['install', 'jshint', 'server', 'watch', 'sass'], function (done) {
   done();
 });
+
+gulp.task('test', ['coveralls'], function (done) {
+  done();
+});
