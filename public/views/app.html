@@ -7,26 +7,11 @@
         <div class="white-text" id="cfh-icon">CFH</div>
       </div>
       <div class="col m3">
-          <!--<div class="col m6">
-            <ul style="top:1.5px;position: absolute; z-index: 2; min-width: 100px; background-color: white" class="collapsible" data-collapsible="accordion">
-            
-              <li>
-                <div class=" collapsible-header white-text z-depth-2 light-blue darken-4" ng-click="getEmail()">Friends</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-              </li>
-            </ul>
-          </div>-->
-          <!-- Dropdown Structure -->
-          <!--<form id='dropdown1' class='dropdown-content'>
-            <ul>
-            <li ng-repeat= "friend in friendList" style="color: grey"> {{friend}} </li>
-            </ul>
-          </form>-->
-          <div class="col m4">
-            <i  data-activates='dropdown1' class=" dropdown-button material-icons mdl-badge mdl-badge--overlap" >notifications_none</i>
+          <div class="col m4" >
+            <i  data-activates='dropdown1' class=" dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
             <!-- Dropdown Structure -->
             <ul id='dropdown1' class='dropdown-content'>
-              <li><a id = 'notification' href="#!"></a></li>
+              <li><label id = 'notification' ng-click="readNotifications()"></label></li>
             </ul>
         
           </div>
@@ -53,19 +38,6 @@
             </div>
         </div>
         <div class="col m3" id = "player-timer">
-              <!--<div class="col m10">
-                
-                <label style="font-size: 18px" for="gg">Add a friend</label>
-              <a id = "gg" class="btn-floating waves-effect blue" ng-click="display();getEmail(); "><i class="material-icons">add</i></a>
-              <div id = "friend" style="display: none">
-                <input id="newFriend" type="text" list="emails" placeholder="Enter email"  />
-                <datalist id="emails" >
-                          <option ng-repeat="email in emails"  value = "{{email}}" ></option>
-                </datalist>
-                <button class="btn" ng-click="addFriend()">add</button>
-              </div>
-            </div>-->
-          <!--</div>-->
           <timer></timer>   
           <player></player>
           <div class="col m10">
@@ -122,11 +94,8 @@
   }
   
       $(document).ready(function(){
-        // getFriendsEmail();
         $('.collapsible').collapsible({accordion: true, hover:true});
       });
-
-  // $(document).ready(function() {
             console.log("intiate dropdown");
             $('.dropdown-button').dropdown({
               inDuration: 300,
@@ -138,7 +107,6 @@
               belowOrigin: true,
               alignment: 'left'
             });
-          // });
           $('.dropdown-button').dropdown('open');
           $('.dropdown-button').dropdown('close');
 </script>

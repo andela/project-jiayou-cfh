@@ -83,7 +83,7 @@ exports.addFriend = function (req, res) {
 exports.getFriendsEmail = function (req, res) {
   var arr = [];
   Friend.find({ user_id: req.query.user_id }, function (err, friend) {
-    friend.forEach((value, index) => {
+    friend.forEach((value) => {
       arr.push(value.friend_email);
     });
     res.send(arr);
@@ -93,7 +93,7 @@ exports.getFriendsEmail = function (req, res) {
 exports.getAFriend = function (req, res) {
   var id = '';
   Friend.find({ friend_email: req.query.friend_email }, function (err, friend) {
-    friend.forEach((value, index) => {
+    friend.forEach((value) => {
       id = value.friend_id;
     });
     res.send(id);
@@ -102,8 +102,8 @@ exports.getAFriend = function (req, res) {
 
 exports.getNotifications = function (req, res) {
   var notify = {};
-  Notification.find({ user_Id: req.query.user_Id }, function (err, notification) {
-    friend.forEach((value, index) => {
+  Notification.find({}, function (err, notification) {
+    notification.forEach((value) => {
       notify.message = value.message;
       notify.date = value.date;
       notify.user_Id = value.user_Id;
@@ -111,5 +111,15 @@ exports.getNotifications = function (req, res) {
     });
     res.send(notify);
   });
-}
+};
+
+exports.getUserName = function (req, res) {
+  var userName = '';
+  User.find({ email: req.query.email }, function(err, user) {
+    user.forEach((userDetails) => {
+      userName = userDetails.username;
+    });
+    res.send(userName);
+  });
+};
 

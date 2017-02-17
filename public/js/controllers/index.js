@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', 'jwtHelper', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', function ($scope, Global, jwtHelper, $location, socket, game, AvatarService, authService, $window, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$http', 'jwtHelper', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', function ($scope, Global, $http, jwtHelper, $location, socket, game, AvatarService, authService, $window, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -27,10 +27,12 @@ angular.module('mean.system')
         // socket.privateChannel = io.connect("/"+tokenDec._doc._id);
         $http({
           method: 'GET',
-          url: `/api/notifications?user_Id=${tokenDec._doc._id}`
+          url: '/api/notifications'
         }).then(function successCallback(response) {
           var data = response.data;
-          document.getElementById('notification').innerHTML = data.message;
+          if (tokenDec._doc._id === data.user_Id) {
+            document.getElementById('notification').innerHTML = data.message;
+          }
         }, function errorCallback(response) {
         });
         localStorage.setItem('JWT', res.token);

@@ -26,15 +26,15 @@ module.exports = function (io) {
       var playerPrivateChannel = io.of(`/${id}`);
 
       var callYou = function (data) {
-        playerPrivateChannel.emit('notify', 'You just received a notification');
         var notification = new Notification();
         notification.status = 'unread';
-        notification.message = 'You just received a notification';
+        notification.message = data.message;
         notification.date = new Date();
         notification.user_Id = data.friend_Id;
         notification.sender_Id = data.user_Id;
         notification.save(function (err) {
         });
+        playerPrivateChannel.emit('notify', { mess: data.message, date: new Date() });
       };
 
       playerPrivateChannel.on('connection', function (private_socket) {

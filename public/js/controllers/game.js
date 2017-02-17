@@ -10,9 +10,9 @@ angular.module('mean.system')
   $scope.makeAWishFact = makeAWishFacts.pop();
   $scope.friendList = [];
 
-  var sendNotification = function (friendId, userId){
+  var sendNotification = function (friendId, userId, mess) {
     var privateSocket = io.connect(`/${friendId}`);
-    privateSocket.emit('message', { friend_Id: friendId, user_Id: userId });
+    privateSocket.emit('message', { friend_Id: friendId, user_Id: userId, message: mess });
   };
 
   $scope.sendInvite2 = (friend) => {
@@ -31,7 +31,7 @@ angular.module('mean.system')
         $scope.canSend = true;
       }
       if ($scope.canSend) {
-        $http.post('/api/search/users', { emailArray: array, link: document.URL }).success(function (res) {
+        $http.post('/api/search/users', { emailArray: array, link: document.URL, senderEmail: localStorage.getItem('Email') }).success(function (res) {
           if (res.statusCode === 202) {
             Materialize.toast('Invite Sent', 4000);
           } else {
@@ -44,8 +44,19 @@ angular.module('mean.system')
         }).then(function successCallback(response) {
           $scope.friendId = response.data;
           var user = localStorage.getItem('JWT');
+          var email = localStorage.getItem('Email');
           var tokenDec = jwtHelper.decodeToken(user);
-          sendNotification($scope.friendId, tokenDec._doc._id);
+          var linkStr = 'link';
+          var link = linkStr.link(document.URL);
+          $http({
+            method: 'GET',
+            url: `/api/username?email=${email}`
+          }).then(function successCallback2(response2) {
+            var username = response2.data;
+            var message = `${username} would like to invite you to join cards for humanity game. Kindly click this ${link} to join`;
+            sendNotification($scope.friendId, tokenDec._doc._id, message);
+          }, function errorCallback(response2) {
+          });
         }, function errorCallback(response) {
         });
       } else {
@@ -58,9 +69,13 @@ angular.module('mean.system')
 
   var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
   var myPrivateSocket = io.connect(`/${id}`);
-  myPrivateSocket.on('notify', function (mess) {
-    document.getElementById('notification').innerHTML = mess;
+  myPrivateSocket.on('notify', function (message) {
+    document.getElementById('notification').innerHTML = `${message.mess} at ${message.date}`;
   });
+
+  $scope.readNotifications = function () {
+    // document.getElementById('notification').innerHTML = '';
+  };
 
 
   $scope.pickCard = function (card) {
