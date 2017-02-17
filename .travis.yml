@@ -5,8 +5,6 @@ node_js:
   - "6"
   - "6.1"
   - "5.11"
-  # - "4.5"
-  # - "4.4"
 env:
   - DB_URL=mongodb://localhost:27017 /cfh
 services:
