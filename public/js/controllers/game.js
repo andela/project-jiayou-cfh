@@ -1,6 +1,6 @@
 angular.module('mean.system')
   .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog) {
-    Materialize.toast('I am a toast!', 4000);
+    Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -287,15 +287,13 @@ angular.module('mean.system')
       game.joinGame();
     }
     $scope.drawCard = () => {
-      console.log('clicked');
-      if (game.state === 'waiting for czar to draw cards') {
+      if (game.state === 'waiting for czar to draw cards' && !$scope.isCzar()) {
+        Materialize.toast('You are not the czar!');
+      } else if (game.state === 'waiting for czar to draw cards' && $scope.isCzar()) {
+        // Ensure only card czar choose question for next round
         game.drawCard();
       } else {
         Materialize.toast('Wait for czar to choose next question!', 4000);
       }
-    };
-
-    $scope.testClick = () => {
-      console.log('test clicked');
     };
   }]);

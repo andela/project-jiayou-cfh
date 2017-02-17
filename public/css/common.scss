@@ -1334,104 +1334,56 @@ body{
 Card flipping animation start
 ----------------------------*/
 
-// .back {
-//   position: relative;
-//   background: blue;
-// }
-
- #question-flip {
-  transform: perspective(800px) rotateY(0deg);
-  backface-visibility: hidden;
-  transition: transform .5s linear 0s;
-}
-
-#question-flip.flipped {
-	-webkit-transform: perspective( 600px ) rotateY( -180deg );
-	transform: perspective( 600px ) rotateY( -180deg );
-}
-
-// .flip-3D .back {
-//   position: absolute;
-//   transform: perspective(800px) rotateY(180deg);
-//   backface-visibility: hidden;
-//   transition: transform .5s linear 0s;
-//   // background-color: blue;
-//   // color: blue;
-// }
-
 .back {
-  font-size: 36px;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
   position: absolute;
-  padding: 90px 150px;
-  border-radius: 10px;
-  background-color:#cccccc;
-  height: 215px;
-  width: 36.3%;
-  margin-top: 6.5px;
-  border:6px solid #fff;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+.front {
+  // -webkit-transform: rotateX(90deg);
+  // transform: rotateX(90deg);
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  position: absolute;
+  // -webkit-backface-visibility: hidden;
+  // backface-visibility: hidden;
+}
+
+#axis:focus .back {
+  -webkit-transform: translate(350px, 10px) rotateX(180deg) rotateY(180deg);
+  transform: translate(350px, 10px) rotateX(180deg) rotateY(0deg);
+}
+
+#axis:focus .front {
+  transform: translate(350px, 10px) rotateX(0deg) rotateY(180deg);
+  -webkit-transform: translate(350px, 10px) rotateX(0deg) rotateY(180deg);
+  -moz-transform: translate(350px, 10px) rotateX(0deg) rotateY(180deg);
 }
 
 #outer {
-  border: 6px solid #fff;
   position: relative;
-  margin-left: 40px;
-  background-color: #cccccc;
+  margin-left: 20px;
+  margin-right: 40px;
   -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-
-  -webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
-	-ms-transform: rotate(-2deg);
-	transform: rotate(-2deg);
+  -webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
   cursor: pointer;
-}
-
-#outer:before{
-  content: "";
-  height: 215px; width: 245px;
-  border-radius: 10px;
-	background:#cccccc;
-	border: 6px solid white;
-  margin-left: 35px;
-
-  position: absolute;
-	z-index: -1;
-	top: 0px;
-	left: -10px;
-
-	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-
-  -webkit-transform: rotate(5deg);
-	-moz-transform: rotate(5deg);
-	-ms-transform: rotate(5deg);
-	transform: rotate(5deg);
-}
-
-#outer:after{
-  content: "";
-  height: 215px; width: 245px;
-  padding-right: 40px;
-  border-radius: 10px;
-	background:#cccccc;
-	border: 6px solid white;
-  margin-left: 35px;
-
-  position: absolute;
-	z-index: -1;
-	top: 0px;
-	left: -10px;
-
-	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-
-  -webkit-transform: rotate(-5deg);
-	-moz-transform: rotate(-5deg);
-	-ms-transform: rotate(-5deg);
-	transform: rotate(-5deg);
+  background-image: url(../img/ribbon5.png);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right bottom;
+  opacity: 50;
+  width: 250px;
 }
 
 .inner {
@@ -1442,6 +1394,17 @@ Card flipping animation start
   padding-top: 20px
 }
 
+#backface {
+  margin-left: 10px;
+  width:260px;
+  height:217px;
+  border-radius: 10px;
+  background-color: #cccccc;
+  -webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
 
 
 
