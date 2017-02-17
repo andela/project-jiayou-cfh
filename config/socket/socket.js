@@ -2,10 +2,11 @@ var Game = require('./game');
 var Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
 var mongoose = require('mongoose');
+var Notification = mongoose.model('Notification');
 var jwt = require('jsonwebtoken');
 var User = mongoose.model('User');
 
-var avatars = require(`${__dirname }/../../app/controllers/avatars.js`).all();
+var avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
@@ -17,22 +18,28 @@ module.exports = function (io) {
   var gameID = 0;
 
 
-
   io.sockets.on('connection', function (socket) {
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
 
-    socket.on('user', function(id) {
-      var playerPrivateChannel = io.of('/'+ id);
+    socket.on('user', function (id) {
+      var playerPrivateChannel = io.of(`/${id}`);
 
-      var callYou = function () {
+      var callYou = function (data) {
         playerPrivateChannel.emit('notify', 'You just received a notification');
+        var notification = new Notification();
+        notification.status = 'unread';
+        notification.message = 'You just received a notification';
+        notification.date = new Date();
+        notification.user_Id = data.friend_Id;
+        notification.sender_Id = data.user_Id;
+        notification.save(function (err) {
+        });
       };
 
-      playerPrivateChannel.on('connection', function(private_socket) {
-        private_socket.on('message', function(data) {
-          console.log('wantt to send a message');
-          callYou();
+      playerPrivateChannel.on('connection', function (private_socket) {
+        private_socket.on('message', function (data) {
+          callYou(data);
         });
       });
     });
@@ -65,7 +72,6 @@ module.exports = function (io) {
       // console.log('my id is'+id);
       // console.log('friend id is'+ data.userID);
    // });
-     
     });
 
     socket.on('joinNewGame', function (data) {
@@ -106,7 +112,7 @@ module.exports = function (io) {
   });
 
   var joinGame = function (socket, data, io) {
-    var playerPrivateChannel = io.of('/'+data.userID);
+    var playerPrivateChannel = io.of(`/${data.userID}`);
     var player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
@@ -126,9 +132,8 @@ module.exports = function (io) {
           player.username = user.name;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
-          
+
           // notify user of a message
-          
         }
         getGame(player, socket, data.room, data.createPrivate);
       });

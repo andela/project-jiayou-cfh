@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  Friend = mongoose.model('Friend');
+  Friend = mongoose.model('Friend'),
+  Notification = mongoose.model('Notification');
 var MongoClient = require('mongodb').MongoClient;
 var sendMail = require('sendgrid').mail;
 var dburl = process.env.DB_URL;
@@ -10,14 +11,14 @@ exports.invite = function (req, res) {
   fromEmail = 'fisayomi.ojuri@andela.com';
   subject = 'Invite to join Cards for Humanity game';
   content =
-  '<html>\
+  `<html>\
   <body>\
     <label>Hello, <\label><br>\
     <p> I would like to invite you to join cards for humanity game. </p>\
-    <p>Kindly click this  <a href = req.body.link> link </a> to join</p>\
+    <p>Kindly click this  <a href ='${req.body.link}'/> link </a> to join</p>\
     <br><p>Regards,<p>jiayou team.</p></p>\
   </body>\
-  </html>';
+  </html>`;
   mailer = {
     personalizations: [{
       to: req.body.emailArray,
@@ -98,4 +99,17 @@ exports.getAFriend = function (req, res) {
     res.send(id);
   });
 };
+
+exports.getNotifications = function (req, res) {
+  var notify = {};
+  Notification.find({ user_Id: req.query.user_Id }, function (err, notification) {
+    friend.forEach((value, index) => {
+      notify.message = value.message;
+      notify.date = value.date;
+      notify.user_Id = value.user_Id;
+      notify.sender_Id = value.sender_Id;
+    });
+    res.send(notify);
+  });
+}
 

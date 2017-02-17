@@ -10,9 +10,9 @@ angular.module('mean.system')
   $scope.makeAWishFact = makeAWishFacts.pop();
   $scope.friendList = [];
 
-  var sendNotification = function (id) {
-    var privateSocket = io.connect(`/${id}`);
-    privateSocket.emit('message', id);
+  var sendNotification = function (friendId, userId){
+    var privateSocket = io.connect(`/${friendId}`);
+    privateSocket.emit('message', { friend_Id: friendId, user_Id: userId });
   };
 
   $scope.sendInvite2 = (friend) => {
@@ -45,7 +45,7 @@ angular.module('mean.system')
           $scope.friendId = response.data;
           var user = localStorage.getItem('JWT');
           var tokenDec = jwtHelper.decodeToken(user);
-          sendNotification($scope.friendId);
+          sendNotification($scope.friendId, tokenDec._doc._id);
         }, function errorCallback(response) {
         });
       } else {
@@ -57,7 +57,6 @@ angular.module('mean.system')
   };
 
   var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
-
   var myPrivateSocket = io.connect(`/${id}`);
   myPrivateSocket.on('notify', function (mess) {
     document.getElementById('notification').innerHTML = mess;

@@ -25,6 +25,14 @@ angular.module('mean.system')
         var tokenDec = jwtHelper.decodeToken(res.token);
         socket.emit('user', tokenDec._doc._id);
         // socket.privateChannel = io.connect("/"+tokenDec._doc._id);
+        $http({
+          method: 'GET',
+          url: `/api/notifications?user_Id=${tokenDec._doc._id}`
+        }).then(function successCallback(response) {
+          var data = response.data;
+          document.getElementById('notification').innerHTML = data.message;
+        }, function errorCallback(response) {
+        });
         localStorage.setItem('JWT', res.token);
         localStorage.setItem('Email', res.userEmail);
         window.user = res.user;
@@ -53,12 +61,11 @@ angular.module('mean.system')
     var signInFailure = function (err) {
       $scope.userActive = false;
     };
-    
+
     $scope.userLogin = function () {
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
-    
     };
-    
+
     var signUpSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
