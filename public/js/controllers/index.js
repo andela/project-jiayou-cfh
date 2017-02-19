@@ -19,7 +19,6 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
-
     var signInSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
@@ -48,13 +47,12 @@ angular.module('mean.system')
       }
     };
 
-    var showGameLog = function () {
-      $location.path('/leader-board');
+    var startDonation = function () {
+      $location.path('/charity');
     };
     var signout = function () {
       $http.get("/signout")
      .success(function (res) {
-       localStorage.clear();
        $location.path('/signin');
      }).error(function (err) {
         var dialogDetails = { title: "Signout Failed",
@@ -90,14 +88,14 @@ angular.module('mean.system')
       gameModals.showConfirm($scope.event, dialogDetails).then(function () {
         startGame();
       }, function () {
-        showGameLog();
+        startDonation();
       });
     };
 
     var signInFailure = function (err) {
       $scope.userActive = false;
     };
-
+    
     var signUpSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
@@ -124,7 +122,8 @@ angular.module('mean.system')
     };
 
     $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
+      authService.signUp($scope.credentials.email, $scope.credentials.password,
+      $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time
@@ -160,4 +159,3 @@ angular.module('mean.system')
       });
     };
   }]);
-

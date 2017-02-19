@@ -1,5 +1,5 @@
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
-  .config(['$routeProvider',
+ .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
         when('/', {
@@ -25,15 +25,6 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
         }).
         when('/charity', {
           templateUrl: '/views/charity.html'
-        }).
-        when('/leader-board', {
-          templateUrl: '/views/leader-board.html'
-        }).
-        when('/game-log', {
-          templateUrl: '/views/game-log.html'
-        }).
-        when('/donation-log', {
-          templateUrl: '/views/donation-log.html'
         }).
         when('/aboutus', {
           templateUrl: '/views/aboutus.html'
@@ -73,6 +64,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
     };
   }]);
 
-//angular.module('mean.system', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'angularMoment']);
-angular.module('mean.system', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'angularMoment']);
+angular.module('mean.system', ['ngMaterial', 'ngMessages', 'ngSanitize', 'material.svgAssetsCache', 'angularMoment']);
 angular.module('mean.directives', []);

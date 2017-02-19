@@ -65,6 +65,24 @@
 html, body, .main-container, .cont, #first-section, #inner-container {
   height: 100%; }
 
+html {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative; }
+  @media (max-width: 520px) {
+    html {
+      margin-top: 0px; } }
+
+body {
+  font-family: "helvetica neue", helvetica, sans-serif;
+  background: transparent; }
+  @media only screen and (min-width: 521px) and (max-width: 768px) {
+    body {
+      margin: 5px; } }
+  @media (max-width: 520px) {
+    body {
+      margin: 1px; } }
+
 .navbar .nav > li > a.brand {
   padding-left: 20px;
   margin-left: 0; }
@@ -132,6 +150,9 @@ html, body, .main-container, .cont, #first-section, #inner-container {
             margin-right: 1px;
             padding: 5px;
             width: 60px; } }
+        @media only screen and (min-width: 1025) {
+          #main-container #app-container #menu-container #abandon-game-button {
+            position: relative; } }
       #main-container #app-container #menu-container #abandon-game-button:hover {
         background: #F34444; }
       #main-container #app-container #menu-container #tweet-container {
@@ -779,8 +800,8 @@ html, body, .main-container, .cont, #first-section, #inner-container {
           width: 100%;
           height: 100%;
           font-size: 18px;
-          padding-left: 5px;
-          max-height: 250px; }
+          max-height: 250px;
+          padding-left: 20px; }
           @media (max-width: 520px) {
             #main-container #app-container #gameplay-container #cards-container #cards {
               background: #252525;
@@ -847,7 +868,7 @@ html, body, .main-container, .cont, #first-section, #inner-container {
 .chat {
   width: 300px;
   height: 80vh;
-  max-height: 500px;
+  max-height: 350px;
   z-index: 2;
   overflow: hidden;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
@@ -1059,9 +1080,10 @@ Message Box
   left: 0; }
 
 .chat-container {
+  background-size: contain;
   position: fixed;
   right: 15px;
-  bottom: 48px;
+  bottom: 2px;
   transition: all .5s;
   transform: translateY(90%); }
   .chat-container button {
@@ -1097,5 +1119,38 @@ Message Box
 .player-card {
   background-color: whitesmoke; }
 
-.isCzar {
-  background-color: #424242 !important; }
+.is-czar {
+  background-color: #424242 !important;
+  color: white; }
+
+@media screen and (max-width: 768px) {
+  .top-navbar {
+    height: 40px;
+    transition: all 1.5s; } }
+
+.question-top {
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px; }
+
+#question-container {
+  font-family: ubuntu;
+  text-align: center;
+  padding-top: 15px; }
+
+.questions {
+  margin-left: unset;
+  margin-right: auto; }
+
+#player-timer {
+  padding-left: 40px; }
+
+#waiting-for-players {
+  padding-left: 17px;
+  font-size: 15px;
+  font-family: ubuntu; }
+
+#cfh-icon {
+  font-size: 30px;
+  font-family: ubuntu;
+  padding-left: 70px; }

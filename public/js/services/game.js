@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', '$sce', function (socket, $timeout, $sce) {
     var game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -11,7 +11,7 @@ angular.module('mean.system')
       table: [],
       czar: null,
       playerMinLimit: 3,
-      playerMaxLimit: 6,
+      playerMaxLimit: 12,
       pointLimit: null,
       state: null,
       round: 0,
@@ -58,7 +58,7 @@ angular.module('mean.system')
     console.log(game.id);
   });
 
-      socket.on('prepareGame', function (data) {
+    socket.on('prepareGame', function (data) {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;
       game.pointLimit = data.pointLimit;
@@ -140,8 +140,8 @@ angular.module('mean.system')
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
         // Extending the underscore within the question
-        game.curQuestion.text = data.curQuestion.text.replace(/_/g, '<u></u>');
-
+        game.curQuestion.text = $sce.trustAsHtml(data.curQuestion.text.replace(/_/g, '<u></u>'));
+        
         // Set notifications only when entering state
         if (newState) {
           if (game.czar === game.playerIndex) {

@@ -20,7 +20,7 @@ exports.startGame = function (req, res) {
         id: gameId,
         czar: req.body.email,
         winner: '',
-        players: [req.email],
+        players: [req.body.email],
         numberOfRounds: 0,
         state: 'start',
       });
@@ -41,6 +41,7 @@ exports.startGame = function (req, res) {
       });
     });
 };
+<<<<<<< HEAD
 
 exports.updateGame = function (req, res) {
   Games.findOne({
@@ -100,3 +101,5 @@ exports.findAllRecord = function (req, res) {
       }
     });
 };
+=======
+>>>>>>> ef5d397dfaa36908c47615d08739e17c6254f63b
