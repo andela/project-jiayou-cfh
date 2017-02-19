@@ -278,4 +278,12 @@ angular.module('mean.system')
     } else {
       game.joinGame();
     }
+  var removeFixedContents = function () {
+    // document.body.className = "";
+    //  $("#body").css({ 'background-color': '#ffffff' });
+    //  $("#body").css('background-image', 'none');
+     $("#body").css('background-color', '#ffffff').css('background-image', ''); 
+    $("dashboard_footer").display = "none";
+  };
+  removeFixedContents();
 }]);

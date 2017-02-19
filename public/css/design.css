@@ -357,7 +357,7 @@ md-dialog {
 @media screen and (device-width: 360px) and (device-height: 640px) and (orientation: portrait) {
   body {
     height: 100%;
-    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+    /*background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);*/
   }
   .welcome {
     font-size: 50px;
@@ -390,7 +390,7 @@ md-dialog {
   }
   body {
     height: 100%;
-    background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+    /*background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);*/
   }
   .bkg {
     background-image: none;
@@ -410,8 +410,8 @@ md-dialog {
     margin-right: -5px;
   }
   .bkg {
-    background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');
-    background-repeat: no-repeat;
+    /*background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');*/
+    /*background-repeat: no-repeat;*/
     background-size: cover;
     color: #fff;
     padding-top: 25px;
@@ -453,7 +453,7 @@ md-dialog {
 @media screen and (min-device-width: 768px) and (max-device-width: 1199px) {
   body {
     height: 100%;
-    background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);
+    /*background: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url(../img/fun.jpg);*/
   }
   .bkg {
     background-image: none;
