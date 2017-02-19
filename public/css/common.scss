@@ -385,7 +385,7 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
 }
 
 html, body, .main-container, .cont, #first-section, #inner-container{
-    height: 100%;
+    height: auto;
 }
 
 html{
@@ -421,10 +421,12 @@ body{
     margin-top:50px;
     width:70%
 }
-
+#main-container {
+    padding: 0;
+}
 
 #main-container{
-    height: 100%;
+    height: auto;
     #app-container {
         height: 100%;
         max-width: 1200px;

@@ -1,11 +1,76 @@
-
 <header>
-    <!--Navbar-->
-    <div ng-include="'/views/navbar.html'"></div>
+    <div class=" light-blue darken-3 top-navbar">
+        <div class="row valign-wrapper" style="min-height: 50px">
+            <div class="col m8 valign">
+                <div class="white-text" id="cfh-icon">CFH</div>
+            </div>
+            <div class="col m4 right-align" style="padding-right: 70px">
+                <a href="/" class="dashboard-menu-item">Home</a>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
 </header>
-
 <main>
+    <div class="container content" ng-controller="DashboardController">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="inactive" href="#!/game-log">Game Log</a></li>
+                    <li class="tab col s3 active"><a class="active" href="#!/leader-board">Leader Board</a></li>
+                    <li class="tab col s3"><a class="inactive" href="#!/donation-log">Donation Log</a></li>
+                </ul>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <h1 class="gamelog-header">Leader Board</h1>
+        </div>
+        <div class="col s12 m12 l12">
+            <div class="card-panel">
+                <table class="striped">
+                    <col width="70">
+                    <col width="70">
+                    <col width="90">
+                    <col width="150">
+                    <col width="90">
+                    <thead>
+                        <tr>
+                            <th data-field="rank">Rank <img src="img/SkillMedalGold.png" class="iconize" /></th>
+                            <th data-field="avatar">Avatar</th>
+                            <th data-field="user-details">User Details</th>
+                            <th data-field="games-won">Games Won</th>
+                            <th data-field="games-won">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="view in views">
+                            <td>
+                                <div class="col s12 m12 l12">
+                                    {{view[0]}}<span ng-if="view[0] === 1">st</span>
+                                    <span ng-if="view[0] === 2">nd</span>
+                                    <span ng-if="view[0] === 3">rd</span>
+                                    <span ng-if="view[0] > 3">th</span></div>
+                            </td>
+                            <td>
+                                <img ng-src="..{{view[1]}}" alt="User Avatar">
+                            </td>
+                            <td>
+                                <div class="chip">{{view[2]}} </div>
+                                <div class="chip">{{view[3]}} </div>
+                            </td>
+                            <td>
+                                <div class="chip blue-grey white-text"><img src="img/winner-icon.jpg" alt="Contact Person">{{view[4]}} Win(s)</div>
+                            </td>
+                            <td>
+                                <div class="chip">{{view[5]}} Point(s)</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
 </main>
-
-<footer>
-</footer>

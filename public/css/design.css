@@ -2,9 +2,12 @@
   background-image: linear-gradient(rgba(0, 15, 25, .8), rgba(0, 15, 25, .8)), url('../img/fun.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   color: #fff;
   padding-top: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
 }
 
 .body-content {
@@ -132,9 +135,8 @@
 }
 
 .footer-bottom {
-
   background-color: #0477b7;
-  opacity: 0.85;
+  color: #fff !important;
 }
 .navbar-default .navbar-text {
   color: #fff;
@@ -282,11 +284,17 @@ md-dialog {
 }
 
 /* css for dashboard */
-.dashboard-menu {
-  background:#0477b7;
-  height: 80px !important;
-  }
-
+#dashboard-footer {
+  position: absolute;
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+.dashboard-menu-item {
+  color: #fff !important;
+  font-weight: bold;
+}
 .gamelog-header {
   color:#0477b7;
 }

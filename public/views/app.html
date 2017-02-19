@@ -1,3 +1,9 @@
+<script>
+ window.onload = function () {
+   document.body.className = "";
+   document.getElementById("dashboard_footer").innerHTML = "";
+ }
+</script>
 <div ng-controller="GameController">
   <div class=" light-blue darken-3 top-navbar">
     <div class="row valign-wrapper" style="min-height: 50px">
@@ -57,9 +63,6 @@
     </div>
   </div>
 </div>
-</div>
-
-
 <script>
   $("#openChatButton").click(function() {
     $("#chatContainer").toggleClass("activeChat");

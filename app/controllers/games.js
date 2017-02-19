@@ -41,7 +41,6 @@ exports.startGame = function (req, res) {
       });
     });
 };
-<<<<<<< HEAD
 
 exports.updateGame = function (req, res) {
   Games.findOne({
@@ -101,5 +100,3 @@ exports.findAllRecord = function (req, res) {
       }
     });
 };
-=======
->>>>>>> ef5d397dfaa36908c47615d08739e17c6254f63b

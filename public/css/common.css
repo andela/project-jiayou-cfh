@@ -63,7 +63,7 @@
       content: '.'; }
 
 html, body, .main-container, .cont, #first-section, #inner-container {
-  height: 100%; }
+  height: auto; }
 
 html {
   background-attachment: fixed;
@@ -92,7 +92,10 @@ body {
   width: 70%; }
 
 #main-container {
-  height: 100%; }
+  padding: 0; }
+
+#main-container {
+  height: auto; }
   #main-container #app-container {
     height: 100%;
     max-width: 1200px;

@@ -243,8 +243,5 @@ module.exports = function (io) {
     socket.leave(socket.gameID);
     // return Object.keys(allPlayers).length;
   };
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> ef5d397dfaa36908c47615d08739e17c6254f63b
+
