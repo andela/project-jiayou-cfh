@@ -77,8 +77,4 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
   }]);
 
 angular.module('mean.system', ['ngMaterial', 'ngMessages', 'ngSanitize', 'material.svgAssetsCache', 'angularMoment']);
-<<<<<<< HEAD
 angular.module('mean.directives', []);
-=======
-angular.module('mean.directives', []);
->>>>>>> 81b9eb61764ca4c244a5a24f3aa81cdae13cc899

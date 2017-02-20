@@ -9,6 +9,9 @@
     </div>
     <div class="row">
         <h1 class="gamelog-header">Leader Board</h1>
+        <div class="alert alert-danger" role="alert" ng-show="errorMessage">
+        <strong><span ng-bind="message"></span></strong>
+       </div>
         <div class="col s12 m12 l12">
             <div class="card-panel overflow">
                 <table class="striped" cellspacing="0" width="100%">

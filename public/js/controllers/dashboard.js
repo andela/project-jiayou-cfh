@@ -1,5 +1,18 @@
 angular.module('mean.system')
   .controller('DashboardController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
+    
+    /**
+     * Function to display a message for a time
+     * @param{Integer} howLong - How long in milliseconds message should show
+     * @returns{undefined}
+     */
+    $scope.timer = function (howLong) {
+      $timeout(function () {
+        $scope.errorMessage = false;
+      }, howLong);
+    };
+
+
     $scope.views = [];
 
     var getObjectSize = function (object) {
@@ -158,10 +171,24 @@ angular.module('mean.system')
       })
         .success(function (res) {
           games = res.gameCollection;
-          populateLeaderBoardContents(games, output);
+          if (Object.keys(games).length > 0) {
+            populateLeaderBoardContents(games, output);
+          } else {
+            var location = $location.path();
+            if (location === '/leader-board') {
+              $scope.message = 'No games played have winners yet!';
+              $scope.errorMessage = true;
+              $scope.timer(4000);
+            }
+          }
         })
         .error(function (err) {
-          console.log(err);
+          var location = $location.path();
+          if (location === '/leader-board') {
+            $scope.message = 'An unexpected error occurred!';
+            $scope.errorMessage = true;
+            $scope.timer(4000);
+          }
         });
     };
 
@@ -179,13 +206,25 @@ angular.module('mean.system')
       var userEmail = localStorage.getItem('Email');
       $http.get(`/api/games/history/${userEmail}`)
         .success((res) => {
-          console.log(res);
-          $scope.histories = res;
+          if (res.length > 0) {
+            $scope.histories = res;
+          } else {
+            var location = $location.path();
+            if (location === '/game-log') {
+              $scope.message = 'No games played yet';
+              $scope.errorMessage = true;
+              $scope.timer(4000);
+            }
+          }
         })
         .error((err) => {
-          console.log(err);
+          var location = $location.path();
+          if (location === '/game-log') {
+            $scope.message = 'An unexpected error occurred!';
+            $scope.errorMessage = true;
+            $scope.timer(4000);
+          }
         });
     };
-    
     $scope.gameLog();
   }]);
