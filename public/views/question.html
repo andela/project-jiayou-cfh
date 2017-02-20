@@ -3,9 +3,10 @@
 </script>
 
 <div class="flip3D">
-  <div class="card smallest col s12 black white-text z-depth-5" id="question-flip" ng-class="(game.state === 'waiting for czar to draw cards') ? 'flipped': ''">
+  <div class="card smallest col s12 black white-text z-depth-5" id="question-flip" ng-class="(game.state === 'waiting for czar to draw cards') ? 'flipped': ''" ng-hide="game.state !== 'awaiting players'" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
     <!--<span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>-->
-    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+
+    <!--<div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>-->
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">
         <h2 class="center-align">Finding Players</h2>

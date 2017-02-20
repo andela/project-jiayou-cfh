@@ -292,6 +292,8 @@ angular.module('mean.system')
       } else if (game.state === 'waiting for czar to draw cards' && $scope.isCzar()) {
         // Ensure only card czar choose question for next round
         game.drawCard();
+
+        // flip cards
       } else {
         Materialize.toast('Wait for czar to choose next question!', 4000);
       }

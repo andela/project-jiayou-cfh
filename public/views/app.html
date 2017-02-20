@@ -17,15 +17,17 @@
   <div class="gameplay-container">
     <div class="row">
       <div class="col m9 s12">
-
         <div class="valign-wrapper question-top">
           <div id="axis" tabindex="1" class="valign">
-            <div class="front card col m4 draw-card" id="outer" ng-click="drawCard()">
+            <div class="front card col m4" id="outer" ng-class="(game.state !== 'awaiting players') && (game.state !== 'game ended') && (game.state !== 'game dissolved') && (game.state !== 'waiting for czar to draw cards') ? 'flipped': ''">
               <div class="inner">
                 <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
               </div>
+
+              <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+
             </div>
-            <div class="back center-align" id="backface">
+            <div class="back center-align draw-card" id="backface" ng-click="drawCard()" ng-class="(game.state !== 'awaiting players') && (game.state !== 'game ended') && (game.state !== 'game dissolved') && (game.state !== 'waiting for czar to draw cards') ? 'flipped': ''">
             </div>
           </div>
           <div class="questions valign col m8 s12">
@@ -76,8 +78,10 @@
   }
 
   // $(this).find('#question-flip').addClass('flipped');
-  // $('.draw-card').click(function() {
-  //   $('#question-flip').addClass('flipped');
-  // });
+  $('.draw-card').click(function () {
+    console.log('clicked!')
+    $('#axis .front').addClass('flipped');
+    $('#axis .back').addClass('flipped');
+  });
 
 </script>
