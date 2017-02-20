@@ -47,9 +47,6 @@ angular.module('mean.system')
       }
     };
 
-    var startDonation = function () {
-      $location.path('/charity');
-    };
     var signout = function () {
       $http.get("/signout")
      .success(function (res) {
@@ -78,6 +75,10 @@ angular.module('mean.system')
       }
     };
 
+    var showGameLog = function () {
+      $location.path('/game-log');
+    };
+
     $scope.showDialog = function () {
       var dialogDetails = { title: "Sign in was Successful!",
         content: "Would you like to Start a new game?",
@@ -88,7 +89,7 @@ angular.module('mean.system')
       gameModals.showConfirm($scope.event, dialogDetails).then(function () {
         startGame();
       }, function () {
-        startDonation();
+        showGameLog();
       });
     };
 

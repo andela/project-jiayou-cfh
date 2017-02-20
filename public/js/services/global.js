@@ -26,6 +26,11 @@ angular.module('mean.system')
           .then(function (response) {
             return response[0].data;
           });
+      },
+
+      isAuthenticated: function () {
+        var jwt = localStorage.getItem("JWT");
+        return $http.post("/api/users/jwt/authenticated", { JWT: jwt });
       }
     };
   }])

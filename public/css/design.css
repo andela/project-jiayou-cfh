@@ -456,3 +456,59 @@ md-dialog {
     margin-top: 50px;
   }
 }
+
+/* css for dashboard */
+.dashboard {
+  background: #fff;
+}
+.dashboard-menu {
+  background:rgb(7, 104, 160);
+  }
+
+.gamelog-header {
+  color:#0477b7;
+}
+
+.active {
+  background: #0477b7;
+  opacity: 0.8;
+  color: #fff !important;
+  padding: 10px;
+}
+.inactive {
+  color: #0477b7 !important;
+}
+.dashboard-menu-items {
+  color: #fff !important;
+}
+.dashboard-menu-items:hover {
+  background: #607d8b;
+  border: solid 2px #607d8b;
+  color: #fff !important;
+}
+
+.menu-item-container {
+  padding-left: 65%;
+  padding-top: 5px;
+}
+.iconize {
+  width: 40px;
+  height: 30px;
+}
+.content {
+  margin-top: 20px;
+}
+.dashboard-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff !important;
+}
+
+.overflow {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+

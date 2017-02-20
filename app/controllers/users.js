@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  jwt = require('jsonwebtoken');
 var avatars = require('./avatars').all();
 
 /**
@@ -203,4 +204,36 @@ exports.authenticate = function (req, res, next) {
       return;
     }
   }
+};
+
+/**
+ * check if user is authenticated
+ * before showing dashboard menu
+ * on navbar
+ */
+exports.isAuthenticated = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.send(false);
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  }
+};
+
+exports.findAllRecord = function (req, res) {
+  User.find()
+    .exec((err, userDetails) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ users: userDetails });
+      }
+    });
 };

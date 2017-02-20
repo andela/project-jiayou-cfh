@@ -41,3 +41,17 @@ exports.startGame = function (req, res) {
       });
     });
 };
+
+exports.findAllRecord = function (req, res) {
+  Games.find()
+    .exec((err, games) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ gameCollection: games });
+      }
+    });
+};
