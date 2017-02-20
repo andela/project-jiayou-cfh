@@ -442,8 +442,12 @@ md-dialog {
   background: #fff;
 }
 .dashboard-menu {
-  background:rgb(7, 104, 160);
+  color: #fff !important;
   }
+
+.dashboard-menu:hover {
+  color: red !important;
+}
 
 .gamelog-header {
   color:#0477b7;
