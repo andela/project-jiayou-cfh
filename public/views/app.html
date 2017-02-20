@@ -1,11 +1,11 @@
 <div ng-controller="GameController">
   <div class=" light-blue darken-3 top-navbar">
     <div class="row valign-wrapper" style="min-height: 50px">
-      <div class="col m8 valign"> 
+      <div class="col m8 valign">
         <div class="white-text" id="cfh-icon">CFH</div>
       </div>
-      <div class="col m4 right-align" style="padding-right: 70px" id='abandon-game-button' ng-click="abandonGame()"> 
-          <a class="chip red darken-3 white-text">Abandon Game</a>
+      <div class="col m4 right-align" style="padding-right: 70px" id='abandon-game-button' ng-click="abandonGame()">
+        <a class="chip red darken-3 white-text">Abandon Game</a>
       </div>
       <div>
       </div>
@@ -13,39 +13,39 @@
   </div>
 
   <div class="question-top container">
-    
+
 
     <div class="gameplay-container">
       <div class="row">
         <div class="col m9 s12">
 
-            <div class="valign-wrapper question-top">
-              <div class="questions valign col m8 s12">
-                <question></question>
-              </div>
-              <div class="card col m4"> CARD DECK</div>
+          <div class="valign-wrapper question-top">
+            <div class="questions valign col m8 s12">
+              <question></question>
             </div>
-            <div class="row">
-              <answers></answers>
-            </div>
+            <div class="card col m4"> CARD DECK</div>
+          </div>
+          <div class="row">
+            <answers></answers>
+          </div>
 
         </div>
-        <div class="col m3" id = "player-timer">
-          
-                <timer></timer>
-            
+        <div class="col m3" id="player-timer">
+
+          <timer></timer>
+
           <player></player>
         </div>
       </div>
     </div>
   </div>
   <div class="col m12 chat-container " id="chatContainer">
-    <button class="btn-flat" style = "outline: none" id="openChatButton">
+    <button class="btn-flat" style="outline: none" id="openChatButton">
       <i class="material-icons">keyboard_arrow_up</i>
     </button>
     <div class="chat">
       <div class="chat-title">
-        
+
       </div>
       <div class="messages">
         <div class="messages-content"></div>

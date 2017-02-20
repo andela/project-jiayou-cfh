@@ -1,25 +1,19 @@
 var Game = require('./game');
 var Player = require('./player');
-require("console-stamp")(console, "m/dd HH:MM:ss");
+require('console-stamp')(console, 'm/dd HH:MM:ss');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+var avatars = require(`${__dirname }/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
-var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = function (io) {
-
-  var game;
-  var allGames = {};
-  var allPlayers = {};
-  var gamesNeedingPlayers = [];
-  var gameID = 0;
-
-  io.sockets.on('connection', function (socket) {
-    console.log(socket.id + ' Connected');
-    socket.emit('id', {
-      id: socket.id
+    io.sockets.on('connection', function(socket) {
+        console.log(`${socket.id} Connected`);
+        socket.emit('id', {
+            id: socket.id
+        });
     });
 
     socket.on('pickCards', function (data) {
@@ -60,10 +54,8 @@ module.exports = function (io) {
             if (game.gameID === socket.gameID) {
               return gamesNeedingPlayers.splice(index, 1);
             }
-          });
-          thisGame.prepareGame();
-          thisGame.sendNotification('The game has begun!');
-        }
+        });
+    }
       }
     });
 
@@ -83,7 +75,6 @@ module.exports = function (io) {
       exitGame(socket);
       // return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
     });
-  });
 
   var joinGame = function (socket, data) {
     var player = new Player(socket);
@@ -134,6 +125,7 @@ module.exports = function (io) {
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
         game.players.push(player);
+        allGames[uniqueRoom] = game;
         socket.join(game.gameID);
         socket.gameID = game.gameID;
         game.assignPlayerColors();

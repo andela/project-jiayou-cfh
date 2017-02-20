@@ -174,4 +174,18 @@ angular.module('mean.system')
       ranks: {}
     };
     getAllGames(output);
+
+    $scope.gameLog = () => {
+      var userEmail = localStorage.getItem('Email');
+      $http.get(`/api/games/history/${userEmail}`)
+        .success((res) => {
+          console.log(res);
+          $scope.histories = res;
+        })
+        .error((err) => {
+          console.log(err);
+        });
+    };
+    
+    $scope.gameLog();
   }]);

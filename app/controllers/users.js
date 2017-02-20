@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
   User = mongoose.model('User'),
   jwt = require('jsonwebtoken');
 var avatars = require('./avatars').all();
+var jwt = require('jsonwebtoken');
 
 /**
  * Auth callback
@@ -48,6 +49,7 @@ exports.signout = function (req, res) {
  */
 exports.session = function (req, res) {
   res.redirect('/#!/app');
+
 };
 
 /**
@@ -71,7 +73,6 @@ exports.checkAvatar = function (req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
@@ -237,3 +238,4 @@ exports.findAllRecord = function (req, res) {
       }
     });
 };
+

@@ -25,6 +25,10 @@ module.exports = function(app, passport, auth) {
   app.post("/api/users/getAllUserDetails", users.authenticate, users.findAllRecord);
   app.post('/api/users/jwt/authenticated', users.isAuthenticated);
 
+  // game history
+  app.put('/api/games/:id/end', games.updateGame);
+  app.get('/api/games/history/:email', games.getGame);
+
   app.post('/api/search/users', invite.invite);
   app.get('/api/userEmail', invite.getEmail);
 
