@@ -31,6 +31,7 @@ module.exports = function(app, passport, auth) {
   // Endpoint to get a friend email
   app.get('/api/get/friend/email', invite.getAFriend);
   app.get('/api/notifications', invite.getNotifications);
+  app.post('/api/saveNotifications', invite.saveNotifivcations);
 
   app.get('/api/username', invite.getUserName);
 

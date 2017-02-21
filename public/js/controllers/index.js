@@ -19,22 +19,12 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
+
     var signInSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
         var tokenDec = jwtHelper.decodeToken(res.token);
         socket.emit('user', tokenDec._doc._id);
-        // socket.privateChannel = io.connect("/"+tokenDec._doc._id);
-        $http({
-          method: 'GET',
-          url: '/api/notifications'
-        }).then(function successCallback(response) {
-          var data = response.data;
-          if (tokenDec._doc._id === data.user_Id) {
-            document.getElementById('notification').innerHTML = data.message;
-          }
-        }, function errorCallback(response) {
-        });
         localStorage.setItem('JWT', res.token);
         localStorage.setItem('Email', res.userEmail);
         window.user = res.user;

@@ -101,21 +101,34 @@ exports.getAFriend = function (req, res) {
 };
 
 exports.getNotifications = function (req, res) {
+  var allNotifications = [];
   var notify = {};
-  Notification.find({}, function (err, notification) {
+  Notification.find({ user_Id: req.query.id }, function (err, notification) {
     notification.forEach((value) => {
       notify.message = value.message;
       notify.date = value.date;
       notify.user_Id = value.user_Id;
       notify.sender_Id = value.sender_Id;
+      allNotifications.push(notify);
     });
-    res.send(notify);
+    res.send(allNotifications);
+  });
+};
+
+exports.saveNotifivcations = function (req, res) {
+  var notification = new Notification();
+  notification.status = 'unread';
+  notification.message = req.body.mess;
+  notification.date = new Date();
+  notification.user_Id = req.body.friend_Id;
+  notification.sender_Id = req.body.user_Id;
+  notification.save(function (err) {
   });
 };
 
 exports.getUserName = function (req, res) {
   var userName = '';
-  User.find({ email: req.query.email }, function(err, user) {
+  User.find({ email: req.query.email }, function (err, user) {
     user.forEach((userDetails) => {
       userName = userDetails.username;
     });

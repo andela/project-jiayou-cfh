@@ -1,5 +1,4 @@
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
-      <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.purple-red.min.css">
 <div ng-controller="GameController">
   <div class=" light-blue darken-3 top-navbar" >
     <div class="row valign-wrapper" style="min-height: 50px;position: relative; ">
@@ -7,19 +6,18 @@
         <div class="white-text" id="cfh-icon">CFH</div>
       </div>
       <div class="col m3">
-          <div class="col m4" >
-            <i  data-activates='dropdown1' class=" dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
+          <div class="col m4"  >
+            <i  data-activates='dropdown1' class="dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
             <!-- Dropdown Structure -->
             <ul id='dropdown1' class='dropdown-content'>
-              <li><label id = 'notification' ng-click="readNotifications()"></label></li>
+              <li class="head"><label style="font-size: 15px">Notifications</label></li>
+              <li class= "tail" ng-repeat='notification in notifications track by $index' ><hr><label style="font-size: 12px" ng-bind-html-unsafe="notification">{{ notification }}</label></li>
             </ul>
-        
           </div>
           <div class="col m8">
             <a class="chip red darken-3 white-text" ng-click="abandonGame()">Abandon Game</a>
           </div>
-      </div>     
-      
+      </div>          
     </div>
   </div>
 
@@ -80,7 +78,7 @@
     </div>
   </div>
 </div>
-</div>
+
 
 
 <script>
@@ -96,11 +94,10 @@
       $(document).ready(function(){
         $('.collapsible').collapsible({accordion: true, hover:true});
       });
-            console.log("intiate dropdown");
+            // console.log("intiate dropdown");
             $('.dropdown-button').dropdown({
               inDuration: 300,
               outDuration: 100,
-              stopPropagation: false,
               constrain_width: true,
               hover: true,
               gutter: 0,

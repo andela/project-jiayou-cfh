@@ -26,14 +26,6 @@ module.exports = function (io) {
       var playerPrivateChannel = io.of(`/${id}`);
 
       var callYou = function (data) {
-        var notification = new Notification();
-        notification.status = 'unread';
-        notification.message = data.message;
-        notification.date = new Date();
-        notification.user_Id = data.friend_Id;
-        notification.sender_Id = data.user_Id;
-        notification.save(function (err) {
-        });
         playerPrivateChannel.emit('notify', { mess: data.message, date: new Date() });
       };
 
@@ -65,13 +57,6 @@ module.exports = function (io) {
       if (!allPlayers[socket.id]) {
         joinGame(socket, data, io);
       }
-      // socket.on('friendId', function (idDetails) {
-      // if ( idDetails.friendId === ) {
-
-      // }
-      // console.log('my id is'+id);
-      // console.log('friend id is'+ data.userID);
-   // });
     });
 
     socket.on('joinNewGame', function (data) {

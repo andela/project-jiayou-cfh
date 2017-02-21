@@ -9,6 +9,7 @@ angular.module('mean.system')
   var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
   $scope.friendList = [];
+  $scope.notifications = [];
 
   var sendNotification = function (friendId, userId, mess) {
     var privateSocket = io.connect(`/${friendId}`);
@@ -54,6 +55,8 @@ angular.module('mean.system')
           }).then(function successCallback2(response2) {
             var username = response2.data;
             var message = `${username} would like to invite you to join cards for humanity game. Kindly click this ${link} to join`;
+            $http.post('/api/saveNotifications', { friend_Id: $scope.friendId, user_Id: tokenDec._doc._id, mess: message }).success(function (res) {
+            });
             sendNotification($scope.friendId, tokenDec._doc._id, message);
           }, function errorCallback(response2) {
           });
@@ -68,13 +71,24 @@ angular.module('mean.system')
   };
 
   var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
+
+  $http({
+    method: 'GET',
+    url: `/api/notifications?id=${id}`
+  }).then(function successCallback(response) {
+    var data = response.data;
+    data.forEach((message) => {
+      $scope.notifications.push(`${message.date} - ${message.message}`);
+    });
+  }, function errorCallback(response) {
+  });
   var myPrivateSocket = io.connect(`/${id}`);
   myPrivateSocket.on('notify', function (message) {
-    document.getElementById('notification').innerHTML = `${message.mess} at ${message.date}`;
+    $scope.notifications.push(`${data.date} - ${data.message}`);
   });
 
   $scope.readNotifications = function () {
-    // document.getElementById('notification').innerHTML = '';
+    
   };
 
 

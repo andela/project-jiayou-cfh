@@ -1,4 +1,4 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'checklist-model', 'angular-jwt'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'checklist-model', 'angular-jwt'])
   .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
