@@ -18,7 +18,10 @@ module.exports = function (io) {
 
   io.sockets.on('connection', function (socket) {
     console.log(socket.id + ' Connected');
-    socket.emit('id', { id: socket.id });
+
+    socket.emit('id', {
+      id: socket.id
+    });
 
     socket.on('pickCards', function (data) {
       console.log(socket.id, "picked", data);
@@ -66,12 +69,20 @@ module.exports = function (io) {
     });
 
     socket.on('leaveGame', function () {
+      const gameDBId = socket.gameDBId;
+      const newGameId = socket.gameID;
+      // var numberOfPlayersLeft = exitGame(socket);
       exitGame(socket);
-    });
+    //   console.log({ gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft });
+    //   return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
+     });
 
     socket.on('disconnect', function () {
-      console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
+        // console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
+      const gameDBId = socket.gameDBId;
+      const newGameId = socket.gameID;
       exitGame(socket);
+      // return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
     });
 
     socket.on('drawCard', function () {
@@ -102,17 +113,18 @@ module.exports = function (io) {
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
         }
-        getGame(player, socket, data.room, data.createPrivate);
+
+        getGame(player, socket, data.room, data.gameDBId, data.createPrivate);
       });
     } else {
       // If the user isn't authenticated (guest)
       player.username = 'Guest';
       player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
-      getGame(player, socket, data.room, data.createPrivate);
+      getGame(player, socket, data.room, data.gameDBId, data.createPrivate);
     }
   };
 
-  var getGame = function (player, socket, requestedGameId, createPrivate) {
+  var getGame = function (player, socket, requestedGameId, gameDBId, createPrivate) {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
     console.log(socket.id, 'is requesting room', requestedGameId);
@@ -125,7 +137,7 @@ module.exports = function (io) {
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
       if (game.state === 'awaiting players' && (!game.players.length ||
-        game.players[0].socket.id !== socket.id)) {
+          game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
@@ -147,7 +159,7 @@ module.exports = function (io) {
       // Put players into the general queue
       console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
-        createGameWithFriends(player, socket);
+        createGameWithFriends(player, socket, gameDBId);
       } else {
         fireGame(player, socket);
       }
@@ -189,7 +201,8 @@ module.exports = function (io) {
     }
   };
 
-  var createGameWithFriends = function (player, socket) {
+
+  var createGameWithFriends = function (player, socket, gameDBId) {
     var isUniqueRoom = false;
     var uniqueRoom = '';
     // Generate a random 6-character game ID
@@ -198,6 +211,10 @@ module.exports = function (io) {
       for (var i = 0; i < 6; i++) {
         uniqueRoom += chars[Math.floor(Math.random() * chars.length)];
       }
+      /* append the Db record id created 
+      for game to the generated 6-xter game id
+      */
+      uniqueRoom += gameDBId;
       if (!allGames[uniqueRoom] && !(/^\d+$/).test(uniqueRoom)) {
         isUniqueRoom = true;
       }
@@ -233,6 +250,6 @@ module.exports = function (io) {
       }
     }
     socket.leave(socket.gameID);
+    // return Object.keys(allPlayers).length;
   };
-
 };

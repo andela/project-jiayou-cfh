@@ -136,7 +136,6 @@
   background-color: #0477b7;
   opacity: 0.85;
 }
-
 .navbar-default .navbar-text {
   color: #fff;
 }
@@ -205,7 +204,46 @@
   margin-right: 80px;
 }
 
-.modal {
+/* The Modal (background) */
+
+
+.modals {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-contents {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: black;
+    text-align: center;
+}
+
+.modals {
   display: none;
   /* Hidden by default */
   position: fixed;
@@ -220,19 +258,9 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  color: black;
-  text-align: center;
-}
-
-.size {
+/*.size {
   width: 50%;
-}
+}*/
 
 .close {
   color: #aaaaaa;
@@ -255,6 +283,31 @@
   position: absolute;
   margin-top: -30px;
   margin-left: 15px;
+}
+
+#player-count-container {
+  margin-top: 50px;
+}
+
+/*for invite to display well */
+#invModal {
+  max-height: 33%;
+}
+
+/* css rule for angular material modal */
+.md-title, .md-dialog-content-body {
+  color: #ffffff;
+}
+.md-button {
+  background: #ffffff !important;
+  border-radius: 2px !important;
+  text-align: center !important;
+}
+.md-button :hover {
+  color: #4CAF50 !important;
+}
+md-dialog {
+  background: #0477b7 !important;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (min-device-height: 800px) and (max-device-height: 1400px) and (-webkit-min-device-pixel-ratio: 1) {

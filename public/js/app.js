@@ -1,5 +1,5 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'checklist-model'])
-  .config(['$routeProvider',
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
+ .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
         when('/', {
@@ -43,6 +43,10 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
     function ($locationProvider) {
       $locationProvider.hashPrefix("!");
     }
+  ]).config(['$locationProvider',
+    function ($locationProvider) {
+      $locationProvider.hashPrefix('!');
+    }
   ]).run(['$rootScope', function ($rootScope) {
     $rootScope.safeApply = function (fn) {
       var phase = this.$root.$$phase;
@@ -60,5 +64,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
     };
   }]);
 
-angular.module('mean.system', []);
+angular.module('mean.system', ['ngMaterial', 'ngMessages', 'ngSanitize', 'material.svgAssetsCache', 'angularMoment']);
 angular.module('mean.directives', []);

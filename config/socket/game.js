@@ -130,7 +130,6 @@ Game.prototype.prepareGame = function() {
       }
       self.questions = results[0];
       self.answers = results[1];
-
       self.startGame();
     });
 };
