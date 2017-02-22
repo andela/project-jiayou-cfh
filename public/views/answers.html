@@ -29,16 +29,6 @@
 </div>
 </div>
 
-<div ng-show="game.state === 'waiting for czar to draw cards'">
-  <div ng-show="!isCzar()">
-    <h4 class='text-center'>Wait for czar to draw next question</h4>
-  </div>
-  <div ng-show="isCzar()">
-    <h4 class='text-center'>Click the card deck to draw the next question</h4>
-    <!--<div class="draw-card-icon" ng-click="drawCard()"></div>-->
-  </div>
-</div>
-
 
 <div ng-show="game.state === 'awaiting players'">
   <ul class="collection" id="waiting-for-players">

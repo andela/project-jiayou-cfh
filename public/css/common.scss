@@ -1340,29 +1340,23 @@ Card flipping animation start
   position: absolute;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  // -webkit-transform: rotateY(180deg);
-  // transform: rotateY(180deg);
 }
 
 .front {
-  // -webkit-transform: rotateY(180deg);
-  // transform: rotateY(180deg);
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
   position: absolute;
-  // -webkit-backface-visibility: hidden;
-  // backface-visibility: hidden;
 }
 
 #axis .back.flipped {
-  -webkit-transform: translate(350px, 10px) rotateX(180deg) rotateY(180deg) scale(1.2);
-  transform: translate(350px, 10px) rotateX(180deg) rotateY(0deg) scale(1.2);
+  -webkit-transform: translate(300px, 5px) rotateX(180deg) rotateY(180deg) scale(1.15, 1.20);
+  transform: translate(300px, 5px) rotateX(180deg) rotateY(0deg) scale(1.15, 1.20);
 }
 
 #axis .front.flipped {
-  transform: translate(350px, 10px) rotateX(0deg) rotateY(20deg) scale(1.2);
-  -webkit-transform: translate(350px, 10px) rotateX(0deg) rotateY(20deg) scale(1.2);
-  -moz-transform: translate(350px, 10px) rotateX(0deg) rotateY(20deg) scale(1.2);
+  transform: translate(300px, 5px) rotateX(0deg) rotateY(20deg) scale(1.15, 1.20);
+  -webkit-transform: translate(300px, 5px) rotateX(0deg) rotateY(20deg) scale(1.15, 1.20);
+  -moz-transform: translate(300px, 5px) rotateX(0deg) rotateY(20deg) scale(1.15, 1.20);
 }
 
 #outer {
@@ -1377,7 +1371,6 @@ Card flipping animation start
 	-ms-transform: rotateX(180deg);
 	transform: rotateX(180deg);
   cursor: pointer;
-  background-image: url(../img/ribbon5.png);
   background-color: #fff;
   background-repeat: no-repeat;
   background-size: contain;
@@ -1398,16 +1391,25 @@ Card flipping animation start
   margin-left: 10px;
   width:260px;
   height:217px;
-  border-radius: 10px;
-  background-color: #cccccc;
+  border-radius: 9.5px;
+  background-color: #e8eaef;
   -webkit-transform: rotate(-2deg);
 	-moz-transform: rotate(0deg);
 	-ms-transform: rotate(0deg);
 	transform: rotate(0deg);
+  cursor: pointer;
 }
 
+.preload * {
+  -webkit-transition: 0s !important;
+  -moz-transition: 0s !important;
+  -ms-transition: 0s !important;
+  transition: 0s !important;
+}
 
-
+.czar-click {
+  padding-top: 70px;
+}
 /*--------------------------
 Card flipping animation end
 ---------------------------*/

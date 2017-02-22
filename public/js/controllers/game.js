@@ -5,6 +5,8 @@ angular.module('mean.system')
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
+    // boolean that tracks if the card deck has been clicked
+    $scope.cardDeckClicked = false;
     $scope.game = game;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
@@ -23,7 +25,7 @@ angular.module('mean.system')
             $timeout($scope.sendPickedCards, 300);
           }
         }
-      };
+      }
 
       $scope.pointerCursorStyle = function () {
         if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
@@ -195,6 +197,8 @@ angular.module('mean.system')
     };
 
     $scope.abandonGame = function () {
+      // sessionStorage.clear();
+      sessionStorage.removeItem('guest');
       game.leaveGame();
       $location.path('/');
     };
@@ -292,8 +296,11 @@ angular.module('mean.system')
       } else if (game.state === 'waiting for czar to draw cards' && $scope.isCzar()) {
         // Ensure only card czar choose question for next round
         game.drawCard();
-
-        // flip cards
+        /**
+         * Flip cards. First set cardDeckClicked to true only when czar clicks
+         * the card deck
+         */
+        $scope.cardDeckClicked = true;
       } else {
         Materialize.toast('Wait for czar to choose next question!', 4000);
       }
