@@ -3,7 +3,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="../css/signin.css">
 </head>
-
 <body>
   <div ng-include="'/views/navbar.html'"> </div>
   <main ng-controller="IndexController">
@@ -45,14 +44,18 @@
             <h5 class="grey-text text-darken-1">...or sign in with:</h5>
             <div class="row">
               <div class="social-buttons">
-                <a href="/auth/facebook" class="waves-effect waves-light btn fb-button"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="/auth/twitter" class="waves-effect waves-light btn tw-button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="/auth/google" class="waves-effect waves-light btn g-button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                <a landing ng-click="socialPlayer()" href="/auth/facebook" class="waves-effect waves-light btn fb-button"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a landing ng-click="socialPlayer()" href="/auth/twitter" class="waves-effect waves-light btn tw-button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a landing ng-click="socialPlayer()" href="/auth/google" class="waves-effect waves-light btn g-button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
               </div>
               <div class="input-field col s12">
                 <h5 class="left medium-small">Don't have an account yet? <a href="/#!/signup">Sign up</a></h5>
               </div>
             </div>
+          </form>
+        </div>
+      </div>
+
     </center>
     <div class="section"></div>
   </main>

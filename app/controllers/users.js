@@ -19,6 +19,7 @@ exports.signin = function (req, res) {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
+    console.log(req);
     res.redirect('/#!/app');
   }
 };
@@ -38,8 +39,10 @@ exports.signup = function (req, res) {
  * Logout
  */
 exports.signout = function (req, res) {
-  req.logout();
-  res.redirect('/');
+  req.logOut();
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
 };
 
 /**
