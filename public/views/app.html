@@ -51,36 +51,23 @@
 
     <player></player>
   </div>
-</div>
-</div>
-</div>
-<div class="col m12 chat-container " id="chatContainer">
-  <button class="btn-flat" style="outline: none" id="openChatButton">
+  <div class="col m12 chat-container " id="chatContainer">
+    <button class="btn-flat" style = "outline: none" id="openChatButton">
       <i class="material-icons">keyboard_arrow_up</i>
     </button>
-  <div class="chat">
-    <div class="chat-title">
+    <div class="chat">
+      <div class="chat-title">
+        
+      </div>
+      <div class="messages">
+        <div class="messages-content"></div>
+      </div>
+      <div class="message-box lead emoji-picker-container">
+        <textarea  class="message-input" data-emojiable="true" data-emoji-input="unicode" type="text"  placeholder="Type message..."></textarea>
+        <button type="submit" class="message-submit">Send</button>
+      </div>
 
-    </div>
-    <div class="messages">
-      <div class="messages-content"></div>
-    </div>
-    <div class="message-box">
-      <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
-      <button type="submit" class="message-submit">Send</button>
-    </div>
-  </div>
+  <div class ="col m9 s12"><chat></chat> </div>
 </div>
 </div>
 </div>
-
-<script>
-  $("#openChatButton").click(function () {
-    $("#chatContainer").toggleClass("activeChat");
-  });
-
-  setTimeout(function () {
-    $('div').removeClass("preload");
-  }, 500);
-
-</script>
