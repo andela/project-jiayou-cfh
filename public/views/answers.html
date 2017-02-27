@@ -4,7 +4,7 @@
     <div>
         <div id="cards" class='hand'>
             <span ng-show="winnerPicked()"></span>
-            <div ng-style="{'cursor':'pointer'}" class="card smallest hoverable z-depth-5" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+            <div ng-style="{'cursor':'pointer'}" style="border-style: solid; border-color: #0277bd; border-width: 3px" class="card smallest hoverable z-depth-5" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
                 ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
                 <div class="the-card">
                     <span ng-bind-html-unsafe="card.text"></p>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <span ng-repeat="answer in game.table">
-        <div class="card smallest hoverable z-depth-3" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+        <div class="card smallest hoverable z-depth-3"  ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
             <div class ="the-card">
                 <span ng-bind-html-unsafe="card.text"></span>
