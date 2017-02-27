@@ -115,11 +115,31 @@ angular.module('mean.directives', [])
         scope.showOptions = true;
         scope.showNavBar = true;
         scope.signOut = false;
-        
+
         if ((localStorage.getItem('JWT') && localStorage.getItem('Email')) || localStorage.getItem('jwtToken') || localStorage.getItem('sign_in')) {
           scope.showNavBar = false;
           scope.signOut = true;
         }
+
+        if (sessionStorage.getItem('socialPlayer')) {
+          // when user logs in with social media, hide sign in button
+          scope.showNavBar = false;
+          scope.signOut = true;
+        } else if (sessionStorage.getItem('guestPlayer')) {
+          scope.showNavBar = true;
+        }
+        scope.playAsGuest = function () {
+          sessionStorage.setItem('guestPlayer', 'true');
+        };
+
+        /**
+         * function that gets called when a user signs in with a social
+         * media account
+         * @returns {undefined}
+         */
+        scope.socialPlayer = function () {
+          sessionStorage.setItem('socialPlayer', 'true');
+        };
 
         if (localStorage.getItem('JWT')) {
           // Fix ??
@@ -130,11 +150,8 @@ angular.module('mean.directives', [])
         }
         scope.userLogout = function () {
           // remove the JWT, email and expDate on logout
-          localStorage.removeItem('JWT');
-          localStorage.removeItem('Email');
-          localStorage.removeItem('expDate');
-          localStorage.removeItem('jwtToken');
-          localStorage.removeItem('sign_in');
+          localStorage.clear();
+          sessionStorage.removeItem('socialPlayer');
         };
       }
     };

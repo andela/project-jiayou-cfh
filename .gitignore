@@ -5,4 +5,12 @@ c4h_keys.txt
 .env
 bower_components
 .idea/
+.coverdata
+coverage
+Procfile
+.coverrun
+.vscode
+gruntfile.js
+debug
 public/lib
+npm-debug.log

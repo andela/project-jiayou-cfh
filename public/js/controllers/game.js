@@ -1,5 +1,8 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$http', '$location', 'MakeAWishFactsService', '$dialog', '$window', function ($scope, game, $timeout, $http, $location, MakeAWishFactsService, $dialog, $window) {
+
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
+    Materialize.toast('Welcome!', 4000);
+
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -9,6 +12,9 @@ angular.module('mean.system')
       $window.sessionStorage.setItem('gameID', game.gameID);
     }, 500);
 
+    // boolean that tracks if the card deck has been clicked
+    $scope.cardDeckClicked = false;
+    $scope.game = game;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
@@ -21,17 +27,19 @@ angular.module('mean.system')
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
+
             $scope.pickedCards.length === 2) {
             // delay and send
-          $scope.hasPickedCards = true;
-          $timeout($scope.sendPickedCards, 300);
+            $scope.hasPickedCards = true;
+            $timeout($scope.sendPickedCards, 300);
+          }
         }
         } else {
           $scope.pickedCards.pop();
         }
       }
-    };
 
+<<<<<<< HEAD
   $scope.pointerCursorStyle = function () {
     if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
       return { cursor: 'pointer' };
@@ -51,103 +59,135 @@ angular.module('mean.system')
     });
   };
 
-  $scope.checkAll = function () {
-    $scope.selected = angular.copy($scope.emails);
-  };
-
-  $scope.uncheckAll = function () {
-    $scope.selected = angular.copy([]);
-  };
-
-  $scope.sentEmails = [];
-  $scope.canSend = false;
-  $scope.cantSend = [];
-  $scope.sendInvite = function () {
-    array = [];
-    var selectedEmail = document.getElementById('select').value;
-    var currentUser = localStorage.getItem('Email');
-    if (currentUser !== selectedEmail) {
-      array.push({ email: selectedEmail });
-      if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
-        $scope.sentEmails.push(selectedEmail);
-      } else {
-        $scope.cantSend.push(selectedEmail);
+    $scope.pointerCursorStyle = function () {
+      if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
+        return { cursor: 'pointer' };
       }
-      if ($scope.sentEmails.length > 11) {
-        $scope.canSend = false;
+      return {};
+    };
+                                 
+    $scope.getEmail = function () {
+      $scope.canSend = false;
+      $http({
+        method: 'GET',
+        url: '/api/userEmail'
+      }).then(function successCallback(response) {
+        var data = response.data;
+        $scope.emails = data;
+      }, function errorCallback(response) {
+      });
+    };
+
+    $scope.checkAll = function () {
+      $scope.selected = angular.copy($scope.emails);
+    };
+
+    $scope.uncheckAll = function () {
+      $scope.selected = angular.copy([]);
+    };
+
+    $scope.sentEmails = [];
+    $scope.canSend = false;
+    $scope.cantSend = [];
+
+    $scope.sendInvite = function () {
+      array = [];
+      var selectedEmail = document.getElementById('select').value;
+      var currentUser = localStorage.getItem('Email');
+      if (currentUser !== selectedEmail) {
+        array.push({ email: selectedEmail });
+        if ($scope.sentEmails.indexOf(selectedEmail) === -1) {
+          $scope.sentEmails.push(selectedEmail);
+        } else {
+          $scope.cantSend.push(selectedEmail);
+        }
+        if ($scope.sentEmails.length > 11) {
+          $scope.canSend = false;
+        } else {
+          $scope.canSend = true;
+        }
+        if ($scope.canSend) {
+          $http.post('/api/search/users', { emailArray: array }).success(function (res) {
+            if (res.statusCode === 202) {
+              $scope.showSuccessAlert = true;
+              $scope.timer(5000);
+            } else {
+              $location.path('/#!/signup');
+            }
+          });
+        } else {
+          $scope.showAlert2 = true;
+          $scope.timer(4000);
+        }
       } else {
-        $scope.canSend = true;
+        $scope.showWarningAlert = true;
+        $scope.timer(5000);
       }
-      if ($scope.canSend) {
-        $http.post('/api/search/users', { emailArray: array }).success(function (res) {
-          if (res.statusCode === 202) {
-            $scope.showSuccessAlert = true;
-            $scope.timer(5000);
-          } else {
-            $location.path('/#!/signup');
-          }
-        });
-      } else {
-        $scope.showAlert2 = true;
-        $scope.timer(4000);
+      document.getElementById('select').value = '';
+    };
+
+    $scope.timer = function (howLong) {
+      $timeout(function () {
+        $scope.showSuccessAlert = false;
+        $scope.showWarningAlert = false;
+        $scope.showAlert2 = false;
+      }, howLong);
+    };
+    $scope.checkFirst = function () {
+      $scope.user.emails.splice(0, $scope.user.roles.length);
+      $scope.user.emails.push('guest');
+    };
+
+    $scope.sendPickedCards = function () {
+      game.pickCards($scope.pickedCards);
+      $scope.showTable = true;
+    };
+
+    $scope.cardIsFirstSelected = function (card) {
+      if (game.curQuestion.numAnswers > 1) {
+        return card === $scope.pickedCards[0];
       }
-    } else {
-      $scope.showWarningAlert = true;
-      $scope.timer(5000);
-    }
-    document.getElementById('select').value = '';
-  };
+      return false;
+    };
 
-  $scope.timer = function (howLong) {
-    $timeout(function () {
-      $scope.showSuccessAlert = false;
-      $scope.showWarningAlert = false;
-      $scope.showAlert2 = false;
-    }, howLong);
-  };
-  $scope.checkFirst = function () {
-    $scope.user.emails.splice(0, $scope.user.roles.length);
-    $scope.user.emails.push('guest');
-  };
+    $scope.cardIsSecondSelected = function (card) {
+      if (game.curQuestion.numAnswers > 1) {
+        return card === $scope.pickedCards[1];
+      }
+      return false;
+    };
 
-  $scope.sendPickedCards = function () {
-    game.pickCards($scope.pickedCards);
-    $scope.showTable = true;
-  };
+    $scope.firstAnswer = function ($index) {
+      if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
+        return true;
+      }
+      return false;
+    };
 
-  $scope.cardIsFirstSelected = function (card) {
-    if (game.curQuestion.numAnswers > 1) {
-      return card === $scope.pickedCards[0];
-    }
-    return false;
-  };
+    $scope.secondAnswer = function ($index) {
+      if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
+        return true;
+      }
+      return false;
+    };
 
-  $scope.cardIsSecondSelected = function (card) {
-    if (game.curQuestion.numAnswers > 1) {
-      return card === $scope.pickedCards[1];
-    }
-    return false;
-  };
+    $scope.showFirst = function (card) {
+      return game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
+    };
 
-  $scope.firstAnswer = function ($index) {
-    if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
-      return true;
-    }
-    return false;
-  };
+    $scope.showSecond = function (card) {
+      return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
+    };
 
-  $scope.secondAnswer = function ($index) {
-    if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
-      return true;
-    }
-    return false;
-  };
+    $scope.isCzar = function () {
+      return game.czar === game.playerIndex;
+    };
 
-  $scope.showFirst = function (card) {
-    return game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
-  };
+    $scope.isPlayer = function ($index) {
+      return $index === game.playerIndex;
+    };
 
-  $scope.isPlayer = function($index) {
+$scope.isPlayer = function($index) {
     $window.sessionStorage.setItem('Username', game.players[game.playerIndex].username);
     $window.sessionStorage.setItem('Avatar', game.players[game.playerIndex].avatar);
     return $index === game.playerIndex;

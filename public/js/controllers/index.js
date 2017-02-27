@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $window, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function () {
@@ -26,7 +26,7 @@ angular.module('mean.system')
         localStorage.setItem('Email', res.userEmail);
         window.user = res.user;
         localStorage.setItem('expDate', res.expDate);
-        $location.path('/app');
+        $scope.showDialog();
       } else if (res.message === 'Authentication failed wrong password') {
         $scope.message = 'Wrong password';
         $scope.errorMessage = true;
@@ -47,14 +47,60 @@ angular.module('mean.system')
       }
     };
 
+    var startDonation = function () {
+      $location.path('/charity');
+    };
+    var signout = function () {
+      $http.get("/signout")
+     .success(function (res) {
+       $location.path('/signin');
+     }).error(function (err) {
+        var dialogDetails = { title: "Signout Failed",
+          content: "Signout failed!",
+          label: "Signout",
+          okTitle: "Ok"
+        };
+       gameModals.showAlert($scope.event, dialogDetails);
+     });
+    };
+
+    var startGame = function () {
+      if (moment().isBefore(localStorage.getItem('expDate'))) {
+        $scope.generateGameId(localStorage.getItem('JWT'));
+      } else {
+        var dialogDetails = { title: "Session Expired",
+          content: "Please resign in, your session has expired!",
+          label: "Session Expired",
+          okTitle: "Ok"
+        };
+        gameModals.showAlert($scope.event, dialogDetails);
+        signout();
+      }
+    };
+
+    $scope.showDialog = function () {
+      var dialogDetails = { title: "Sign in was Successful!",
+        content: "Would you like to Start a new game?",
+        label: "Start Game After Signin",
+        okTitle: "Yes",
+        cancelTitle: "No"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        startGame();
+      }, function () {
+        startDonation();
+      });
+    };
+
     var signInFailure = function (err) {
       $scope.userActive = false;
     };
-    
+
     $scope.userLogin = function () {
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
-    
+
+
     var signUpSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
@@ -93,5 +139,28 @@ angular.module('mean.system')
       $timeout(function () {
         $scope.errorMessage = false;
       }, howLong);
+    };
+
+    $scope.userLogin = function ($event) {
+      $scope.event = $event;
+      authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
+    };
+
+    $scope.generateGameId = function (jwt) {
+      $http.post('/api/games/0/start', {
+        JWT: jwt,
+        email: $scope.credentials.userEmail
+      }).success(function (res) {
+        const generatedGameId = res.gameId;
+        localStorage.setItem("gameDBId", generatedGameId);
+        $location.path('/app/').search({ custom: 1 });
+      }).error(function (err) {
+        var dialogDetails = { title: "Game Creation Failed!",
+          content: "The game could not be created!",
+          label: "Game Creation Error",
+          okTitle: "Ok"
+        };
+        gameModals.showAlert($scope.event, dialogDetails);
+      });
     };
   }]);
