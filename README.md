@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=master)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/andela/project-jiayou-cfh/badge.svg?branch=setup%2Fintegrate-coveralls-code-coverage-service-137138317)](https://coveralls.io/github/andela/project-jiayou-cfh?branch=setup%2Fintegrate-coveralls-code-coverage-service-137138317)
 ![](https://travis-ci.org/andela/project-jiayou-cfh.svg?branch=feature%2Fcreate-travisCI-badge-137138309)
 
 

@@ -16,12 +16,13 @@ describe("Game Server",function(){
 
   it('Should accept requests to joinGame', function(done) {
     var client1 = io.connect(socketURL, options);
+
     var disconnect = function() {
       client1.disconnect();
       done();
     };
     client1.on('connect', function(data){
-      client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
+      client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: true});
       setTimeout(disconnect,200);
     });
   });
@@ -43,7 +44,7 @@ describe("Game Server",function(){
 
   it('Should announce new user to all users', function(done){
     var client1 = io.connect(socketURL, options);
-    var client2;
+    var client2, client3;
     var disconnect = function() {
       client1.disconnect();
       client2.disconnect();
@@ -52,9 +53,19 @@ describe("Game Server",function(){
     client1.on('connect', function(data){
       client1.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
       client2 = io.connect(socketURL, options);
+      client3 = io.connect(socketURL, options);
       client2.on('connect', function(data) {
         client2.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
         client1.on('notification', function(data) {
+          data.notification.should.match(/ has joined the game\!/);
+        });
+      });
+      client3.on('connect', function(data) {
+        client3.emit('joinGame',{userID:'unauthenticated',room: '', createPrivate: false});
+        client1.on('notification', function(data) {
+          data.notification.should.match(/ has joined the game\!/);
+        });
+        client2.on('notification', function(data) {
           data.notification.should.match(/ has joined the game\!/);
         });
       });
