@@ -21,6 +21,7 @@ angular.module('mean.system')
       timeLimits: {},
       joinOverride: false
     };
+
   var notificationQueue = [];
   var timeout = false;
   var self = this;
@@ -122,22 +123,22 @@ angular.module('mean.system')
             }
           }
         }
-        for (i = 0; i < removed.length; i++) {
-          for (var k = 0; k < game.table.length; k++) {
-            if (removed[i] === game.table[k].player) {
-              game.table.splice(k, 1);
-            }
+      }
+      for (i = 0; i < removed.length; i++) {
+        for (var k = 0; k < game.table.length; k++) {
+          if (removed[i] === game.table[k].player) {
+            game.table.splice(k, 1);
           }
         }
       }
+  
+    if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
+      game.players = data.players;
+    }
 
-      if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
-        game.players = data.players;
-      }
-
-      if (newState || game.curQuestion !== data.curQuestion) {
-        game.state = data.state;
-      }
+    if (newState || game.curQuestion !== data.curQuestion) {
+      game.state = data.state;
+    }
 
       if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
@@ -157,9 +158,11 @@ angular.module('mean.system')
         }
       } else if (data.state === 'waiting for czar to decide') {
         if (game.czar === game.playerIndex) {
-          addToNotificationQueue("Everyone's done. Choose the winner!");
+          addToNotificationQueue('You\'re the Card Czar! Please wait!');
+        } else if (game.curQuestion.numAnswers === 1) {
+          addToNotificationQueue('Select an answer!');
         } else {
-          addToNotificationQueue('The czar is contemplating...');
+          addToNotificationQueue('Select TWO answers!');
         }
       } else if (data.state === 'waiting for czar to draw cards') {
         if (game.czar === game.playerIndex) {
@@ -183,7 +186,6 @@ angular.module('mean.system')
   socket.on('notification', function(data) {
     addToNotificationQueue(data.notification);
   });
-
   game.joinGame = function(mode, room, gameDBId, createPrivate) {
     mode = mode || 'joinGame';
     room = room || '';
@@ -191,21 +193,17 @@ angular.module('mean.system')
     var userID = !!window.user ? user._id : 'unauthenticated';
     socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate, gameDBId: gameDBId});
   };
-
   game.startGame = function() {
     socket.emit('startGame');
   };
-
   game.leaveGame = function() {
     game.players = [];
     game.time = 0;
     socket.emit('leaveGame');
   };
-
   game.pickCards = function(cards) {
     socket.emit('pickCards',{cards: cards});
   };
-
   game.pickWinning = function(card) {
     socket.emit('pickWinning',{card: card.id});
   };
@@ -213,9 +211,6 @@ angular.module('mean.system')
 game.drawCard = function() {
       socket.emit('drawCard');
     };
-
     decrementTime();
-
-
   return game;
-}]);
+  }]);

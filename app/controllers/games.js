@@ -41,3 +41,72 @@ exports.startGame = function (req, res) {
       });
     });
 };
+
+exports.findAllRecord = function (req, res) {
+  Games.find()
+    .exec((err, games) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ gameCollection: games });
+      }
+    });
+};
+
+exports.updateGame = function (req, res) {
+  Games.findOne({
+    id: req.params.id
+  }).exec((err, games) => {
+    if (err) {
+      res.json({
+        success: false,
+        msg: 'An unexpected error occurred'
+      });
+    }
+    if (games) {
+      gameId = Object.keys(games).length + 1;
+    }
+    var game = {
+      winner: req.body.winner.username,
+      players: req.body.players,
+      numberOfRounds: req.body.numberOfRounds,
+      state: req.body.state
+    };
+    const query = {
+      $and: [{
+        id: game.id
+      }, {
+        creator: game.creator
+      }]
+    };
+    Games.update({ id: req.params.id }, game, function (err, result) {
+      if (err) {
+        res.status(500).json({
+          message: 'An error occured while updating this data',
+          error: err
+        });
+      } else {
+        res.status(200).json({
+          message: 'Game updated sucessfully'
+        });
+      }
+      return res;
+    });
+  });
+};
+
+exports.getGame = function (req, res) {
+  Games.find({ creator: req.params.email }, function (err, result) {
+    if (err) {
+      res.status(500).json({
+        message: 'An error occured while updating this data',
+        error: err
+      });
+    } else {
+      res.status(200).json(result);
+    }
+  });
+};

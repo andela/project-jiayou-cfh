@@ -5,7 +5,7 @@
 </head>
 <body>
   <div ng-include="'/views/navbar.html'"> </div>
-  <main ng-controller="IndexController">
+  <main ng-controller="IndexController" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="">
     <center>
       <div class="section"></div>
       <div class="alert alert-danger" role="alert" ng-show="errorMessage">
@@ -38,7 +38,7 @@
             <center>
               <div class="row">
                 <button name='btn_login' class='col s12 btn waves-effect sb-button' type="submit"
-                  ng-click="userLogin()">SIGN IN</button>
+                  ng-click="userLogin($event)">SIGN IN</button>
               </div>
             </center>
             <h5 class="grey-text text-darken-1">...or sign in with:</h5>

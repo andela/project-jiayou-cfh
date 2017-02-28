@@ -1,13 +1,13 @@
 angular.module('mean.system')
   .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
-    $scope.global = Global;
+   $scope.global = Global;
     $scope.credentials = {};
-    $scope.playAsGuest = function () {
+    $scope.playAsGuest = function() {
       game.joinGame();
       $location.path('/app');
     };
 
-    $scope.showError = function () {
+    $scope.showError = function() {
       if ($location.search().error) {
         return $location.search().error;
       }
@@ -16,10 +16,11 @@ angular.module('mean.system')
 
     $scope.avatars = [];
     AvatarService.getAvatars()
-      .then(function (data) {
+      .then(function(data) {
         $scope.avatars = data;
       });
-    var signInSuccess = function (res) {
+
+    var signInSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
         localStorage.setItem('JWT', res.token);
@@ -47,9 +48,6 @@ angular.module('mean.system')
       }
     };
 
-    var startDonation = function () {
-      $location.path('/charity');
-    };
     var signout = function () {
       $http.get("/signout")
      .success(function (res) {
@@ -78,6 +76,10 @@ angular.module('mean.system')
       }
     };
 
+    var showGameLog = function () {
+      $location.path('/game-log');
+    };
+
     $scope.showDialog = function () {
       var dialogDetails = { title: "Sign in was Successful!",
         content: "Would you like to Start a new game?",
@@ -88,7 +90,7 @@ angular.module('mean.system')
       gameModals.showConfirm($scope.event, dialogDetails).then(function () {
         startGame();
       }, function () {
-        startDonation();
+        showGameLog();
       });
     };
 
@@ -122,21 +124,20 @@ angular.module('mean.system')
       }
     };
 
-    var signUpFailure = function (err) {
+    var signUpFailure = function(err) {
       $scope.userActive = false;
     };
 
-    $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password,
-      $scope.credentials.username).then(signUpSuccess, signUpFailure);
+    $scope.userSignUp = function() {
+      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time
      * @param{Integer} howLong - How long in milliseconds message should show
      * @returns{undefined}
      */
-    $scope.timer = function (howLong) {
-      $timeout(function () {
+    $scope.timer = function(howLong) {
+      $timeout(function() {
         $scope.errorMessage = false;
       }, howLong);
     };
@@ -162,5 +163,20 @@ angular.module('mean.system')
         };
         gameModals.showAlert($scope.event, dialogDetails);
       });
+    };
+
+    // var userEmail = localStorage.getItem('Email');
+    // $http.get(`/api/games/history/${userEmail}`, {};
+
+    $scope.gameLog = () => {
+      var userEmail = localStorage.getItem('Email');
+      $http.get(`/api/games/history/${userEmail}`)
+        .success((res) => {
+          console.log(res);
+          $scope.history = res;
+        })
+        .error((err) => {
+          console.log(err);
+        });
     };
   }]);

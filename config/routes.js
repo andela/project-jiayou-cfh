@@ -20,6 +20,13 @@ module.exports = function(app, passport, auth) {
 
   // game playing routes
   app.post('/api/games/:id/start', users.authenticate, games.startGame);
+  app.post("/api/games", users.authenticate, games.findAllRecord);
+  app.post("/api/users/getAllUserDetails", users.authenticate, users.findAllRecord);
+  app.post('/api/users/jwt/authenticated', users.isAuthenticated);
+
+  // game history
+  app.put('/api/games/:id/end', games.updateGame);
+  app.get('/api/games/history/:email', games.getGame);
 
   app.post('/api/search/users', invite.invite);
   app.get('/api/userEmail', invite.getEmail);

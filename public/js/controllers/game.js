@@ -1,6 +1,6 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
-    Materialize.toast('Welcome!', 4000);
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
+     Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -11,8 +11,7 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
-
-
+  
   $scope.pickCard = function (card) {
     if (!$scope.hasPickedCards) {
       if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -28,16 +27,6 @@ angular.module('mean.system')
           }
         }
       }
-
-      $scope.pointerCursorStyle = function () {
-        if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-          return { 'cursor': 'pointer' };
-        } else {
-          $scope.pickedCards.pop();
-        }
-      }
-    }
-  };
 
     $scope.pointerCursorStyle = function () {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
@@ -221,17 +210,17 @@ angular.module('mean.system')
         return $scope.game.state === 'game dissolved';
       },
 
-    $scope.abandonGame = function (event) {
-      var dialogDetails = { title: "Exit Game",
-        content: "Do you really want to abandon the game?",
-        label: "Abandon Game",
-        okTitle: "Yes",
-        cancelTitle: "No"
-      };
-      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
-        game.leaveGame();
-        $location.path('/').search({});
-      });
+  $scope.abandonGame = function (event) {
+    var dialogDetails = { title: "Exit Game",
+      content: "Do you really want to abandon the game?",
+      label: "Abandon Game",
+      okTitle: "Yes",
+      cancelTitle: "No"
+    };
+    gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+      game.leaveGame();
+      $location.path('/').search({});
+    });
       /* call function to update the
       database record with new gameId if
       remaining players are just two
@@ -239,15 +228,15 @@ angular.module('mean.system')
       $location.path('/');
       */
       // $scope.updateGameId(gameDetails);
-    };
+  };
 
-    $scope.updateGameId = function (gameDetails) {
-      if (gameDetails.playerLeft === 2) {
-        $http.put('/api/games/${gameDetails.gameId}/start', {
-          gameDetails: gameDetails
-        }).success(function (res) {
-          $location.path('/');
-        }).error(function (err) {
+  $scope.updateGameId = function (gameDetail) {
+    if (gameDetail.playerLeft === 2) {
+      $http.put('/api/games/${gameDetails.gameId}/start', {
+        gameDetails: gameDetail
+      }).success(function (res) {
+        $location.path('/');
+      }).error(function (err) {
           // $scope.startGameStatus = false;
           // $scope.showDialog();
         });

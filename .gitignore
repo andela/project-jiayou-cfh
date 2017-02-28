@@ -1,9 +1,9 @@
 node_modules
+bower_components
 .sass-cache/
 .DS_store
 c4h_keys.txt
 .env
-bower_components
 .idea/
 .coverdata
 coverage
@@ -13,4 +13,6 @@ Procfile
 gruntfile.js
 debug
 public/lib
+.vscode
 npm-debug.log
+Procfile
