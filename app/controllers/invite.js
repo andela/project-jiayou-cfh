@@ -93,9 +93,7 @@ exports.getFriendsEmail = function (req, res) {
 exports.getAFriend = function (req, res) {
   var id = '';
   Friend.find({ friend_email: req.query.friend_email }, function (err, friend) {
-    friend.forEach((value) => {
-      id = value.friend_id;
-    });
+    id = friend[0].friend_id;
     res.send(id);
   });
 };
@@ -115,7 +113,7 @@ exports.getNotifications = function (req, res) {
   });
 };
 
-exports.saveNotifivcations = function (req, res) {
+exports.saveNotifications = function (req, res) {
   var notification = new Notification();
   notification.status = 'unread';
   notification.message = req.body.mess;

@@ -84,7 +84,7 @@ angular.module('mean.system')
   });
   var myPrivateSocket = io.connect(`/${id}`);
   myPrivateSocket.on('notify', function (message) {
-    $scope.notifications.push(`${data.date} - ${data.message}`);
+    $scope.notifications.push(`${message.date} - ${message.mess}`);
   });
 
   $scope.readNotifications = function () {
