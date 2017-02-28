@@ -1,10 +1,15 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function ($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window) {
      Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
+    $scope.game = game;
+    $timeout(function(){
+      $window.sessionStorage.setItem('gameID', game.gameID);
+    }, 500);
+
     // boolean that tracks if the card deck has been clicked
     $scope.cardDeckClicked = false;
     $scope.game = game;
@@ -152,12 +157,10 @@ angular.module('mean.system')
       return game.czar === game.playerIndex;
     };
 
-    $scope.isPlayer = function ($index) {
+    $scope.isPlayer = function($index) {
+      $window.sessionStorage.setItem('Username', game.players[game.playerIndex].username);
+      $window.sessionStorage.setItem('Avatar', game.players[game.playerIndex].avatar);
       return $index === game.playerIndex;
-    };
-
-    $scope.isCustomGame = function () {
-      return !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players';
     };
 
     $scope.isPremium = function ($index) {
@@ -167,6 +170,10 @@ angular.module('mean.system')
     $scope.currentCzar = function ($index) {
       return $index === game.czar;
     };
+
+  $scope.isCustomGame = function () {
+    return !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players';
+  };
 
     $scope.winningColor = function ($index) {
       if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
