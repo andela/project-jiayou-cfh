@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'checklist-model'])
   .config(['$routeProvider',
       function($routeProvider) {
@@ -49,6 +50,11 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
   }]).config(['$locationProvider',
     function($locationProvider) {
         $locationProvider.hashPrefix("!");
+
+    }
+  ]).config(['$locationProvider',
+    function ($locationProvider) {
+      $locationProvider.hashPrefix('!');
     }
   ]).run(['$rootScope', function ($rootScope) {
     $rootScope.safeApply = function (fn) {
@@ -67,5 +73,5 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
     };
   }]);
 
-angular.module('mean.system', []);
+angular.module('mean.system', ['ngMaterial', 'ngMessages', 'ngSanitize', 'material.svgAssetsCache', 'angularMoment']);
 angular.module('mean.directives', []);

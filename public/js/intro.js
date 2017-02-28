@@ -106,10 +106,10 @@
         }
 
         //intro without element
-        if (typeof(currentItem.element) === 'undefined' || currentItem.element == null) {
+        if (typeof(currentItem.element) === 'undefined' || currentItem.element === null) {
           var floatingElementQuery = document.querySelector(".introjsFloatingElement");
 
-          if (floatingElementQuery == null) {
+          if (floatingElementQuery === null) {
             floatingElementQuery = document.createElement('div');
             floatingElementQuery.className = 'introjsFloatingElement';
 
@@ -120,7 +120,7 @@
           currentItem.position = 'floating';
         }
 
-        if (currentItem.element != null) {
+        if (currentItem.element !== null) {
           introItems.push(currentItem);
         }
       }

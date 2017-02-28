@@ -2,8 +2,10 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  jwt = require('jsonwebtoken');
 var avatars = require('./avatars').all();
+var jwt = require('jsonwebtoken');
 
 /**
  * Auth callback
@@ -19,6 +21,7 @@ exports.signin = function (req, res) {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
+    console.log(req);
     res.redirect('/#!/app');
   }
 };
@@ -38,8 +41,10 @@ exports.signup = function (req, res) {
  * Logout
  */
 exports.signout = function (req, res) {
-  req.logout();
-  res.redirect('/');
+  req.logOut();
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
 };
 
 /**
@@ -47,6 +52,7 @@ exports.signout = function (req, res) {
  */
 exports.session = function (req, res) {
   res.redirect('/#!/app');
+
 };
 
 /**
@@ -70,7 +76,6 @@ exports.checkAvatar = function (req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
@@ -186,3 +191,54 @@ exports.user = function (req, res, next, id) {
       next();
     });
 };
+
+/**
+ * Authenticate the user
+ */
+exports.authenticate = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.redirect('/#!/signin?error=invalid');
+    return;
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/#!/signin?error=invalid');
+      return;
+    }
+  }
+};
+
+/**
+ * check if user is authenticated
+ * before showing dashboard menu
+ * on navbar
+ */
+exports.isAuthenticated = function (req, res, next) {
+  if (!req.body.JWT) {
+    res.send(false);
+  } else {
+    req.user = jwt.verify(req.body.JWT, process.env.SECRET);
+    if (req.user) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  }
+};
+
+exports.findAllRecord = function (req, res) {
+  User.find()
+    .exec((err, userDetails) => {
+      if (err) {
+        return res.json({
+          success: false,
+          msg: 'An unexpected error occurred'
+        });
+      } else {
+        res.send({ users: userDetails });
+      }
+    });
+};
+
