@@ -2,24 +2,25 @@
   <div class="container">
     <div ng-include="'/views/navbar.html'"> </div>
     <div class="row body-content">
-     <div class="col-lg-12" style="margin-left:150px;">
+      <div class="col-lg-12" style="margin-left:150px;">
         <div class="col-lg-6 title">
           <div class="alert alert-success" role="alert" ng-show="signOut" landing>
             <span><strong>Goodbye! Click Sign out to quit the game</strong></span>
           </div>
-
           <h2 class="welcome">Cards for <span class="humanity">Humanity</span></h2>
           <p> Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
           </p>
-
           <button id="myBtn" class="btn btn-default btn-primary play-button">PLAY</button>
           <div id="myModal" class="modals">
             <!-- Modal content -->
             <div class="modal-contents size">
               <span class="close">&times;</span>
               <h3>Welcome to Cards for Humanity "Online Version"</h3>
-              <p>Would you like to play as a guest ?&nbsp;<a href="/gametour">Click here</a></p>
-              <p>To start a new game <a href="#!/signin">Click here</a> </p>
+              <p>Would you like to play as a guest ?&nbsp;
+                <a href="/play" ng-click="playAsGuest()" landing>Click here</a>
+              </p>
+              <p>To start a new game <a href="#!/signup">Click here</a> </p>
+
             </div>
           </div>
           <!-- End -->

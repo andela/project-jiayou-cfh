@@ -91,6 +91,9 @@ angular.module('mean.system')
         data.state !== 'game ended' && data.state !== 'game dissolved') {
         game.time = game.timeLimits.stateChoosing - 1;
         timeSetViaUpdate = true;
+      } else if (newState && data.state === 'waiting for czar to draw cards') {
+        game.time = game.timeLimits.stateDrawCards - 1;
+        timeSetViaUpdate = true;
       } else if (newState && data.state === 'waiting for czar to decide') {
         game.time = game.timeLimits.stateJudging - 1;
         timeSetViaUpdate = true;
@@ -162,12 +165,29 @@ angular.module('mean.system')
         } else {
           addToNotificationQueue('Select TWO answers!');
         }
+      } else if (data.state === 'waiting for czar to draw cards') {
+        if (game.czar === game.playerIndex) {
+          // addToNotificationQueue('Click to Draw the Cards!');
+        } else {
+          // addToNotificationQueue('The czar is drawing the cards...');
+        }
+      } else if (data.state === 'winner has been chosen' &&
+        game.curQuestion.text.indexOf('<u></u>') > -1) {
+        game.curQuestion = data.curQuestion;
+      } else if (data.state === 'awaiting players') {
+        joinOverrideTimeout = $timeout(function() {
+          game.joinOverride = true;
+        }, 15000);
+      } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+        game.players[game.playerIndex].hand = [];
+        game.time = 0;
       }
     });
 
     socket.on('notification', function(data) {
       addToNotificationQueue(data.notification);
     });
+
     game.joinGame = function(mode, room, gameDBId, createPrivate) {
       mode = mode || 'joinGame';
       room = room || '';
@@ -175,20 +195,31 @@ angular.module('mean.system')
       var userID = !!window.user ? user._id : 'unauthenticated';
       socket.emit(mode, { userID: userID, room: room, createPrivate: createPrivate, gameDBId: gameDBId });
     };
+
     game.startGame = function() {
       socket.emit('startGame');
     };
+
     game.leaveGame = function() {
       game.players = [];
       game.time = 0;
       socket.emit('leaveGame');
     };
+
     game.pickCards = function(cards) {
       socket.emit('pickCards', { cards: cards });
     };
+
     game.pickWinning = function(card) {
       socket.emit('pickWinning', { card: card.id });
     };
+
+    game.drawCard = function() {
+      socket.emit('drawCard');
+    };
+
     decrementTime();
+
+
     return game;
   }]);

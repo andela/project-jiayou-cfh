@@ -11,7 +11,6 @@ module.exports = function(app, passport, auth) {
   var index = require('../app/controllers/index');
   var games = require('../app/controllers/games');
 
-  var signup = require('../app/controllers/signup');
   var invite = require('../app/controllers/invite');
   // Route for sign-in
   app.post('/api/auth/login', signin.userAuth);

@@ -92,7 +92,9 @@ module.exports = function (passport) {
   passport.use(new FacebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: process.env.FB_CALLBACK_URL
+    callbackURL: process.env.FB_CALLBACK_URL,
+    profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
+    enableProof: true
   },
     function (accessToken, refreshToken, profile, done) {
       User.findOne({
@@ -113,6 +115,7 @@ module.exports = function (passport) {
           user.save(function (err) {
             if (err) console.log(err);
             user.facebook = null;
+            console.log(user);
             return done(err, user);
           });
         } else {
