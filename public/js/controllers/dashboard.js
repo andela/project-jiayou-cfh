@@ -71,6 +71,8 @@ angular.module('mean.system')
       var tempPoints = output["points"];
       var valuesWins = Object.values(tempWins);
       var valuesPoints = Object.values(tempPoints);
+      var valuesPointsSetStat = [];
+      var valuesWinsSetStat = [];
       var prevMaxWins = 0;
       var prevMaxPoints = 0;
       for (var j = 0; j < valuesWins.length; j += 1) {
@@ -80,26 +82,25 @@ angular.module('mean.system')
         var maxPoints = valuesPoints.reduce(function(valuePrior, valueNext) {
           return Math.max(valuePrior, valueNext);
         });
-        if (maxWins === j && maxPoints === j) {
-          break;
-        }
         for (var k = 0; k < valuesWins.length; k += 1) {
-          if (valuesWins[k] === maxWins && prevMaxWins !== maxWins) {
+          if (valuesWins[k] === maxWins && valuesWinsSetStat !== 1) {
             valuesWins[k] = j + 1;
+            valuesWinsSetStat[k] = 1;
           }
-          if (valuesPoints[k] === maxPoints && prevMaxPoints !== maxPoints) {
+          if (valuesPoints[k] === maxPoints && valuesPointsSetStat[k] !== 1) {
             valuesPoints[k] = j + 1;
+            valuesPointsSetStat[k] = 1;
           }
         }
         prevMaxPoints = maxPoints;
         prevMaxWins = maxWins;
       }
       var ranks = [];
+      var ranksMain = [];
       for (var m = 0; m < valuesPoints.length; m += 1) {
         valuesWins[m] = (valuesWins[m] + valuesPoints[m]) / 2;
         ranks[m] = valuesWins[m];
       }
-
       for (var n = 0; n < ranks.length; n += 1) {
         var maxWinsFinal = valuesWins.reduce(function(valuePrior, valueNext) {
           return Math.max(valuePrior, valueNext);
@@ -109,25 +110,45 @@ angular.module('mean.system')
             var pos = ranks.length - n;
             if (pos === 1) {
               ranks[l] = pos + "st";
+              ranksMain[l] = pos;
             } else if (pos === 2) {
               ranks[l] = pos + "nd";
+              ranksMain[l] = pos;
             } else if (pos === 3) {
               ranks[l] = pos + "rd";
+              ranksMain[l] = pos;
             } else {
               ranks[l] = pos + "th";
+              ranksMain[l] = pos;
             }
           }
         }
         valuesWins[valuesWins.indexOf(maxWinsFinal)] = 0;
       }
+
+      var maxRank = ranksMain.reduce(function(valuePrior, valueNext) {
+        return Math.max(valuePrior, valueNext);
+      });
+      var temprank = {};
       for (var i = 0; i < valuesWins.length; i += 1) {
         var email = output["emails"][i];
-        var tempView = [];
-        tempView.push(ranks[i], output["avatars"][email], output["userNames"][email], email,
-          output["numberOfWins"][email], output["points"][email]);
-        $scope.views[i] = tempView;
+
+        var lowestRank = ranksMain.reduce(function(valuePrior, valueNext) {
+          return Math.min(valuePrior, valueNext);
+        });
+
+        var indexOfLowest = ranksMain.indexOf(lowestRank);
+        if (ranksMain[indexOfLowest] !== (maxRank + 1)) {
+          temprank[output["emails"][indexOfLowest]] = lowestRank;
+          ranksMain[indexOfLowest] = maxRank + 1;
+        }
       }
-      console.log(output);
+      for (var rank in temprank) {
+        var email = rank;
+        $scope.views.push([temprank[rank], output["avatars"][email], output["userNames"][email], email,
+          output["numberOfWins"][email], output["points"][email]
+        ]);
+      }
     };
 
     /**
