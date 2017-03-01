@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', '$window', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', '$window', 'jwtHelper', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window, $jwtHelper) {
     Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
@@ -10,6 +10,89 @@ angular.module('mean.system')
     $timeout(function() {
       $window.sessionStorage.setItem('gameID', game.gameID);
     }, 500);
+
+    $scope.friendList = [];
+  $scope.notifications = [];
+
+  var sendNotification = function (friendId, userId, mess) {
+    var privateSocket = io.connect(`/${friendId}`);
+    privateSocket.emit('message', { friend_Id: friendId, user_Id: userId, message: mess });
+  };
+
+  $scope.sendInvite2 = (friend) => {
+    array = [];
+    var currentUser = localStorage.getItem('Email');
+    if (currentUser !== friend) {
+      array.push({ email: friend });
+      if ($scope.sentEmails.indexOf(friend) === -1) {
+        $scope.sentEmails.push(friend);
+      } else {
+        $scope.cantSend.push(friend);
+      }
+      if ($scope.sentEmails.length > 11) {
+        $scope.canSend = false;
+      } else {
+        $scope.canSend = true;
+      }
+      if ($scope.canSend) {
+        $http.post('/api/search/users', { emailArray: array, link: document.URL, senderEmail: localStorage.getItem('Email') }).success(function (res) {
+          if (res.statusCode === 202) {
+            Materialize.toast('Invite Sent', 4000);
+          } else {
+            $location.path('/#!/signup');
+          }
+        });
+        $http({
+          method: 'GET',
+          url: `/api/get/friend/email?friend_email=${friend}`
+        }).then(function successCallback(response) {
+          $scope.friendId = response.data;
+          var user = localStorage.getItem('JWT');
+          var email = localStorage.getItem('Email');
+          var tokenDec = jwtHelper.decodeToken(user);
+          var linkStr = 'link';
+          var link = linkStr.link(document.URL);
+          $http({
+            method: 'GET',
+            url: `/api/username?email=${email}`
+          }).then(function successCallback2(response2) {
+            var username = response2.data;
+            var message = `${username} would like to invite you to join cards for humanity game. Kindly click this ${link} to join`;
+            $http.post('/api/saveNotifications', { friend_Id: $scope.friendId, user_Id: tokenDec._doc._id, mess: message }).success(function (res) {
+            });
+            sendNotification($scope.friendId, tokenDec._doc._id, message);
+          }, function errorCallback(response2) {
+          });
+        }, function errorCallback(response) {
+        });
+      } else {
+        Materialize.toast('You cannot invite more than 11', 4000);
+      }
+    } else {
+      Materialize.toast('You cannot invite yourself', 4000);
+    }
+  };
+
+  var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
+
+  $http({
+    method: 'GET',
+    url: `/api/notifications?id=${id}`
+  }).then(function successCallback(response) {
+    var data = response.data;
+    data.forEach((message) => {
+      $scope.notifications.push(`${message.date} - ${message.message}`);
+    });
+  }, function errorCallback(response) {
+  });
+  var myPrivateSocket = io.connect(`/${id}`);
+  myPrivateSocket.on('notify', function (message) {
+    $scope.notifications.push(`${message.date} - ${message.mess}`);
+  });
+
+  $scope.readNotifications = function () {
+    
+  };
 
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
@@ -40,6 +123,39 @@ angular.module('mean.system')
         return {};
       }
     };
+
+$scope.getFriendsEmail = function () {
+    var user = localStorage.getItem('JWT');
+    var tokenDec = jwtHelper.decodeToken(user);
+    $http({
+      method: 'GET',
+      url: `/api/get/friendsEmail?user_id=${tokenDec._doc._id}`
+    }).then(function successCallback(response) {
+      var data = response.data;
+      $scope.friendList = data;
+    }, function errorCallback(response) {
+    });
+  };
+
+  $scope.display = function () {
+    document.getElementById('friend').style.display = 'block';
+  };
+
+  $scope.addFriend = function () {
+    var user = localStorage.getItem('JWT');
+    var tokenDec = jwtHelper.decodeToken(user);
+    var friend = document.getElementById('newFriend').value;
+
+    $http.post('/api/friends', { email: friend, user_id: tokenDec._doc._id }).success(function (res) {
+      if (res.succ) {
+        setTimeout(() => {
+          $scope.$apply(() => {
+            $scope.friendList.push(res.email);
+          });
+        }, 1000);
+      }
+    });
+  };
 
     $scope.getEmail = function() {
       $scope.canSend = false;

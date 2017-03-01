@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Friend = mongoose.model('Friend'),
+  Notification = mongoose.model('Notification');
 var MongoClient = require('mongodb').MongoClient;
 var sendMail = require('sendgrid').mail;
 var dburl = process.env.DB_URL;
@@ -13,7 +15,7 @@ exports.invite = function (req, res) {
   <body>\
     <label>Hello, <\label><br>\
     <p> I would like to invite you to join cards for humanity game. </p>\
-    <p>Kindly click this  <a href = ='${req.body.link}'> link </a> to join</p>\
+    <p>Kindly click this  <a href ='${req.body.link}'/> link </a> to join</p>\
     <br><p>Regards,<p>jiayou team.</p></p>\
   </body>\
   </html>`;
@@ -53,3 +55,82 @@ exports.getEmail = function (req, res) {
     res.send(arr);
   });
 };
+
+exports.addFriend = function (req, res) {
+  var newFriend = new Friend();
+  Friend.findOne({ friend_email: req.body.email, user_id: req.body.user_id }, function (err, friends) {
+    if (friends) {
+      res.send({ success: false, message: 'Already a friend' });
+    } else {
+      User.findOne({ email: req.body.email }, function (err, friend) {
+        newFriend.friend_id = friend._id;
+        newFriend.friend_email = req.body.email;
+        newFriend.user_id = req.body.user_id;
+        newFriend.save(function (err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user
+            });
+          }
+        });
+      });
+      res.json({ succ: 'Successful', email: req.body.email });
+    }
+  });
+};
+
+exports.getFriendsEmail = function (req, res) {
+  var arr = [];
+  Friend.find({ user_id: req.query.user_id }, function (err, friend) {
+    friend.forEach((value) => {
+      arr.push(value.friend_email);
+    });
+    res.send(arr);
+  });
+};
+
+exports.getAFriend = function (req, res) {
+  var id = '';
+  Friend.find({ friend_email: req.query.friend_email }, function (err, friend) {
+    id = friend[0].friend_id;
+    res.send(id);
+  });
+};
+
+exports.getNotifications = function (req, res) {
+  var allNotifications = [];
+  var notify = {};
+  Notification.find({ user_Id: req.query.id }, function (err, notification) {
+    notification.forEach((value) => {
+      notify.message = value.message;
+      notify.date = value.date;
+      notify.user_Id = value.user_Id;
+      notify.sender_Id = value.sender_Id;
+      allNotifications.push(notify);
+    });
+    res.send(allNotifications);
+  });
+};
+
+exports.saveNotifications = function (req, res) {
+  var notification = new Notification();
+  notification.status = 'unread';
+  notification.message = req.body.mess;
+  notification.date = new Date();
+  notification.user_Id = req.body.friend_Id;
+  notification.sender_Id = req.body.user_Id;
+  notification.save(function (err) {
+  });
+};
+
+exports.getUserName = function (req, res) {
+  var userName = '';
+  User.find({ email: req.query.email }, function (err, user) {
+    user.forEach((userDetails) => {
+      userName = userDetails.username;
+    });
+    res.send(userName);
+  });
+};
+

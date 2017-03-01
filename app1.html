@@ -1,11 +1,11 @@
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
 <div ng-controller="GameController">
-  <div class=" light-blue darken-3 top-navbar">
-    <div class="row valign-wrapper" style="min-height: 50px">
-      <div class="col m8 valign">
+  <div class=" light-blue darken-3 top-navbar" >
+    <div class="row valign-wrapper" style="min-height: 50px;position: relative; ">
+      <div class="col m9"> 
         <div class="white-text" id="cfh-icon">CFH</div>
       </div>
-           <div class="col m3">
+      <div class="col m3">
           <div class="col m4"  >
             <i  data-activates='dropdown1' class="dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
             <!-- Dropdown Structure -->
@@ -18,48 +18,26 @@
           <div class="col m8">
             <a class="chip red darken-3 white-text" ng-click="abandonGame()">Abandon Game</a>
           </div>
-      </div> 
-      <div>
-      </div>
+      </div>          
     </div>
   </div>
 
-  <div class="question-top  container">
-    <div class="gameplay-container">
-      <div class="row">
-        <div class="col m9 s12">
-          <div class="valign-wrapper question-top">
-            <div id="axis" tabindex="1" class="valign preload">
-              <div class="front card col m4" id="outer" ng-class="(game.state !== 'awaiting players') && (game.state !== 'game ended') && (game.state !== 'game dissolved') && (game.state !== 'waiting for czar to draw cards') || (cardDeckClicked) ? 'flipped': ''">
-                <div class="inner">
-                  <span ng-bind-html="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
-                </div>
-                <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
-
+    <div class="question-top container">
+      <div class="gameplay-container">
+        <div class="row">
+          <div class="col m9 s12">
+            <div class="valign-wrapper question-top">
+              <div class="questions valign col m8 s12">
+                <question></question>
               </div>
-              <div class="back center-align draw-card" id="backface" ng-click="drawCard()" ng-class="(game.state !== 'awaiting players') && (game.state !== 'game ended') && (game.state !== 'game dissolved') && (game.state !== 'waiting for czar to draw cards') || cardDeckClicked ? 'flipped': ''">
-
-                <div ng-show="game.state === 'waiting for czar to draw cards' && isCzar()" class="czar-click">
-                  <h3>Click to draw the next question</h3>
-                </div>
-
-                <div ng-show="game.state === 'waiting for czar to draw cards' && !isCzar()" class="czar-click">
-                  <h3>Wait for Czar to draw next question</h3>
-                </div>
-              </div>
+              <div class="card col m4"> CARD DECK</div>
             </div>
-            <div class="questions valign col m8 s12">
-              <question>
-              </question>
+            <div class="row">
+              <answers></answers>
             </div>
-          </div>
-          <div class="row">
-            <answers></answers>
-          </div>
         </div>
-        <div class="col m3" id="player-timer">
-          <timer></timer>
-
+        <div class="col m3" id = "player-timer">
+          <timer></timer>   
           <player></player>
           <div class="col m10">
               <ul style="position: absolute; z-index: 2; width: 250px; background-color: white" class="collapsible" data-collapsible="accordion">
@@ -83,11 +61,37 @@
       </div>
     </div>
   </div>
-  <div class="col m9 s12">
-    <chat></chat>
+  <div class="col m12 chat-container " id="chatContainer">
+    <button class="btn-flat" style = "outline: none" id="openChatButton">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button>
+    <div class="chat">
+      <div class="chat-title">
+        
+      </div>
+      <div class="messages">
+        <div class="messages-content"></div>
+      </div>
+      <div class="message-box">
+        <textarea type="text" class="message-input" placeholder="Type message..."></textarea>
+        <button type="submit" class="message-submit">Send</button>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
 <script>
+  $("#openChatButton").click(function() {
+    $("#chatContainer").toggleClass("activeChat");
+  });
+
+  // Use a directive
+  if (!(localStorage.getItem('JWT') && localStorage.getItem('Email')) || !localStorage.getItem('jwtToken')) {
+    localStorage.setItem('sign_in', true);
+  }
+  
       $(document).ready(function(){
         $('.collapsible').collapsible({accordion: true, hover:true});
       });

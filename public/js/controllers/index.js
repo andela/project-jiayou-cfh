@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$http', 'jwtHelper', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', function ($scope, Global, $http, jwtHelper, $location, socket, game, AvatarService, authService, $window, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function() {
@@ -20,9 +20,12 @@ angular.module('mean.system')
         $scope.avatars = data;
       });
 
-    var signInSuccess = function(res) {
+
+    var signInSuccess = function (res) {
       if (res.success) {
         // Write token to local storage
+        var tokenDec = jwtHelper.decodeToken(res.token);
+        socket.emit('user', tokenDec._doc._id);
         localStorage.setItem('JWT', res.token);
         localStorage.setItem('Email', res.userEmail);
         window.user = res.user;
@@ -104,7 +107,6 @@ angular.module('mean.system')
     $scope.userLogin = function() {
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
-
 
     var signUpSuccess = function(res) {
       if (res.success) {
