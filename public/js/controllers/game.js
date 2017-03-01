@@ -1,17 +1,19 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', '$window', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window) {
     Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
-    // boolean that tracks if the card deck has been clicked
-    $scope.cardDeckClicked = false;
+
     $scope.game = game;
+    $timeout(function() {
+      $window.sessionStorage.setItem('gameID', game.gameID);
+    }, 500);
+
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
-
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -150,20 +152,18 @@ angular.module('mean.system')
       return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
     };
 
-    $scope.isCzar = function() {
-      return game.czar === game.playerIndex;
+    $scope.isPlayer = function($index) {
+      $window.sessionStorage.setItem('Username', game.players[game.playerIndex].username);
+      $window.sessionStorage.setItem('Avatar', game.players[game.playerIndex].avatar);
+      return $index === game.playerIndex;
     };
 
-    $scope.isPlayer = function($index) {
-      return $index === game.playerIndex;
+    $scope.showSecond = function(card) {
+      return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
     };
 
     $scope.isCustomGame = function() {
       return !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players';
-    };
-
-    $scope.isPremium = function($index) {
-      return game.players[$index].premium;
     };
 
     $scope.currentCzar = function($index) {

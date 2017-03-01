@@ -180,15 +180,16 @@ angular.module('mean.system')
           game.joinOverride = true;
         }, 15000);
       } else if (data.state === 'game dissolved' || data.state === 'game ended') {
-        var gameid = localStorage.getItem('gameDBId');
-        console.log(gameid);
-        $http.put(`/api/games/${gameid}/end`, {
-          creator: localStorage.getItem('Email'),
-          winner: game.players[game.gameWinner],
-          numberOfRounds: game.round,
-          players: game.players,
-          state: game.state
-        });
+        if ($location.search().game) {
+          var gameid = localStorage.getItem('gameDBId');
+          $http.put(`/api/games/${gameid}/end`, {
+            creator: localStorage.getItem('Email'),
+            winner: game.players[game.gameWinner],
+            numberOfRounds: game.round,
+            players: game.players,
+            state: game.state
+          });
+        }
         game.players[game.playerIndex].hand = [];
         game.time = 0;
       }

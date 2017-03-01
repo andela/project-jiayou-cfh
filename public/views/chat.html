@@ -1,0 +1,24 @@
+<div class="col m12 chat-container " id="chatContainer">
+    <button class="btn-flat" style = "outline: none" id="openChatButton">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button>
+    <div class="chat">
+      <div class="chat-title">
+        
+      </div>
+      <div class="messages">
+        <div id ="results"  style="padding-left: 10px; color: black" class="messages-content"></div>
+      </div>
+      <div class="message-box">
+      <textarea id="text" class="message-input" placeholder="Type message..."></textarea>
+      <button id="post" class="message-submit">Send</button>
+      </div>
+    </div>
+</div>
+<script>
+$("#openChatButton").click(function() {
+  $("#chatContainer").toggleClass("activeChat");
+});
+</script>
+
+  

@@ -127,6 +127,7 @@ angular.module('mean.system')
           output["numberOfWins"][email], output["points"][email]);
         $scope.views[i] = tempView;
       }
+      console.log(output);
     };
 
     /**
