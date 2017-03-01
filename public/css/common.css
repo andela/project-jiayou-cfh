@@ -869,7 +869,6 @@ body {
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
 
-<<<<<<< HEAD
 /*----------------------------
 Card flipping animation start
 ----------------------------*/
@@ -946,13 +945,11 @@ Card flipping animation start
 /*--------------------------
 Card flipping animation end
 ---------------------------*/
-=======
 .cursor {
   border-style: solid;
   border-color: #0277bd;
   border-width: 3px; }
 
->>>>>>> ad493a49eb46560813325068c56446c8945ef45b
 .chat {
   width: 300px;
   height: 80vh;
@@ -1096,6 +1093,27 @@ Message Box
     z-index: 100; }
 
 .activeChat {
+  transition: all .5s;
+  transform: translateY(0%); }
+
+.player-chip {
+  background-image: url(../img/11.png);
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: -2px;
+  right: 50px; }
+
+.the-card {
+  background-image: url(../img/ribbon5.png);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right bottom;
+  max-height: 245px;
+  height: 100%;
+  opacity: 50;
   transition: all .5s;
   transform: translateY(0%); }
 

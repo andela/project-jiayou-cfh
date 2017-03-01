@@ -41,6 +41,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
       when('/signin-up', {
         templateUrl: '/views/signin-up.html'
       }).
+      when('/gametour', {
+        templateUrl: '/views/tour.html'
+      }).
       otherwise({
         redirectTo: '/'
       });

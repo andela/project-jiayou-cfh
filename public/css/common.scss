@@ -1267,16 +1267,12 @@ Card flipping animation end
   animation: ball .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
 }
 
-<<<<<<< HEAD
-=======
-.cursor{
-    border-style: solid; 
-    border-color: #0277bd;
-    border-width: 3px;
-
+.cursor {
+  border-style: solid;
+  border-color: #0277bd;
+  border-width: 3px;
 }
 
->>>>>>> ad493a49eb46560813325068c56446c8945ef45b
 .chat {
   // @include right;
   width: 300px;
@@ -1444,7 +1440,6 @@ Message Box
 }
 
 .activeChat {
-<<<<<<< HEAD
   transition: all .5s;
   transform: translateY(0%);
 }
@@ -1468,31 +1463,29 @@ Message Box
   max-height: 245px;
   height: 100%;
   opacity: 50;
-=======
-    transition: all .5s;
-    transform: translateY(0%);
+  transition: all .5s;
+  transform: translateY(0%);
 }
 
-.player-chip{
-    background-image: url(../img/11.png); 
-    background-size: 15px; 
-    width: 15px; 
-    height: 15px; 
-    position: absolute;  
-    top: -2px; 
-    right: 50px
+.player-chip {
+  background-image: url(../img/11.png);
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: -2px;
+  right: 50px
 }
 
-.the-card{
-    //background-image: url(../img/ribbon5.png);
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: right bottom;
-    max-height: 245px;
-    height: 100%;
-    opacity: 50;
->>>>>>> ad493a49eb46560813325068c56446c8945ef45b
+.the-card {
+  //background-image: url(../img/ribbon5.png);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right bottom;
+  max-height: 245px;
+  height: 100%;
+  opacity: 50;
 }
 
 .player-card {
@@ -1539,58 +1532,53 @@ Message Box
 }
 
 #cfh-icon {
-<<<<<<< HEAD
   font-size: 30px;
   font-family: ubuntu;
   padding-left: 70px;
 }
-=======
-    font-size: 30px; 
-    font-family: ubuntu; 
-    padding-left: 70px;
-}
 
 .emoji-picker-icon {
-    position: absolute;
-    left: 5px;
-    top: -1px !important;
-    font-size: 18px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    opacity: 0.7;
-    padding-top: 9px !important;
-    z-index: 100;
-    transition: none;
-    color: black;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    width: 15px;
+  position: absolute;
+  left: 5px;
+  top: -1px !important;
+  font-size: 18px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  opacity: 0.7;
+  padding-top: 9px !important;
+  z-index: 100;
+  transition: none;
+  color: black;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  width: 15px;
 }
+
 .emoji-menu {
-    top: -280px !important;
-    left: 2px !important;
-    position: absolute;
-    z-index: 5002;
-    width: 220px;
-    overflow: hidden;
-    border: 1px #dfdfdf solid;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    overflow: hidden;
-    transform: relative;
-    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  top: -280px !important;
+  left: 2px !important;
+  position: absolute;
+  z-index: 5002;
+  width: 220px;
+  overflow: hidden;
+  border: 1px #dfdfdf solid;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  transform: relative;
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
 }
+
 .emoji-picker-container {
-    position: relative;
+  position: relative;
 }
->>>>>>> ad493a49eb46560813325068c56446c8945ef45b
