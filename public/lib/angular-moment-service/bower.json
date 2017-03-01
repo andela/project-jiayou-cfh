@@ -1,0 +1,24 @@
+{
+  "name": "angular-moment-service",
+  "version": "0.1.0",
+  "authors": [
+    "Igor Rafael <igor.rafael@gmail.com>"
+  ],
+  "description": "AngularJS Service for dependency injection of moment.js\"",
+  "keywords": [
+    "angular",
+    "momentjs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "momentjs": "~2.8.3"
+  }
+}

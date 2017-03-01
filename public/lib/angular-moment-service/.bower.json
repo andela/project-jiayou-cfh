@@ -1,0 +1,34 @@
+{
+  "name": "angular-moment-service",
+  "version": "0.1.0",
+  "authors": [
+    "Igor Rafael <igor.rafael@gmail.com>"
+  ],
+  "description": "AngularJS Service for dependency injection of moment.js\"",
+  "keywords": [
+    "angular",
+    "momentjs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "momentjs": "~2.8.3"
+  },
+  "homepage": "https://github.com/assisrafael/angular-momentjs",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "fdedbb1f335108d443150e70494a6e7c36a3e051"
+  },
+  "_source": "https://github.com/assisrafael/angular-momentjs.git",
+  "_target": "^0.1.0",
+  "_originalSource": "angular-momentjs-service"
+}

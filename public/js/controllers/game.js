@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', '$window', 'jwtHelper', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window, $jwtHelper) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http', '$dialog', 'gameModals', '$window', 'jwtHelper', function($scope, game, $timeout, $location, MakeAWishFactsService, $http, $dialog, gameModals, $window, jwtHelper) {
     Materialize.toast('Welcome!', 4000);
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;

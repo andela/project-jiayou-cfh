@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$http', 'jwtHelper', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', function ($scope, Global, $http, jwtHelper, $location, socket, game, AvatarService, authService, $window, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$http', 'jwtHelper', '$location', 'socket', 'game', 'AvatarService', 'authService', '$window', '$timeout', 'gameModals', function ($scope, Global, $http, jwtHelper, $location, socket, game, AvatarService, authService, $window, $timeout, gameModals) {
     $scope.global = Global;
     $scope.credentials = {};
     $scope.playAsGuest = function() {
