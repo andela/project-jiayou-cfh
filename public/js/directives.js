@@ -1,30 +1,30 @@
 angular.module('mean.directives', [])
-  .directive('player', function () {
+  .directive('player', function() {
     return {
       restrict: 'EA',
       templateUrl: '/views/player.html',
-      link: function (scope, elem, attr) {
+      link: function(scope, elem, attr) {
         scope.colors = ['#7CE4E8', '#FFFFa5', '#FC575E', '#F2ADFF', '#398EC4', '#8CFF95'];
       }
     };
-  }).directive('answers', function () {
+  }).directive('answers', function() {
     return {
       restrict: 'EA',
       templateUrl: '/views/answers.html',
       link(scope, elem, attr) {
-        scope.$watch('game.state', function () {
+        scope.$watch('game.state', function() {
           if (scope.game.state === 'winner has been chosen') {
             var curQ = scope.game.curQuestion;
             var curQuestionArr = curQ.text.split('_');
             var startStyle = "<span style='color: " + scope.colors[scope.game.players[scope.game.winningCardPlayer].color] + "'>";
             var endStyle = "</span>";
             var shouldRemoveQuestionPunctuation = false;
-            var removePunctuation = function (cardIndex) {
+            var removePunctuation = function(cardIndex) {
               var cardText = scope.game.table[scope.game.winningCard].card[cardIndex].text;
               if (cardText.indexOf('.', cardText.length - 2) === cardText.length - 1) {
                 cardText = cardText.slice(0, cardText.length - 1);
               } else if ((cardText.indexOf('!', cardText.length - 2) === cardText.length - 1 ||
-                cardText.indexOf('?', cardText.length - 2) === cardText.length - 1) &&
+                  cardText.indexOf('?', cardText.length - 2) === cardText.length - 1) &&
                 cardIndex === curQ.numAnswers - 1) {
                 shouldRemoveQuestionPunctuation = true;
               }
@@ -51,24 +51,24 @@ angular.module('mean.directives', [])
         });
       }
     };
-  }).directive('question', function () {
+  }).directive('question', function() {
     return {
       restrict: 'EA',
       templateUrl: '/views/question.html',
-      link: function (scope, elem, attr) { }
+      link: function(scope, elem, attr) {}
     };
   })
-  .directive('timer', function () {
+  .directive('timer', function() {
     return {
       restrict: 'EA',
       templateUrl: '/views/timer.html',
-      link: function (scope, elem, attr) { }
+      link: function(scope, elem, attr) {}
     };
   })
-  .directive('landing', function ($timeout, $http) {
+  .directive('landing', function($timeout, $http) {
     return {
       restrict: 'EA',
-      link: function (scope, elem, attr) {
+      link: function(scope, elem, attr) {
         scope.showOptions = true;
         scope.showNavBar = true;
         scope.signOut = false;
@@ -85,7 +85,7 @@ angular.module('mean.directives', [])
         } else if (sessionStorage.getItem('guestPlayer')) {
           scope.showNavBar = true;
         }
-        scope.playAsGuest = function () {
+        scope.playAsGuest = function() {
           sessionStorage.setItem('guestPlayer', 'true');
         };
 
@@ -94,18 +94,18 @@ angular.module('mean.directives', [])
          * media account
          * @returns {undefined}
          */
-        scope.socialPlayer = function () {
+        scope.socialPlayer = function() {
           sessionStorage.setItem('socialPlayer', 'true');
         };
 
         if (localStorage.getItem('JWT')) {
           // Fix ??
           // set alert message to true for 4000ms
-          $timeout(function () {
+          $timeout(function() {
             scope.signOut = false;
           }, 4000);
         }
-        scope.userLogout = function () {
+        scope.userLogout = function() {
           // remove the JWT, email and expDate on logout
           localStorage.clear();
           sessionStorage.removeItem('socialPlayer');
@@ -113,11 +113,11 @@ angular.module('mean.directives', [])
       }
     };
   })
-  .directive('alertMessage', function ($timeout) {
+  .directive('alertMessage', function($timeout) {
     // this direction display an alert for a particular time
-    var linkFunction = function (scope) {
+    var linkFunction = function(scope) {
       scope.showAlert = true;
-      $timeout(function () {
+      $timeout(function() {
         scope.showAlert = false;
       }, 4000);
     };

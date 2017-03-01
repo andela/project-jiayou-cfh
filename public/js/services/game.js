@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', '$sce', function(socket, $timeout, $sce) {
+  .factory('game', ['socket', '$timeout', '$sce', '$http', function(socket, $timeout, $sce, $http) {
     var game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -17,6 +17,7 @@ angular.module('mean.system')
       round: 0,
       time: 0,
       curQuestion: null,
+      curQuestionNonHtml: null,
       notification: null,
       timeLimits: {},
       joinOverride: false
@@ -145,8 +146,8 @@ angular.module('mean.system')
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
         // Extending the underscore within the question
-        game.curQuestion.text = $sce.trustAsHtml(data.curQuestion.text.replace(/_/g, '<u></u>'));
-
+        game.curQuestionNonHtml = data.curQuestion.text.replace(/_/g, '<u></u>');
+        game.curQuestion.text = $sce.trustAsHtml(game.curQuestionNonHtml);
         // Set notifications only when entering state
         if (newState) {
           if (game.czar === game.playerIndex) {
@@ -172,13 +173,22 @@ angular.module('mean.system')
           // addToNotificationQueue('The czar is drawing the cards...');
         }
       } else if (data.state === 'winner has been chosen' &&
-        game.curQuestion.text.indexOf('<u></u>') > -1) {
+        game.curQuestionNonHtml.indexOf('<u></u>') > -1) {
         game.curQuestion = data.curQuestion;
       } else if (data.state === 'awaiting players') {
         joinOverrideTimeout = $timeout(function() {
           game.joinOverride = true;
         }, 15000);
       } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+        var gameid = localStorage.getItem('gameDBId');
+        console.log(gameid);
+        $http.put(`/api/games/${gameid}/end`, {
+          creator: localStorage.getItem('Email'),
+          winner: game.players[game.gameWinner],
+          numberOfRounds: game.round,
+          players: game.players,
+          state: game.state
+        });
         game.players[game.playerIndex].hand = [];
         game.time = 0;
       }

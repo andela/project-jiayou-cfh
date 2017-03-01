@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
   Games = mongoose.model('Game');
 
-exports.startGame = function (req, res) {
+exports.startGame = function(req, res) {
   var gameId = 0;
   Games.find()
     .exec((err, games) => {
@@ -18,13 +18,13 @@ exports.startGame = function (req, res) {
       }
       var game = new Games({
         id: gameId,
-        czar: req.body.email,
+        creator: req.body.email,
         winner: '',
-        players: [req.body.email],
+        players: [],
         numberOfRounds: 0,
         state: 'start',
       });
-      game.save(function (err) {
+      game.save(function(err) {
         if (err) {
           res.json({
             success: false,
@@ -42,7 +42,7 @@ exports.startGame = function (req, res) {
     });
 };
 
-exports.findAllRecord = function (req, res) {
+exports.findAllRecord = function(req, res) {
   Games.find()
     .exec((err, games) => {
       if (err) {
@@ -56,7 +56,7 @@ exports.findAllRecord = function (req, res) {
     });
 };
 
-exports.updateGame = function (req, res) {
+exports.updateGame = function(req, res) {
   Games.findOne({
     id: req.params.id
   }).exec((err, games) => {
@@ -82,7 +82,7 @@ exports.updateGame = function (req, res) {
         creator: game.creator
       }]
     };
-    Games.update({ id: req.params.id }, game, function (err, result) {
+    Games.update({ id: req.params.id }, game, function(err, result) {
       if (err) {
         res.status(500).json({
           message: 'An error occured while updating this data',
@@ -98,15 +98,17 @@ exports.updateGame = function (req, res) {
   });
 };
 
-exports.getGame = function (req, res) {
-  Games.find({ creator: req.params.email }, function (err, result) {
+exports.getGame = function(req, res) {
+  Games.find({ creator: req.params.email }, function(err, result) {
     if (err) {
       res.status(500).json({
         message: 'An error occured while updating this data',
         error: err
       });
     } else {
+      console.log("ela", result);
       res.status(200).json(result);
+
     }
   });
 };
