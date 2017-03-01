@@ -27,18 +27,19 @@ angular.module('mean.system')
             $scope.hasPickedCards = true;
             $timeout($scope.sendPickedCards, 300);
           }
+        } else {
+          $scope.pickedCards.pop();
         }
       }
     };
 
     $scope.pointerCursorStyle = function() {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return { 'cursor': 'pointer' };
+        return { cursor: 'pointer' };
       } else {
-        $scope.pickedCards.pop();
+        return {};
       }
     };
-
 
     $scope.getEmail = function() {
       $scope.canSend = false;
@@ -51,18 +52,9 @@ angular.module('mean.system')
       }, function errorCallback(response) {});
     };
 
-    $scope.checkAll = function() {
-      $scope.selected = angular.copy($scope.emails);
-    };
-
-    $scope.uncheckAll = function() {
-      $scope.selected = angular.copy([]);
-    };
-
     $scope.sentEmails = [];
     $scope.canSend = false;
     $scope.cantSend = [];
-
     $scope.sendInvite = function() {
       array = [];
       var selectedEmail = document.getElementById('select').value;
@@ -98,6 +90,7 @@ angular.module('mean.system')
       }
       document.getElementById('select').value = '';
     };
+
 
     $scope.timer = function(howLong) {
       $timeout(function() {

@@ -9,8 +9,8 @@
       <div class="messages">
         <div id ="results"  style="padding-left: 10px; color: black" class="messages-content"></div>
       </div>
-      <div class="message-box">
-      <textarea id="text" class="message-input" placeholder="Type message..."></textarea>
+      <div class="message-box lead emoji-picker-container">
+      <textarea id="text" class="message-input" data-emojiable="true" data-emoji-input="unicode" type="text" placeholder="Type message..."></textarea>
       <button id="post" class="message-submit">Send</button>
       </div>
     </div>
@@ -19,6 +19,8 @@
 $("#openChatButton").click(function() {
   $("#chatContainer").toggleClass("activeChat");
 });
-</script>
 
+
+</script>
+<script type='text/javascript', src='/js/emoji.js'></script>
   
