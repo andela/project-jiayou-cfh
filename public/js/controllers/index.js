@@ -97,6 +97,21 @@ angular.module('mean.system')
       });
     };
 
+    $scope.startGameDash = function() {
+      var dialogDetails = {
+        title: "Game Starting",
+        content: "You are about to start a new game?",
+        label: "Start Game From Dashboard",
+        okTitle: "Yes",
+        cancelTitle: "No"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function() {
+        startGame();
+      }, function() {
+        showGameLog();
+      });
+    };
+
     var signInFailure = function(err) {
       $scope.userActive = false;
     };

@@ -1,15 +1,16 @@
 <div class=" light-blue darken-3 top-navbar">
-    <div class="row valign-wrapper" style="min-height: 50px">
-      <div class="col m8 valign">
-        <div class="white-text" id="cfh-icon">CFH</div>
-      </div>
-      <div class="col m4 right-align" style="padding-right: 70px;">
-        <a class="darken-3 dashboard-menu" href="#!/">Home</a>
-      </div>
-      <div>
-      </div>
+  <div class="row valign-wrapper" style="min-height: 50px">
+    <div class="col m8 valign">
+      <div class="white-text" id="cfh-icon">CFH</div>
+    </div>
+    <div class="col m4 right-align" style="padding-right: 70px;" ng-controller="IndexController">
+      <a class="darken-3 dashboard-menu" href="#!/">Home</a>
+      <a class="darken-3 dashboard-menu" ng-click="startGameDash()">Start Game</a>
+    </div>
+    <div>
     </div>
   </div>
+</div>
 <div class="container content" ng-controller="DashboardController">
   <div class="col s12">
     <ul class="tabs">
@@ -21,7 +22,7 @@
   <div class="row">
     <h1 class="gamelog-header">Game Log</h1>
     <div class="alert alert-danger" role="alert" ng-show="errorMessage">
-        <strong><span ng-bind="message"></span></strong>
+      <strong><span ng-bind="message"></span></strong>
     </div>
     <div class="col m12">
     </div>
