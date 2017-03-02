@@ -10,9 +10,9 @@
             <i  data-activates='dropdown1' class="dropdown-button material-icons mdl-badge mdl-badge--overlap" data-badge="1">notifications_none</i>
             <!-- Dropdown Structure -->
             <ul id='dropdown1' class='dropdown-content'>
-              <li class="head"><label style="font-size: 15px">Notifications</label></li>
-              <li ng-if="notifications.length < 1"><label style="font-size: 12px; color: lightblue">No notifications</label></li>
-              <li class= "tail" ng-repeat='notification in notifications track by $index' ><hr><label style="font-size: 12px;color: lightblue" ng-bind-html="notification">{{ notification }}</label></li>
+              <li class="head" ><label style="font-size: 15px">Notifications</label></li>
+              <li ng-if="notifications.length < 1"><label style="font-size: 12px; color: lightblue">None</label></li>
+              <li class= "tail" style="height: 1px" ng-repeat='notification in notifications track by $index' ><hr><label style="font-size: 12px;color: lightblue" ng-bind-html="notification">{{ notification }}</label></li>
             </ul>
           </div>
           <div class="col m8">
@@ -88,10 +88,10 @@
   </div>
 </div>
 <script>
+      
       $(document).ready(function(){
         $('.collapsible').collapsible({accordion: true, hover:true});
       });
-            // console.log("intiate dropdown");
             $('.dropdown-button').dropdown({
               inDuration: 300,
               outDuration: 100,
