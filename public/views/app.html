@@ -66,7 +66,7 @@
                 <li style="margin-left: 0; background-color: white">
                   <div class=" collapsible-header white-text z-depth-2 light-blue darken-3" ng-click="getEmail();getFriendsEmail()">Friends</div>
                   <div class="collapsible-body">
-                  <input style="width: 150px" id="newFriend" type="text" list="emails" placeholder="Enter email to add friend"  />
+                  <input style="width: 150px; color: black;" id="newFriend" type="text" list="emails" placeholder="Enter email to add friend"  />
                       <datalist id="emails" >
                                 <option ng-repeat="email in emails track by $index"  value = "{{email}}" ></option>
                       </datalist>

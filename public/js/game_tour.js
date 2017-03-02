@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameTourController', ['$scope', '$window', function($scope, $window) {
+  .controller('GameTourController', ['$scope', '$window', 'gameModals', '$location', function ($scope, $window, gameModals, $location) {
     // exit game tour when we navigate pages
     $scope.$on('$locationChangeSuccess', () => {
       if ($scope.gameTour) {
@@ -14,108 +14,123 @@ angular.module('mean.system')
     $scope.gameTour.setOption('showBullets', true);
     $scope.gameTour.setOptions({
       steps: [{
-          intro: `This guided tour will explain how to play Cards For Humanity.
+        intro: `This guided tour will explain how to play Cards For Humanity.
           Use the arrow keys for navigation or hit ESC to exit the
          tour and proceed to playing the game.`
-        },
-        {
-          element: '#loading-container',
-          intro: `Game needs a minimum of 3 players to start.
+      },
+      {
+        element: '#loading-container',
+        intro: `Game needs a minimum of 3 players to start.
           You have to wait for minimum number of players to join the game.`
-        },
-        {
-          element: '#player-container',
-          intro: 'Here you have info about yourself and the current game.'
-        },
-        {
-          element: '#player-avatar',
-          intro: 'This is your Avatar.'
-        },
-        {
-          element: '#player-star',
-          intro: `Icon to for you to easily identify yourself amongst
+      },
+      {
+        element: '#player-container',
+        intro: 'Here you have info about yourself and the current game.'
+      },
+      {
+        element: '#player-avatar',
+        intro: 'This is your Avatar.'
+      },
+      {
+        element: '#player-star',
+        intro: `Icon to for you to easily identify yourself amongst
          other players.`
-        },
-        {
-          element: '#player-score',
-          intro: `You score during each round of  the game. The game continues 
+      },
+      {
+        element: '#player-score',
+        intro: `You score during each round of  the game. The game continues 
         until a player wins 5 rounds i.e 5/5.`
-        },
-        {
-          element: '#start-game-button',
-          intro: `Once minimum required players have joined, you or any other user
+      },
+      {
+        element: '#start-game-button',
+        intro: `Once minimum required players have joined, you or any other user
          can start the game by clicking on the start game button.`
-        },
-        {
-          element: '#question',
-          intro: 'Once a game is started, a question is displayed.'
-        },
-        {
-          element: '#cards',
-          intro: `You also have different answer cards to pick what you deem
+      },
+      {
+        element: '#question',
+        intro: 'Once a game is started, a question is displayed.'
+      },
+      {
+        element: '#cards',
+        intro: `You also have different answer cards to pick what you deem
          the most appropriate answer to the question.`,
-          position: 'top'
-        },
-        {
-          element: '#inner-timer-container',
-          intro: `Timer counts down. You have a limited time to choose an answer
+        position: 'top'
+      },
+      {
+        element: '#inner-timer-container',
+        intro: `Timer counts down. You have a limited time to choose an answer
           to the current question.`
-        },
-        {
-          element: '#answer',
-          intro: 'This is the answer to the question',
-          position: 'top'
-        },
-        {
-          element: '#the-czar',
-          intro: `The background turns grey so that 
+      },
+      {
+        element: '#answer',
+        intro: 'This is the answer to the question',
+        position: 'top'
+      },
+      {
+        element: '#the-czar',
+        intro: `The background turns grey so that 
           you can easily identify that you are the Czar.`
-        },
-        {
-          element: '#openChatButton',
-          intro: 'While in a game, you can chat with other players.',
-          position: 'top'
-        },
-        {
-          element: '#join-new-game',
-          intro: `After a game ends (because too many players left the game 
+      },
+      {
+        element: '#openChatButton',
+        intro: 'While in a game, you can chat with other players.',
+        position: 'top'
+      },
+      {
+        element: '#join-new-game',
+        intro: `After a game ends (because too many players left the game 
         or a player won), you can join a new game.`,
-          position: 'top'
-        },
-        {
-          element: '#exit-match',
-          intro: 'You could also return to the lobby once the game hends.',
-          position: 'top'
-        },
-        {
-          element: '#charity-widget-container',
-          intro: `Click here to donate to charity at the end of the game.`,
-          position: 'top'
-        },
-        {
-          element: '#abandon-game',
-          intro: 'You can click this icon to abandon a game at any time.'
-        },
-        {
-          element: '#home',
-          intro: 'You can click done to return to go to the game page',
-          position: 'top'
-        }
+        position: 'top'
+      },
+      {
+        element: '#exit-match',
+        intro: 'You could also return to the lobby once the game hends.',
+        position: 'top'
+      },
+      {
+        element: '#charity-widget-container',
+        intro: 'Click here to donate to charity at the end of the game.',
+        position: 'top'
+      },
+      {
+        element: '#abandon-game',
+        intro: 'You can click this icon to abandon a game at any time.'
+      },
+      {
+        element: '#home',
+        intro: 'You can click done to return to go to the game page',
+        position: 'top'
+      }
 
       ]
     });
 
-    const isGameCustom = () => {
-      const custom = $window.location.href.indexOf('custom') >= 0;
-      return (custom);
-    };
+    // const isGameCustom = () => {
+    //   const custom = $window.location.href.indexOf('custom') >= 0;
+    //   return (custom);
+    // };
 
+    $scope.showDialog = function () {
+      var dialogDetails = {
+        title: 'Sign up was Successful!',
+        content: 'Please sign in to play the game',
+        okTitle: 'Sign In',
+        cancelTitle: 'Back'
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        $location.path('/signin');
+      }, function () {
+        $location.path('/');
+      });
+    };
     const tourComplete = () => {
-      if (isGameCustom()) {
-        $window.location = '/play?custom';
-      } else {
-        $window.location = '/play';
-      }
+      // if (isGameCustom()) {
+      //   $window.location = '/play?custom';
+      // } else {
+      //   $window.location = '/play';
+      // }
+      $scope.showDialog();
+    //  }
     };
 
     const beforeTourChange = (targetElement) => {

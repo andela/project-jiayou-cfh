@@ -73,22 +73,24 @@ angular.module('mean.system')
       }
     };
 
-    var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
+    if (!sessionStorage.getItem('guestPlayer')) {
+      var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
 
-    $http({
-      method: 'GET',
-      url: `/api/notifications?id=${id}`
-    }).then(function successCallback(response) {
-      var data = response.data;
-      data.forEach((message) => {
-        $scope.notifications.push(`${message.date} - ${message.message}`);
+      $http({
+        method: 'GET',
+        url: `/api/notifications?id=${id}`
+      }).then(function successCallback(response) {
+        var data = response.data;
+        data.forEach((message) => {
+          $scope.notifications.push(`${message.date} - ${message.message}`);
+        });
+      }, function errorCallback(response) {
       });
-    }, function errorCallback(response) {
-    });
-    var myPrivateSocket = io.connect(`/${id}`);
-    myPrivateSocket.on('notify', function (message) {
-      $scope.notifications.push(`${message.date} - ${message.mess}`);
-    });
+      var myPrivateSocket = io.connect(`/${id}`);
+      myPrivateSocket.on('notify', function (message) {
+        $scope.notifications.push(`${message.date} - ${message.mess}`);
+      });
+    }
 
     $scope.readNotifications = function () {
 

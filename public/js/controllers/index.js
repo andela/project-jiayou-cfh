@@ -202,7 +202,7 @@ angular.module('mean.system')
     };
 
     var playAsGuest = () => {
-      $location.path('/gametour');
+      $location.path('/app');
     };
 
     var showSignup = () => {
@@ -216,6 +216,7 @@ angular.module('mean.system')
         cancelTitle: "Start a New Game!"
       };
       gameModals.showConfirm($scope.event, dialogDetails).then(function() {
+        sessionStorage.setItem('guestPlayer', true);
         playAsGuest();
       }, function() {
         showSignup();

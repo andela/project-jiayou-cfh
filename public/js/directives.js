@@ -103,8 +103,13 @@ angular.module('mean.directives', [])
           });
         };
 
+        var removeChatHistory = function () {
+          firebase.database().ref('msg').remove();
+        };
+
         // Begin listening for data
         startListening();
+        removeChatHistory();
       }
     };
   })
