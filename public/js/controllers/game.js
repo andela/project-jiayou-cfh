@@ -146,7 +146,7 @@ angular.module('mean.system')
       var user = localStorage.getItem('JWT');
       var tokenDec = jwtHelper.decodeToken(user);
       var friend = document.getElementById('newFriend').value;
-
+      document.getElementById('newFriend').value = '';
       $http.post('/api/friends', { email: friend, user_id: tokenDec._doc._id }).success(function (res) {
         if (res.succ) {
           setTimeout(() => {
@@ -156,6 +156,7 @@ angular.module('mean.system')
           }, 1000);
         }
       });
+      
     };
 
     $scope.getEmail = function () {

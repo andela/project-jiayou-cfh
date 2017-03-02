@@ -57,7 +57,6 @@ angular.module('mean.system')
 
     socket.on('id', function(data) {
       game.id = data.id;
-      console.log(game.id);
     });
 
     socket.on('prepareGame', function(data) {
