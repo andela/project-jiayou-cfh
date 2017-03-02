@@ -42,6 +42,9 @@ exports.invite = function (req, res) {
     console.log(response.statusCode);
     console.log(response.body);
     console.log(response.headers);
+    if (error) {
+      console.log(error);
+    }
   });
 };
 
