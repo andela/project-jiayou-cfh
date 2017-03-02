@@ -90,6 +90,8 @@ angular.module('mean.system')
       myPrivateSocket.on('notify', function (message) {
         $scope.notifications.push(`${message.date} - ${message.mess}`);
       });
+    } else {
+      $scope.guestPlayer = true;
     }
 
     $scope.readNotifications = function () {
@@ -307,6 +309,7 @@ angular.module('mean.system')
         cancelTitle: 'No'
       };
       gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+        sessionStorage.clear();
         game.leaveGame();
         $location.path('/').search({});
       });
