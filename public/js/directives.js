@@ -82,6 +82,7 @@ angular.module('mean.directives', [])
           // replace myFirebase.set(...); with the next line
           database.ref('msg').push({ avatar: msgAvatar, username: msgUser, text: msgText });
           textInput.value = '';
+          document.getElementsByClassName('emoji-wysiwyg-editor')[0].innerHTML = '';
         });
 
         /** Function to add a data listener **/

@@ -39,7 +39,7 @@ angular.module('mean.system')
             if (res.statusCode === 202) {
               Materialize.toast('Invite Sent', 4000);
             } else {
-              $location.path('/#!/signup');
+              Materialize.toast('Invite not Sent', 4000);
             }
           });
           $http({
@@ -158,7 +158,6 @@ angular.module('mean.system')
           }, 1000);
         }
       });
-      
     };
 
     $scope.getEmail = function () {
