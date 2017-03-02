@@ -68,11 +68,11 @@
                   <div class="collapsible-body">
                   <input style="width: 150px" id="newFriend" type="text" list="emails" placeholder="Enter email to add friend"  />
                       <datalist id="emails" >
-                                <option ng-repeat="email in emails"  value = "{{email}}" ></option>
+                                <option ng-repeat="email in emails track by $index"  value = "{{email}}" ></option>
                       </datalist>
                     <a id = "gg" class="btn-floating waves-effect light-blue darken-3" ng-click="addFriend();"><i class="material-icons">add</i></a>
                     <ul>
-                      <li ng-repeat= "friend in friendList" > <a>{{friend}}</a> <button ng-click="sendInvite2(friend)" class="btn light-blue darken-3"> invite</button> <hr></li>
+                      <li ng-repeat= "friend in friendList track by $index" > <a>{{friend}}</a> <button ng-click="sendInvite2(friend)" class="btn light-blue darken-3"> invite</button> <hr></li>
                     </ul>
                   </div>
                 </li>
