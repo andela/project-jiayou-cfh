@@ -66,6 +66,5 @@ angular.module('mean.system')
           return " ";
         });
       },
-
     };
   }]);

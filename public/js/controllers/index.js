@@ -1,13 +1,13 @@
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function ($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', 'authService', '$http', '$window', 'gameModals', '$timeout', function($scope, Global, $location, socket, game, AvatarService, authService, $http, $window, gameModals, $timeout) {
     $scope.global = Global;
     $scope.credentials = {};
-    $scope.playAsGuest = function () {
+    $scope.playAsGuest = function() {
       game.joinGame();
       $location.path('/app');
     };
 
-    $scope.showError = function () {
+    $scope.showError = function() {
       if ($location.search().error) {
         return $location.search().error;
       }
@@ -16,10 +16,11 @@ angular.module('mean.system')
 
     $scope.avatars = [];
     AvatarService.getAvatars()
-      .then(function (data) {
+      .then(function(data) {
         $scope.avatars = data;
       });
-    var signInSuccess = function (res) {
+
+    var signInSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
         localStorage.setItem('JWT', res.token);
@@ -47,28 +48,27 @@ angular.module('mean.system')
       }
     };
 
-    var startDonation = function () {
-      $location.path('/charity');
-    };
-    var signout = function () {
+    var signout = function() {
       $http.get("/signout")
-     .success(function (res) {
-       $location.path('/signin');
-     }).error(function (err) {
-        var dialogDetails = { title: "Signout Failed",
-          content: "Signout failed!",
-          label: "Signout",
-          okTitle: "Ok"
-        };
-       gameModals.showAlert($scope.event, dialogDetails);
-     });
+        .success(function(res) {
+          $location.path('/signin');
+        }).error(function(err) {
+          var dialogDetails = {
+            title: "Signout Failed",
+            content: "Signout failed!",
+            label: "Signout",
+            okTitle: "Ok"
+          };
+          gameModals.showAlert($scope.event, dialogDetails);
+        });
     };
 
-    var startGame = function () {
+    var startGame = function() {
       if (moment().isBefore(localStorage.getItem('expDate'))) {
         $scope.generateGameId(localStorage.getItem('JWT'));
       } else {
-        var dialogDetails = { title: "Session Expired",
+        var dialogDetails = {
+          title: "Session Expired",
           content: "Please resign in, your session has expired!",
           label: "Session Expired",
           okTitle: "Ok"
@@ -78,25 +78,35 @@ angular.module('mean.system')
       }
     };
 
-    $scope.showDialog = function () {
-      var dialogDetails = { title: "Sign in was Successful!",
+    var showGameLog = function() {
+      $location.path('/game-log');
+    };
+
+    $scope.showDialog = function() {
+      var dialogDetails = {
+        title: "Sign in was Successful!",
         content: "Would you like to Start a new game?",
         label: "Start Game After Signin",
         okTitle: "Yes",
         cancelTitle: "No"
       };
-      gameModals.showConfirm($scope.event, dialogDetails).then(function () {
+      gameModals.showConfirm($scope.event, dialogDetails).then(function() {
         startGame();
-      }, function () {
-        startDonation();
+      }, function() {
+        showGameLog();
       });
     };
 
-    var signInFailure = function (err) {
+    var signInFailure = function(err) {
       $scope.userActive = false;
     };
-    
-    var signUpSuccess = function (res) {
+
+    $scope.userLogin = function() {
+      authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
+    };
+
+
+    var signUpSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
         localStorage.setItem('jwtToken', res.token);
@@ -117,45 +127,81 @@ angular.module('mean.system')
       }
     };
 
-    var signUpFailure = function (err) {
+    var signUpFailure = function(err) {
       $scope.userActive = false;
     };
 
-    $scope.userSignUp = function () {
-      authService.signUp($scope.credentials.email, $scope.credentials.password,
-      $scope.credentials.username).then(signUpSuccess, signUpFailure);
+    $scope.userSignUp = function() {
+      authService.signUp($scope.credentials.email, $scope.credentials.password, $scope.credentials.username).then(signUpSuccess, signUpFailure);
     };
     /**
      * Function to display a message for a time
      * @param{Integer} howLong - How long in milliseconds message should show
      * @returns{undefined}
      */
-    $scope.timer = function (howLong) {
-      $timeout(function () {
+    $scope.timer = function(howLong) {
+      $timeout(function() {
         $scope.errorMessage = false;
       }, howLong);
     };
 
-    $scope.userLogin = function ($event) {
+    $scope.userLogin = function($event) {
       $scope.event = $event;
       authService.signIn($scope.credentials.userEmail, $scope.credentials.userPassword).then(signInSuccess, signInFailure);
     };
 
-    $scope.generateGameId = function (jwt) {
+    $scope.generateGameId = function(jwt) {
       $http.post('/api/games/0/start', {
         JWT: jwt,
         email: $scope.credentials.userEmail
-      }).success(function (res) {
+      }).success(function(res) {
         const generatedGameId = res.gameId;
         localStorage.setItem("gameDBId", generatedGameId);
         $location.path('/app/').search({ custom: 1 });
-      }).error(function (err) {
-        var dialogDetails = { title: "Game Creation Failed!",
+      }).error(function(err) {
+        var dialogDetails = {
+          title: "Game Creation Failed!",
           content: "The game could not be created!",
           label: "Game Creation Error",
           okTitle: "Ok"
         };
         gameModals.showAlert($scope.event, dialogDetails);
+      });
+    };
+
+    // var userEmail = localStorage.getItem('Email');
+    // $http.get(`/api/games/history/${userEmail}`, {};
+
+    $scope.gameLog = () => {
+      var userEmail = localStorage.getItem('Email');
+      $http.get(`/api/games/history/${userEmail}`)
+        .success((res) => {
+          console.log(res);
+          $scope.history = res;
+        })
+        .error((err) => {
+          console.log(err);
+        });
+    };
+
+    var playAsGuest = () => {
+      $location.path('/gametour');
+    };
+
+    var showSignup = () => {
+      $location.path('/signin');
+    };
+
+    $scope.playFromHome = () => {
+      var dialogDetails = {
+        title: "Welcome to Cards for Humanity \"Online Version\"",
+        okTitle: "Play as Guest",
+        cancelTitle: "Start a New Game!"
+      };
+      gameModals.showConfirm($scope.event, dialogDetails).then(function() {
+        playAsGuest();
+      }, function() {
+        showSignup();
       });
     };
   }]);

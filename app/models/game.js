@@ -15,7 +15,7 @@ var GameSchema = new Schema({
   id: {
     type: Number
   },
-  czar: {
+  creator: {
     type: String
   },
   winner: {

@@ -24,4 +24,3 @@ exports.userAuth = function (req, res) {
     }
   });
 };
-

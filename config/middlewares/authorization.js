@@ -11,7 +11,7 @@ exports.requiresLogin = function(req, res, next) {
 /**
  * User authorizations routing middleware
  */
-exports.user = {
+exports.usezr = {
     hasAuthorization: function(req, res, next) {
         if (req.profile.id != req.user.id) {
             return res.send(401, 'User is not authorized');

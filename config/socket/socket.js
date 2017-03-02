@@ -18,6 +18,7 @@ module.exports = function (io) {
 
   io.sockets.on('connection', function (socket) {
     console.log(socket.id + ' Connected');
+
     socket.emit('id', {
       id: socket.id
     });
@@ -83,6 +84,12 @@ module.exports = function (io) {
       exitGame(socket);
       // return { gameDBId: socket.gameDBId, newGameId: socket.gameID, playerLeft: numberOfPlayersLeft };
     });
+
+    socket.on('drawCard', function () {
+      if (allGames[socket.gameID]) {
+        allGames[socket.gameID].drawCard();
+      }
+    });
   });
 
   var joinGame = function (socket, data) {
@@ -106,6 +113,7 @@ module.exports = function (io) {
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
         }
+
         getGame(player, socket, data.room, data.gameDBId, data.createPrivate);
       });
     } else {
@@ -192,6 +200,7 @@ module.exports = function (io) {
       }
     }
   };
+
 
   var createGameWithFriends = function (player, socket, gameDBId) {
     var isUniqueRoom = false;
