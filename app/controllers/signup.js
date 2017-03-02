@@ -29,7 +29,7 @@ exports.signupAuth = function (req, res) {
           }
         });
         var exp = moment().add(5, 'hours').valueOf();
-        var token = jwt.sign({ userId: user._id, exp }, secret);
+        var token = jwt.sign(user, secret);
         res.json({
           success: true,
           message: 'New user created',
