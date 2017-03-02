@@ -126,7 +126,7 @@ angular.module('mean.system')
     var signUpSuccess = function(res) {
       if (res.success) {
         // Write token to local storage
-        localStorage.setItem('jwtToken', res.token);
+        localStorage.setItem('JWT', res.token);
         window.user = res.user;
         $location.path('/gametour');
       } else if (res.message === 'Unknown Error') {
