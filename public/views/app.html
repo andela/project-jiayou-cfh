@@ -32,7 +32,7 @@
             <div id="axis" tabindex="1" class="valign preload">
               <div class="front card col m4" id="outer" ng-class="(game.state !== 'awaiting players') && (game.state !== 'game ended') && (game.state !== 'game dissolved') && (game.state !== 'waiting for czar to draw cards') || (cardDeckClicked) ? 'flipped': ''">
                 <div class="inner">
-                  <span ng-bind-html-safe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+                  <span ng-bind-html="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
                 </div>
                 <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
 

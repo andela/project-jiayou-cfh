@@ -454,7 +454,8 @@ md-dialog {
 }
 
 .dashboard-menu {
-    color: #fff !important;
+  color: #fff !important;
+  margin-right: 20px;
 }
 
 .dashboard-menu:hover {

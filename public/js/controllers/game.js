@@ -285,6 +285,9 @@ angular.module('mean.system')
       return '#f9f9f9';
     };
 
+    $scope.isCzar = function () {
+      return game.czar === game.playerIndex;
+    };
     $scope.pickWinning = function (winningSet) {
       if ($scope.isCzar()) {
         game.pickWinning(winningSet.card[0]);

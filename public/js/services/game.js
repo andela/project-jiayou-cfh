@@ -179,8 +179,7 @@ angular.module('mean.system')
         joinOverrideTimeout = $timeout(function() {
           game.joinOverride = true;
         }, 15000);
-      } else if (data.state === 'game dissolved' || data.state === 'game ended') {
-        if ($location.search().game) {
+      } else if (data.state === 'game dissolved' || data.state === 'game ended') {     
           var gameid = localStorage.getItem('gameDBId');
           $http.put(`/api/games/${gameid}/end`, {
             creator: localStorage.getItem('Email'),
@@ -189,7 +188,6 @@ angular.module('mean.system')
             players: game.players,
             state: game.state
           });
-        }
         game.players[game.playerIndex].hand = [];
         game.time = 0;
       }
