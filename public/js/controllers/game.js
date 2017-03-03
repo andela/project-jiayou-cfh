@@ -73,9 +73,8 @@ angular.module('mean.system')
       }
     };
 
-    if (!sessionStorage.getItem('guestPlayer' || !sessionStorage.getItem('socialPlayer'))) {
+    if (!sessionStorage.getItem('guestPlayer') || !sessionStorage.getItem('socialPlayer')) {
       var id = jwtHelper.decodeToken(localStorage.getItem('JWT'))._doc._id;
-
       $http({
         method: 'GET',
         url: `/api/notifications?id=${id}`
